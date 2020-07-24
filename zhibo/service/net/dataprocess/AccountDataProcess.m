@@ -1,0 +1,140 @@
+//
+//  AccountDataProcess.m
+//  zhibo
+//
+//  Created by qp on 2020/6/29.
+//  Copyright © 2020 qp. All rights reserved.
+//
+
+#import "AccountDataProcess.h"
+
+@implementation AccountDataProcess
+/// Called to modify a request before sending.
+- (ABNetRequest *)prepare:(ABNetRequest *)request {
+    if ([request.uri isEqualToString:URI_ACCOUNT_LOGIN]) {
+        request.realUri = @"/login";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_INFO]) {
+        request.realUri = @"/user_balance";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_REGISTER]) {
+        request.realUri = @"/register";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_FORGET_LOGIN]) {
+        request.realUri = @"/login_pwd";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_FORGET_RECHARGE]) {
+        request.realUri = @"/draw_pwd";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_EDIT_NICKNAME]) {
+        request.realUri = @"/change_nickname";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_INFO]) {
+        request.realUri = @"/Userinfo";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BIND_WECHAT]) {
+        request.realUri = @"/wx_bind";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BIND_ALIPAY]) {
+        request.realUri = @"/ali_bind";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
+        
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
+        
+    }
+    return request;
+}
+
+/// Called immediately before a request will sent
+- (BOOL)canSend:(ABNetRequest *)request {
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
+        return false;
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
+        return false;
+    }
+    return true;
+}
+
+/// Called immediately before a request is sent over the network (or stubbed).
+- (void)willSend:(ABNetRequest *)request {
+    
+}
+
+/// Called to modify a result before completion.
+- (void)didReceive:(ABNetRequest *)request response:(NSDictionary *)response {
+    
+}
+
+/// Called to modify a result before completion.
+- (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
+    NSArray *paychannels = @[
+        @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel"},
+        @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel"},
+        @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel"}
+    ];
+    
+    NSDictionary *css  = @{
+        @"item.size.width":@"100%",
+        @"item.size.height":@"60",
+    };
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
+        return @{@"css":css, @"items":paychannels};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
+        NSArray *numbers = @[@"20", @"30", @"50", @"80", @"100"];
+        NSMutableArray *numberItems = [[NSMutableArray alloc] init];
+        for (int i=0; i<numbers.count; i++) {
+            NSInteger num = [numbers[i] intValue];
+            NSString *dou = [NSString stringWithFormat:@"直播豆%ld", num*2];
+            [numberItems addObject:@{
+                @"number":numbers[i],
+                @"dou":dou,
+                @"native_id":@"moneyitem"
+            }];
+        }
+        
+        NSArray *pays = @[
+            @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel"},
+            @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel"},
+            @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel"}
+        ];
+        
+        CGFloat w = floor((SCREEN_WIDTH-14)/3);
+        NSArray *list = @[
+            @{
+                @"css":@{
+                        @"item.size.width":@(w),
+                        @"item.size.height":@"68",
+                        @"header.size.height":@"44",
+                        @"header.size.width":@"100%",
+                        @"section.inset.left":@(7),
+                        @"section.inset.right":@(7),
+                },
+                @"header":@{
+                           @"title":@"充值金额",
+                           @"native_id":@"moneysectionheader"
+                       },
+                @"items":numberItems
+            },
+            @{
+                @"css":@{
+                        @"item.size.width":@"100%",
+                        @"item.size.height":@"60",
+                        @"header.size.height":@"44",
+                        @"header.size.width":@"100%"
+                },
+                @"header":@{
+                           @"title":@"充值方式",
+                           @"native_id":@"moneysectionheader"
+                       },
+                @"items":pays
+            },
+        ];
+        return @{@"list":list};
+    }
+    return response;
+}
+@end

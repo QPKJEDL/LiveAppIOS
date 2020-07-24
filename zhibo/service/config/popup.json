@@ -1,0 +1,20 @@
+{
+	"data":[
+		{
+			"title":"直播",
+			"icon":"zhibo"
+		},
+		{
+			"title":"上传",
+			"icon":"shangcuan"
+		},
+		{
+			"title":"拍摄",
+			"icon":"paishe"
+		},
+		{
+			"title":"动态",
+			"icon":"dongtai"
+		}
+	]
+}

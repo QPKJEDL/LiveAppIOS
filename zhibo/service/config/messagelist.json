@@ -1,0 +1,34 @@
+{
+	"data":[
+		{
+			"icon":"kefu",
+			"title":"客服",
+            "type":"chat",
+			"content":"点击咨询碰到的问题"
+		},
+		{
+			"icon":"gonggao",
+			"title":"系统公告",
+            "type":"chat",
+			"content":"母亲节特惠活动"
+		},
+		{
+			"icon":"xiaoxi2",
+			"title":"官方消息",
+            "type":"chat",
+			"content":"是不是惊呆了"
+		},
+		{
+			"icon":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587790448617&di=cf8073c1ab0a8d6cba0ab8d0fa022d20&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201509%2F27%2F20150927100722_Xxzmn.jpeg",
+			"title":"陈壹仟",
+            "type":"chat",
+			"content":"只要你回头，就能看到我的深刻"
+		},
+		{
+			"icon":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1813762643,1914315241&fm=26&gp=0.jpg",
+			"title":"高鱼",
+            "type":"chat",
+			"content":"管不管万事千秋"
+		}
+	]
+}

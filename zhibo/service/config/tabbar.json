@@ -1,0 +1,39 @@
+{
+	"data":[
+		{
+			"title":"首页",
+			"module":"HomeViewController",
+			"icon":"shouye",
+			"icon_h":"shouye2",
+			"bar":"light"
+		},
+        {
+            "title":"关注",
+            "bar":"light",
+            "module":"FollowViewController",
+            "icon":"guanzhu",
+            "icon_h":"guanzhu2",
+            "nav":{
+                "bgcolors":["FF2498", "FF962B"]
+            }
+        },
+		{
+			"title":"消息",
+			"bar":"default",
+			"module":"MessageViewController",
+			"icon":"huixiaoxi",
+			"icon_h":"xiaoxi",
+            "nav":{
+                "bgcolors":["FF2498", "FF962B"]
+            }
+		},
+		
+		{
+			"title":"我的",
+			"bar":"light",
+			"module":"MineViewController",
+			"icon":"geren",
+			"icon_h":"geren2"
+		}
+	]
+}

@@ -1,0 +1,59 @@
+{
+	"data":{
+		"1":{
+			"game_id":1,
+			"game_name":"百家乐",
+            "sounds":{"1":"heJu.mp3", "2":"bankPair.mp3", "4":"xianWin.mp3", "5":"xianPair.mp3", "7":"bankWin.mp3"},
+			"uris":{"bet":"/bjl_set_bet", "unbet":"/bjl_quit_bet"},
+			"options":[
+				{"title":"闲对","id":"playerPair", "r":"5","oddType":"Equal", "css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+				{"title":"和","id":"tie","r":"1", "oddType":"Equal", "css":{"w":"33%","h":"50%","title.color":"#FFC62E","title.font":"15"}},
+				{"title":"庄对","id":"bankerPair","r":"2", "oddType":"Equal", "css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+				{"title":"闲","id":"player","r":"4", "oddType":"Equal", "css":{"w":"50%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+				{"title":"庄","id":"banker","r":"7", "oddType":"Equal", "css":{"w":"50%","h":"50%","title.color":"#F72EFF","title.font":"15"}}
+			]
+		},
+		"2":{
+			"game_id":2,
+			"game_name":"龙虎",
+            "sounds":{"1":"heJu.mp3", "4":"huWin.mp3", "7":"longWin.mp3"},
+			"uris":{"bet":"/lh_set_bet", "unbet":"/lh_quit_bet"},
+			"options":[
+                {"title":"龙","id":"dragon", "r":"7","oddType":"Equal", "css":{"w":"33%","h":"100%","title.color":"#F72EFF","title.font":"22"}},
+                {"title":"和","id":"tie", "r":"1","oddType":"Equal", "css":{"w":"33%","h":"100%","title.color":"#F72EFF","title.font":"22"}},
+                {"title":"虎","id":"tiger", "r":"4", "oddType":"Equal", "css":{"w":"33%","h":"100%","title.color":"#F72EFF","title.font":"22"}}
+			]
+		},
+		"3":{
+			"game_id":3,
+			"xian":3,
+			"uris":{"bet":"/bets", "unbet":"/NncancelBets", "record":"/nnGameRecord", "card":"/RoomCard"},
+			"game_name":"牛牛"
+		},
+		"4":{
+			"game_id":4,
+			"xian":6,
+			"uris":{"bet":"/SgBets", "unbet":"/SgcancelBets", "record":"/SgGameRecord", "card":"/SgRoomCard"},
+			"game_name":"三公"
+		},
+		"5":{
+			"game_id":5,
+			"uris":{"bet":"/A89Bets", "unbet":"/A89cancelBets", "record":"/A89GameRecord", "card":"/A89RoomCard"},
+			"uri":"/A89Bets",
+			"game_name":"A89",
+            "rr":[
+                {"title":"庄", "r":"Bankerwin"},
+                {"title":"顺门", "r":"ShunMenwin"},
+                {"title":"天门", "r":"TianMenwin"},
+                {"title":"反门", "r":"FanMenwin"},
+            ],
+			"options":[
+                {"title":"顺门","id":"ShunMen_equal","oddType":"Equal","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+                {"title":"天门","id":"TianMen_equal","oddType":"Equal","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#FFC62E","title.font":"15"}},
+                {"title":"反门","id":"FanMen_equal","oddType":"Equal","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+				{"title":"顺门超倍","id":"ShunMen_Super_Double","oddType":"Double","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+				{"title":"天门超倍","id":"TianMen_Super_Double","oddType":"Double","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#FFC62E","title.font":"15"}},
+				{"title":"反门超倍","id":"FanMen_Super_Double","oddType":"Double","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}}]
+		}
+	}
+}

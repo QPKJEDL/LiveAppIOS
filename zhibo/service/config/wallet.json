@@ -1,0 +1,14 @@
+{
+    "data":[
+        {
+            "title":"直播账单（礼物）",
+            "key":"bill",
+            "type":"arrow"
+        },
+        {
+            "title":"提现充值记录",
+            "key":"recharge",
+            "type":"arrow"
+        }
+    ]
+}

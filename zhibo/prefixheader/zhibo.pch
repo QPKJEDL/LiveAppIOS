@@ -1,0 +1,34 @@
+//
+//  zhibo.pch
+//  zhibo
+//
+//  Created by FaiWong on 2020/4/22.
+//  Copyright © 2020 qp. All rights reserved.
+//
+
+#ifndef zhibo_pch
+#define zhibo_pch
+#ifdef __OBJC__
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "Stack.h"
+#import <ABUIKit/ABUIKit.h>
+#import <ABFoundation/ABFoundation.h>
+#import "PublicExtension.h"
+
+//macro definition
+#import "PublicDefine.h"
+
+#import "PublicHeader.h"
+
+
+#import "HTTPURI.h"
+#import "Service.h"
+
+#import <Toast/Toast.h>
+#import <QMUIKit/QMUIKit.h>
+
+#import "UIFont+Extension.h"
+#import "RoomContext.h"
+#endif
+#endif /* zhibo_pch */
