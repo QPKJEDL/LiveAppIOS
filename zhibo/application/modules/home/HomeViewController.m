@@ -74,11 +74,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.titles.count == 0) {
-        [self fetchPostUri:URI_CHANNEL_LIST params:nil];
+        [self reloadData];
     }
 }
 
 - (void)reloadData {
+    [ABUITips showLoading];
+    [self hideEmptyView];
     [self fetchPostUri:URI_CHANNEL_LIST params:nil];
 }
 
@@ -126,6 +128,7 @@
 
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips hideLoading];
     [self hideEmptyView];
     [self.categoryView setHidden:false];
     NSArray *list = obj[@"list"];
@@ -143,6 +146,7 @@
 }
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips hideLoading];
     [self showEmptyViewWithImage:[UIImage imageNamed:@"wuwang"] text:@"网络无法连接" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(reloadData)];
 }
 
