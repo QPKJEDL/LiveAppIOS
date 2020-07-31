@@ -27,6 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)rememberAccount:(NSString *)account password:(NSString *)password;
 - (NSString *)rememberAccount;
 - (NSString *)rememberPassword;
+
+
+- (void)followUserWithUid:(NSInteger)uid;
+- (void)unfollowUserWithUid:(NSInteger)uid;
+
+- (void)likeMomentWithUid:(NSInteger)uid zone_id:(NSInteger)zone_id;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -25,6 +25,7 @@
         
         self.avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 33, 33)];
         self.avatarImageView.layer.cornerRadius = 15;
+        self.avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.avatarImageView.clipsToBounds = true;
         [self addSubview:self.avatarImageView];
         

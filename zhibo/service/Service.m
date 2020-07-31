@@ -157,6 +157,18 @@
         [Stack shared].game_url = obj[@"game_url"];
         [Stack shared].game_wsurl = obj[@"game_wsurl"];
     }
+    if ([req.uri isEqualToString:URI_FOLLOW_FOLLOW]) {
+        [ABUITips showSucceed:@"关注成功"];
+        [[ABMQ shared] publish:@"" channel:CHANNEL_FOLLOW_CHANGED];
+    }
+    if ([req.uri isEqualToString:URI_FOLLOW_UNFOLLOW]) {
+        [ABUITips showSucceed:@"取关成功"];
+        [[ABMQ shared] publish:@"" channel:CHANNEL_FOLLOW_CHANGED];
+    }
+    if ([req.uri isEqualToString:URI_MOMENTS_LIKE]) {
+        [ABUITips showSucceed:@"点赞成功"];
+        [[ABMQ shared] publish:@"" channel:CHANNEL_LIKE_CHANGED];
+    }
 }
 
 - (void)rememberAccount:(NSString *)account password:(NSString *)password {
@@ -172,5 +184,25 @@
 
 - (NSString *)rememberPassword {
     return [self.dao get:@"last_password"];
+}
+
+- (void)followUserWithUid:(NSInteger)uid {
+    [self fetchPostUri:URI_FOLLOW_FOLLOW params:@{@"live_uid":@(uid)}];
+}
+
+- (void)unfollowUserWithUid:(NSInteger)uid {
+    QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
+    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+        [self fetchPostUri:URI_FOLLOW_UNFOLLOW params:@{@"live_uid":@(uid)}];
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定不在关注此人？" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:action1];
+    [alertController addAction:action2];
+    [alertController showWithAnimated:YES];
+    
+}
+
+- (void)likeMomentWithUid:(NSInteger)uid zone_id:(NSInteger)zone_id {
+    [self fetchPostUri:URI_MOMENTS_LIKE params:@{@"live_uid":@(uid), @"zone_id":@(zone_id)}];
 }
 @end

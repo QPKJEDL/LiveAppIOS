@@ -23,7 +23,7 @@
         
         //设置背景图片
         _avatarImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, SYS_STATUSBAR_HEIGHT+100, 100, 100)];
-        _avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
         _avatarImageView.layer.cornerRadius = 50;
         _avatarImageView.clipsToBounds = true;
         [self addSubview:_avatarImageView];

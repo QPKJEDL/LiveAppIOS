@@ -18,7 +18,7 @@
 #import "GiftRankPromptView.h"
 #import "AnchorPromptView.h"
 #import "GameResultPromptView.h"
-@interface RoomPrompt ()<TopicsPromptViewDelegate, ChannelsPromptViewDelegate>
+@interface RoomPrompt ()<TopicsPromptViewDelegate, ChannelsPromptViewDelegate, GamesPromptViewDelegate, DesksPromptViewDelegate>
 @property (nonatomic, strong) UserPromptView *userPromptView; //聊天点击展示用户试图
 @property (nonatomic, strong) AnchorPromptView *anchorPromptView; //主播视图
 @property (nonatomic, strong) AnchorFuncPromptView *anchorFuncPromptView;//主播多功能
@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) TitleBlock topicsBlock;
 @property (nonatomic, strong) TitleBlock channelsBlock;
+@property (nonatomic, strong) GameBlock gameBlock;
+@property (nonatomic, assign) NSInteger gameid;
 @end
 @implementation RoomPrompt
 + (RoomPrompt *)shared {
@@ -109,6 +111,13 @@
 }
 
 #pragma mark ---------
+- (void)promptGameBlock:(GameBlock)block {
+    self.gameBlock = block;
+    self.gamesPrompView = [[GamesPromptView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 144)];
+    self.gamesPrompView.delegate = self;
+    [[ABUIPopUp shared] show:self.gamesPrompView from:ABPopUpDirectionBottom];
+}
+#pragma mark ---------
 - (void)promptGameResultWithGameId:(NSInteger)gameid winner:(id)winner {
     [[ABUIPopUp shared] remove:0];
     
@@ -122,4 +131,23 @@
     [self.gameResultPromptView refreshWithGid:gameid winKey:winKey];
     [[ABUIPopUp shared] show:self.gameResultPromptView from:ABPopUpDirectionCenter];
 }
+
+- (void)gamesPromptView:(GamesPromptView *)gamesPromptView didSelectIndex:(NSInteger)index item:(NSDictionary *)item {
+    [[ABUIPopUp shared] remove:0];
+    [self promptDesksWithGameId:[item[@"id"] intValue]];
+}
+
+- (void)promptDesksWithGameId:(NSInteger)gameid {
+    self.gameid = gameid;
+    self.desksPromptView = [[DesksPromptView alloc] initWithFrame:CGRectMake(0, 0, 331, 262)];
+    self.desksPromptView.delegate = self;
+    [self.desksPromptView refreshWithGameID:gameid];
+    [[ABUIPopUp shared] show:self.desksPromptView from:ABPopUpDirectionCenter];
+}
+
+- (void)desksPromptView:(DesksPromptView *)desksPromptView didSelectIndex:(NSInteger)index item:(NSDictionary *)item {
+    [[ABUIPopUp shared] remove];
+    self.gameBlock([item[@"GameId"] intValue], [item[@"DeskId"] intValue], item[@"GameName"]);
+}
+
 @end

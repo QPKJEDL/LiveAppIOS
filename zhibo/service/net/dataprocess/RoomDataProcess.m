@@ -12,7 +12,12 @@
 /// Called to modify a request before sending.
 - (ABNetRequest *)prepare:(ABNetRequest *)request {
     if ([request.uri isEqualToString:URI_ROOM_LIST]) {
-        request.realUri = @"/ChanneRoomList";
+        if ([request.params[@"channe_id"] intValue] == -1) {
+            request.realUri = @"/follow_list";
+            request.realParams = @{@"lastid":@"0"};
+        }else{
+            request.realUri = @"/ChanneRoomList";
+        }
 //        request.realUri = @"/RoomList";
     }
     if ([request.uri isEqualToString:URI_ROOM_INFO]) {
@@ -83,7 +88,6 @@
     }
         
     
-    
     return true;
 }
 
@@ -100,6 +104,31 @@
 /// Called to modify a result before completion.
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
     [[UIApplication sharedApplication].keyWindow hideToastActivity];
+//    if ([request.uri isEqualToString:URI_ROOM_LIST]) {
+//        NSMutableArray *list = [[NSMutableArray alloc] init];
+//        [list addObject:@{
+//            @"LiveName":@"小白",
+//            @"CoverImg":@"",
+//            @"RoomCount":@(400)
+//        }];
+//        [list addObject:@{
+//            @"LiveName":@"小紫",
+//            @"CoverImg":@"",
+//            @"RoomCount":@(2000)
+//        }];
+//        [list addObject:@{
+//            @"LiveName":@"小绿",
+//            @"CoverImg":@"",
+//            @"RoomCount":@(2200)
+//        }];
+//        [list addObject:@{
+//            @"LiveName":@"小粉",
+//            @"CoverImg":@"",
+//            @"RoomCount":@(3000)
+//        }];
+//
+//        return @{@"list":list};
+//    }
     if ([request.uri isEqualToString:URI_ROOM_INFO]) {
 //        NSDictionary *anchor = response[@"liveinfo"];
 //        NSDictionary *video = response[@"list"];
@@ -120,60 +149,65 @@
             @"systime":response[@"list"][@"SysTime"],
             @"endtime":response[@"list"][@"EndTime"],
             @"rank":response[@"giftRankList"],
-            @"status":response[@"list"][@"Status"]
+            @"status":@(1)
+//            @"status":response[@"list"][@"Status"]
         };
         
         return @{@"video":video, @"room":room, @"anchor":user, @"isFollowed":response[@"isFollowed"]};
-        
-//        NSDictionary *res = response[@"list"];
-//        NSDictionary *video = @{@"hls":res[@"PullRtmp"]};
-////        NSDictionary *video = @{@"hls":@"http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8"};
-//        NSDictionary *user = @{
-//            @"name":res[@"LiveName"],
-//            @"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587790448617&di=f14b92c18ecbadf438682d2534d7b094&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F06%2F20170706131313_M25Jr.jpeg", @"fansCount":@"8924"};
-//        NSDictionary *audience = @{
-//            @"count":[NSString stringWithFormat:@"%@", res[@"RoomCount"]],
-//            @"list":@[
-//                @"http://cdn.duitang.com/uploads/item/201507/11/20150711140831_KLCfd.jpeg",
-//                @"http://pic1.win4000.com/wallpaper/2018-11-17/5befba8de8144.jpg",
-//                @"http://pic1.win4000.com/wallpaper/2018-08-03/5b63b40c86d3d.jpg",
-//                @"http://img.ewebweb.com/uploads/20191127/13/1574832815-IAhzkoVxXw.jpg",
-//                @"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1813762643,1914315241&fm=26&gp=0.jpg"
-//            ]
-//        };
-//        return @{@"user":user, @"desk":res, @"audience":audience, @"video":video, @"liveinfo":response[@"liveinfo"], @"isFollowed":response[@"isFollowed"]};
     }
     if ([request.uri isEqualToString:URI_ROOM_LIST]) {
-        
-        NSDictionary *mm = @{
-            @"DeskName":@"DeskName",
-            @"DeskId":@"desk_id",
-            @"BootNum":@"boot_num",
-            @"PaveNum":@"pave_num"
+        NSDictionary *map = @{
+            @"百家乐":@"icon_baijiale",
+            @"龙虎":@"icon_longhu",
+            @"牛牛":@"icon_niuniu",
+            @"三公":@"icon_sangong",
+            @"A89":@"icon_a89"
         };
-        NSMutableArray *newList = [[NSMutableArray alloc] init];
         NSArray *list = response[@"list"];
-//        NSArray *sss = @[
-//            @"http://cdn.duitang.com/uploads/item/201507/11/20150711140831_KLCfd.jpeg",
-//            @"http://pic1.win4000.com/wallpaper/2018-11-17/5befba8de8144.jpg",
-//            @"http://pic1.win4000.com/wallpaper/2018-08-03/5b63b40c86d3d.jpg",
-//            @"http://img.ewebweb.com/uploads/20191127/13/1574832815-IAhzkoVxXw.jpg",
-//            @"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1813762643,1914315241&fm=26&gp=0.jpg"
-//        ];
-        for (NSDictionary *item in list) {
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:item];
-            NSMutableDictionary *submit = [[NSMutableDictionary alloc] init];
-            for (NSString *key in mm.allKeys) {
-                if (dic[key] != nil) {
-                    [submit setValue:dic[key] forKey:mm[key]];
-                }
+        list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"native_id"] = @"anchoritem";
+            if (dic[@"LiveName"] != nil) {
+                dic[@"nickname"] = dic[@"LiveName"];
             }
-//            dic[@"CoverImg"] = sss[random()%sss.count];
-            dic[@"submit"] = submit;
-            [newList addObject:dic];
-        }
+            if (dic[@"CoverImg"] != nil) {
+                dic[@"avatar"] = dic[@"CoverImg"];
+            }
+            if (dic[@"RoomCount"] != nil) {
+                dic[@"roomcount"] = dic[@"RoomCount"];
+            }
+            dic[@"Channel"] = @"龙虎";
+            NSString *channel = dic[@"Channel"];
+            if (map[channel] != nil) {
+                dic[@"game_icon"] = map[channel];
+            }
+            return dic;
+        }];
         
-        return @{@"list":newList};
+        return @{@"list":list};
+        
+//        NSDictionary *mm = @{
+//            @"DeskName":@"DeskName",
+//            @"DeskId":@"desk_id",
+//            @"BootNum":@"boot_num",
+//            @"PaveNum":@"pave_num"
+//        };
+//        NSMutableArray *newList = [[NSMutableArray alloc] init];
+//        NSArray *list = response[@"list"];
+//
+//        for (NSDictionary *item in list) {
+//            NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:item];
+//            NSMutableDictionary *submit = [[NSMutableDictionary alloc] init];
+//            for (NSString *key in mm.allKeys) {
+//                if (dic[key] != nil) {
+//                    [submit setValue:dic[key] forKey:mm[key]];
+//                }
+//            }
+////            dic[@"CoverImg"] = sss[random()%sss.count];
+//            dic[@"submit"] = submit;
+//            [newList addObject:dic];
+//        }
+//
+//        return @{@"list":newList};
     }
     if ([request.uri isEqualToString:URI_ROOM_GIFT]) {
         NSArray *giftList = response[@"list"];
@@ -183,6 +217,10 @@
         }];
         [Stack shared].giftMap = dic;
         [Stack shared].giftList = giftList;
+    }
+    
+    if ([request.uri isEqualToString:URI_ROOM_GAME]) {
+
     }
     return response;
 }

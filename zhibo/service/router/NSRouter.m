@@ -25,6 +25,11 @@
 #import "RoomPushViewController.h"
 #import "GiftHistoryViewController.h"
 #import "SettingViewController.h"
+#import "GameHistoryViewController.h"
+#import "GameRulesViewController.h"
+#import "WebViewViewController.h"
+#import "ProfileViewController.h"
+#import "ReChargeHistoryViewController.h"
 @implementation NSRouter
 + (void)doLogin {
     LoginViewController *vc = [[LoginViewController alloc] init];
@@ -82,8 +87,10 @@
     [NSRouter pushTo:vc props:@{}];
 }
 
-+ (void)gotoProfile {
-
++ (void)gotoProfile:(NSInteger)uid {
+    ProfileViewController *vc = [[ProfileViewController alloc] init];
+    vc.props = @{@"uid":@(uid)};
+    [NSRouter pushTo:vc props:@{}];
 }
 
 + (void)gotoWallet {
@@ -148,6 +155,38 @@
         vc.title = @"收到的礼物";
     }else{
         vc.title = @"送出的礼物";
+    }
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)showImages {
+    
+}
+
++ (void)gotoGameHistroy {
+    GameHistoryViewController *vc = [[GameHistoryViewController alloc] init];
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoGameRules {
+    GameRulesViewController *vc = [[GameRulesViewController alloc] init];
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoWeb:(NSString *)path title:(nonnull NSString *)title {
+    WebViewViewController *vc = [[WebViewViewController alloc] init];
+    vc.path = path;
+    vc.title = title;
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoChargerHistory:(NSInteger)type {
+    ReChargeHistoryViewController *vc = [[ReChargeHistoryViewController alloc] init];
+    vc.type = type;
+    if (type == 1) {
+        vc.title = @"充值记录";
+    }else{
+        vc.title = @"提现记录";
     }
     [NSRouter pushTo:vc props:@{}];
 }

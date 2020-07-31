@@ -69,12 +69,12 @@
 - (void)onRoomMessage:(RoomMessage *)rm {
     NSLog(@"%@", rm.content);
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[rm.content dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    [[ABMQ shared] publish:dic channel:@"CHANNEL_ROOM_GAME"];
+    [[ABMQ shared] publish:dic channel:CHANNEL_ROOM_GAME];
 }
 
 - (void)onPeerMessage:(IMMessage *)msg { //游戏事件
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[msg.content dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    [[ABMQ shared] publish:dic channel:@"CHANNEL_ROOM_GAME"];
+    [[ABMQ shared] publish:dic channel:CHANNEL_ROOM_GAME];
 }
 
 - (void)sendText:(NSString *)text {

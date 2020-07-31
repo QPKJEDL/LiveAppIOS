@@ -13,7 +13,11 @@
     if ([uri hasPrefix:@"/game"]) {
         return [Stack shared].game_url;
     }
+    if ([uri isEqualToString:URI_MOMENTS_PUBLISH]) {
+        return @"http://129.211.114.135:8933";
+    }
     return @"http://129.211.114.135:8212";
+//    return @"http://192.168.0.103:8212";
 }
 
 - (NSDictionary *)headers:(NSString *)uri {

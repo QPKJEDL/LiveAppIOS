@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *address;
 - (void)requestRoomInfo;
 
-- (void)setcover:(NSString *)covername label:(NSString *)label channel:(NSString *)channel;
+- (void)setcover:(NSString *)covername gameid:(NSInteger)gameid deskid:(NSInteger)deskid channel:(NSString *)channel;
 
 @end
 

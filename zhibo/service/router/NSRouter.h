@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)gotoPublishDT;
 + (void)gotoMessagePage:(NSInteger)tag;
 + (void)gotoSearch;
-+ (void)gotoProfile;
++ (void)gotoProfile:(NSInteger)uid;
 + (void)gotoWallet;
 + (void)gotoCashOut;
 + (void)gotoReCharge;
@@ -31,6 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)back;
 
 + (void)gotoGiftHistroy:(NSInteger)type;
+
++ (void)showImages;
++ (void)gotoGameHistroy;
++ (void)gotoGameRules;
++ (void)gotoWeb:(NSString *)path title:(NSString *)title;
+
++ (void)gotoChargerHistory:(NSInteger)type;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,7 +8,7 @@
 
 #import "BasePromptView.h"
 @interface BasePromptView ()
-@property (nonatomic, strong) QMUIEmptyView *emptyView;
+
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @end
 

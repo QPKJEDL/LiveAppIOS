@@ -19,8 +19,8 @@
     [RoomContext shared].isForbidden = false;
 }
 
-- (void)setcover:(NSString *)covername label:(NSString *)label channel:(NSString *)channel {
-    [self fetchPostUri:URI_ROOM_SETCOVER params:@{@"covername":covername, @"label":label, @"channel":channel}];
+- (void)setcover:(NSString *)covername gameid:(NSInteger)gameid deskid:(NSInteger)deskid channel:(NSString *)channel {
+    [self fetchPostUri:URI_ROOM_SETCOVER params:@{@"covername":covername, @"game_id":@(gameid), @"desk_id":@(deskid), @"channel":channel, @"label":channel}];
 }
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {

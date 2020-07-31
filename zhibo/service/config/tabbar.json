@@ -3,26 +3,26 @@
 		{
 			"title":"首页",
 			"module":"HomeViewController",
-			"icon":"shouye",
-			"icon_h":"shouye2",
+			"icon":"shouyehui",
+			"icon_h":"shouye",
 			"bar":"light"
 		},
         {
-            "title":"关注",
+            "title":"动态",
             "bar":"light",
-            "module":"FollowViewController",
-            "icon":"guanzhu",
-            "icon_h":"guanzhu2",
+            "module":"MomentsViewController",
+            "icon":"dongtaihui",
+            "icon_h":"dongtai",
             "nav":{
                 "bgcolors":["FF2498", "FF962B"]
             }
         },
 		{
-			"title":"消息",
+			"title":"榜单",
 			"bar":"default",
-			"module":"MessageViewController",
-			"icon":"huixiaoxi",
-			"icon_h":"xiaoxi",
+			"module":"RankViewController",
+			"icon":"bangdanhui",
+			"icon_h":"bangdan",
             "nav":{
                 "bgcolors":["FF2498", "FF962B"]
             }
@@ -32,8 +32,8 @@
 			"title":"我的",
 			"bar":"light",
 			"module":"MineViewController",
-			"icon":"geren",
-			"icon_h":"geren2"
+			"icon":"gerenhui",
+			"icon_h":"geren"
 		}
 	]
 }

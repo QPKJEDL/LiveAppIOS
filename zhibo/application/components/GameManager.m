@@ -19,7 +19,7 @@
     if (self) {
         self.socket = [[GameSocket alloc] init];
         
-        [[ABMQ shared] subscribe:self channel:@"CHANNEL_ROOM_GAME" autoAck:true];
+        [[ABMQ shared] subscribe:self channel:CHANNEL_ROOM_GAME autoAck:true];
     }
     return self;
 }

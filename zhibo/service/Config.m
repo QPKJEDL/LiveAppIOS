@@ -12,14 +12,14 @@
 + (NSArray *)getMe {
     
     NSArray *titleSets = @[
-        @[@"我看过的", @"用户等级", @"直播帐户", @"会员特权", @"活动中心"],
-        @[@"主播相关", @"粉丝礼物"],
+        @[@"团队报表", @"游戏记录", @"游戏规则", @"我看过的"],
+        @[@"充值记录", @"提现记录", @"送出礼物", @"收到礼物"],
         @[@"帮助与反馈"],
     ];
     
     NSArray *iconSets = @[
-        @[@"kanguo", @"yonghudengji", @"zhibozhenghu", @"zhan", @"huodongzhongxin"],
-        @[@"zhiboxiangguan", @"fensiliwu"],
+        @[@"tuanduibaobiao", @"youxijilu-", @"youxiguiz", @"kanguo"],
+        @[@"congzhijilu", @"tixianjil-", @"songchuliwu", @"shoudao"],
         @[@"bangzhu"],
     ];
     
@@ -55,20 +55,20 @@
 + (NSArray *)getMeActions {
     return @[
         @{
-            @"title":@"私信",
-            @"icon":@"shixin"
+            @"title":@"充值",
+            @"icon":@"congz"
         },
         @{
-            @"title":@"任务",
-            @"icon":@"renwu"
+            @"title":@"提现",
+            @"icon":@"tixian"
         },
         @{
-            @"title":@"钱包",
+            @"title":@"关注",
+            @"icon":@"guanzhu"
+        },
+        @{
+            @"title":@"推广",
             @"icon":@"qianbao"
-        },
-        @{
-            @"title":@"等级",
-            @"icon":@"dengji"
         }
     ];
 }

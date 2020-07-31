@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BasePromptView : UIView
+@property (nonatomic, strong) QMUIEmptyView *emptyView;
 - (void)showEmpty;
 - (void)hideEmpty;
 

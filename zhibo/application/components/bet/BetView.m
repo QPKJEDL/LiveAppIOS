@@ -36,28 +36,27 @@
         self.optionsView.delegate = self;
         [self addSubview:self.optionsView];
         
-        self.okButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        self.okButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 60, 40, 40)];
         [self.okButton setTitle:@"确定" forState:UIControlStateNormal];
         self.okButton.titleLabel.font = [UIFont systemFontOfSize:10];
         [self.okButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.okButton setBackgroundColor:[UIColor hexColor:@"11605C"]];
+        [self.okButton setBackgroundColor:[UIColor hexColor:@"#FF2853"]];
         [self addSubview:self.okButton];
-        self.okButton.top = self.optionsView.top;
         self.okButton.left = self.width-10-self.okButton.width;
-        self.okButton.layer.cornerRadius = 15;
+        self.okButton.layer.cornerRadius = 20;
         self.okButton.clipsToBounds = true;
         [self.okButton addTarget:self action:@selector(onConfirm) forControlEvents:UIControlEventTouchUpInside];
         
         
-        self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
         [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        [self.cancelButton setBackgroundColor:[UIColor hexColor:@"11605C"]];
+        [self.cancelButton setBackgroundColor:[UIColor hexColor:@"#FFFFFF"]];
         self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:10];
         [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.cancelButton];
         self.cancelButton.top = self.okButton.bottom+6;
         self.cancelButton.left = self.width-10-self.cancelButton.width;
-        self.cancelButton.layer.cornerRadius = 15;
+        self.cancelButton.layer.cornerRadius = 20;
         self.cancelButton.clipsToBounds = true;
         [self.cancelButton addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
         

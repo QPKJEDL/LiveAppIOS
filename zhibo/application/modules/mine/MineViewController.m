@@ -77,6 +77,24 @@
     if ([icon isEqualToString:@"zhibozhenghu"]) {
         [NSRouter gotoWallet];
     }
+    if ([icon isEqualToString:@"youxijilu-"]) {
+        [NSRouter gotoGameHistroy];
+    }
+    if ([icon isEqualToString:@"youxiguiz"]) {
+        [NSRouter gotoGameRules];
+    }
+    if ([icon isEqualToString:@"songchuliwu"]) {
+        [NSRouter gotoGiftHistroy:2];
+    }
+    if ([icon isEqualToString:@"shoudao"]) {
+        [NSRouter gotoGiftHistroy:1];
+    }
+    if ([icon isEqualToString:@"congzhijilu"]) {
+        [NSRouter gotoChargerHistory:1];
+    }
+    if ([icon isEqualToString:@"tixianjil-"]) {
+        [NSRouter gotoChargerHistory:2];
+    }
 }
 
 @end

@@ -84,7 +84,8 @@
         [self addSubview:self.leaveLabel];
         [self.leaveLabel setHidden:true];
         
-        [[ABMQ shared] subscribe:self channels:@[@"CHANNEL_ROOM_GAME", @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
+        [[ABMQ shared] subscribe:self channels:@[CHANNEL_ROOM_GAME, @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
+    
     }
     return self;
 }
@@ -200,7 +201,7 @@
     }
     
     NSDictionary *dic = (NSDictionary *)message;
-    if ([channel isEqualToString:@"CHANNEL_ROOM_GAME"]) {
+    if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
         if ([dic isKindOfClass:[NSDictionary class]] && dic[@"Cmd"] != nil) {
             if ([self isSelf:dic] == false) {
                 return;

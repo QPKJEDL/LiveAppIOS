@@ -70,7 +70,7 @@
 
 - (void)refreshData {
     [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
-    [self fetchPostUri:@"/gift_record" params:@{@"type":@(self.type)}];
+    [self fetchPostUri:@"/gift_record" params:@{@"type":@(self.type), @"lastid":@"0"}];
 }
 /*
 #pragma mark - Navigation

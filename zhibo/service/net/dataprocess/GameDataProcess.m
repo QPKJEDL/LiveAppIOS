@@ -47,6 +47,9 @@
     else if ([request.uri isEqualToString:URI_GAME_DESKLIST]) {
         request.realUri = @"/RoomTypelist";
     }
+    else if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
+        
+    }
     return request;
 }
 
@@ -56,6 +59,12 @@
         return false;
     }
     if ([request.uri isEqualToString:URI_GAME_RESULTS]) {
+        return false;
+    }
+    if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
+        return false;
+    }
+    if ([request.uri isEqualToString:URI_GAME_RULES]) {
         return false;
     }
 //    if ([request.uri isEqualToString:URI_GAME_BET_FEE]) {
@@ -92,6 +101,50 @@
     }
     if ([request.uri isEqualToString:URI_GAME_RESULTS]) {
         return [self.dataHelper getGameBetResultWithParams:request.params];
+    }
+    if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
+        NSMutableArray *list = [[NSMutableArray alloc] init];
+        [list addObject:@{
+            @"time":@"日期：2020-07-28",
+            @"number":@"注单号：N20010202",
+            @"detail":@"详细注单：A10 1靴 1铺",
+            @"money":@"投注金额：闲三平 100",
+            @"native_id":@"gamehistoryitem"
+        }];
+        
+        return @{@"list":list};
+    }
+    if ([request.uri isEqualToString:URI_GAME_RULES]) {
+        
+        NSArray *list = @[
+            @{
+                @"title":@"百家乐游戏",
+                @"src":@"baijiale.html",
+                @"native_id":@"gameruleitem",
+            },
+            @{
+                @"title":@"龙虎游戏",
+                @"src":@"longhu.html",
+                @"native_id":@"gameruleitem",
+            },
+            @{
+                @"title":@"牛牛游戏",
+                @"src":@"niuniu.html",
+                @"native_id":@"gameruleitem",
+            },
+            @{
+                @"title":@"三公游戏",
+                @"src":@"sangong.html",
+                @"native_id":@"gameruleitem",
+            },
+            @{
+                @"title":@"A89游戏",
+                @"src":@"A89.html",
+                @"native_id":@"gameruleitem",
+            }
+        ];
+        
+        return @{@"list":list};
     }
     return response;
 }

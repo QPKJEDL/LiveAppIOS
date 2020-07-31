@@ -18,7 +18,6 @@
 		557C079B24500F28008868E6 /* ResourceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C079A24500F28008868E6 /* ResourceUtil.m */; };
 		557C079E245012D7008868E6 /* UITabBarController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C079D245012D7008868E6 /* UITabBarController+Extension.m */; };
 		557C07A12450141F008868E6 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07A02450141F008868E6 /* NSDictionary+Extension.m */; };
-		557C07A42450150C008868E6 /* ThreadSafeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07A32450150C008868E6 /* ThreadSafeArray.m */; };
 		557C07A724501955008868E6 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07A624501955008868E6 /* BaseNavigationController.m */; };
 		557C07B424503099008868E6 /* AnchorListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07B324503099008868E6 /* AnchorListViewController.m */; };
 		557C07B7245030C3008868E6 /* BasePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07B6245030C3008868E6 /* BasePageViewController.m */; };
@@ -27,7 +26,6 @@
 		557C07CF24511FD2008868E6 /* NSMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07CE24511FD2008868E6 /* NSMediator.m */; };
 		557C07E624512FA4008868E6 /* ZBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07E524512FA4008868E6 /* ZBTabBar.m */; };
 		557C07E924513DE0008868E6 /* PopUpOptionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07E824513DE0008868E6 /* PopUpOptionsView.m */; };
-		557C07EF245146A5008868E6 /* PopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07EE245146A5008868E6 /* PopUp.m */; };
 		557C07F124515E7C008868E6 /* popup.json in Resources */ = {isa = PBXBuildFile; fileRef = 557C07F024515E7C008868E6 /* popup.json */; };
 		557C07F7245168C2008868E6 /* ZhiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07F6245168C2008868E6 /* ZhiBoViewController.m */; };
 		557C07FC245170F2008868E6 /* PublishDTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C07FB245170F2008868E6 /* PublishDTViewController.m */; };
@@ -106,6 +104,8 @@
 		F11682F624A09E1B004DD6B8 /* BetOptionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11682F524A09E1B004DD6B8 /* BetOptionsView.m */; };
 		F11682F924A0A315004DD6B8 /* BetOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11682F824A0A315004DD6B8 /* BetOptionView.m */; };
 		F116830424A20897004DD6B8 /* RoomDataProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = F116830324A20897004DD6B8 /* RoomDataProcess.m */; };
+		F11AA4DD24D2F55E00FCFE18 /* ReChargeHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4DC24D2F55E00FCFE18 /* ReChargeHistoryViewController.m */; };
+		F11AA4E024D2F7BA00FCFE18 /* ChargeHistoryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4DF24D2F7BA00FCFE18 /* ChargeHistoryItemView.m */; };
 		F11F7BA024BEFAF300DB96B3 /* UserPromptActionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7B9F24BEFAF300DB96B3 /* UserPromptActionItemView.m */; };
 		F11F7C3124BFEA3F00DB96B3 /* RoomComeRaw.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7C3024BFEA3F00DB96B3 /* RoomComeRaw.m */; };
 		F11F7C3424BFEA6300DB96B3 /* RoomComeContainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7C3324BFEA6300DB96B3 /* RoomComeContainView.m */; };
@@ -119,6 +119,36 @@
 		F121921024CAA7F200630CA2 /* InputItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121920F24CAA7F200630CA2 /* InputItemView.m */; };
 		F121921324CAB23B00630CA2 /* SwitchItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121921224CAB23B00630CA2 /* SwitchItemView.m */; };
 		F121921624CABCB400630CA2 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F121921424CABCB300630CA2 /* ListCell.m */; };
+		F121921924CE773E00630CA2 /* HomeHotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121921824CE773E00630CA2 /* HomeHotViewController.m */; };
+		F121921C24CE801B00630CA2 /* ADBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121921B24CE801A00630CA2 /* ADBannerView.m */; };
+		F121922024CEC7C800630CA2 /* MomentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121921F24CEC7C800630CA2 /* MomentsViewController.m */; };
+		F121922424CECC1600630CA2 /* RankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121922324CECC1600630CA2 /* RankViewController.m */; };
+		F121922724CECE4100630CA2 /* MomentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121922624CECE4100630CA2 /* MomentItemView.m */; };
+		F121922A24CED10D00630CA2 /* MomentDataProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = F121922924CED10D00630CA2 /* MomentDataProcess.m */; };
+		F121922D24CFACB900630CA2 /* ImageItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121922C24CFACB900630CA2 /* ImageItemView.m */; };
+		F121923424CFD06700630CA2 /* RankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121923324CFD06700630CA2 /* RankListViewController.m */; };
+		F121923724CFD35F00630CA2 /* RankItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121923624CFD35F00630CA2 /* RankItemView.m */; };
+		F121923A24CFD67600630CA2 /* RankDataProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = F121923924CFD67600630CA2 /* RankDataProcess.m */; };
+		F121923E24CFFBB700630CA2 /* RankTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121923D24CFFBB700630CA2 /* RankTopView.m */; };
+		F121924124CFFFBF00630CA2 /* PodiumView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121924024CFFFBF00630CA2 /* PodiumView.m */; };
+		F121924424D01E5100630CA2 /* RankActionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121924324D01E5100630CA2 /* RankActionsView.m */; };
+		F121924724D03CBE00630CA2 /* GameHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121924624D03CBE00630CA2 /* GameHistoryViewController.m */; };
+		F121924A24D0403800630CA2 /* GameHistoryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121924924D0403800630CA2 /* GameHistoryItemView.m */; };
+		F121924D24D049BE00630CA2 /* GameRulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121924C24D049BE00630CA2 /* GameRulesViewController.m */; };
+		F121925024D04C5A00630CA2 /* GameRuleItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121924F24D04C5A00630CA2 /* GameRuleItemView.m */; };
+		F121925624D052EE00630CA2 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121925524D052EE00630CA2 /* WebViewViewController.m */; };
+		F121925924D0554700630CA2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121925824D0554700630CA2 /* ProfileViewController.m */; };
+		F121925C24D055A000630CA2 /* ProfileTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121925B24D055A000630CA2 /* ProfileTopView.m */; };
+		F121925E24D154FB00630CA2 /* A89.html in Resources */ = {isa = PBXBuildFile; fileRef = F121925D24D154F900630CA2 /* A89.html */; };
+		F121926124D15A2D00630CA2 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926024D15A2C00630CA2 /* CommentView.m */; };
+		F121926424D1600800630CA2 /* CommentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926324D1600800630CA2 /* CommentItemView.m */; };
+		F121926B24D16F1E00630CA2 /* ZBInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926A24D16F1E00630CA2 /* ZBInputView.m */; };
+		F121927024D17B8100630CA2 /* niuniu.html in Resources */ = {isa = PBXBuildFile; fileRef = F121926C24D17B7F00630CA2 /* niuniu.html */; };
+		F121927124D17B8100630CA2 /* longhu.html in Resources */ = {isa = PBXBuildFile; fileRef = F121926D24D17B8000630CA2 /* longhu.html */; };
+		F121927224D17B8100630CA2 /* sangong.html in Resources */ = {isa = PBXBuildFile; fileRef = F121926E24D17B8000630CA2 /* sangong.html */; };
+		F121927524D17B9600630CA2 /* baijiale.html in Resources */ = {isa = PBXBuildFile; fileRef = F121927424D17B9600630CA2 /* baijiale.html */; };
+		F121927724D1825400630CA2 /* bjl.png in Resources */ = {isa = PBXBuildFile; fileRef = F121927624D1825300630CA2 /* bjl.png */; };
+		F121927C24D276EF00630CA2 /* CommentReplyItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121927B24D276EE00630CA2 /* CommentReplyItemView.m */; };
 		F14250722499E7C2003E83D8 /* NetProvidor.m in Sources */ = {isa = PBXBuildFile; fileRef = F14250712499E7C2003E83D8 /* NetProvidor.m */; };
 		F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1425079249A102C003E83D8 /* AnchorItemView.m */; };
 		F16015C124AB3DCC0005ABBA /* LiveCommentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16015C024AB3DCC0005ABBA /* LiveCommentItemView.m */; };
@@ -232,8 +262,6 @@
 		557C079D245012D7008868E6 /* UITabBarController+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+Extension.m"; sourceTree = "<group>"; };
 		557C079F2450141F008868E6 /* NSDictionary+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extension.h"; sourceTree = "<group>"; };
 		557C07A02450141F008868E6 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
-		557C07A22450150C008868E6 /* ThreadSafeArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadSafeArray.h; sourceTree = "<group>"; };
-		557C07A32450150C008868E6 /* ThreadSafeArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadSafeArray.m; sourceTree = "<group>"; };
 		557C07A524501955008868E6 /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		557C07A624501955008868E6 /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		557C07A824501988008868E6 /* PublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicHeader.h; sourceTree = "<group>"; };
@@ -251,8 +279,6 @@
 		557C07E524512FA4008868E6 /* ZBTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBTabBar.m; sourceTree = "<group>"; };
 		557C07E724513DE0008868E6 /* PopUpOptionsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopUpOptionsView.h; sourceTree = "<group>"; };
 		557C07E824513DE0008868E6 /* PopUpOptionsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopUpOptionsView.m; sourceTree = "<group>"; };
-		557C07ED245146A5008868E6 /* PopUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopUp.h; sourceTree = "<group>"; };
-		557C07EE245146A5008868E6 /* PopUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopUp.m; sourceTree = "<group>"; };
 		557C07F024515E7C008868E6 /* popup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = popup.json; sourceTree = "<group>"; };
 		557C07F5245168C2008868E6 /* ZhiBoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiBoViewController.h; sourceTree = "<group>"; };
 		557C07F6245168C2008868E6 /* ZhiBoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiBoViewController.m; sourceTree = "<group>"; };
@@ -400,6 +426,10 @@
 		F11682F824A0A315004DD6B8 /* BetOptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BetOptionView.m; sourceTree = "<group>"; };
 		F116830224A20896004DD6B8 /* RoomDataProcess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomDataProcess.h; sourceTree = "<group>"; };
 		F116830324A20897004DD6B8 /* RoomDataProcess.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomDataProcess.m; sourceTree = "<group>"; };
+		F11AA4DB24D2F55E00FCFE18 /* ReChargeHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReChargeHistoryViewController.h; sourceTree = "<group>"; };
+		F11AA4DC24D2F55E00FCFE18 /* ReChargeHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReChargeHistoryViewController.m; sourceTree = "<group>"; };
+		F11AA4DE24D2F7BA00FCFE18 /* ChargeHistoryItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeHistoryItemView.h; sourceTree = "<group>"; };
+		F11AA4DF24D2F7BA00FCFE18 /* ChargeHistoryItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeHistoryItemView.m; sourceTree = "<group>"; };
 		F11F7B9E24BEFAF300DB96B3 /* UserPromptActionItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptActionItemView.h; sourceTree = "<group>"; };
 		F11F7B9F24BEFAF300DB96B3 /* UserPromptActionItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptActionItemView.m; sourceTree = "<group>"; };
 		F11F7C2F24BFEA3F00DB96B3 /* RoomComeRaw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomComeRaw.h; sourceTree = "<group>"; };
@@ -424,6 +454,60 @@
 		F121921224CAB23B00630CA2 /* SwitchItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchItemView.m; sourceTree = "<group>"; };
 		F121921424CABCB300630CA2 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
 		F121921524CABCB400630CA2 /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
+		F121921724CE773E00630CA2 /* HomeHotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHotViewController.h; sourceTree = "<group>"; };
+		F121921824CE773E00630CA2 /* HomeHotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHotViewController.m; sourceTree = "<group>"; };
+		F121921A24CE801A00630CA2 /* ADBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADBannerView.h; sourceTree = "<group>"; };
+		F121921B24CE801A00630CA2 /* ADBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADBannerView.m; sourceTree = "<group>"; };
+		F121921E24CEC7C800630CA2 /* MomentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentsViewController.h; sourceTree = "<group>"; };
+		F121921F24CEC7C800630CA2 /* MomentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentsViewController.m; sourceTree = "<group>"; };
+		F121922224CECC1600630CA2 /* RankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankViewController.h; sourceTree = "<group>"; };
+		F121922324CECC1600630CA2 /* RankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankViewController.m; sourceTree = "<group>"; };
+		F121922524CECE4100630CA2 /* MomentItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentItemView.h; sourceTree = "<group>"; };
+		F121922624CECE4100630CA2 /* MomentItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentItemView.m; sourceTree = "<group>"; };
+		F121922824CED10D00630CA2 /* MomentDataProcess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentDataProcess.h; sourceTree = "<group>"; };
+		F121922924CED10D00630CA2 /* MomentDataProcess.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentDataProcess.m; sourceTree = "<group>"; };
+		F121922B24CFACB900630CA2 /* ImageItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageItemView.h; sourceTree = "<group>"; };
+		F121922C24CFACB900630CA2 /* ImageItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageItemView.m; sourceTree = "<group>"; };
+		F121923224CFD06700630CA2 /* RankListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankListViewController.h; sourceTree = "<group>"; };
+		F121923324CFD06700630CA2 /* RankListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankListViewController.m; sourceTree = "<group>"; };
+		F121923524CFD35F00630CA2 /* RankItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankItemView.h; sourceTree = "<group>"; };
+		F121923624CFD35F00630CA2 /* RankItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankItemView.m; sourceTree = "<group>"; };
+		F121923824CFD67600630CA2 /* RankDataProcess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankDataProcess.h; sourceTree = "<group>"; };
+		F121923924CFD67600630CA2 /* RankDataProcess.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankDataProcess.m; sourceTree = "<group>"; };
+		F121923C24CFFBB700630CA2 /* RankTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankTopView.h; sourceTree = "<group>"; };
+		F121923D24CFFBB700630CA2 /* RankTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankTopView.m; sourceTree = "<group>"; };
+		F121923F24CFFFBF00630CA2 /* PodiumView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodiumView.h; sourceTree = "<group>"; };
+		F121924024CFFFBF00630CA2 /* PodiumView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PodiumView.m; sourceTree = "<group>"; };
+		F121924224D01E5100630CA2 /* RankActionsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankActionsView.h; sourceTree = "<group>"; };
+		F121924324D01E5100630CA2 /* RankActionsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankActionsView.m; sourceTree = "<group>"; };
+		F121924524D03CBE00630CA2 /* GameHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameHistoryViewController.h; sourceTree = "<group>"; };
+		F121924624D03CBE00630CA2 /* GameHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameHistoryViewController.m; sourceTree = "<group>"; };
+		F121924824D0403800630CA2 /* GameHistoryItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameHistoryItemView.h; sourceTree = "<group>"; };
+		F121924924D0403800630CA2 /* GameHistoryItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameHistoryItemView.m; sourceTree = "<group>"; };
+		F121924B24D049BE00630CA2 /* GameRulesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameRulesViewController.h; sourceTree = "<group>"; };
+		F121924C24D049BE00630CA2 /* GameRulesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameRulesViewController.m; sourceTree = "<group>"; };
+		F121924E24D04C5A00630CA2 /* GameRuleItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameRuleItemView.h; sourceTree = "<group>"; };
+		F121924F24D04C5A00630CA2 /* GameRuleItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameRuleItemView.m; sourceTree = "<group>"; };
+		F121925424D052EE00630CA2 /* WebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
+		F121925524D052EE00630CA2 /* WebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
+		F121925724D0554700630CA2 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		F121925824D0554700630CA2 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		F121925A24D055A000630CA2 /* ProfileTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTopView.h; sourceTree = "<group>"; };
+		F121925B24D055A000630CA2 /* ProfileTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTopView.m; sourceTree = "<group>"; };
+		F121925D24D154F900630CA2 /* A89.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = A89.html; sourceTree = "<group>"; };
+		F121925F24D15A2C00630CA2 /* CommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
+		F121926024D15A2C00630CA2 /* CommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
+		F121926224D1600800630CA2 /* CommentItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentItemView.h; sourceTree = "<group>"; };
+		F121926324D1600800630CA2 /* CommentItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentItemView.m; sourceTree = "<group>"; };
+		F121926924D16F1E00630CA2 /* ZBInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBInputView.h; sourceTree = "<group>"; };
+		F121926A24D16F1E00630CA2 /* ZBInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBInputView.m; sourceTree = "<group>"; };
+		F121926C24D17B7F00630CA2 /* niuniu.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = niuniu.html; sourceTree = "<group>"; };
+		F121926D24D17B8000630CA2 /* longhu.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = longhu.html; sourceTree = "<group>"; };
+		F121926E24D17B8000630CA2 /* sangong.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sangong.html; sourceTree = "<group>"; };
+		F121927424D17B9600630CA2 /* baijiale.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = baijiale.html; sourceTree = "<group>"; };
+		F121927624D1825300630CA2 /* bjl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bjl.png; sourceTree = "<group>"; };
+		F121927A24D276EE00630CA2 /* CommentReplyItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentReplyItemView.h; sourceTree = "<group>"; };
+		F121927B24D276EE00630CA2 /* CommentReplyItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplyItemView.m; sourceTree = "<group>"; };
 		F142506F2499E766003E83D8 /* HTTPURI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPURI.h; sourceTree = "<group>"; };
 		F14250702499E7C2003E83D8 /* NetProvidor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetProvidor.h; sourceTree = "<group>"; };
 		F14250712499E7C2003E83D8 /* NetProvidor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetProvidor.m; sourceTree = "<group>"; };
@@ -639,12 +723,8 @@
 				559F3EC524540BB8001280F2 /* User */,
 				559F3E732452C0B9001280F2 /* PhotoListView */,
 				557C080324517964008868E6 /* PickPhoto */,
-				557C07A22450150C008868E6 /* ThreadSafeArray.h */,
-				557C07A32450150C008868E6 /* ThreadSafeArray.m */,
 				557C07E424512FA4008868E6 /* ZBTabBar.h */,
 				557C07E524512FA4008868E6 /* ZBTabBar.m */,
-				557C07ED245146A5008868E6 /* PopUp.h */,
-				557C07EE245146A5008868E6 /* PopUp.m */,
 				559F3EE4245426BA001280F2 /* ButtonsView.h */,
 				559F3EE5245426BA001280F2 /* ButtonsView.m */,
 			);
@@ -663,6 +743,8 @@
 		557C075124500472008868E6 /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				F121922124CECC0600630CA2 /* rank */,
+				F121921D24CEC7B000630CA2 /* moments */,
 				F166617424BD723A00B2607C /* game */,
 				F18AA66124B893D6002846AB /* room */,
 				F11682BD249F5F0C004DD6B8 /* loginregister */,
@@ -690,6 +772,8 @@
 				557C07B324503099008868E6 /* AnchorListViewController.m */,
 				559F3E4324519FA6001280F2 /* SearchViewController.h */,
 				559F3E4424519FA6001280F2 /* SearchViewController.m */,
+				F121921724CE773E00630CA2 /* HomeHotViewController.h */,
+				F121921824CE773E00630CA2 /* HomeHotViewController.m */,
 				557C077924500BA1008868E6 /* P */,
 			);
 			path = home;
@@ -749,6 +833,14 @@
 				F1A4D87524C56447003A6031 /* GiftHistoryViewController.m */,
 				F121920024CA7AA400630CA2 /* MineViewController.h */,
 				F121920124CA7AA400630CA2 /* MineViewController.m */,
+				F121924524D03CBE00630CA2 /* GameHistoryViewController.h */,
+				F121924624D03CBE00630CA2 /* GameHistoryViewController.m */,
+				F121924B24D049BE00630CA2 /* GameRulesViewController.h */,
+				F121924C24D049BE00630CA2 /* GameRulesViewController.m */,
+				F121925724D0554700630CA2 /* ProfileViewController.h */,
+				F121925824D0554700630CA2 /* ProfileViewController.m */,
+				F11AA4DB24D2F55E00FCFE18 /* ReChargeHistoryViewController.h */,
+				F11AA4DC24D2F55E00FCFE18 /* ReChargeHistoryViewController.m */,
 			);
 			path = mine;
 			sourceTree = "<group>";
@@ -873,6 +965,8 @@
 				559F3EE2245424BA001280F2 /* MineActionsView.m */,
 				F11682C9249F6444004DD6B8 /* LoginTipView.h */,
 				F11682CA249F6444004DD6B8 /* LoginTipView.m */,
+				F121925A24D055A000630CA2 /* ProfileTopView.h */,
+				F121925B24D055A000630CA2 /* ProfileTopView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1164,6 +1258,40 @@
 			path = animate;
 			sourceTree = "<group>";
 		};
+		F121921D24CEC7B000630CA2 /* moments */ = {
+			isa = PBXGroup;
+			children = (
+				F121921E24CEC7C800630CA2 /* MomentsViewController.h */,
+				F121921F24CEC7C800630CA2 /* MomentsViewController.m */,
+			);
+			path = moments;
+			sourceTree = "<group>";
+		};
+		F121922124CECC0600630CA2 /* rank */ = {
+			isa = PBXGroup;
+			children = (
+				F121923B24CFFBAA00630CA2 /* V */,
+				F121922224CECC1600630CA2 /* RankViewController.h */,
+				F121922324CECC1600630CA2 /* RankViewController.m */,
+				F121923224CFD06700630CA2 /* RankListViewController.h */,
+				F121923324CFD06700630CA2 /* RankListViewController.m */,
+			);
+			path = rank;
+			sourceTree = "<group>";
+		};
+		F121923B24CFFBAA00630CA2 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				F121923C24CFFBB700630CA2 /* RankTopView.h */,
+				F121923D24CFFBB700630CA2 /* RankTopView.m */,
+				F121923F24CFFFBF00630CA2 /* PodiumView.h */,
+				F121924024CFFFBF00630CA2 /* PodiumView.m */,
+				F121924224D01E5100630CA2 /* RankActionsView.h */,
+				F121924324D01E5100630CA2 /* RankActionsView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
 		F142506E2499E74D003E83D8 /* net */ = {
 			isa = PBXGroup;
 			children = (
@@ -1190,6 +1318,12 @@
 				F1A4D87B24C57F5C003A6031 /* GameManager.m */,
 				F1A4D89B24CA6C66003A6031 /* ZBUIImagePickerController.h */,
 				F1A4D89C24CA6C66003A6031 /* ZBUIImagePickerController.m */,
+				F121925424D052EE00630CA2 /* WebViewViewController.h */,
+				F121925524D052EE00630CA2 /* WebViewViewController.m */,
+				F121925F24D15A2C00630CA2 /* CommentView.h */,
+				F121926024D15A2C00630CA2 /* CommentView.m */,
+				F121926924D16F1E00630CA2 /* ZBInputView.h */,
+				F121926A24D16F1E00630CA2 /* ZBInputView.m */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1250,6 +1384,22 @@
 				F121920F24CAA7F200630CA2 /* InputItemView.m */,
 				F121921124CAB23B00630CA2 /* SwitchItemView.h */,
 				F121921224CAB23B00630CA2 /* SwitchItemView.m */,
+				F121922524CECE4100630CA2 /* MomentItemView.h */,
+				F121922624CECE4100630CA2 /* MomentItemView.m */,
+				F121922B24CFACB900630CA2 /* ImageItemView.h */,
+				F121922C24CFACB900630CA2 /* ImageItemView.m */,
+				F121923524CFD35F00630CA2 /* RankItemView.h */,
+				F121923624CFD35F00630CA2 /* RankItemView.m */,
+				F121924824D0403800630CA2 /* GameHistoryItemView.h */,
+				F121924924D0403800630CA2 /* GameHistoryItemView.m */,
+				F121924E24D04C5A00630CA2 /* GameRuleItemView.h */,
+				F121924F24D04C5A00630CA2 /* GameRuleItemView.m */,
+				F121926224D1600800630CA2 /* CommentItemView.h */,
+				F121926324D1600800630CA2 /* CommentItemView.m */,
+				F121927A24D276EE00630CA2 /* CommentReplyItemView.h */,
+				F121927B24D276EE00630CA2 /* CommentReplyItemView.m */,
+				F11AA4DE24D2F7BA00FCFE18 /* ChargeHistoryItemView.h */,
+				F11AA4DF24D2F7BA00FCFE18 /* ChargeHistoryItemView.m */,
 			);
 			path = listitemviews;
 			sourceTree = "<group>";
@@ -1296,6 +1446,12 @@
 		F16CBB1E24AE0FDF00CA6C18 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				F121927624D1825300630CA2 /* bjl.png */,
+				F121927424D17B9600630CA2 /* baijiale.html */,
+				F121926D24D17B8000630CA2 /* longhu.html */,
+				F121926C24D17B7F00630CA2 /* niuniu.html */,
+				F121926E24D17B8000630CA2 /* sangong.html */,
+				F121925D24D154F900630CA2 /* A89.html */,
 				F10FB5B924BC001600857E1E /* 1_720.mp4 */,
 				F16CBB1F24AE102700CA6C18 /* audio */,
 			);
@@ -1350,6 +1506,10 @@
 				F10FB59124B9B83E00857E1E /* UserDataProcess.m */,
 				F10FB59A24B9C91900857E1E /* MessageDataPrecess.h */,
 				F10FB59B24B9C91900857E1E /* MessageDataPrecess.m */,
+				F121922824CED10D00630CA2 /* MomentDataProcess.h */,
+				F121922924CED10D00630CA2 /* MomentDataProcess.m */,
+				F121923824CFD67600630CA2 /* RankDataProcess.h */,
+				F121923924CFD67600630CA2 /* RankDataProcess.m */,
 			);
 			path = dataprocess;
 			sourceTree = "<group>";
@@ -1509,6 +1669,8 @@
 			children = (
 				F19E90E524B338EC00FFF38C /* HomeNavView.h */,
 				F19E90E624B338EC00FFF38C /* HomeNavView.m */,
+				F121921A24CE801A00630CA2 /* ADBannerView.h */,
+				F121921B24CE801A00630CA2 /* ADBannerView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1584,15 +1746,21 @@
 				F10FB5BA24BC023600857E1E /* 1_720.mp4 in Resources */,
 				559F3E852452E096001280F2 /* commentlist.json in Resources */,
 				F16CBB3824AE102800CA6C18 /* huWin.mp3 in Resources */,
+				F121927124D17B8100630CA2 /* longhu.html in Resources */,
 				F16CBB3924AE102800CA6C18 /* stopBet.mp3 in Resources */,
 				F16CBB3624AE102800CA6C18 /* lastTenM.mp3 in Resources */,
 				557C077324500A0C008868E6 /* Images.xcassets in Resources */,
+				F121927524D17B9600630CA2 /* baijiale.html in Resources */,
 				F16CBB2F24AE102800CA6C18 /* heJu.mp3 in Resources */,
 				F16CBB2E24AE102800CA6C18 /* xianPair.mp3 in Resources */,
 				F16CBB3324AE102800CA6C18 /* bankPair.mp3 in Resources */,
+				F121925E24D154FB00630CA2 /* A89.html in Resources */,
+				F121927224D17B8100630CA2 /* sangong.html in Resources */,
 				559F3E942452EDBE001280F2 /* anchorlist.json in Resources */,
 				55F3B24D245EED0F00334B8F /* livecomment.json in Resources */,
+				F121927724D1825400630CA2 /* bjl.png in Resources */,
 				F16CBB3524AE102800CA6C18 /* xianWin.mp3 in Resources */,
+				F121927024D17B8100630CA2 /* niuniu.html in Resources */,
 				F16CBB3124AE102800CA6C18 /* xian3.mp3 in Resources */,
 				F1B7950B24597A7C000BD333 /* footprint.json in Resources */,
 				559F3EC42453F8E3001280F2 /* sysmessagelist.json in Resources */,
@@ -1666,13 +1834,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F121924D24D049BE00630CA2 /* GameRulesViewController.m in Sources */,
 				F18AA67024B894F3002846AB /* RoomPushView.m in Sources */,
 				F166EE6324B727A200178F0F /* RoomPushLoadControl.m in Sources */,
+				F121924124CFFFBF00630CA2 /* PodiumView.m in Sources */,
 				55FD3677244FDCBB00D84DD9 /* AppDelegate.m in Sources */,
 				F1A4D88B24C68871003A6031 /* MoneySectionHeaderView.m in Sources */,
 				F1B7950924597214000BD333 /* BillViewController.m in Sources */,
 				559F3E4524519FA6001280F2 /* SearchViewController.m in Sources */,
 				559F3EFD24543CF2001280F2 /* ReChargeViewController.m in Sources */,
+				F121921C24CE801B00630CA2 /* ADBannerView.m in Sources */,
 				F18AA67424B8955B002846AB /* RoomPlayViewController.m in Sources */,
 				F10FB59C24B9C91900857E1E /* MessageDataPrecess.m in Sources */,
 				559F3E792452C0F9001280F2 /* PhotoListCell.m in Sources */,
@@ -1682,29 +1853,33 @@
 				F19E90F324B49F5300FFF38C /* AvatarView.m in Sources */,
 				559F3EE3245424BA001280F2 /* MineActionsView.m in Sources */,
 				F10FB5AB24BAA11300857E1E /* AnchorFuncPromptView.m in Sources */,
+				F121923A24CFD67600630CA2 /* RankDataProcess.m in Sources */,
 				F16F6D4224A9B591003A51A6 /* GameDataHelper.m in Sources */,
 				F10FB5C924BC500300857E1E /* RoomAudienceItemView.m in Sources */,
 				F10FB5C324BC2E3C00857E1E /* GameResultPromptView.m in Sources */,
 				F10FB58C24B9AA9D00857E1E /* ChannelItemView.m in Sources */,
+				F121924424D01E5100630CA2 /* RankActionsView.m in Sources */,
 				559F3E922452EB4E001280F2 /* AnchorPresent.m in Sources */,
 				F18AA64A24B85714002846AB /* GiftItemView.m in Sources */,
 				F18AA64324B84CFC002846AB /* MeiYanPromptView.m in Sources */,
-				557C07EF245146A5008868E6 /* PopUp.m in Sources */,
 				557C078524500BFA008868E6 /* ShowViewController.m in Sources */,
 				557C07FC245170F2008868E6 /* PublishDTViewController.m in Sources */,
 				F166EE4324B6C3A300178F0F /* RoomPushReadyTitleView.m in Sources */,
 				559F3EE6245426BA001280F2 /* ButtonsView.m in Sources */,
 				F11682BA249F5328004DD6B8 /* Dao.m in Sources */,
 				F10FB5B524BBE33500857E1E /* GiftRankPromptView.m in Sources */,
-				557C07A42450150C008868E6 /* ThreadSafeArray.m in Sources */,
 				F1A4D87624C56447003A6031 /* GiftHistoryViewController.m in Sources */,
 				F18AA69024B93BAC002846AB /* RoomContext.m in Sources */,
 				557C08022451782B008868E6 /* PickPhotoView.m in Sources */,
 				F166616924BD3F0500B2607C /* RoomPushSocket.m in Sources */,
 				559F3ECB24540BE9001280F2 /* UserBriefView.m in Sources */,
 				559F3ECE24540D26001280F2 /* MineNavView.m in Sources */,
+				F121925C24D055A000630CA2 /* ProfileTopView.m in Sources */,
 				F16CBB1124AD89CA00CA6C18 /* LoginPhoneView.m in Sources */,
+				F121926B24D16F1E00630CA2 /* ZBInputView.m in Sources */,
 				F121920524CA7AD800630CA2 /* Config.m in Sources */,
+				F121926124D15A2D00630CA2 /* CommentView.m in Sources */,
+				F121925624D052EE00630CA2 /* WebViewViewController.m in Sources */,
 				559F3EB62453DF4F001280F2 /* MessagePresent.m in Sources */,
 				F10FB58924B9A91800857E1E /* ChannelsPromptView.m in Sources */,
 				F121920D24CA903C00630CA2 /* SettingViewController.m in Sources */,
@@ -1712,9 +1887,11 @@
 				F121920224CA7AA400630CA2 /* MineViewController.m in Sources */,
 				F10FB5A524B9FDED00857E1E /* UserPromptActionView.m in Sources */,
 				F18AA64024B848AF002846AB /* RoomControl.m in Sources */,
+				F121925924D0554700630CA2 /* ProfileViewController.m in Sources */,
 				F11682F024A094C8004DD6B8 /* BetCoinCell.m in Sources */,
 				559F3E3F24518BC7001280F2 /* MessageViewController.m in Sources */,
 				F166EE3224B5EF0500178F0F /* UserListViewController.m in Sources */,
+				F121922D24CFACB900630CA2 /* ImageItemView.m in Sources */,
 				F19E90E724B338EC00FFF38C /* HomeNavView.m in Sources */,
 				559F3EF4245438D3001280F2 /* WalletViewTopView.m in Sources */,
 				559F3EF124543674001280F2 /* BalanceView.m in Sources */,
@@ -1733,14 +1910,20 @@
 				F18AA68624B89919002846AB /* RoomSocket.m in Sources */,
 				F10FB58024B9986F00857E1E /* GamesPromptView.m in Sources */,
 				F18AA65024B858F4002846AB /* RoomBottomBar.m in Sources */,
+				F11AA4DD24D2F55E00FCFE18 /* ReChargeHistoryViewController.m in Sources */,
 				F16CBB0724ACBEAE00CA6C18 /* RegisterView.m in Sources */,
 				F1A4D87924C567A8003A6031 /* GiftHistoryItemView.m in Sources */,
+				F121922424CECC1600630CA2 /* RankViewController.m in Sources */,
+				F121923724CFD35F00630CA2 /* RankItemView.m in Sources */,
 				F11682F924A0A315004DD6B8 /* BetOptionView.m in Sources */,
 				F10FB5A224B9FA2C00857E1E /* UserSubItemView.m in Sources */,
 				557C07A12450141F008868E6 /* NSDictionary+Extension.m in Sources */,
 				557C080C24517A83008868E6 /* PickPhotoAddCell.m in Sources */,
 				F16CBB0424ACBE9100CA6C18 /* LoginView.m in Sources */,
+				F121927C24D276EF00630CA2 /* CommentReplyItemView.m in Sources */,
 				F16F6D6F24AB1010003A51A6 /* NetErrorPlugin.m in Sources */,
+				F121921924CE773E00630CA2 /* HomeHotViewController.m in Sources */,
+				F121924724D03CBE00630CA2 /* GameHistoryViewController.m in Sources */,
 				F10FB58F24B9AE4A00857E1E /* UserPromptView.m in Sources */,
 				F1A4D88824C67C0F003A6031 /* MoneyItemView.m in Sources */,
 				557C075A24500490008868E6 /* BaseViewController.m in Sources */,
@@ -1753,9 +1936,12 @@
 				55FD3688244FDCBD00D84DD9 /* main.m in Sources */,
 				F121921324CAB23B00630CA2 /* SwitchItemView.m in Sources */,
 				F11F7BA024BEFAF300DB96B3 /* UserPromptActionItemView.m in Sources */,
+				F121922024CEC7C800630CA2 /* MomentsViewController.m in Sources */,
+				F121923E24CFFBB700630CA2 /* RankTopView.m in Sources */,
 				F18AA63D24B810E7002846AB /* RoomAnchorBriefView.m in Sources */,
 				557C07CF24511FD2008868E6 /* NSMediator.m in Sources */,
 				F10FB5CC24BC5FD500857E1E /* RoomMessageWelcomeItemView.m in Sources */,
+				F121924A24D0403800630CA2 /* GameHistoryItemView.m in Sources */,
 				F166618E24BEF6B000B2607C /* RoomAnchorActionView.m in Sources */,
 				F166EE2E24B5CF5D00178F0F /* Stack.m in Sources */,
 				F10FB5BD24BC034000857E1E /* GiftEffectsPlayView.m in Sources */,
@@ -1769,12 +1955,14 @@
 				F1A4D87324C54C5C003A6031 /* TitleImage2ItemView.m in Sources */,
 				F121921024CAA7F200630CA2 /* InputItemView.m in Sources */,
 				559F3EDB245415F8001280F2 /* MinePresent.m in Sources */,
+				F121923424CFD06700630CA2 /* RankListViewController.m in Sources */,
 				F18AA66D24B894E5002846AB /* RoomPlayView.m in Sources */,
 				559F3E762452C0CB001280F2 /* PhotoListView.m in Sources */,
 				557C07622450058D008868E6 /* MainViewController.m in Sources */,
 				F166EE5424B716C800178F0F /* TopicItemView.m in Sources */,
 				F16F6D3B24A982A3003A51A6 /* GameDataProcess.m in Sources */,
 				557C077C24500BB8008868E6 /* HomeViewController.m in Sources */,
+				F121922A24CED10D00630CA2 /* MomentDataProcess.m in Sources */,
 				F166EE6024B7278D00178F0F /* RoomPushReadyControl.m in Sources */,
 				F18AA69424B95D3D002846AB /* RoomPushControl.m in Sources */,
 				F18AA68D24B89C66002846AB /* RoomPresent.m in Sources */,
@@ -1788,6 +1976,7 @@
 				F1A4D87C24C57F5C003A6031 /* GameManager.m in Sources */,
 				F18AA67F24B89827002846AB /* RoomPlayPresent.m in Sources */,
 				F10FB5C024BC0F1800857E1E /* GiftRawView.m in Sources */,
+				F121922724CECE4100630CA2 /* MomentItemView.m in Sources */,
 				559F3F0424567554001280F2 /* ChatViewController.m in Sources */,
 				F166EE2824B57E9200178F0F /* UIFont+Extension.m in Sources */,
 				557C07E924513DE0008868E6 /* PopUpOptionsView.m in Sources */,
@@ -1809,6 +1998,7 @@
 				F10FB58324B9A00C00857E1E /* TopicsPromptView.m in Sources */,
 				F166618724BEB0C000B2607C /* GameResultItemView.m in Sources */,
 				557C07F7245168C2008868E6 /* ZhiBoViewController.m in Sources */,
+				F121926424D1600800630CA2 /* CommentItemView.m in Sources */,
 				F11682EA24A08B10004DD6B8 /* BetView.m in Sources */,
 				F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */,
 				F166617A24BD728A00B2607C /* GameSocket.m in Sources */,
@@ -1820,6 +2010,7 @@
 				F16CBBD624B063C200CA6C18 /* QMUIConfigurationTemplate.m in Sources */,
 				F10FB5A824BA9BE700857E1E /* DesksPromptView.m in Sources */,
 				F18AA65724B867BD002846AB /* TitleImageItemView.m in Sources */,
+				F11AA4E024D2F7BA00FCFE18 /* ChargeHistoryItemView.m in Sources */,
 				559F3E58245274CF001280F2 /* TimeUtil.m in Sources */,
 				557C079E245012D7008868E6 /* UITabBarController+Extension.m in Sources */,
 				F18AA67724B8956A002846AB /* RoomPushViewController.m in Sources */,
@@ -1827,6 +2018,7 @@
 				F16015C124AB3DCC0005ABBA /* LiveCommentItemView.m in Sources */,
 				559F3E8B2452EA45001280F2 /* UserItem.m in Sources */,
 				F166617324BD67B900B2607C /* RoomPlaySocket.m in Sources */,
+				F121925024D04C5A00630CA2 /* GameRuleItemView.m in Sources */,
 				F1A4D87F24C592C6003A6031 /* PayChannelItemView.m in Sources */,
 				F10FB59524B9BF7100857E1E /* MessageItemView.m in Sources */,
 				F166619124BEF74300B2607C /* UserPromptActionsView.m in Sources */,

@@ -27,11 +27,11 @@
 }
 
 - (void)buttonsView:(ButtonsView *)buttonsView didSelectIndex:(NSInteger)index {
-    if (index == 2) {
-        [NSRouter gotoWallet];
-    }
     if (index == 0) {
-        [(MainViewController *)[UIApplication sharedApplication].keyWindow.rootViewController setSelectedIndex:2];
+        [NSRouter gotoReCharge];
+    }
+    if (index == 1) {
+        [NSRouter gotoCashOut];
     }
 }
 

@@ -23,7 +23,6 @@
 #pragma mark router
 #import "NSRouter.h"
 
-#import "PopUp.h"
 #import "RoomStack.h"
 #import <JXCategoryView/JXCategoryView.h>
 #import <SDWebImage/SDWebImage.h>

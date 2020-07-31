@@ -85,10 +85,10 @@
 //    [appearance setBarTintColor:[UIColor hexColor:@"ffffff"]];
     [appearance setTintColor:[UIColor redColor]];
     
-    // 设置文字属性
+     // 设置文字属性
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
-    textAttrs[NSFontAttributeName] = [UIFont boldSystemFontOfSize:16];
+    textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    textAttrs[NSFontAttributeName] = [UIFont PingFangSCBlod:16];
     [appearance setTitleTextAttributes:textAttrs];
 }
 
@@ -152,9 +152,10 @@
 
 - (void)updateNavStatus:(UIViewController *)vc backButton:(UIButton *)btn {
     if (vc.isVisableNavigationBar) {
+        UINavigationBar *appearance = [UINavigationBar appearance];
         if (vc.preferredStatusBarStyle == UIStatusBarStyleLightContent) {
             [btn setImage:[UIImage imageNamed:@"baifanhui"] forState:UIControlStateNormal];
-            self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.blackColor};
+            self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
         }
         else{
             [btn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
@@ -165,7 +166,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-//    [self updateNavStatus:self.topViewController backButton:nil];
+    [self updateNavStatus:self.topViewController backButton:nil];
     return self.topViewController.preferredStatusBarStyle;
 }
 

@@ -8,8 +8,6 @@
 
 #import "AnchorListViewController.h"
 #import "AnchorPresent.h"
-#import <AVFoundation/AVFoundation.h>
-#import "GiftEffectsPlayView.h"
 @interface AnchorListViewController ()<ABUIListViewDelegate, AnchorPresentDelegate>
 @property (nonatomic, strong) ABUIListView *uilistView;
 @property (nonatomic, strong) AnchorPresent *present;
@@ -20,8 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = UIColor.whiteColor;
   
     _uilistView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
     _uilistView.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
@@ -43,7 +39,7 @@
 - (void)onReceiveAnchorList{
     [self.uilistView endPullRefreshing];
     NSString *w = [NSString stringWithFormat:@"%f", ceil((SCREEN_WIDTH-3*12)/2.0)];
-    [self.uilistView setDataList:self.present.anchorList css:@{@"item.size.width":w, @"item.size.height":w, @"section.inset.right":@"12", @"section.inset.left":@"12", @"item.rowSpacing":@"12"}];
+    [self.uilistView setDataList:self.present.anchorList css:@{@"item.size.width":w, @"item.size.height":@([ABDevice pixelWidth:195]), @"section.inset.right":@"12", @"section.inset.left":@"12", @"section.inset.top":@"12", @"item.rowSpacing":@"10"}];
     if (self.present.anchorList.count == 0) {
         [self showNoDataEmpty];
     }else{

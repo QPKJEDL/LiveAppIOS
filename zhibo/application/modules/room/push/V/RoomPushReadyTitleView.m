@@ -36,17 +36,17 @@
         [self addSubview:self.textField];
         
         self.tipButton = [[UIButton alloc] initWithFrame:CGRectMake(self.textField.left, self.textField.bottom+20, 73, 22)];
-        [self.tipButton setTitle:@"+话题标签" forState:UIControlStateNormal];
+        [self.tipButton setTitle:@"选择游戏" forState:UIControlStateNormal];
         [self.tipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.tipButton.titleLabel.font = [UIFont PingFangSC:12];
         [self.tipButton addTarget:self action:@selector(onTipButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.tipButton];
         
-        self.chButton = [[UIButton alloc] initWithFrame:CGRectMake(self.tipButton.left, self.tipButton.bottom+10, 73, 22)];
-        [self.chButton setTitle:@"+频道选择" forState:UIControlStateNormal];
-        [self.chButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.chButton.titleLabel.font = [UIFont PingFangSC:12];
-        [self.chButton addTarget:self action:@selector(onChanenl) forControlEvents:UIControlEventTouchUpInside];
+//        self.chButton = [[UIButton alloc] initWithFrame:CGRectMake(self.tipButton.left, self.tipButton.bottom+10, 73, 22)];
+//        [self.chButton setTitle:@"+频道选择" forState:UIControlStateNormal];
+//        [self.chButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        self.chButton.titleLabel.font = [UIFont PingFangSC:12];
+//        [self.chButton addTarget:self action:@selector(onChanenl) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:self.chButton];
         self.chButton.layer.cornerRadius = 11;

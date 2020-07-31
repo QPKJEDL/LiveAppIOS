@@ -17,7 +17,7 @@
         NSString *title = item[@"title"];
         NSString *nmIconName = item[@"icon"];
         NSString *hlIconName = item[@"icon_h"];
-//        NSDictionary *navDic = item[@"nav"];
+        NSDictionary *navDic = item[@"nav"];
         
         //dynmic load vc from module name
         UIViewController *vc = [[NSClassFromString(module) alloc] init];
@@ -32,7 +32,7 @@
         nav.tabBarItem = tabBarItem;
         
         
-        
+        [nav.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor hexColor:@"FF2828"]] forBarMetrics:UIBarMetricsDefault];
         
 //        if (navDic != nil) {
 //            NSMutableArray *colors = [[NSMutableArray alloc] init];

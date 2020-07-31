@@ -102,15 +102,19 @@
         return;
     }
     NSDictionary *dic = self.dataList[self.index];
-    [[RoomContext shared].gamesocket stopRoom];
-    [[RoomContext shared].gamesocket startRoomWithID:[dic[@"DeskId"] intValue]];
-    [RoomContext shared].gameid = [dic[@"GameId"] intValue];
-    [self fetchPostUri:URI_ROOM_SETGAME params:@{
-        @"room_id":@([RoomContext shared].roomid),
-        @"desk_id":dic[@"DeskId"],
-        @"game_id":dic[@"GameId"],
+    if (self.delegate && [self.delegate respondsToSelector:@selector(desksPromptView:didSelectIndex:item:)]) {
+        [self.delegate desksPromptView:self didSelectIndex:self.index item:dic];
     }
-    ];
+//    
+//    [[RoomContext shared].gamesocket stopRoom];
+//    [[RoomContext shared].gamesocket startRoomWithID:[dic[@"DeskId"] intValue]];
+//    [RoomContext shared].gameid = [dic[@"GameId"] intValue];
+//    [self fetchPostUri:URI_ROOM_SETGAME params:@{
+//        @"room_id":@([RoomContext shared].roomid),
+//        @"desk_id":dic[@"DeskId"],
+//        @"game_id":dic[@"GameId"],
+//    }
+//    ];
 }
 
 @end

@@ -34,10 +34,7 @@
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
    [[UIApplication sharedApplication].keyWindow hideToastActivity];
-    NSMutableArray *list = [ABIteration iterationList:obj[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
-        dic[@"native_id"] = @"anchoritem";
-        return dic;
-    }];
+    NSMutableArray *list = obj[@"list"];
     if (self.isPullRefresh) {
         self.anchorList = list;
     }else{

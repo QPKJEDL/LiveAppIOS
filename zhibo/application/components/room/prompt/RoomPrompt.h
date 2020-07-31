@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 typedef void (^TitleBlock)(NSString * _Nullable title);
+typedef void (^GameBlock)(NSInteger gameid, NSInteger deskid, NSString *title);
 
 NS_ASSUME_NONNULL_BEGIN
 #define RP [RoomPrompt shared]
@@ -27,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)promptGiftRank;
 /// 游戏结果
 - (void)promptGameResultWithGameId:(NSInteger)gameid winner:(id)winner;
+- (void)promptGameBlock:(GameBlock)block;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -44,6 +44,9 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
         
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
+        request.realUri = @"/account_changer_list";
+    }
     return request;
 }
 
@@ -133,6 +136,37 @@
                 @"items":pays
             },
         ];
+        return @{@"list":list};
+    }
+    
+    if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
+        NSArray *list = response[@"list"];
+        list = @[
+            @{
+                @"creatime":@"1592410495",
+                @"id":@1,
+                @"money":@1000
+            },
+            @{
+                @"creatime":@"1593410495",
+                @"id":@1,
+                @"money":@2000
+            },
+            @{
+                @"creatime":@"1593410195",
+                @"id":@1,
+                @"money":@100
+            },
+            @{
+                @"creatime":@"1593420495",
+                @"id":@1,
+                @"money":@5000
+            }
+        ];
+        list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"native_id"] = @"chargeitem";
+            return dic;
+        }];
         return @{@"list":list};
     }
     return response;

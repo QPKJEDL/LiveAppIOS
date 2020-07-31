@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIView *bottomView;
 
 @property (nonatomic, strong) UIImagePickerController *picker;
+
+@property (nonatomic, strong) UIView *actionView;
 @end
 @implementation MineTopView
 
@@ -50,8 +52,41 @@
         self.picker.modalPresentationStyle = UIModalPresentationFullScreen;
         self.picker.delegate = self;
         self.picker.allowsEditing = true;
+        
+        self.actionView = [[UIView alloc] initWithFrame:CGRectMake(self.width-110-15, SYS_STATUSBAR_HEIGHT+48, 110, 54)];
+        self.actionView.backgroundColor = [[UIColor hexColor:@"#FFFFFF"] colorWithAlphaComponent:0.2];
+        self.actionView.layer.cornerRadius = 54/2;
+        self.actionView.clipsToBounds = true;
+        [self addSubview:self.actionView];
+        
+        
+        QMUIButton *dongtaiButton = [[QMUIButton alloc] initWithFrame:CGRectMake(5, 0, 50, 54)];
+        dongtaiButton.imagePosition = QMUIButtonImagePositionTop;
+        dongtaiButton.titleLabel.font = [UIFont PingFangSC:10];
+        [dongtaiButton setTitle:@"发动态" forState:UIControlStateNormal];
+        [dongtaiButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [dongtaiButton setImage:[UIImage imageNamed:@"dongtai2"] forState:UIControlStateNormal];
+        [self.actionView addSubview:dongtaiButton];
+        [dongtaiButton addTarget:self action:@selector(onDongTai) forControlEvents:UIControlEventTouchUpInside];
+        
+        QMUIButton *zhiboButton = [[QMUIButton alloc] initWithFrame:CGRectMake(dongtaiButton.right, 0, 110/2, 54)];
+        zhiboButton.imagePosition = QMUIButtonImagePositionTop;
+        zhiboButton.titleLabel.font = [UIFont PingFangSC:10];
+        [zhiboButton setTitle:@"直播" forState:UIControlStateNormal];
+        [zhiboButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [zhiboButton setImage:[UIImage imageNamed:@"dongtai2"] forState:UIControlStateNormal];
+        [self.actionView addSubview:zhiboButton];
+        [zhiboButton addTarget:self action:@selector(onZhibo) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
+}
+
+- (void)onDongTai {
+    [NSRouter gotoPublishDT];
+}
+
+- (void)onZhibo {
+    [NSRouter gotoKaibo];
 }
 
 - (void)layoutSubviews {

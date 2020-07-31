@@ -27,6 +27,9 @@
 @property (nonatomic, strong) RoomGiftView *roomGiftView;
 
 @property (nonatomic, strong) ABUIAnimateBanner *comeAnimateBanner;
+
+@property (nonatomic, strong) UIButton *sceneButton;
+@property (nonatomic, strong) UIImageView *sceneImageView;
 @end
 
 @implementation RoomControl
@@ -81,10 +84,38 @@
         self.anchorPromptView = [[AnchorPromptView alloc] initWithFrame:CGRectMake(50, 0, self.width-100, 262)];
         self.anchorPromptView.layer.cornerRadius = 10;
         self.anchorPromptView.clipsToBounds = true;
+        
+        self.sceneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 56, 30)];
+        self.sceneButton.layer.cornerRadius = 15;
+        self.sceneButton.clipsToBounds = true;
+        [self.sceneButton setTitle:@"现场" forState:UIControlStateNormal];
+        [self.sceneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.sceneButton.backgroundColor = [UIColor hexColor:@"#3C3C3C"];
+        self.sceneButton.titleLabel.font = [UIFont PingFangSC:12];
+        [self addSubview:self.sceneButton];
+        self.sceneButton.centerY = self.briefView.centerY;
+        self.sceneButton.left = self.briefView.right+38;
+        [self.sceneButton addTarget:self action:@selector(onScene) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.sceneImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
+        [self.sceneImageView setContentMode:UIViewContentModeScaleAspectFit];
+        [self addSubview:self.sceneImageView];
+        self.sceneImageView.centerX = self.sceneButton.centerX;
+        self.sceneImageView.top = self.sceneButton.centerY+3;
+    
     }
     return self;
 }
 
+- (void)onScene {
+    [self.sceneButton setSelected:!self.sceneButton.isSelected];
+    if (self.sceneButton.isSelected) {
+        [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
+    }else{
+        [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
+    }
+}
 
 #pragma mark ----- receive data --------
 - (void)onReceivePeerMessage:(NSDictionary *)message {

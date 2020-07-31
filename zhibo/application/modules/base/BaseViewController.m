@@ -31,13 +31,23 @@
     [self showEmptyViewWithImage:[UIImage imageNamed:@"shuju"] text:@"暂无数据" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(refreshData)];
 }
 
+- (void)showSeat {
+    if (![ABNet isNetReachable]) {
+        [self showEmptyViewWithImage:[UIImage imageNamed:@"shuju"] text:@"暂无数据" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(refreshData)];
+    }else{
+       [self showEmptyViewWithImage:[UIImage imageNamed:@"wuwang"] text:@"网络异常" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(refreshData)];
+    }
+}
+
+- (void)hideSeat {
+    [self hideEmptyView];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     NSString *des = [[self class] description];
-    
-    
+
     if ([IQSets containsObject:des]) {
         [IQKeyboardManager sharedManager].enable = true;
         [IQKeyboardManager sharedManager].enableAutoToolbar = true;
@@ -54,7 +64,7 @@
 }
 
 - (void)refreshData {
-    
+    [self hideSeat];
 }
 
 - (BOOL)shouldHideKeyboardWhenTouchInView:(UIView *)view {
@@ -62,7 +72,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

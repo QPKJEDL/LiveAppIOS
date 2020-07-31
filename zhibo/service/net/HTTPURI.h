@@ -32,6 +32,8 @@
 #define URI_ACCOUNT_BALANCE_RECHARGE        @"/account/balance/recharge"
 #define URI_ACCOUNT_BALANCE_CASHOUT        @"/account/balance/cashout"
 
+#define URI_ACCOUNT_CHANGER_LIST            @"/account/changer/list"
+
 #define URI_ROOM_USER_INFO               @"/RoomUserInfo"
 #pragma mark ------ zfnotice -------
 #define URI_ZFNOTICE_KEFU                   @"/zfnotice/kefu"
@@ -46,6 +48,8 @@
 #define URI_GAME_DESK                   @"/game/desk"
 #define URI_GAME_DESKLIST               @"/game/desklist"
 #define URI_GAME_RESULTS               @"/game/results"
+#define URI_GAME_HISTORY               @"/game/history"
+#define URI_GAME_RULES               @"/game/rules"
 #pragma mark --------- channel ---------
 #define URI_CHANNEL_LIST                @"/GetHasChannel"
 #define URI_LABEL_LIST                  @"/GetLabel"
@@ -82,7 +86,25 @@
 #define URI_USER_INFO                           @"/user/info"
 #define URI_MESSAGE_LIST                        @"/message/list"
 
+
+#pragma mark ---------- moments --------
+#define URI_MOMENTS_LIST                        @"/moments/list"
+#define URI_MOMENTS_PUBLISH                     @"/moments/publish"
+#define URI_MOMENTS_COMMENTS                     @"/moments/comments"
+#define URI_MOMENTS_COMMENT_SEND                     @"/moments/comment/send"
+#define URI_MOMENTS_COMMENT_REPLY                     @"/moments/comment/reply"
+#define URI_MOMENTS_LIKE                        @"/moments/like"
+#define URI_MOMENTS_COMMENT_DELETE              @"/moments/comment/delete"
+#pragma mark ---------- rank --------
+#define URI_RANK_LIST                        @"/rank/list"
+
 #pragma mark ------ shixun -------
 #define URI_GAME_LOGIN                   @"/game/login"
 
+
+#pragma mark ------ channel for mq ------
+#define CHANNEL_FOLLOW_CHANGED      @"CHANNEL_FOLLOW_CHANGED" //关注发生变化
+#define CHANNEL_COMMENT_CHANGED      @"CHANNEL_COMMENT_CHANGED" //评论发生变化
+#define CHANNEL_LIKE_CHANGED      @"CHANNEL_LIKE_CHANGED" //喜欢发生变化
+#define CHANNEL_ROOM_GAME          @"CHANNEL_ROOM_GAME" //游戏房间消息
 #endif /* HTTPURI_h */

@@ -22,6 +22,8 @@
 #import "MessageDataPrecess.h"
 #import <WOCrashProtectorManager.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "MomentDataProcess.h"
+#import "RankDataProcess.h"
 @interface AppDelegate ()
 
 @end
@@ -31,7 +33,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [WOCrashProtectorManager makeAllEffective];
+//    [WOCrashProtectorManager makeAllEffective];
     [IQKeyboardManager sharedManager].enable = true;
     [IQKeyboardManager sharedManager].enableAutoToolbar = true;
     [self ready];
@@ -63,7 +65,7 @@
     NetProvidor *p = [[NetProvidor alloc] init];
     
     [ABNetConfiguration shared].provider = p;
-    [ABUIListViewMapping shared].mapping = @{
+    [ABUIListViewMapping shared].mapping = [[NSMutableDictionary alloc] initWithDictionary:@{
         @"anchoritem":@"AnchorItemView",
         @"betoption":@"BetOptionView",
         @"livecomment":@"LiveCommentItemView",
@@ -89,8 +91,16 @@
         @"moneysectionheader":@"MoneySectionHeaderView",
         @"arrowitem":@"ArrowItemView",
         @"inputitem":@"InputItemView",
-        @"switchitem":@"SwitchItemView"
-    };
+        @"switchitem":@"SwitchItemView",
+        @"momentitem":@"MomentItemView",
+        @"imageitem":@"ImageItemView",
+        @"rankitem":@"RankItemView",
+        @"gamehistoryitem":@"GameHistoryItemView",
+        @"gameruleitem":@"GameRuleItemView",
+        @"commentitem":@"CommentItemView",
+        @"commentitemreply":@"CommentReplyItemView",
+        @"chargeitem":@"ChargeHistoryItemView"
+    }];
     
     [ABNet shared].errorHandle = [[NetErrorPlugin alloc] init];
     [[ABNet shared] registerDataProcess:[[RoomDataProcess alloc] init] key:@"/room"];
@@ -99,6 +109,8 @@
     [[ABNet shared] registerDataProcess:[[FollowDataProcess alloc] init] key:@"/follow"];
     [[ABNet shared] registerDataProcess:[[UserDataProcess alloc] init] key:@"/user"];
     [[ABNet shared] registerDataProcess:[[MessageDataPrecess alloc] init] key:@"/message"];
+    [[ABNet shared] registerDataProcess:[[MomentDataProcess alloc] init] key:@"/moments"];
+    [[ABNet shared] registerDataProcess:[[RankDataProcess alloc] init] key:@"/rank"];
     
     [[Service shared] refreshGameURL];
 }

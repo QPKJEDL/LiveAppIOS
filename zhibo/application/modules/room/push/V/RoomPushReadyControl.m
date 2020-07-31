@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UIButton *backButton;
 
 @property (nonatomic, strong) UIImagePickerController *picker;
+@property (nonatomic, assign) NSInteger gameid;
+@property (nonatomic, assign) NSInteger deskid;
 @end
 @implementation RoomPushReadyControl
 - (instancetype)initWithFrame:(CGRect)frame
@@ -93,11 +95,11 @@
 
 
 - (void)onStartPush {
-    if (self.titleView.label == nil || self.titleView.channel == nil || self.titleView.title.length == 0) {
-        [ABUITips showError:@"请填写开播信息"];
+    if (self.titleView.label == nil || self.titleView.title.length == 0) {
+        [ABUITips showError:@"请输入您的标题并选择一个游戏"];
         return;
     }
-    [[RoomContext shared].pushPresent setcover:self.titleView.title label:self.titleView.label channel:self.titleView.channel];
+    [[RoomContext shared].pushPresent setcover:self.titleView.title gameid:self.gameid deskid:self.deskid channel:self.titleView.label];
 }
 
 - (void)titleViewOnCover:(RoomPushReadyTitleView *)titleView {
@@ -130,7 +132,9 @@
 
 - (void)titleViewOnTip:(RoomPushReadyTitleView *)titleView {
     [self endEditing:true];
-    [RP promptTopic:^(NSString * _Nullable title) {
+    [RP promptGameBlock:^(NSInteger gameid, NSInteger deskid, NSString *title) {
+        self.gameid = gameid;
+        self.deskid = deskid;
         self.titleView.label = title;
     }];
 }

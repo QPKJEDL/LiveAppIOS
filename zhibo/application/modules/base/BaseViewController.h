@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseViewController : QMUICommonViewController
 - (void)showNoDataEmpty;
+- (void)showSeat;
+- (void)hideSeat;
 - (void)refreshData;
 @end
 

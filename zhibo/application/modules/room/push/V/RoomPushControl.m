@@ -38,7 +38,7 @@
 //        self.roomMangerPromptView.delegate = self;
         
 //        [[ABMQ shared] subscribe:self channels:@[@"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
-        [[ABMQ shared] subscribe:self channels:@[@"CHANNEL_ROOM_GAME", @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
+        [[ABMQ shared] subscribe:self channels:@[CHANNEL_ROOM_GAME, @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
     }
     return self;
 }
@@ -60,7 +60,7 @@
 }
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
-    if ([channel isEqualToString:@"CHANNEL_ROOM_GAME"]) {
+    if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
         [self refreshDesk:message];
         return;
     }
