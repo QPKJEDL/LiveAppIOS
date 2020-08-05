@@ -9,8 +9,10 @@
 #import "HomeHotViewController.h"
 #import "ADBannerView.h"
 #import "AnchorListViewController.h"
-@interface AJXCategoryIndicatorBackgroundView: JXCategoryIndicatorBackgroundView
+#import "HTAsyncSocket.h"
+@interface AJXCategoryIndicatorBackgroundView: JXCategoryIndicatorBackgroundView<INetData>
 @property (nonatomic, strong) UIImageView *indicatorImageView;
+
 @end
 
 @implementation AJXCategoryIndicatorBackgroundView
@@ -35,7 +37,7 @@
 
 @end
 
-@interface HomeHotViewController ()<JXCategoryViewDelegate, JXCategoryListContainerViewDelegate, INetData>
+@interface HomeHotViewController ()<JXCategoryViewDelegate, JXCategoryListContainerViewDelegate, INetData, ADBannerViewDelegate>
 @property (nonatomic, strong) UIView *colorView;
 @property (nonatomic, strong) ADBannerView *bannerView;
 @property (nonatomic, strong) UIView *whiteView;
@@ -46,6 +48,8 @@
 
 @property (nonatomic, strong) NSArray *titleList;
 @property (nonatomic, strong) NSArray *titles;
+
+@property (nonatomic, strong) NSArray *bannerImgs;
 @end
 
 @implementation HomeHotViewController
@@ -63,6 +67,7 @@
     [self.view addSubview:self.whiteView];
     
     self.bannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 125)];
+    self.bannerView.delegate = self;
     [self.view addSubview:self.bannerView];
 
     
@@ -93,6 +98,30 @@
     self.listContainerView.backgroundColor = self.view.backgroundColor;
     //关联到categoryView
     self.categoryView.listContainer = self.listContainerView;
+    
+
+  
+//    [[HTAsyncSocket shareAsncSocket] connecteServerWith:@"" onPort:<#(uint16_t)#>]
+//    HTAsyncSocket *socket = [HTAsyncSocket shareAsncSocket];
+//[socket sendDataWithType:<#(int)#> withDic:<#(nonnull NSMutableDictionary *)#>]
+//    [socket reciveData:^(NSString  *data, NSString *type) {
+//    }];
+}
+
+- (void)adBannerView:(ADBannerView *)adBannerView didSelectIndex:(NSInteger)index {
+    NSDictionary *banner = self.bannerImgs[index];
+    NSInteger kind = [self.bannerImgs[index][@"kind"] intValue];
+    if (kind == 0) {
+        [NSRouter gotoRoomPlayPage:[self.bannerImgs[index][@"room_id"] intValue]];
+    }
+    if (kind == 1) {
+        NSString *url = self.bannerImgs[index][@"ad_url"];
+        if ([url hasPrefix:@"http"] == false) {
+            url = [NSString stringWithFormat:@"http://%@", url];
+        }
+        [NSRouter gotoWeb:url title:banner[@"remark"]];
+    }
+    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -131,27 +160,39 @@
     [ABUITips showLoading];
     [self hideEmptyView];
     [self fetchPostUri:URI_CHANNEL_LIST params:nil];
+    [self fetchPostUri:URI_BANNER_LIST params:nil];
 }
 
 
 
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    [ABUITips hideLoading];
-    [self hideEmptyView];
-    [self.categoryView setHidden:false];
-    NSArray *list = obj[@"list"];
-    self.titleList = list;
-    NSMutableArray *titles = [[NSMutableArray alloc] init];
-    for (NSDictionary *item in list) {
-        [titles addObject:item[@"channel"]];
-    }
-    self.titles = titles;
-//    [self.categoryView setTitles:@[@"热门", @"龙虎", @"百家乐", @"三公", @"牛牛", @"A89"]];
-    self.categoryView.titles = self.titles;
-    [self.categoryView reloadData];
+    if ([req.uri isEqualToString:URI_BANNER_LIST]) {
+        self.bannerImgs = obj[@"list"];
+        NSMutableArray *urls = [[NSMutableArray alloc] init];
+        for (NSDictionary *dic in self.bannerImgs) {
+            [urls addObject:dic[@"img"]];
+        }
+        
+        [self.bannerView setUrls:urls];
+    }else{
+        [ABUITips hideLoading];
+        [self hideEmptyView];
+        [self.categoryView setHidden:false];
+        NSArray *list = obj[@"list"];
+        self.titleList = list;
+        NSMutableArray *titles = [[NSMutableArray alloc] init];
+        for (NSDictionary *item in list) {
+            [titles addObject:item[@"channel"]];
+        }
+        self.titles = titles;
+    //    [self.categoryView setTitles:@[@"热门", @"龙虎", @"百家乐", @"三公", @"牛牛", @"A89"]];
+        self.categoryView.titles = self.titles;
+        [self.categoryView reloadData];
 
-    [[Service shared] refreshGameURL];
+        [[Service shared] refreshGameURL];
+    }
+
 }
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {

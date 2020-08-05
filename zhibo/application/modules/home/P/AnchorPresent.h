@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AnchorPresentDelegate <NSObject>
 @optional
-- (void)onReceiveAnchorList;
+- (void)onReceiveAnchorList:(BOOL)isMore;
 - (void)onReceiveAnchorListFailure;
 @end
 @interface AnchorPresent : NSObject

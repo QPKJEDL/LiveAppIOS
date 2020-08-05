@@ -54,6 +54,10 @@
     [self fetchPostUri:URI_MOMENTS_LIST params:@{@"live_uid":self.props[@"uid"], @"lastid":@"0"}];
 }
 
+- (void)refreshData {
+    [self fetchPostUri:URI_MOMENTS_LIST params:@{@"live_uid":self.props[@"uid"], @"lastid":@"0"}];
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.listView.frame = self.view.bounds;
@@ -70,6 +74,11 @@
     if ([req.uri isEqualToString:URI_MOMENTS_LIST]) {
         self.dataList = obj[@"list"];
         [self.listView setDataList:self.dataList css:@{@"item.rowSpacing":@"5"}];
+        if (self.dataList.count == 0) {
+            [self showSeat];
+        }else{
+            [self hideSeat];
+        }
     }
     if ([req.uri isEqualToString:URI_USER_INFO]) {
         [self.topView setData:obj];

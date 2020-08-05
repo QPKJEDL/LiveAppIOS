@@ -12,6 +12,8 @@
 @interface RankListViewController ()<INetData>
 @property (nonatomic, strong) ABUIListView *listView;
 @property (nonatomic, strong) RankTopView *rankTopView;
+@property (nonatomic, assign) NSInteger leftType;
+@property (nonatomic, assign) NSInteger rightType;
 @end
 
 @implementation RankListViewController
@@ -24,19 +26,36 @@
     NSInteger index = [self.props[@"index"] intValue];
     if (index == 0) {
         [self.rankTopView.rankActionsView setleft:@"当月冲榜" right:@"女神榜"];
+        self.leftType = 1;
+        self.rightType = 2;
     }
     if (index == 1) {
         [self.rankTopView.rankActionsView setleft:@"今日冲榜" right:@"宠爱榜"];
+        self.leftType = 3;
+        self.rightType = 4;
     }
     if (index == 2) {
         [self.rankTopView.rankActionsView setleft:@"今日冲榜" right:@"赌神榜"];
+        self.leftType = 5;
+        self.rightType = 6;
     }
+    
+    [self.rankTopView.rankActionsView.leftButton addTarget:self action:@selector(onLeft) forControlEvents:UIControlEventTouchUpInside];
+    [self.rankTopView.rankActionsView.rightButton addTarget:self action:@selector(onRight) forControlEvents:UIControlEventTouchUpInside];
     
     self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
     self.listView.headerView = self.rankTopView;
     [self.view addSubview:self.listView];
     
-    [self fetchPostUri:URI_RANK_LIST params:nil];
+    [self fetchPostUri:URI_RANK_LIST params:@{@"type":@(self.leftType)}];
+}
+
+- (void)onLeft {
+    [self fetchPostUri:URI_RANK_LIST params:@{@"type":@(self.leftType)}];
+}
+
+- (void)onRight {
+    [self fetchPostUri:URI_RANK_LIST params:@{@"type":@(self.rightType)}];
 }
 
 - (void)viewDidLayoutSubviews {

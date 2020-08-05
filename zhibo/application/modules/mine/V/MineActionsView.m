@@ -33,6 +33,12 @@
     if (index == 1) {
         [NSRouter gotoCashOut];
     }
+    if (index == 2) {
+        [NSRouter gotoTransform];
+    }
+    if (index == 3) {
+        [NSRouter gotoPopularize];
+    }
 }
 
 @end

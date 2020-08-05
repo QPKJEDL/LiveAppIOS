@@ -60,6 +60,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.6.4)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -71,6 +72,7 @@ PODS:
     - HXPhotoPicker/Default (= 3.0.2)
   - HXPhotoPicker/Default (3.0.2)
   - IQKeyboardManager (6.5.5)
+  - JSONModel (1.8.0)
   - JXCategoryView (1.5.5)
   - JXPagingView/Pager (2.0.6)
   - MJRefresh (3.4.3)
@@ -405,11 +407,13 @@ DEPENDENCIES:
   - ABFoundation (from `/Users/qp/own/ABFoundation`)
   - ABUIKit (from `/Users/qp/own/ABUIKit`)
   - AFNetworking
+  - CocoaAsyncSocket
   - FMDB
   - FSTextView
   - gobelieve (from `/Users/qp/own/gobelieve`)
   - HXPhotoPicker (~> 3.0.2)
   - IQKeyboardManager (from `/Users/qp/own/IQKeyboardManager`)
+  - JSONModel
   - JXCategoryView
   - JXPagingView/Pager
   - MJRefresh
@@ -425,9 +429,11 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - CocoaAsyncSocket
     - FMDB
     - FSTextView
     - HXPhotoPicker
+    - JSONModel
     - JXCategoryView
     - JXPagingView
     - MJRefresh
@@ -457,11 +463,13 @@ SPEC CHECKSUMS:
   ABFoundation: 24d5c9a443b5ba6cc02e3edf1b9397719c808c7b
   ABUIKit: 9ecc86ba81184f4f7cfbf7a6fb524c03e957446f
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
   gobelieve: e8f4b63419a95bf73b12d8bad14ad960b4523f74
   HXPhotoPicker: adea1df9f5d374588736b799679360c947ab0751
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   JXCategoryView: 0293fcb356f10a5c2e679dac0a1a5f1899ee0c87
   JXPagingView: 5851fb8cc964d0cbd93e9611077f7bc1fca05fee
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
@@ -476,6 +484,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 4222c36b8010c94bf3af5481c0c2d43383e7beb5
+PODFILE CHECKSUM: 27f9da222e628986143ac3c4e765bd49ae879af6
 
 COCOAPODS: 1.9.3

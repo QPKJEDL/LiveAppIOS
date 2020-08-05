@@ -21,6 +21,7 @@
     
     self.categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
     self.categoryView.backgroundColor = [UIColor hexColor:@"FF2828"];
+//    [self.categoryView gradient:GRADIENTCOLORS direction:0];
 //    self.categoryView.delegate = self;
     self.categoryView.titleLabelZoomEnabled = false;
     self.categoryView.titleColor = [UIColor hexColor:@"#FEC6D3"];

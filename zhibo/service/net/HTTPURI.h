@@ -14,7 +14,7 @@
 
 #define mark ----- index -----
 #define URI_INDEX_UPDATE                    @"/index/update"
-
+#define URI_BANNER_LIST                     @"/banner_list"
 
 #pragma mark ----- account --------
 #define URI_ACCOUNT_LOGIN                   @"/account/login"
@@ -35,6 +35,14 @@
 #define URI_ACCOUNT_CHANGER_LIST            @"/account/changer/list"
 
 #define URI_ROOM_USER_INFO               @"/RoomUserInfo"
+#define URI_ACCOUNT_TEAM_LOWERS            @"/account/team/lowers"
+#define URI_ACCOUNT_TEAM_STATIS            @"/account/team/statis"
+#define URI_ACCOUNT_SX_BANLANCE            @"/WebUserBalance"
+#define URI_ACCOUNT_EXCAHNGE                @"/Exchange"
+#define URI_ACCOUNT_WITHDRAW                @"/Withdraw"
+#define URI_ACCOUNT_WebUserBetsFee          @"/WebUserBetsFee"
+#define URI_ACCOUNT_POPULARIZE_CODELIST     @"/account/popularize/codelist"
+
 #pragma mark ------ zfnotice -------
 #define URI_ZFNOTICE_KEFU                   @"/zfnotice/kefu"
 

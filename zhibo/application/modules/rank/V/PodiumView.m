@@ -143,7 +143,7 @@
     self.guanImageView.left = self.avatarImageView.left-self.guanImageView.width/2+floor(self.guanImageView.width/3);
     self.guanImageView.top = self.avatarImageView.top-self.guanImageView.width/2;
     
-    [self.moneyButton setTitle:@"200" forState:UIControlStateNormal];
+    [self.moneyButton setTitle:data[@"money"] forState:UIControlStateNormal];
     self.moneyButton.top = self.nickNameLabel.bottom;
 
     

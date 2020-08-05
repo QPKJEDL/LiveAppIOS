@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) RoomPushPresent *pushPresent;
 
 @property (nonatomic, weak) RoomPlayView *playView;
+@property (nonatomic, weak) RoomPlayView *shixunPlayView;
 @property (nonatomic, weak) RoomPlayControl *playControl;
 
 

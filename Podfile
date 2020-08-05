@@ -24,4 +24,6 @@ pod 'TSHAlphaVideos', :path => "/Users/qp/own/TSHAlphaVideos"
 pod 'SDCycleScrollView','>= 1.80'
 pod 'YBImageBrowser'
 pod 'HXPhotoPicker', '~> 3.0.2'
+pod 'CocoaAsyncSocket'
+pod 'JSONModel'
 end

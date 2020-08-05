@@ -27,6 +27,8 @@
 @property (nonatomic, assign) NSInteger MinLimit;
 
 @property (nonatomic, strong) UILabel *leaveLabel;
+
+
 @end
 @implementation RoomPlayControl
 
@@ -60,9 +62,8 @@
         [self.moreListView setDataList:dataList css:css];
         self.moreListView.delegate = self;
         
-        self.betView = [[BetView alloc] initWithFrame:CGRectMake(0, 0, self.width, 160)];
+        self.betView = [[BetView alloc] initWithFrame:CGRectMake(0, 0, self.width, 160+44)];
         self.betView.delegate = self;
-        self.betView.backgroundColor = [[UIColor hexColor:@"#1B3F41"] colorWithAlphaComponent:0.4];
         self.betView.top = self.height;
         [self addSubview:self.betView];
         
@@ -70,6 +71,7 @@
         self.plateView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.58];
         self.plateView.layer.cornerRadius = 33;
         [self addSubview:self.plateView];
+        [self.plateView addTarget:self action:@selector(onPlate) forControlEvents:UIControlEventTouchUpInside];
         self.plateView.delegate = self;
         [self.plateView watch];
         [self.plateView setHidden:true];
@@ -88,6 +90,10 @@
     
     }
     return self;
+}
+
+- (void)onPlate {
+    [self showBetView];
 }
 
 #pragma mark ----------- local action -----------
@@ -136,6 +142,7 @@
 
 - (void)receiveDeskInfo:(NSDictionary *)deskInfo {
     [self.plateView setHidden:false];
+    self.shixunPlayAddress = deskInfo[@"LeftPlay"];
     self.MaxLimit = [deskInfo[@"MaxLimit"] integerValue];
     self.MinLimit = [deskInfo[@"MinLimit"] integerValue];
     self.gameid = [deskInfo[@"GameId"] intValue];
@@ -152,6 +159,7 @@
 }
 
 - (void)receiveBetSuccess {
+    self.betView.isBet = true;
     [ABUITips showError:@"下注成功"];
 }
 
@@ -165,7 +173,7 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView animateWithDuration:0.1 animations:^{
         self.betView.top = self.height-TI_HEIGHT-44-self.betView.height;
-        self.plateView.top = self.betView.top-self.plateView.height-10;
+        self.plateView.top = self.betView.top-self.plateView.height-10+44;
     }];
 }
 

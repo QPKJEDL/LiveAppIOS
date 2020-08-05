@@ -24,6 +24,7 @@
     _uilistView.delegate = self;
     [self.view addSubview:_uilistView];
     [_uilistView setupPullRefresh];
+    [_uilistView setupLoadMore];
     
     self.present = [[AnchorPresent alloc] init];
     self.present.delegate = self;
@@ -36,8 +37,9 @@
     _uilistView.frame = self.view.bounds;
 }
 
-- (void)onReceiveAnchorList{
+- (void)onReceiveAnchorList:(BOOL)isMore{
     [self.uilistView endPullRefreshing];
+    [self.uilistView endLoadMore];
     NSString *w = [NSString stringWithFormat:@"%f", ceil((SCREEN_WIDTH-3*12)/2.0)];
     [self.uilistView setDataList:self.present.anchorList css:@{@"item.size.width":w, @"item.size.height":@([ABDevice pixelWidth:195]), @"section.inset.right":@"12", @"section.inset.left":@"12", @"section.inset.top":@"12", @"item.rowSpacing":@"10"}];
     if (self.present.anchorList.count == 0) {
@@ -45,6 +47,10 @@
     }else{
         [self hideEmptyView];
     }
+    if (isMore == false) {
+        [self.uilistView noMoreData];
+    }
+    
 }
 - (void)onReceiveAnchorListFailure {
     [self.uilistView endPullRefreshing];
@@ -64,11 +70,15 @@
     if (self.present.anchorList.count == 0) {
         return;
     }
-
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:item];
-    dic[@"addtime"] = [ABTime timestamp];
-    [[Service shared] addHistory:dic];
-    [NSRouter gotoRoomPlayPage:[self.present.anchorList[indexPath.row][@"RoomId"] intValue]];
+    
+    if ([item[@"Status"] intValue] == 1) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:item];
+        dic[@"addtime"] = [ABTime timestamp];
+        [[Service shared] addHistory:dic];
+        [NSRouter gotoRoomPlayPage:[self.present.anchorList[indexPath.row][@"RoomId"] intValue]];
+    }else{
+        [NSRouter gotoProfile:[item[@"uid"] intValue]];
+    }
 }
 
 - (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
@@ -76,5 +86,8 @@
     [self.present getAnchorList:self.props];
 }
 
-
+- (void)listViewOnLoadMore:(ABUIListView *)listView {
+    self.present.isPullRefresh = false;
+    [self.present getAnchorList:self.props];
+}
 @end

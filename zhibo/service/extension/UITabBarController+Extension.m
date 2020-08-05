@@ -31,7 +31,7 @@
         UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:nmImage selectedImage:hlImage];
         nav.tabBarItem = tabBarItem;
         
-        
+//        [nav.navigationBar setBackgroundImage:[UIImage imageWithGradientColors:GRADIENTCOLORS frame:CGRectMake(0, 0, SCREEN_WIDTH, STATUS_AND_NAV_BAR_HEIGHT)] forBarMetrics:UIBarMetricsDefault];
         [nav.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor hexColor:@"FF2828"]] forBarMetrics:UIBarMetricsDefault];
         
 //        if (navDic != nil) {

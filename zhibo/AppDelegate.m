@@ -99,7 +99,10 @@
         @"gameruleitem":@"GameRuleItemView",
         @"commentitem":@"CommentItemView",
         @"commentitemreply":@"CommentReplyItemView",
-        @"chargeitem":@"ChargeHistoryItemView"
+        @"chargeitem":@"ChargeHistoryItemView",
+        @"loweritem":@"TeamLowerItemView",
+        @"statisitem":@"TeamStatisItemView",
+        @"popularizecodeitem":@"PopularizeCodeItemView"
     }];
     
     [ABNet shared].errorHandle = [[NetErrorPlugin alloc] init];

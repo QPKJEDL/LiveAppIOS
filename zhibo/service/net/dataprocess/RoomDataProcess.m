@@ -13,7 +13,7 @@
 - (ABNetRequest *)prepare:(ABNetRequest *)request {
     if ([request.uri isEqualToString:URI_ROOM_LIST]) {
         if ([request.params[@"channe_id"] intValue] == -1) {
-            request.realUri = @"/follow_list";
+            request.realUri = @"/FollowListRoom";
             request.realParams = @{@"lastid":@"0"};
         }else{
             request.realUri = @"/ChanneRoomList";
@@ -149,13 +149,17 @@
             @"systime":response[@"list"][@"SysTime"],
             @"endtime":response[@"list"][@"EndTime"],
             @"rank":response[@"giftRankList"],
-            @"status":@(1)
-//            @"status":response[@"list"][@"Status"]
+            @"Status":response[@"list"][@"Status"]
         };
         
         return @{@"video":video, @"room":room, @"anchor":user, @"isFollowed":response[@"isFollowed"]};
     }
     if ([request.uri isEqualToString:URI_ROOM_LIST]) {
+        NSDictionary *nResponse = response;
+        if ([request.realUri isEqualToString:@"/FollowListRoom"]) {
+            nResponse = @{@"is_more":@(false), @"RoomList":response[@"list"]};
+        }
+        
         NSDictionary *map = @{
             @"百家乐":@"icon_baijiale",
             @"龙虎":@"icon_longhu",
@@ -163,27 +167,26 @@
             @"三公":@"icon_sangong",
             @"A89":@"icon_a89"
         };
-        NSArray *list = response[@"list"];
+        NSArray *list = nResponse[@"RoomList"];
         list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"native_id"] = @"anchoritem";
             if (dic[@"LiveName"] != nil) {
                 dic[@"nickname"] = dic[@"LiveName"];
             }
-            if (dic[@"CoverImg"] != nil) {
-                dic[@"avatar"] = dic[@"CoverImg"];
-            }
+            dic[@"avatar"] = [dic valueInKeys:@[@"CoverImg", @"avater"]];
             if (dic[@"RoomCount"] != nil) {
                 dic[@"roomcount"] = dic[@"RoomCount"];
             }
-            dic[@"Channel"] = @"龙虎";
+            dic[@"uid"] = [dic valueInKeys:@[@"LiveUid", @"live_uid"]];
             NSString *channel = dic[@"Channel"];
-            if (map[channel] != nil) {
+            if (map[channel] != nil && [dic[@"Status"] intValue] == 1) {
                 dic[@"game_icon"] = map[channel];
             }
+            dic[@"last_id"] = request.params[@"last_id"];
             return dic;
         }];
         
-        return @{@"list":list};
+        return @{@"list":list, @"ismore":nResponse[@"is_more"]};
         
 //        NSDictionary *mm = @{
 //            @"DeskName":@"DeskName",
@@ -220,7 +223,11 @@
     }
     
     if ([request.uri isEqualToString:URI_ROOM_GAME]) {
-
+//        return @{
+//            @"desk_id": @"2",
+//            @"game_type": @"3",
+//            @"room_id": @"10000"
+//        };
     }
     return response;
 }

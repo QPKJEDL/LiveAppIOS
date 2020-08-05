@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)viewDisAppear;
 - (void)free;
+- (void)remove;
 
 - (void)playURL:(NSString *)url;
 @end

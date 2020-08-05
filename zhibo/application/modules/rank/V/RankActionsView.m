@@ -8,8 +8,7 @@
 
 #import "RankActionsView.h"
 @interface RankActionsView ()
-@property (nonatomic, strong) QMUIButton *leftButton;
-@property (nonatomic, strong) QMUIButton *rightButton;
+
 @end
 @implementation RankActionsView
 - (instancetype)initWithFrame:(CGRect)frame

@@ -106,6 +106,32 @@
 		F116830424A20897004DD6B8 /* RoomDataProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = F116830324A20897004DD6B8 /* RoomDataProcess.m */; };
 		F11AA4DD24D2F55E00FCFE18 /* ReChargeHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4DC24D2F55E00FCFE18 /* ReChargeHistoryViewController.m */; };
 		F11AA4E024D2F7BA00FCFE18 /* ChargeHistoryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4DF24D2F7BA00FCFE18 /* ChargeHistoryItemView.m */; };
+		F11AA4E324D4012900FCFE18 /* HTAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4E224D4012900FCFE18 /* HTAsyncSocket.m */; };
+		F11AA4F524D4032C00FCFE18 /* GACErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4E724D4032B00FCFE18 /* GACErrorManager.m */; };
+		F11AA4F624D4032C00FCFE18 /* GCDAsyncSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4EA24D4032C00FCFE18 /* GCDAsyncSocketManager.m */; };
+		F11AA4F724D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4EB24D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.m */; };
+		F11AA4F824D4032C00FCFE18 /* GCKeyChainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4EF24D4032C00FCFE18 /* GCKeyChainManager.m */; };
+		F11AA4F924D4032C00FCFE18 /* GACSocketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4F324D4032C00FCFE18 /* GACSocketModel.m */; };
+		F11AA4FA24D4032C00FCFE18 /* GACConnectConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4F424D4032C00FCFE18 /* GACConnectConfig.m */; };
+		F11AA50024D4473800FCFE18 /* TeamFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA4FF24D4473800FCFE18 /* TeamFormViewController.m */; };
+		F11AA50324D447B800FCFE18 /* PopularizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA50224D447B800FCFE18 /* PopularizeViewController.m */; };
+		F11AA50624D4492F00FCFE18 /* TeamFormStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA50524D4492F00FCFE18 /* TeamFormStatisticsViewController.m */; };
+		F11AA50924D4495100FCFE18 /* TeamFormLowerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA50824D4495100FCFE18 /* TeamFormLowerViewController.m */; };
+		F11AA50C24D44BCD00FCFE18 /* TeamLowerItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA50B24D44BCD00FCFE18 /* TeamLowerItemView.m */; };
+		F11AA50F24D515DE00FCFE18 /* TeamStatisItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA50E24D515DE00FCFE18 /* TeamStatisItemView.m */; };
+		F11AA51C24D53C3000FCFE18 /* GFCalendarScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA51124D53C3000FCFE18 /* GFCalendarScrollView.m */; };
+		F11AA51D24D53C3000FCFE18 /* GFCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA51524D53C3000FCFE18 /* GFCalendarCell.m */; };
+		F11AA51E24D53C3000FCFE18 /* GFCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA51624D53C3000FCFE18 /* GFCalendarView.m */; };
+		F11AA51F24D53C3000FCFE18 /* NSDate+GFCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA51824D53C3000FCFE18 /* NSDate+GFCalendar.m */; };
+		F11AA52024D53C3000FCFE18 /* GFCalendarMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA51A24D53C3000FCFE18 /* GFCalendarMonth.m */; };
+		F11AA52524D79D4000FCFE18 /* ZBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA52424D79D4000FCFE18 /* ZBProgressView.m */; };
+		F11AA52824D7C11C00FCFE18 /* WenLuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA52724D7C11C00FCFE18 /* WenLuView.m */; };
+		F11AA52C24D7C31A00FCFE18 /* ZZLuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA52B24D7C31A00FCFE18 /* ZZLuView.m */; };
+		F11AA52F24D8245600FCFE18 /* TransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA52E24D8245600FCFE18 /* TransformViewController.m */; };
+		F11AA53224D835A500FCFE18 /* MoneyInPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53124D835A500FCFE18 /* MoneyInPrompt.m */; };
+		F11AA53524D83F3D00FCFE18 /* MoneyOutPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53424D83F3D00FCFE18 /* MoneyOutPrompt.m */; };
+		F11AA53924D8F11500FCFE18 /* PopularizeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53824D8F11400FCFE18 /* PopularizeListViewController.m */; };
+		F11AA53D24D9027200FCFE18 /* PopularizeCodeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53C24D9027100FCFE18 /* PopularizeCodeItemView.m */; };
 		F11F7BA024BEFAF300DB96B3 /* UserPromptActionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7B9F24BEFAF300DB96B3 /* UserPromptActionItemView.m */; };
 		F11F7C3124BFEA3F00DB96B3 /* RoomComeRaw.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7C3024BFEA3F00DB96B3 /* RoomComeRaw.m */; };
 		F11F7C3424BFEA6300DB96B3 /* RoomComeContainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7C3324BFEA6300DB96B3 /* RoomComeContainView.m */; };
@@ -430,6 +456,59 @@
 		F11AA4DC24D2F55E00FCFE18 /* ReChargeHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReChargeHistoryViewController.m; sourceTree = "<group>"; };
 		F11AA4DE24D2F7BA00FCFE18 /* ChargeHistoryItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeHistoryItemView.h; sourceTree = "<group>"; };
 		F11AA4DF24D2F7BA00FCFE18 /* ChargeHistoryItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeHistoryItemView.m; sourceTree = "<group>"; };
+		F11AA4E124D4012900FCFE18 /* HTAsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTAsyncSocket.h; sourceTree = "<group>"; };
+		F11AA4E224D4012900FCFE18 /* HTAsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTAsyncSocket.m; sourceTree = "<group>"; };
+		F11AA4E624D4032B00FCFE18 /* GACErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACErrorManager.h; sourceTree = "<group>"; };
+		F11AA4E724D4032B00FCFE18 /* GACErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACErrorManager.m; sourceTree = "<group>"; };
+		F11AA4E924D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocketCommunicationManager.h; sourceTree = "<group>"; };
+		F11AA4EA24D4032C00FCFE18 /* GCDAsyncSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocketManager.m; sourceTree = "<group>"; };
+		F11AA4EB24D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocketCommunicationManager.m; sourceTree = "<group>"; };
+		F11AA4EC24D4032C00FCFE18 /* GCDAsyncSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocketManager.h; sourceTree = "<group>"; };
+		F11AA4EE24D4032C00FCFE18 /* GCKeyChainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCKeyChainManager.h; sourceTree = "<group>"; };
+		F11AA4EF24D4032C00FCFE18 /* GCKeyChainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCKeyChainManager.m; sourceTree = "<group>"; };
+		F11AA4F124D4032C00FCFE18 /* GACSocketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACSocketModel.h; sourceTree = "<group>"; };
+		F11AA4F224D4032C00FCFE18 /* GACConnectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACConnectConfig.h; sourceTree = "<group>"; };
+		F11AA4F324D4032C00FCFE18 /* GACSocketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACSocketModel.m; sourceTree = "<group>"; };
+		F11AA4F424D4032C00FCFE18 /* GACConnectConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACConnectConfig.m; sourceTree = "<group>"; };
+		F11AA4FE24D4473800FCFE18 /* TeamFormViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamFormViewController.h; sourceTree = "<group>"; };
+		F11AA4FF24D4473800FCFE18 /* TeamFormViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamFormViewController.m; sourceTree = "<group>"; };
+		F11AA50124D447B800FCFE18 /* PopularizeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopularizeViewController.h; sourceTree = "<group>"; };
+		F11AA50224D447B800FCFE18 /* PopularizeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopularizeViewController.m; sourceTree = "<group>"; };
+		F11AA50424D4492F00FCFE18 /* TeamFormStatisticsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamFormStatisticsViewController.h; sourceTree = "<group>"; };
+		F11AA50524D4492F00FCFE18 /* TeamFormStatisticsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamFormStatisticsViewController.m; sourceTree = "<group>"; };
+		F11AA50724D4495100FCFE18 /* TeamFormLowerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamFormLowerViewController.h; sourceTree = "<group>"; };
+		F11AA50824D4495100FCFE18 /* TeamFormLowerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamFormLowerViewController.m; sourceTree = "<group>"; };
+		F11AA50A24D44BCD00FCFE18 /* TeamLowerItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamLowerItemView.h; sourceTree = "<group>"; };
+		F11AA50B24D44BCD00FCFE18 /* TeamLowerItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamLowerItemView.m; sourceTree = "<group>"; };
+		F11AA50D24D515DD00FCFE18 /* TeamStatisItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamStatisItemView.h; sourceTree = "<group>"; };
+		F11AA50E24D515DE00FCFE18 /* TeamStatisItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamStatisItemView.m; sourceTree = "<group>"; };
+		F11AA51124D53C3000FCFE18 /* GFCalendarScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCalendarScrollView.m; sourceTree = "<group>"; };
+		F11AA51224D53C3000FCFE18 /* NSDate+GFCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+GFCalendar.h"; sourceTree = "<group>"; };
+		F11AA51324D53C3000FCFE18 /* GFCalendarMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCalendarMonth.h; sourceTree = "<group>"; };
+		F11AA51424D53C3000FCFE18 /* GFCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCalendar.h; sourceTree = "<group>"; };
+		F11AA51524D53C3000FCFE18 /* GFCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCalendarCell.m; sourceTree = "<group>"; };
+		F11AA51624D53C3000FCFE18 /* GFCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCalendarView.m; sourceTree = "<group>"; };
+		F11AA51724D53C3000FCFE18 /* GFCalendarScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCalendarScrollView.h; sourceTree = "<group>"; };
+		F11AA51824D53C3000FCFE18 /* NSDate+GFCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GFCalendar.m"; sourceTree = "<group>"; };
+		F11AA51924D53C3000FCFE18 /* GFCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCalendarCell.h; sourceTree = "<group>"; };
+		F11AA51A24D53C3000FCFE18 /* GFCalendarMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCalendarMonth.m; sourceTree = "<group>"; };
+		F11AA51B24D53C3000FCFE18 /* GFCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCalendarView.h; sourceTree = "<group>"; };
+		F11AA52324D79D4000FCFE18 /* ZBProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBProgressView.h; sourceTree = "<group>"; };
+		F11AA52424D79D4000FCFE18 /* ZBProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBProgressView.m; sourceTree = "<group>"; };
+		F11AA52624D7C11C00FCFE18 /* WenLuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WenLuView.h; sourceTree = "<group>"; };
+		F11AA52724D7C11C00FCFE18 /* WenLuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WenLuView.m; sourceTree = "<group>"; };
+		F11AA52A24D7C31A00FCFE18 /* ZZLuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZLuView.h; sourceTree = "<group>"; };
+		F11AA52B24D7C31A00FCFE18 /* ZZLuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZLuView.m; sourceTree = "<group>"; };
+		F11AA52D24D8245600FCFE18 /* TransformViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformViewController.h; sourceTree = "<group>"; };
+		F11AA52E24D8245600FCFE18 /* TransformViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransformViewController.m; sourceTree = "<group>"; };
+		F11AA53024D835A500FCFE18 /* MoneyInPrompt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyInPrompt.h; sourceTree = "<group>"; };
+		F11AA53124D835A500FCFE18 /* MoneyInPrompt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyInPrompt.m; sourceTree = "<group>"; };
+		F11AA53324D83F3D00FCFE18 /* MoneyOutPrompt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyOutPrompt.h; sourceTree = "<group>"; };
+		F11AA53424D83F3D00FCFE18 /* MoneyOutPrompt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyOutPrompt.m; sourceTree = "<group>"; };
+		F11AA53724D8F11400FCFE18 /* PopularizeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopularizeListViewController.h; sourceTree = "<group>"; };
+		F11AA53824D8F11400FCFE18 /* PopularizeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopularizeListViewController.m; sourceTree = "<group>"; };
+		F11AA53B24D9027100FCFE18 /* PopularizeCodeItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopularizeCodeItemView.h; sourceTree = "<group>"; };
+		F11AA53C24D9027100FCFE18 /* PopularizeCodeItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopularizeCodeItemView.m; sourceTree = "<group>"; };
 		F11F7B9E24BEFAF300DB96B3 /* UserPromptActionItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptActionItemView.h; sourceTree = "<group>"; };
 		F11F7B9F24BEFAF300DB96B3 /* UserPromptActionItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptActionItemView.m; sourceTree = "<group>"; };
 		F11F7C2F24BFEA3F00DB96B3 /* RoomComeRaw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomComeRaw.h; sourceTree = "<group>"; };
@@ -702,6 +781,10 @@
 				F166EE2D24B5CF5C00178F0F /* Stack.m */,
 				F121920324CA7AD800630CA2 /* Config.h */,
 				F121920424CA7AD800630CA2 /* Config.m */,
+				F11AA4E124D4012900FCFE18 /* HTAsyncSocket.h */,
+				F11AA4E224D4012900FCFE18 /* HTAsyncSocket.m */,
+				F11AA52324D79D4000FCFE18 /* ZBProgressView.h */,
+				F11AA52424D79D4000FCFE18 /* ZBProgressView.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -841,6 +924,18 @@
 				F121925824D0554700630CA2 /* ProfileViewController.m */,
 				F11AA4DB24D2F55E00FCFE18 /* ReChargeHistoryViewController.h */,
 				F11AA4DC24D2F55E00FCFE18 /* ReChargeHistoryViewController.m */,
+				F11AA4FE24D4473800FCFE18 /* TeamFormViewController.h */,
+				F11AA4FF24D4473800FCFE18 /* TeamFormViewController.m */,
+				F11AA50124D447B800FCFE18 /* PopularizeViewController.h */,
+				F11AA50224D447B800FCFE18 /* PopularizeViewController.m */,
+				F11AA50424D4492F00FCFE18 /* TeamFormStatisticsViewController.h */,
+				F11AA50524D4492F00FCFE18 /* TeamFormStatisticsViewController.m */,
+				F11AA50724D4495100FCFE18 /* TeamFormLowerViewController.h */,
+				F11AA50824D4495100FCFE18 /* TeamFormLowerViewController.m */,
+				F11AA52D24D8245600FCFE18 /* TransformViewController.h */,
+				F11AA52E24D8245600FCFE18 /* TransformViewController.m */,
+				F11AA53724D8F11400FCFE18 /* PopularizeListViewController.h */,
+				F11AA53824D8F11400FCFE18 /* PopularizeListViewController.m */,
 			);
 			path = mine;
 			sourceTree = "<group>";
@@ -1170,6 +1265,7 @@
 		55FD3674244FDCBB00D84DD9 /* zhibo */ = {
 			isa = PBXGroup;
 			children = (
+				F11AA4E424D4032B00FCFE18 /* GCDAsyncSocketManager */,
 				F16CBBD324B063C100CA6C18 /* QMUIConfigurationTemplate */,
 				F16CBB1E24AE0FDF00CA6C18 /* resource */,
 				F11682B7249F5321004DD6B8 /* dao */,
@@ -1243,6 +1339,86 @@
 			path = bet;
 			sourceTree = "<group>";
 		};
+		F11AA4E424D4032B00FCFE18 /* GCDAsyncSocketManager */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA4E524D4032B00FCFE18 /* Universal */,
+				F11AA4E824D4032B00FCFE18 /* Manager */,
+				F11AA4ED24D4032C00FCFE18 /* Keychain */,
+				F11AA4F024D4032C00FCFE18 /* Model */,
+			);
+			path = GCDAsyncSocketManager;
+			sourceTree = "<group>";
+		};
+		F11AA4E524D4032B00FCFE18 /* Universal */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA4E624D4032B00FCFE18 /* GACErrorManager.h */,
+				F11AA4E724D4032B00FCFE18 /* GACErrorManager.m */,
+			);
+			path = Universal;
+			sourceTree = "<group>";
+		};
+		F11AA4E824D4032B00FCFE18 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA4E924D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.h */,
+				F11AA4EA24D4032C00FCFE18 /* GCDAsyncSocketManager.m */,
+				F11AA4EB24D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.m */,
+				F11AA4EC24D4032C00FCFE18 /* GCDAsyncSocketManager.h */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		F11AA4ED24D4032C00FCFE18 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA4EE24D4032C00FCFE18 /* GCKeyChainManager.h */,
+				F11AA4EF24D4032C00FCFE18 /* GCKeyChainManager.m */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		F11AA4F024D4032C00FCFE18 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA4F124D4032C00FCFE18 /* GACSocketModel.h */,
+				F11AA4F224D4032C00FCFE18 /* GACConnectConfig.h */,
+				F11AA4F324D4032C00FCFE18 /* GACSocketModel.m */,
+				F11AA4F424D4032C00FCFE18 /* GACConnectConfig.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F11AA51024D53C3000FCFE18 /* GFCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA51124D53C3000FCFE18 /* GFCalendarScrollView.m */,
+				F11AA51224D53C3000FCFE18 /* NSDate+GFCalendar.h */,
+				F11AA51324D53C3000FCFE18 /* GFCalendarMonth.h */,
+				F11AA51424D53C3000FCFE18 /* GFCalendar.h */,
+				F11AA51524D53C3000FCFE18 /* GFCalendarCell.m */,
+				F11AA51624D53C3000FCFE18 /* GFCalendarView.m */,
+				F11AA51724D53C3000FCFE18 /* GFCalendarScrollView.h */,
+				F11AA51824D53C3000FCFE18 /* NSDate+GFCalendar.m */,
+				F11AA51924D53C3000FCFE18 /* GFCalendarCell.h */,
+				F11AA51A24D53C3000FCFE18 /* GFCalendarMonth.m */,
+				F11AA51B24D53C3000FCFE18 /* GFCalendarView.h */,
+			);
+			path = GFCalendar;
+			sourceTree = "<group>";
+		};
+		F11AA52924D7C2F400FCFE18 /* Wenlu */ = {
+			isa = PBXGroup;
+			children = (
+				F11AA52624D7C11C00FCFE18 /* WenLuView.h */,
+				F11AA52724D7C11C00FCFE18 /* WenLuView.m */,
+				F11AA52A24D7C31A00FCFE18 /* ZZLuView.h */,
+				F11AA52B24D7C31A00FCFE18 /* ZZLuView.m */,
+			);
+			path = Wenlu;
+			sourceTree = "<group>";
+		};
 		F11F7C2E24BFE9D700DB96B3 /* animate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1308,6 +1484,8 @@
 		F1425076249A0F96003E83D8 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F11AA52924D7C2F400FCFE18 /* Wenlu */,
+				F11AA51024D53C3000FCFE18 /* GFCalendar */,
 				F18AA63A24B81057002846AB /* room */,
 				F19E90F024B49F3E00FFF38C /* user */,
 				F11682E224A08B10004DD6B8 /* bet */,
@@ -1324,6 +1502,10 @@
 				F121926024D15A2C00630CA2 /* CommentView.m */,
 				F121926924D16F1E00630CA2 /* ZBInputView.h */,
 				F121926A24D16F1E00630CA2 /* ZBInputView.m */,
+				F11AA53024D835A500FCFE18 /* MoneyInPrompt.h */,
+				F11AA53124D835A500FCFE18 /* MoneyInPrompt.m */,
+				F11AA53324D83F3D00FCFE18 /* MoneyOutPrompt.h */,
+				F11AA53424D83F3D00FCFE18 /* MoneyOutPrompt.m */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1400,6 +1582,12 @@
 				F121927B24D276EE00630CA2 /* CommentReplyItemView.m */,
 				F11AA4DE24D2F7BA00FCFE18 /* ChargeHistoryItemView.h */,
 				F11AA4DF24D2F7BA00FCFE18 /* ChargeHistoryItemView.m */,
+				F11AA50A24D44BCD00FCFE18 /* TeamLowerItemView.h */,
+				F11AA50B24D44BCD00FCFE18 /* TeamLowerItemView.m */,
+				F11AA50D24D515DD00FCFE18 /* TeamStatisItemView.h */,
+				F11AA50E24D515DE00FCFE18 /* TeamStatisItemView.m */,
+				F11AA53B24D9027100FCFE18 /* PopularizeCodeItemView.h */,
+				F11AA53C24D9027100FCFE18 /* PopularizeCodeItemView.m */,
 			);
 			path = listitemviews;
 			sourceTree = "<group>";
@@ -1842,19 +2030,23 @@
 				F1A4D88B24C68871003A6031 /* MoneySectionHeaderView.m in Sources */,
 				F1B7950924597214000BD333 /* BillViewController.m in Sources */,
 				559F3E4524519FA6001280F2 /* SearchViewController.m in Sources */,
+				F11AA4F924D4032C00FCFE18 /* GACSocketModel.m in Sources */,
 				559F3EFD24543CF2001280F2 /* ReChargeViewController.m in Sources */,
 				F121921C24CE801B00630CA2 /* ADBannerView.m in Sources */,
 				F18AA67424B8955B002846AB /* RoomPlayViewController.m in Sources */,
 				F10FB59C24B9C91900857E1E /* MessageDataPrecess.m in Sources */,
 				559F3E792452C0F9001280F2 /* PhotoListCell.m in Sources */,
 				559F3EED24543527001280F2 /* WalletViewController.m in Sources */,
+				F11AA52F24D8245600FCFE18 /* TransformViewController.m in Sources */,
 				F18AA66024B878A3002846AB /* UserItemView.m in Sources */,
 				F11682C0249F5F20004DD6B8 /* LoginViewController.m in Sources */,
 				F19E90F324B49F5300FFF38C /* AvatarView.m in Sources */,
 				559F3EE3245424BA001280F2 /* MineActionsView.m in Sources */,
 				F10FB5AB24BAA11300857E1E /* AnchorFuncPromptView.m in Sources */,
 				F121923A24CFD67600630CA2 /* RankDataProcess.m in Sources */,
+				F11AA52024D53C3000FCFE18 /* GFCalendarMonth.m in Sources */,
 				F16F6D4224A9B591003A51A6 /* GameDataHelper.m in Sources */,
+				F11AA4F724D4032C00FCFE18 /* GCDAsyncSocketCommunicationManager.m in Sources */,
 				F10FB5C924BC500300857E1E /* RoomAudienceItemView.m in Sources */,
 				F10FB5C324BC2E3C00857E1E /* GameResultPromptView.m in Sources */,
 				F10FB58C24B9AA9D00857E1E /* ChannelItemView.m in Sources */,
@@ -1870,13 +2062,18 @@
 				F10FB5B524BBE33500857E1E /* GiftRankPromptView.m in Sources */,
 				F1A4D87624C56447003A6031 /* GiftHistoryViewController.m in Sources */,
 				F18AA69024B93BAC002846AB /* RoomContext.m in Sources */,
+				F11AA52524D79D4000FCFE18 /* ZBProgressView.m in Sources */,
 				557C08022451782B008868E6 /* PickPhotoView.m in Sources */,
 				F166616924BD3F0500B2607C /* RoomPushSocket.m in Sources */,
 				559F3ECB24540BE9001280F2 /* UserBriefView.m in Sources */,
 				559F3ECE24540D26001280F2 /* MineNavView.m in Sources */,
+				F11AA53D24D9027200FCFE18 /* PopularizeCodeItemView.m in Sources */,
+				F11AA52824D7C11C00FCFE18 /* WenLuView.m in Sources */,
+				F11AA53924D8F11500FCFE18 /* PopularizeListViewController.m in Sources */,
 				F121925C24D055A000630CA2 /* ProfileTopView.m in Sources */,
 				F16CBB1124AD89CA00CA6C18 /* LoginPhoneView.m in Sources */,
 				F121926B24D16F1E00630CA2 /* ZBInputView.m in Sources */,
+				F11AA51E24D53C3000FCFE18 /* GFCalendarView.m in Sources */,
 				F121920524CA7AD800630CA2 /* Config.m in Sources */,
 				F121926124D15A2D00630CA2 /* CommentView.m in Sources */,
 				F121925624D052EE00630CA2 /* WebViewViewController.m in Sources */,
@@ -1902,13 +2099,16 @@
 				F1F5F6952459095000B448F9 /* FootPrintViewController.m in Sources */,
 				F10FB5AE24BADA1900857E1E /* DeskItemView.m in Sources */,
 				559F3F142456CD9D001280F2 /* ViewUtil.m in Sources */,
+				F11AA4F524D4032C00FCFE18 /* GACErrorManager.m in Sources */,
 				557C07B7245030C3008868E6 /* BasePageViewController.m in Sources */,
 				F11682F324A09DCA004DD6B8 /* BetCoinsView.m in Sources */,
 				557C08092451798F008868E6 /* PickPhotoCell.m in Sources */,
 				F11682F624A09E1B004DD6B8 /* BetOptionsView.m in Sources */,
 				F166618A24BEE2B700B2607C /* RoomPlayEndControl.m in Sources */,
+				F11AA53524D83F3D00FCFE18 /* MoneyOutPrompt.m in Sources */,
 				F18AA68624B89919002846AB /* RoomSocket.m in Sources */,
 				F10FB58024B9986F00857E1E /* GamesPromptView.m in Sources */,
+				F11AA52C24D7C31A00FCFE18 /* ZZLuView.m in Sources */,
 				F18AA65024B858F4002846AB /* RoomBottomBar.m in Sources */,
 				F11AA4DD24D2F55E00FCFE18 /* ReChargeHistoryViewController.m in Sources */,
 				F16CBB0724ACBEAE00CA6C18 /* RegisterView.m in Sources */,
@@ -1925,11 +2125,15 @@
 				F121921924CE773E00630CA2 /* HomeHotViewController.m in Sources */,
 				F121924724D03CBE00630CA2 /* GameHistoryViewController.m in Sources */,
 				F10FB58F24B9AE4A00857E1E /* UserPromptView.m in Sources */,
+				F11AA4E324D4012900FCFE18 /* HTAsyncSocket.m in Sources */,
 				F1A4D88824C67C0F003A6031 /* MoneyItemView.m in Sources */,
+				F11AA50C24D44BCD00FCFE18 /* TeamLowerItemView.m in Sources */,
 				557C075A24500490008868E6 /* BaseViewController.m in Sources */,
 				F166618124BDD17100B2607C /* ManagerItemView.m in Sources */,
+				F11AA4FA24D4032C00FCFE18 /* GACConnectConfig.m in Sources */,
 				F18AA65A24B86B0A002846AB /* RoomAudienceView.m in Sources */,
 				F18AA65D24B86E7A002846AB /* RoomChatView.m in Sources */,
+				F11AA50024D4473800FCFE18 /* TeamFormViewController.m in Sources */,
 				F166618424BDD8DD00B2607C /* RoomPrompt.m in Sources */,
 				F116830424A20897004DD6B8 /* RoomDataProcess.m in Sources */,
 				557C078824500C01008868E6 /* NearByViewController.m in Sources */,
@@ -1944,6 +2148,7 @@
 				F121924A24D0403800630CA2 /* GameHistoryItemView.m in Sources */,
 				F166618E24BEF6B000B2607C /* RoomAnchorActionView.m in Sources */,
 				F166EE2E24B5CF5D00178F0F /* Stack.m in Sources */,
+				F11AA51D24D53C3000FCFE18 /* GFCalendarCell.m in Sources */,
 				F10FB5BD24BC034000857E1E /* GiftEffectsPlayView.m in Sources */,
 				F10FB5B124BB1D9D00857E1E /* AnchorPromptView.m in Sources */,
 				557C07A724501955008868E6 /* BaseNavigationController.m in Sources */,
@@ -1953,6 +2158,7 @@
 				F11682CE249F6801004DD6B8 /* LoginRegPresent.m in Sources */,
 				F10FB5C624BC310100857E1E /* RoomGiftView.m in Sources */,
 				F1A4D87324C54C5C003A6031 /* TitleImage2ItemView.m in Sources */,
+				F11AA4F824D4032C00FCFE18 /* GCKeyChainManager.m in Sources */,
 				F121921024CAA7F200630CA2 /* InputItemView.m in Sources */,
 				559F3EDB245415F8001280F2 /* MinePresent.m in Sources */,
 				F121923424CFD06700630CA2 /* RankListViewController.m in Sources */,
@@ -1974,6 +2180,7 @@
 				F166617E24BDBE8A00B2607C /* RoomManagerPromptView.m in Sources */,
 				F166617724BD724D00B2607C /* GameStatusPlateView.m in Sources */,
 				F1A4D87C24C57F5C003A6031 /* GameManager.m in Sources */,
+				F11AA53224D835A500FCFE18 /* MoneyInPrompt.m in Sources */,
 				F18AA67F24B89827002846AB /* RoomPlayPresent.m in Sources */,
 				F10FB5C024BC0F1800857E1E /* GiftRawView.m in Sources */,
 				F121922724CECE4100630CA2 /* MomentItemView.m in Sources */,
@@ -1992,6 +2199,7 @@
 				F10FB59224B9B83E00857E1E /* UserDataProcess.m in Sources */,
 				F10FB59F24B9CB4E00857E1E /* NoticeItemView.m in Sources */,
 				F10FB5B824BBE47600857E1E /* GiftRankItemView.m in Sources */,
+				F11AA50924D4495100FCFE18 /* TeamFormLowerViewController.m in Sources */,
 				F1A4D89D24CA6C66003A6031 /* ZBUIImagePickerController.m in Sources */,
 				F121920824CA7CBE00630CA2 /* ArrowItemView.m in Sources */,
 				557C077F24500BCF008868E6 /* FollowViewController.m in Sources */,
@@ -2004,6 +2212,9 @@
 				F166617A24BD728A00B2607C /* GameSocket.m in Sources */,
 				F166EE3524B5EF7200178F0F /* FollowDataProcess.m in Sources */,
 				F1A4D88224C597B6003A6031 /* CashOutInputView.m in Sources */,
+				F11AA51F24D53C3000FCFE18 /* NSDate+GFCalendar.m in Sources */,
+				F11AA50324D447B800FCFE18 /* PopularizeViewController.m in Sources */,
+				F11AA50624D4492F00FCFE18 /* TeamFormStatisticsViewController.m in Sources */,
 				F11682B6249F52F2004DD6B8 /* Service.m in Sources */,
 				F11682CB249F6444004DD6B8 /* LoginTipView.m in Sources */,
 				55F3B221245EB55B00334B8F /* LiveUserView.m in Sources */,
@@ -2015,12 +2226,15 @@
 				557C079E245012D7008868E6 /* UITabBarController+Extension.m in Sources */,
 				F18AA67724B8956A002846AB /* RoomPushViewController.m in Sources */,
 				F11F7C3E24C0056F00DB96B3 /* BasePromptView.m in Sources */,
+				F11AA50F24D515DE00FCFE18 /* TeamStatisItemView.m in Sources */,
 				F16015C124AB3DCC0005ABBA /* LiveCommentItemView.m in Sources */,
 				559F3E8B2452EA45001280F2 /* UserItem.m in Sources */,
 				F166617324BD67B900B2607C /* RoomPlaySocket.m in Sources */,
 				F121925024D04C5A00630CA2 /* GameRuleItemView.m in Sources */,
 				F1A4D87F24C592C6003A6031 /* PayChannelItemView.m in Sources */,
+				F11AA51C24D53C3000FCFE18 /* GFCalendarScrollView.m in Sources */,
 				F10FB59524B9BF7100857E1E /* MessageItemView.m in Sources */,
+				F11AA4F624D4032C00FCFE18 /* GCDAsyncSocketManager.m in Sources */,
 				F166619124BEF74300B2607C /* UserPromptActionsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

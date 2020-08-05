@@ -32,6 +32,7 @@
     _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
     _coverImageView.layer.cornerRadius = 8;
     _coverImageView.clipsToBounds = true;
+//    [_coverImageView gradient:GRADIENTCOLORS direction:0];
     [self.containView addSubview:_coverImageView];
     
     _watchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.coverImageView.bottom-20, 10, 10)];
@@ -61,7 +62,7 @@
     [self.gameImageView setImage:[UIImage imageNamed:@"icon_niuniu"]];
     [self.coverImageView addSubview:self.gameImageView];
     
-
+    
 }
 
 - (void)layoutAdjustContents {
@@ -80,7 +81,7 @@
 
 - (void)reload:(NSDictionary *)item {
     self.nameLabel.text = item[@"nickname"];
-    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageNamed:@"anchor_default"]];
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageWithColor:[UIColor hexColor:@"FF2828"] frame:self.coverImageView.bounds]];
     
     [self.nameLabel sizeToFit];
     self.nameLabel.height = 12;

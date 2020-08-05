@@ -65,13 +65,13 @@
 }
 
 - (void)reload:(NSDictionary *)item extra:(NSDictionary *)extra indexPath:(NSIndexPath *)indexPath {
-    self.numberLabel.text = item[@"num"];
+    self.numberLabel.text = [item stringValueForKey:@"num"];
     
     self.nameLabel.text = item[@"nickname"];
     [self.nameLabel sizeToFit];
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
     
-    [self.meiliButton setTitle:@"888" forState:UIControlStateNormal];
+    [self.meiliButton setTitle:item[@"money"] forState:UIControlStateNormal];
 }
 @end

@@ -8,7 +8,7 @@
 
 #import "ADBannerView.h"
 #import <SDCycleScrollView.h>
-@interface ADBannerView ()
+@interface ADBannerView ()<SDCycleScrollViewDelegate>
 @property (nonatomic, strong) UIView *containView;
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @end
@@ -32,11 +32,21 @@
         // 网络加载图片的轮播器
         _cycleScrollView = [[SDCycleScrollView alloc] initWithFrame:self.containView.bounds];
         _cycleScrollView.autoScrollTimeInterval = 5.0f;
+        _cycleScrollView.delegate = self;
         _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
-        _cycleScrollView.imageURLStringsGroup = @[@"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=587361437,2958469427&fm=15&gp=0.jpg", @"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3554609148,2724423662&fm=26&gp=0.jpg"];
         [self.containView addSubview:self.cycleScrollView];
         
     }
     return self;
+}
+
+- (void)setUrls:(NSArray *)urls {
+//    _cycleScrollView.imageURLStringsGroup = @[@"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=587361437,2958469427&fm=15&gp=0.jpg", @"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3554609148,2724423662&fm=26&gp=0.jpg"];
+    _cycleScrollView.imageURLStringsGroup = urls;
+}
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    [self.delegate adBannerView:self didSelectIndex:index];
+
 }
 @end

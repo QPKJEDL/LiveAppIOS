@@ -38,6 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)gotoWeb:(NSString *)path title:(NSString *)title;
 
 + (void)gotoChargerHistory:(NSInteger)type;
++ (void)gotoTeamForm;
++ (void)gotoPopularize;
++ (void)gotoTransform;
++ (void)gotoPopularizeList;
 @end
 
 NS_ASSUME_NONNULL_END

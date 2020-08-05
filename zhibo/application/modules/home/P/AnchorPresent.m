@@ -25,9 +25,10 @@
         [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
     }
     if (self.anchorList.count == 0 || self.isPullRefresh == true) {
-        [self fetchPostUri:URI_ROOM_LIST params:@{@"channe_id":props[@"id"], @"last_time":@"0"}];
+        [self fetchPostUri:URI_ROOM_LIST params:@{@"channe_id":props[@"id"], @"last_id":@"0"}];
     }else{
-        [self fetchPostUri:URI_ROOM_LIST params:@{@"channe_id":props[@"id"], @"last_time":[self.anchorList lastObject][@"StartTime"]}];
+        NSInteger last_id = [[self.anchorList lastObject][@"last_id"] intValue];
+        [self fetchPostUri:URI_ROOM_LIST params:@{@"channe_id":props[@"id"], @"last_id":@(last_id+1)}];
     }
 }
 
@@ -41,7 +42,8 @@
         [self.anchorList addObjectsFromArray:list];
     }
     self.isPullRefresh = false;
-    [self.delegate onReceiveAnchorList];
+    
+    [self.delegate onReceiveAnchorList:[obj[@"ismore"] boolValue]];
 }
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {

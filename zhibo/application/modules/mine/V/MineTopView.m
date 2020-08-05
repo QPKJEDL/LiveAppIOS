@@ -31,7 +31,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         _topView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-        _topView.image = [UIImage imageNamed:@"beijing"];
+//        _topView.image = [UIImage imageNamed:@"beijing"];
+//        _topView.backgroundColor = [UIColor hexColor:@"FF2828"];
+        [_topView gradient:GRADIENTCOLORS direction:0];
         [self addSubview:self.topView];
         _topView.backgroundColor = [UIColor systemPinkColor];
         

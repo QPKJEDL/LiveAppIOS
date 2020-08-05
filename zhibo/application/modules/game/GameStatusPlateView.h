@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)plateView:(GameStatusPlateView *)plateView onStatusChanged:(GameStatusPlateViewStatus)status;
 
 @end
-@interface GameStatusPlateView : UIView
+@interface GameStatusPlateView : UIButton
 @property (nonatomic, weak) id<GameStatusPlateViewDelegate> delegate;
 - (void)please:(NSDictionary *)info;
 - (void)finish;

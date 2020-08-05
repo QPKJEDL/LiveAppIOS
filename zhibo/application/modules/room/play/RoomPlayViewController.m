@@ -17,6 +17,7 @@
 #import "RoomPlayPresent.h"
 @interface RoomPlayViewController ()<RoomPlayControlDelegate, RoomPlayPresentDelegate>
 @property (nonatomic, strong) RoomPlayView *playView;
+@property (nonatomic, strong) RoomPlayView *shixunPlayView;
 @property (nonatomic, strong) RoomPlayControl *controlView;
 @property (nonatomic, strong) RoomPlayPresent *present;
 @property (nonatomic, strong) RoomSocket *roomSocket;
@@ -34,6 +35,10 @@
     self.playView = [[RoomPlayView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.playView];
     
+    self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
+    [self.view addSubview:self.shixunPlayView];
+    [self.shixunPlayView setHidden:true];
+    
     self.controlView = [[RoomPlayControl alloc] initWithFrame:self.view.bounds];
     self.controlView.delegate = self;
     [self.view addSubview:self.controlView];
@@ -48,6 +53,7 @@
     
     [RoomContext shared].playControl = self.controlView;
     [RoomContext shared].playView = self.playView;
+    [RoomContext shared].shixunPlayView = self.shixunPlayView;
     [RoomContext shared].socket = self.roomSocket;
     [RoomContext shared].playPresent = self.present;
     [RoomContext shared].roomid = self.roomid;
@@ -85,6 +91,7 @@
 - (void)close:(NSDictionary *)data {
     [self.controlView removeFromSuperview];
     [self.playView free];
+    [self.shixunPlayView free];
 
     self.endControl = [[RoomPlayEndControl alloc] initWithFrame:self.view.bounds];
     [self.endControl setData:data];
@@ -95,6 +102,7 @@
 - (void)dealloc
 {
     [self.playView free];
+    [self.shixunPlayView free];
 }
 
 @end

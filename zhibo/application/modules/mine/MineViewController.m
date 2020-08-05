@@ -95,6 +95,9 @@
     if ([icon isEqualToString:@"tixianjil-"]) {
         [NSRouter gotoChargerHistory:2];
     }
+    if ([icon isEqualToString:@"tuanduibaobiao"]) {
+        [NSRouter gotoTeamForm];
+    }
 }
 
 @end

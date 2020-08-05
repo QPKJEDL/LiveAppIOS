@@ -10,16 +10,19 @@
 #import "BetCoinsView.h"
 #import "BetOptionsView.h"
 @interface BetView()<BetCoinsViewDelegate, BetOptionsViewDelegate>
+@property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) BetCoinsView *coinsView;
 @property (nonatomic, strong) BetOptionsView *optionsView;
 @property (nonatomic, strong) UIButton *okButton;
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UILabel *tipLabel;
-
+@property (nonatomic, strong) UILabel *balanceLabel;
 @property (nonatomic, strong) NSArray *coins;
 @property (nonatomic, strong) NSArray *options;
 
 @property (nonatomic, strong) NSDictionary *sounds;
+
+@property (nonatomic, strong) UIButton *wenluButton;
 @end
 
 @implementation BetView
@@ -28,49 +31,82 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.width, self.height-44)];
+        self.mainView.backgroundColor = [UIColor redColor];
+        self.mainView.backgroundColor = [[UIColor hexColor:@"#1B3F41"] colorWithAlphaComponent:0.4];
+        [self addSubview:self.mainView];
+        
         self.coinsView = [[BetCoinsView alloc] initWithFrame:CGRectMake(10, 2, SCREEN_WIDTH-20, 55)];
         self.coinsView.delegate = self;
-        [self addSubview:self.coinsView];
+        [self.mainView addSubview:self.coinsView];
         
         self.optionsView = [[BetOptionsView alloc] initWithFrame:CGRectMake(10, self.coinsView.bottom, SCREEN_WIDTH-70, 100)];
         self.optionsView.delegate = self;
-        [self addSubview:self.optionsView];
+        [self.mainView addSubview:self.optionsView];
         
         self.okButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 60, 40, 40)];
         [self.okButton setTitle:@"确定" forState:UIControlStateNormal];
         self.okButton.titleLabel.font = [UIFont systemFontOfSize:10];
         [self.okButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.okButton setBackgroundColor:[UIColor hexColor:@"#FF2853"]];
-        [self addSubview:self.okButton];
+        [self.mainView addSubview:self.okButton];
         self.okButton.left = self.width-10-self.okButton.width;
         self.okButton.layer.cornerRadius = 20;
-        self.okButton.clipsToBounds = true;
+//        self.okButton.clipsToBounds = true;
         [self.okButton addTarget:self action:@selector(onConfirm) forControlEvents:UIControlEventTouchUpInside];
-        
+        self.okButton.layer.shadowColor = [UIColor colorWithRed:94/255.0 green:124/255.0 blue:124/255.0 alpha:0.88].CGColor;
+        self.okButton.layer.shadowOffset = CGSizeMake(0,1);
+        self.okButton.layer.shadowOpacity = 1;
+        self.okButton.layer.shadowRadius = 0;
         
         self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
         [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [self.cancelButton setBackgroundColor:[UIColor hexColor:@"#FFFFFF"]];
         self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:10];
-        [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self addSubview:self.cancelButton];
+        [self.cancelButton setTitleColor:[UIColor hexColor:@"#383733"] forState:UIControlStateNormal];
+        [self.mainView addSubview:self.cancelButton];
         self.cancelButton.top = self.okButton.bottom+6;
         self.cancelButton.left = self.width-10-self.cancelButton.width;
         self.cancelButton.layer.cornerRadius = 20;
-        self.cancelButton.clipsToBounds = true;
+//        self.cancelButton.clipsToBounds = true;
         [self.cancelButton addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
+        self.cancelButton.layer.shadowColor = [UIColor colorWithRed:94/255.0 green:124/255.0 blue:124/255.0 alpha:0.88].CGColor;
+        self.cancelButton.layer.shadowOffset = CGSizeMake(0,1);
+        self.cancelButton.layer.shadowOpacity = 1;
+        self.cancelButton.layer.shadowRadius = 0;
         
-        self.tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 23)];
-        self.tipLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+        
+        self.tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 24)];
+        self.tipLabel.backgroundColor = [[UIColor hexColor:@"#3C3C3C"] colorWithAlphaComponent:0.6];
         self.tipLabel.textAlignment = NSTextAlignmentCenter;
         [self.tipLabel setTextColor:[UIColor whiteColor]];
-        self.tipLabel.font = [UIFont systemFontOfSize:8];
-        self.tipLabel.layer.borderWidth = 1;
-        self.tipLabel.layer.cornerRadius = 23/2;
+        self.tipLabel.font = [UIFont systemFontOfSize:9];
+        self.tipLabel.layer.cornerRadius = 24/2;
         self.tipLabel.numberOfLines = 2;
+        self.tipLabel.clipsToBounds = true;
         [self addSubview:self.tipLabel];
-        self.tipLabel.top = self.cancelButton.bottom+6;
-        self.tipLabel.left = self.width-self.tipLabel.width;
+        self.tipLabel.centerY = 22;
+        
+        self.balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tipLabel.right+2, 0, 60, 24)];
+        self.balanceLabel.backgroundColor = [[UIColor hexColor:@"#3C3C3C"] colorWithAlphaComponent:0.6];
+        self.balanceLabel.textAlignment = NSTextAlignmentCenter;
+        [self.balanceLabel setTextColor:[UIColor whiteColor]];
+        self.balanceLabel.font = [UIFont systemFontOfSize:9];
+        self.balanceLabel.layer.cornerRadius = 24/2;
+        self.balanceLabel.numberOfLines = 2;
+        self.balanceLabel.clipsToBounds = true;
+        [self addSubview:self.balanceLabel];
+        self.balanceLabel.centerY = 22;
+        
+        self.wenluButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+        self.wenluButton.backgroundColor = self.tipLabel.backgroundColor;
+        self.wenluButton.layer.cornerRadius = 32/2;
+        self.wenluButton.clipsToBounds = true;
+        [self.wenluButton setImage:[UIImage imageNamed:@"wenlu"] forState:UIControlStateNormal];
+        [self addSubview:self.wenluButton];
+        self.wenluButton.centerY = 22;
+        self.wenluButton.left = self.balanceLabel.right+10;
         
         self.enabled = false;
         
@@ -80,16 +116,16 @@
 
 - (void)setEnabled:(BOOL)enabled {
     _enabled = enabled;
-    if (enabled) {
-        [self.okButton setHidden:false];
-        [self.cancelButton setHidden:false];
-        [self.tipLabel setHidden:false];
-    }else{
-        [self.okButton setHidden:true];
-        [self.cancelButton setHidden:true];
-        [self.tipLabel setHidden:true];
-        
-    }
+//    if (enabled) {
+//        [self.okButton setHidden:false];
+//        [self.cancelButton setHidden:false];
+//        [self.tipLabel setHidden:false];
+//    }else{
+//        [self.okButton setHidden:true];
+//        [self.cancelButton setHidden:true];
+//        [self.tipLabel setHidden:true];
+//
+//    }
 }
 
 #pragma mark --------- loc action ----------
@@ -130,6 +166,7 @@
     self.options = options;
     self.sounds = sounds;
     [self.tipLabel setText:limit];
+    self.balanceLabel.text = @"余额\n21334.00";
     
     [self _reload];
 }

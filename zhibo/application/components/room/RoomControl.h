@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RoomControl : UIView
+@property (nonatomic, strong) NSString *shixunPlayAddress;
 @property (nonatomic, strong) NSDictionary *roomInfo;
 
 - (void)onReceiveRoomMessage:(NSDictionary *)message;

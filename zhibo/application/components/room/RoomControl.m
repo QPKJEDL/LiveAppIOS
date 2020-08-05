@@ -90,7 +90,7 @@
         self.sceneButton.clipsToBounds = true;
         [self.sceneButton setTitle:@"现场" forState:UIControlStateNormal];
         [self.sceneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.sceneButton.backgroundColor = [UIColor hexColor:@"#3C3C3C"];
+        self.sceneButton.backgroundColor = [[UIColor hexColor:@"#3C3C3C"] colorWithAlphaComponent:0.6];
         self.sceneButton.titleLabel.font = [UIFont PingFangSC:12];
         [self addSubview:self.sceneButton];
         self.sceneButton.centerY = self.briefView.centerY;
@@ -111,10 +111,19 @@
 - (void)onScene {
     [self.sceneButton setSelected:!self.sceneButton.isSelected];
     if (self.sceneButton.isSelected) {
+        [[RoomContext shared].shixunPlayView setHidden:false];
+        [[RoomContext shared].shixunPlayView playURL:self.shixunPlayAddress];
+//        [[RoomContext shared].shixunPlayView playURL:@"http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8"];
+        
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
     }else{
+        [[RoomContext shared].shixunPlayView setHidden:true];
+        [[RoomContext shared].shixunPlayView remove];
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
     }
+    
+    
+    
 }
 
 #pragma mark ----- receive data --------

@@ -63,7 +63,7 @@
             @"icon":@"tixian"
         },
         @{
-            @"title":@"关注",
+            @"title":@"筹码兑换",
             @"icon":@"guanzhu"
         },
         @{

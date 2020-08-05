@@ -59,11 +59,11 @@
 }
 
 - (void)onFollow {
-    [NSRouter gotoUserList:@"关注列表"];
+//    [NSRouter gotoUserList:@"关注列表"];
 }
 
 - (void)onFans {
-    [NSRouter gotoUserList:@"粉丝列表"];
+//    [NSRouter gotoUserList:@"粉丝列表"];
 }
 
 - (void)reload:(NSDictionary *)data {

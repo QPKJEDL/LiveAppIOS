@@ -66,8 +66,12 @@
 
 - (void)playURL:(NSString *)url {
     NSLog(@"%@", url);
-//    [_player startPlay:url type:PLAY_TYPE_LIVE_RTMP];
-    [_player startPlay:@"http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8" type:PLAY_TYPE_VOD_HLS];
+    if ([url hasPrefix:@"rtmp"]) {
+        [_player startPlay:url type:PLAY_TYPE_LIVE_RTMP];
+    }else {
+        [_player setRenderMode:RENDER_MODE_FILL_EDGE];
+        [_player startPlay:url type:PLAY_TYPE_VOD_HLS];
+    }
 }
 
 - (void)viewWillAppear {
@@ -118,6 +122,10 @@
 
 - (void)onNetStatus:(NSDictionary *)param {
     
+}
+
+- (void)remove {
+    [self.player stopPlay];
 }
 
 - (void)free {

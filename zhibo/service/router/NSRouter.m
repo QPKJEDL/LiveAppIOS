@@ -30,6 +30,10 @@
 #import "WebViewViewController.h"
 #import "ProfileViewController.h"
 #import "ReChargeHistoryViewController.h"
+#import "TeamFormViewController.h"
+#import "PopularizeViewController.h"
+#import "TransformViewController.h"
+#import "PopularizeListViewController.h"
 @implementation NSRouter
 + (void)doLogin {
     LoginViewController *vc = [[LoginViewController alloc] init];
@@ -188,6 +192,29 @@
     }else{
         vc.title = @"提现记录";
     }
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoTeamForm {
+    TeamFormViewController *vc = [[TeamFormViewController alloc] init];
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoPopularize {
+    PopularizeViewController *vc = [[PopularizeViewController alloc] init];
+    vc.title = @"推广";
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoTransform {
+    TransformViewController *vc = [[TransformViewController alloc] init];
+    vc.title = @"筹码兑换";
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoPopularizeList {
+    PopularizeListViewController *vc = [[PopularizeListViewController alloc] init];
+    vc.title = @"推广码";
     [NSRouter pushTo:vc props:@{}];
 }
 @end

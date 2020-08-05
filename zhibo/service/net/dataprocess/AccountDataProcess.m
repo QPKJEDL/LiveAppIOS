@@ -47,6 +47,15 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
         request.realUri = @"/account_changer_list";
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_LOWERS]) {
+        request.realUri = @"/TeamList";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
+    //        request.realUri = @"";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
+        
+    }
     return request;
 }
 
@@ -56,6 +65,12 @@
         return false;
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
+        return false;
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
+         return false;
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
         return false;
     }
     return true;
@@ -167,6 +182,84 @@
             dic[@"native_id"] = @"chargeitem";
             return dic;
         }];
+        return @{@"list":list};
+    }
+    
+    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_LOWERS]) {
+        NSArray *list = [ABIteration iterationList:response[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"avatar"] = dic[@"avater"];
+            dic[@"native_id"] = @"loweritem";
+            return dic;
+        }];
+//        NSArray *list = @[
+//
+//            @{
+//                @"avatar":@"http://cdn.duitang.com/uploads/item/201507/11/20150711140831_KLCfd.jpeg",
+//                @"nickname":@"米雪儿",
+//                @"native_id":@"loweritem"
+//            },
+//            @{
+//                @"avatar":@"http://cdn.duitang.com/uploads/item/201507/11/20150711140831_KLCfd.jpeg",
+//                @"nickname":@"李兴奥",
+//                @"native_id":@"loweritem"
+//            }
+//
+//        ];
+        return @{@"list":list, @"count":@(0)};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
+        return @{
+            @"list":@[
+                @{
+                    @"title":@"注册人数",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"投注人数",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"投注金额",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"中奖金额",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"充值金额",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"下级返点金额",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"团队返点金额",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                },
+                @{
+                    @"title":@"我的饭店金额",
+                    @"content":@"1083人",
+                    @"native_id":@"statisitem"
+                }
+            ]
+        };
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
+        NSArray *list = @[
+            @{
+                @"time":[ABTime time],
+                @"native_id":@"popularizecodeitem"
+            }
+        ];
         return @{@"list":list};
     }
     return response;
