@@ -82,6 +82,7 @@
 - (void)setBalance:(NSString *)text {
     self.balanceLabel.text = [NSString stringWithFormat:@"可用余额:%@", text];
     [self.balanceLabel sizeToFit];
+    [self.textField becomeFirstResponder];
 }
 
 - (void)onOk {

@@ -17,7 +17,7 @@
         return @"http://129.211.114.135:8933";
     }
     return @"http://129.211.114.135:8212";
-//    return @"http://192.168.0.102:8212";
+//    return @"http://192.168.0.114:8212";
 }
 
 - (NSDictionary *)headers:(NSString *)uri {

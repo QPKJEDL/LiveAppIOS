@@ -26,4 +26,5 @@ pod 'YBImageBrowser'
 pod 'HXPhotoPicker', '~> 3.0.2'
 pod 'CocoaAsyncSocket'
 pod 'JSONModel'
+pod 'QCloudCOSXML'
 end

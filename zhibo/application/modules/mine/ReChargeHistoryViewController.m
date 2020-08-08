@@ -8,7 +8,7 @@
 
 #import "ReChargeHistoryViewController.h"
 
-@interface ReChargeHistoryViewController ()<INetData>
+@interface ReChargeHistoryViewController ()<INetData, ABUIListViewDelegate>
 @property (nonatomic, strong) ABUIListView *listView;
 @end
 
@@ -19,7 +19,12 @@
     // Do any additional setup after loading the view.
     
     self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
+    self.listView.delegate = self;
     [self.view addSubview:self.listView];
+    [self.listView setupPullRefresh];
+    
+    
+    
     [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
 }
 
@@ -28,7 +33,12 @@
     self.listView.frame = self.view.bounds;
 }
 
+- (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
+     [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
+}
+
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [self.listView endPullRefreshing];
     [self.listView setDataList:obj[@"list"] css:@{
         @"item.rowSpacing":@"1"
     }];

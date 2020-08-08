@@ -29,9 +29,7 @@
         [self addSubview:self.titleLabel];
         [self.titleLabel addLineDirection:LineDirectionBottom color:[UIColor hexColor:@"dedede"] width:LINGDIANWU];
         
-        
-
-        
+    
         self.textField = [[QMUITextField alloc] initWithFrame:CGRectMake(15, self.titleLabel.bottom+10, self.width-30, 44)];
         [self.textField setPlaceholder:@"请输入金额"];
         self.textField.textColor = [UIColor hexColor:@"#474747"];
@@ -79,6 +77,7 @@
 - (void)setBalance:(NSString *)text {
     self.balanceLabel.text = [NSString stringWithFormat:@"可用余额:%@", text];
     [self.balanceLabel sizeToFit];
+    [self.textField becomeFirstResponder];
 }
 
 - (void)onCancel {

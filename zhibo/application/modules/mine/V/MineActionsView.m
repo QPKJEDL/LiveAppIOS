@@ -37,7 +37,7 @@
         [NSRouter gotoTransform];
     }
     if (index == 3) {
-        [NSRouter gotoPopularize];
+        [NSRouter gotoPopularizeList];
     }
 }
 

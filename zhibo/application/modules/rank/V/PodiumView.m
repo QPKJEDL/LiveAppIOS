@@ -71,6 +71,13 @@
     return _moneyButton;
 }
 
+- (void)clear {
+    [self.moneyButton setHidden:true];
+    [self.nickNameLabel setHidden:true];
+    [self.avatarImageView setHidden:true];
+    [self.guanImageView setHidden:true];
+}
+
 - (void)render {
     
 }
@@ -88,6 +95,10 @@
 }
 
 - (void)setData:(NSDictionary *)data {
+    [self.moneyButton setHidden:false];
+    [self.nickNameLabel setHidden:false];
+    [self.avatarImageView setHidden:false];
+    [self.guanImageView setHidden:false];
     NSInteger mc = [data[@"num"] intValue];
     NSString *avatar = data[@"avatar"];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:[UIImage imageNamed:@"avatar_default"]];

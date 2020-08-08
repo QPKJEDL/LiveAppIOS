@@ -24,6 +24,7 @@
     self.iconImageView.backgroundColor = [UIColor hexColor:@"dedede"];
     self.iconImageView.layer.cornerRadius = 48/2;
     self.iconImageView.clipsToBounds = true;
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.containView addSubview:self.iconImageView];
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];

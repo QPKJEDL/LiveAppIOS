@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *avatarImageView;
 - (void)setTaiImageName:(NSString *)imageName mc:(NSInteger)mc;
 - (void)setData:(NSDictionary *)data;
+- (void)clear;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -177,6 +177,8 @@
 		F121927C24D276EF00630CA2 /* CommentReplyItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121927B24D276EE00630CA2 /* CommentReplyItemView.m */; };
 		F14250722499E7C2003E83D8 /* NetProvidor.m in Sources */ = {isa = PBXBuildFile; fileRef = F14250712499E7C2003E83D8 /* NetProvidor.m */; };
 		F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1425079249A102C003E83D8 /* AnchorItemView.m */; };
+		F144CA0924DA5CC80051EDD4 /* DateItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F144CA0824DA5CC80051EDD4 /* DateItemView.m */; };
+		F144CA1D24DED09D0051EDD4 /* QrCodeSharePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */; };
 		F16015C124AB3DCC0005ABBA /* LiveCommentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16015C024AB3DCC0005ABBA /* LiveCommentItemView.m */; };
 		F166616924BD3F0500B2607C /* RoomPushSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F166616824BD3F0500B2607C /* RoomPushSocket.m */; };
 		F166617024BD631D00B2607C /* RoomMessageHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = F166616F24BD631D00B2607C /* RoomMessageHandle.m */; };
@@ -592,6 +594,10 @@
 		F14250712499E7C2003E83D8 /* NetProvidor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetProvidor.m; sourceTree = "<group>"; };
 		F1425078249A102C003E83D8 /* AnchorItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnchorItemView.h; sourceTree = "<group>"; };
 		F1425079249A102C003E83D8 /* AnchorItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnchorItemView.m; sourceTree = "<group>"; };
+		F144CA0724DA5CC80051EDD4 /* DateItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateItemView.h; sourceTree = "<group>"; };
+		F144CA0824DA5CC80051EDD4 /* DateItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateItemView.m; sourceTree = "<group>"; };
+		F144CA1B24DED09C0051EDD4 /* QrCodeSharePrompt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QrCodeSharePrompt.h; sourceTree = "<group>"; };
+		F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QrCodeSharePrompt.m; sourceTree = "<group>"; };
 		F16015BF24AB3DCC0005ABBA /* LiveCommentItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveCommentItemView.h; sourceTree = "<group>"; };
 		F16015C024AB3DCC0005ABBA /* LiveCommentItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveCommentItemView.m; sourceTree = "<group>"; };
 		F166616724BD3F0500B2607C /* RoomPushSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomPushSocket.h; sourceTree = "<group>"; };
@@ -1506,6 +1512,10 @@
 				F11AA53124D835A500FCFE18 /* MoneyInPrompt.m */,
 				F11AA53324D83F3D00FCFE18 /* MoneyOutPrompt.h */,
 				F11AA53424D83F3D00FCFE18 /* MoneyOutPrompt.m */,
+				F144CA0724DA5CC80051EDD4 /* DateItemView.h */,
+				F144CA0824DA5CC80051EDD4 /* DateItemView.m */,
+				F144CA1B24DED09C0051EDD4 /* QrCodeSharePrompt.h */,
+				F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -2031,6 +2041,7 @@
 				F1B7950924597214000BD333 /* BillViewController.m in Sources */,
 				559F3E4524519FA6001280F2 /* SearchViewController.m in Sources */,
 				F11AA4F924D4032C00FCFE18 /* GACSocketModel.m in Sources */,
+				F144CA1D24DED09D0051EDD4 /* QrCodeSharePrompt.m in Sources */,
 				559F3EFD24543CF2001280F2 /* ReChargeViewController.m in Sources */,
 				F121921C24CE801B00630CA2 /* ADBannerView.m in Sources */,
 				F18AA67424B8955B002846AB /* RoomPlayViewController.m in Sources */,
@@ -2210,6 +2221,7 @@
 				F11682EA24A08B10004DD6B8 /* BetView.m in Sources */,
 				F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */,
 				F166617A24BD728A00B2607C /* GameSocket.m in Sources */,
+				F144CA0924DA5CC80051EDD4 /* DateItemView.m in Sources */,
 				F166EE3524B5EF7200178F0F /* FollowDataProcess.m in Sources */,
 				F1A4D88224C597B6003A6031 /* CashOutInputView.m in Sources */,
 				F11AA51F24D53C3000FCFE18 /* NSDate+GFCalendar.m in Sources */,

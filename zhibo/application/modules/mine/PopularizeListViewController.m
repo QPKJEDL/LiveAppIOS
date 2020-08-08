@@ -7,9 +7,12 @@
 //
 
 #import "PopularizeListViewController.h"
-
-@interface PopularizeListViewController ()<INetData>
+#import "QrCodeSharePrompt.h"
+#import <HXPhotoTools.h>
+@interface PopularizeListViewController ()<INetData, ABUIListViewDelegate>
 @property (nonatomic, strong) ABUIListView *listView;
+@property (nonatomic, assign) NSInteger codeid;
+@property (nonatomic, strong) QrCodeSharePrompt *qsp;
 
 @end
 
@@ -19,22 +22,75 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    QMUIButton *btn = [[QMUIButton alloc] initWithFrame:CGRectMake(35, 21, SCREEN_WIDTH-70, 42)];
+    btn.layer.cornerRadius = 42/2;
+    btn.clipsToBounds = true;
+    [btn setTitle:@"添加二维码" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont PingFangSC:14];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor hexColor:@"FF2828"]];
+    [self.view addSubview:btn];
+    [btn addTarget:self action:@selector(onButton) forControlEvents:UIControlEventTouchUpInside];
+    
     self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
+    self.listView.delegate = self;
     [self.view addSubview:self.listView];
+    [self.listView adapterSafeArea];
+    self.listView.delegate = self;
+    [self.listView setupPullRefresh];
     
     [self fetchPostUri:URI_ACCOUNT_POPULARIZE_CODELIST params:nil];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.listView.frame = self.view.bounds;
+    self.listView.frame = CGRectMake(0, 82, SCREEN_WIDTH, self.view.height-82);
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    [self.listView setDataList:obj[@"list"] css:@{@"item.size.height":@(74)}];
+    if ([req.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
+        [self.listView endPullRefreshing];
+        [self.listView setDataList:obj[@"list"] css:@{@"item.size.height":@(74)}];
+    }else{
+        [ABUITips showError:@"删除成功"];
+         [self fetchPostUri:URI_ACCOUNT_POPULARIZE_CODELIST params:nil];
+    }
+    
 }
 
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [self.listView endPullRefreshing];
+    [ABUITips showSucceed:err.message];
+}
 
+- (void)onButton {
+    [NSRouter gotoPopularize];
+}
+
+- (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
+    [self fetchPostUri:URI_ACCOUNT_POPULARIZE_CODELIST params:nil];
+}
+
+- (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
+    QrCodeSharePrompt *qsp = [[QrCodeSharePrompt alloc] initWithFrame:CGRectMake(26, 0, SCREEN_WIDTH-26-26, SCREEN_HEIGHT*0.8)];
+    [qsp.saveButton addTarget:self action:@selector(onSave) forControlEvents:UIControlEventTouchUpInside];
+    [qsp.deleteButton addTarget:self action:@selector(onDelete) forControlEvents:UIControlEventTouchUpInside];
+    qsp.qrcodeStr = item[@"qrcode"];
+    self.codeid = [item[@"id"] intValue];
+    self.qsp = qsp;
+    [[ABUIPopUp shared] show:qsp from:ABPopUpDirectionCenter];
+}
+
+- (void)onSave {
+    [[ABUIPopUp shared] remove];
+    [HXPhotoTools savePhotoToCustomAlbumWithName:nil photo:[ABTools getImageViewWithView:self.qsp.mainImageView]];
+    [ABUITips showSucceed:@"保存成功"];
+}
+
+- (void)onDelete {
+    [[ABUIPopUp shared] remove];
+    [self fetchPostUri:URI_ACCOUNT_POPULARIZE_DELETE params:@{@"codeid":@(self.codeid)}];
+}
 
 /*
 #pragma mark - Navigation

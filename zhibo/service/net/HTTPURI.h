@@ -42,7 +42,9 @@
 #define URI_ACCOUNT_WITHDRAW                @"/Withdraw"
 #define URI_ACCOUNT_WebUserBetsFee          @"/WebUserBetsFee"
 #define URI_ACCOUNT_POPULARIZE_CODELIST     @"/account/popularize/codelist"
-
+#define URI_ACCOUNT_POPULARIZE_ADD     @"/account/popularize/add"
+#define URI_ACCOUNT_POPULARIZE_DELETE     @"/account/popularize/delete"
+#define URI_ACCOUNT_BET_HISTORY             @"/account/bethistory"
 #pragma mark ------ zfnotice -------
 #define URI_ZFNOTICE_KEFU                   @"/zfnotice/kefu"
 
@@ -86,7 +88,7 @@
 #define URI_ROOM_MANAGERLIST                   @"/room/managerlist"
 #define URI_ROOM_LEAVE                  @"/LiveLeaveRoom"
 #define URI_ROOM_RETURN                  @"/LiveReturnRoom"
-
+#define URI_ROOM_GIFTRECORD              @"/room/giftrecord"
 #pragma mark -------- user ---------
 #define URI_FOLLOW_LIST                         @"/follow/list"
 #define URI_FOLLOW_FOLLOW                       @"/follow/follow"

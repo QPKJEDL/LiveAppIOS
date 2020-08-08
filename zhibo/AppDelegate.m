@@ -24,8 +24,11 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "MomentDataProcess.h"
 #import "RankDataProcess.h"
-@interface AppDelegate ()
 
+#import <QCloudCOSXML/QCloudCOSXML.h>
+@interface AppDelegate ()<QCloudSignatureProvider, QCloudCredentailFenceQueueDelegate>
+// 一个脚手架实例
+@property (nonatomic) QCloudCredentailFenceQueue* credentialFenceQueue;
 @end
 
 @implementation AppDelegate
@@ -42,7 +45,67 @@
     
     [TXLiveBase setLicenceURL:@"http://license.vod2.myqcloud.com/license/v1/91fdbc3ccf9f493cf80ec9410610d562/TXLiveSDK.licence" key:@"cfec6f3245fbc129bdadac94e65c8413"];
     
+    QCloudServiceConfiguration* configuration = [QCloudServiceConfiguration new];
+    QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] init];
+    // 服务地域简称，例如广州地区是 ap-guangzhou
+    endpoint.regionName = @"ap-guangzhou";
+    // 使用 HTTPS
+    endpoint.useHTTPS = true;
+    configuration.endpoint = endpoint;
+    // 密钥提供者为自己
+    configuration.signatureProvider = self;
+    // 初始化 COS 服务示例
+    [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
+    [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:
+        configuration];
+
+    // 初始化临时密钥脚手架
+    self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
+    self.credentialFenceQueue.delegate = self;
+    
     return YES;
+}
+
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+{
+    //这里同步从后台服务器获取临时密钥
+    //...
+
+    QCloudCredential* credential = [QCloudCredential new];
+    // 临时密钥 SecretId
+    credential.secretID = @"COS_SECRETID";
+    // 临时密钥 SecretKey
+    credential.secretKey = @"COS_SECRETKEY";
+    // 临时密钥 Token
+    credential.token = @"COS_TOKEN";
+    // 强烈建议返回服务器时间作为签名的开始时间
+    // 用来避免由于用户手机本地时间偏差过大导致的签名不正确
+    credential.startDate = [[[NSDateFormatter alloc] init]
+        dateFromString:@"startTime"]; // 单位是秒
+    credential.experationDate = [[[NSDateFormatter alloc] init]
+        dateFromString:@"expiredTime"];
+
+    QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
+        initWithCredential:credential];
+    continueBlock(creator, nil);
+}
+
+// 获取签名的方法入口，这里演示了获取临时密钥并计算签名的过程
+// 您也可以自定义计算签名的过程
+- (void) signatureWithFields:(QCloudSignatureFields*)fileds
+                     request:(QCloudBizHTTPRequest*)request
+                  urlRequest:(NSMutableURLRequest*)urlRequst
+                   compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
+{
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+        NSError *error) {
+        if (error) {
+            continueBlock(nil, error);
+        } else {
+            QCloudSignature* signature =  [creator signatureForData:urlRequst];
+            continueBlock(signature, nil);
+        }
+    }];
 }
 
 //init window and display
@@ -137,3 +200,29 @@
 //    [[IMService instance] enterForeground];
 }
 @end
+
+//QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
+//// 本地文件路径
+//NSURL* url = [NSURL fileURLWithPath:@"文件的URL"];
+//// 存储桶名称，格式为 BucketName-APPID
+//put.bucket = @"examplebucket-1250000000";
+//// 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+//put.object = @"exampleobject";
+////需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
+//put.body =  url;
+////监听上传进度
+//[put setSendProcessBlock:^(int64_t bytesSent,
+//                            int64_t totalBytesSent,
+//                            int64_t totalBytesExpectedToSend) {
+//    //      bytesSent                   新增字节数
+//    //      totalBytesSent              本次上传的总字节数
+//    //      totalBytesExpectedToSend    本地上传的目标字节数
+//}];
+//
+////监听上传结果
+//[put setFinishBlock:^(id outputObject, NSError *error) {
+//    //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+//    NSDictionary * result = (NSDictionary *)outputObject;
+//}];
+//
+//[[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];

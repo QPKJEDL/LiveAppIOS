@@ -47,6 +47,6 @@
     return response;
 }
 - (void)didReceiveError:(ABNetRequest *)request error:(ABNetError *)error {
-   
+    [ABUITips showError:error.message];
 }
 @end

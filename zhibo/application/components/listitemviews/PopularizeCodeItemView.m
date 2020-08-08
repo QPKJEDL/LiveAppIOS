@@ -24,6 +24,8 @@
     self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     self.timeLabel.font = [UIFont PingFangSC:10];
     self.timeLabel.textColor = [UIColor hexColor:@"#A8A8A8"];
+    self.timeLabel.numberOfLines = 2;
+    self.timeLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.timeLabel];
 
     self.itemA = [[TeamTextItem alloc] initWithFrame:CGRectMake(0, 0, 92, 50)];
@@ -42,6 +44,7 @@
     self.qrcodeButton.backgroundColor = [UIColor hexColor:@"#FF2B2B"];
     self.qrcodeButton.titleLabel.font = [UIFont PingFangSC:11];
     self.qrcodeButton.clipsToBounds = true;
+    [self.qrcodeButton setUserInteractionEnabled:false];
     
 }
 
@@ -52,7 +55,7 @@
     self.contentLabel.left = self.width-self.contentLabel.width-15;
     self.contentLabel.centerY = self.height/2;
     
-    self.itemA.left = self.timeLabel.right;
+    self.itemA.left = self.timeLabel.right+20;
     self.itemA.centerY = self.height/2;
     
     self.itemB.left = self.itemA.right;
@@ -63,12 +66,12 @@
 }
 
 - (void)reload:(NSDictionary *)item {
-    self.timeLabel.text = @"2020-01-01 00:00:00";
+    self.timeLabel.text = item[@"time"];
     [self.timeLabel sizeToFit];
     self.contentLabel.text = item[@"content"];
     
-    self.itemA.aLabel.text = @"0";
-    self.itemB.aLabel.text = @"0";
+    self.itemA.aLabel.text = item[@"countstr"];
+    self.itemB.aLabel.text = item[@"feestr"];
     
 }
 

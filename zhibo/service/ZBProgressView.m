@@ -48,7 +48,7 @@
         [self addSubview:self.leftLabel];
         
         self.rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width-40, self.height, 40, 20)];
-        self.rightLabel.text = @"1";
+        self.rightLabel.text = @"100";
         self.rightLabel.textAlignment = NSTextAlignmentRight;
         self.rightLabel.font = [UIFont PingFangSC:14];
         self.rightLabel.textColor = [UIColor hexColor:@"#474747"];
@@ -65,7 +65,7 @@
     
     self.cursorLabel.left = self.cursorView.width-self.cursorLabel.width-5;
     
-    NSString *text = [NSString stringWithFormat:@"%.2f", progress];
+    NSString *text = [NSString stringWithFormat:@"%.0f", progress*100];
     self.cursorLabel.text = text;
 }
 
@@ -84,6 +84,9 @@
     }
     
     self.progress = p.x/self.width;
+    if (self.progress > 1) {
+        self.progress = 1;
+    }
     
     
 }

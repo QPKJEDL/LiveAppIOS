@@ -8,7 +8,7 @@
 
 #import "PopularizeViewController.h"
 #import "ZBProgressView.h"
-@interface PopularizeViewController ()
+@interface PopularizeViewController ()<INetData>
 @property (nonatomic, strong) UIScrollView *mainScollView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) ZBProgressView *progressView;
@@ -54,10 +54,15 @@
     [btn setBackgroundColor:[UIColor hexColor:@"FF2828"]];
     [self.mainScollView addSubview:btn];
     [btn addTarget:self action:@selector(onButton) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)onButton {
-    [NSRouter gotoPopularizeList];
+    [self fetchPostUri:URI_ACCOUNT_POPULARIZE_ADD params:@{@"fee":@(self.progressView.progress*100)}];
+}
+
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips showSucceed:@"添加成功"];
 }
 
 /*

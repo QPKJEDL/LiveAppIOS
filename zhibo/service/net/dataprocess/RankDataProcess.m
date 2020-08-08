@@ -43,12 +43,27 @@
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
     [[UIApplication sharedApplication].keyWindow hideToastActivity];
     if ([request.uri isEqualToString:URI_RANK_LIST]) {
-        NSMutableArray *list = [[NSMutableArray alloc] init];
+        NSMutableArray *list = [[NSMutableArray alloc] initWithArray:response[@"list"]];
+        NSInteger cha = 3-list.count;
+        if (cha > 0) {
+            for (int i=0; i<cha; i++) {
+                [list addObject:@{
+                    @"avater":@"",
+                    @"nickname":@"暂无席位",
+                    @"all_get":@"0",
+                }];
+            }
+        }
         
-        list = [ABIteration iterationList:response[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"avatar"] = dic[@"avater"];
             dic[@"num"] = @(idx+1);
-            dic[@"money"] = [NSString stringWithFormat:@"%@", [dic valueInKeys:@[@"month_get", @"day_send"]]];
+            NSString *money = [NSString stringWithFormat:@"%@", [dic valueInKeys:@[@"month_get",@"all_get", @"day_send",@"all_send",@"win_rate",@"all_rate"]]];
+            money = [money componentsSeparatedByString:@"."][0];
+            if ([[dic allKeys] containsObject:@"win_rate"] || [[dic allKeys] containsObject:@"all_rate"]) {
+                money = [NSString stringWithFormat:@"%@%%", money];
+            }
+            dic[@"money"] = money;
             dic[@"native_id"] = @"rankitem";
             return dic;
         }];

@@ -17,7 +17,9 @@
 @property (nonatomic, strong) MoneySectionHeaderView *headerView;
 
 @property (nonatomic, strong) NSMutableDictionary *infoDic;
-@property (nonatomic, strong) NSArray *dataList;
+@property (nonatomic, strong) NSMutableArray *dataList;
+
+@property (nonatomic, assign) BOOL isPullRefresh;
 @end
 
 @implementation TeamFormLowerViewController
@@ -64,13 +66,21 @@
     self.listtView.backgroundColor = self.view.backgroundColor;
     self.listtView.delegate = self;
     self.listtView.dataSource = self;
+    [self.listtView setupPullRefresh];
+    [self.listtView setupLoadMore];
     [self.view addSubview:self.listtView];
     
+    self.isPullRefresh = true;
     [self refreshData];
 }
 
 - (void)refreshData {
-    [self fetchPostUri:URI_ACCOUNT_TEAM_LOWERS params:nil];
+    NSInteger last_id = 0;
+    if (_isPullRefresh == false) {
+        last_id = [self.dataList.lastObject[@"last_id"] intValue]+1;
+    }
+    [self fetchPostUri:URI_ACCOUNT_TEAM_LOWERS params:@{@"last_id":@(last_id)}];
+    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -105,11 +115,20 @@
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [self.listtView endPullRefreshing];
+    [self.listtView endLoadMore];
     [ABUITips hideLoading];
     if ([req.uri isEqualToString:URI_ACCOUNT_TEAM_LOWERS]) {
         [self.headerView reload:@{@"title":[NSString stringWithFormat:@"下级人数:%@", obj[@"count"]]}];
-        self.dataList = obj[@"list"];
-          [self.listtView setDataList:obj[@"list"] css:@{@"item.size.height":@"68", @"item.rowSpacing":@"1"}];
+        if (self.isPullRefresh) {
+            self.dataList = [[NSMutableArray alloc] initWithArray:obj[@"list"]];
+        }else{
+            [self.dataList addObjectsFromArray:obj[@"list"]];
+        }
+        [self.listtView setDataList:self.dataList css:@{@"item.size.height":@"68", @"item.rowSpacing":@"1"}];
+        if ([obj[@"is_more"] boolValue] == false) {
+            [self.listtView noMoreData];
+        }
     }else{
         [self.infoDic setValue:obj forKey:obj[@"userid"]];
         [self.listtView reloadData];
@@ -122,6 +141,17 @@
 
 - (void)onSelectButton {
     [self fetchPostUri:URI_ACCOUNT_TEAM_LOWERS params:@{@"keywords":@"xx"}];
+}
+
+- (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
+    self.isPullRefresh = true;
+    [self refreshData];
+    
+}
+
+- (void)listViewOnLoadMore:(ABUIListView *)listView {
+    self.isPullRefresh = false;
+    [self refreshData];
 }
 
 @end

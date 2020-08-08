@@ -48,7 +48,7 @@
         request.realUri = @"/RoomTypelist";
     }
     else if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
-        
+        request.realUri = @"/user_bet_list";
     }
     return request;
 }
@@ -59,9 +59,6 @@
         return false;
     }
     if ([request.uri isEqualToString:URI_GAME_RESULTS]) {
-        return false;
-    }
-    if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
         return false;
     }
     if ([request.uri isEqualToString:URI_GAME_RULES]) {

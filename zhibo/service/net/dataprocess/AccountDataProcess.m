@@ -51,10 +51,19 @@
         request.realUri = @"/TeamList";
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
-    //        request.realUri = @"";
+            request.realUri = @"/TeamListInfo";
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
-        
+        request.realUri = @"/QrCodeList";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_ADD]) {
+        request.realUri = @"/AddQrCode";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BET_HISTORY]) {
+        request.realUri = @"/user_bet_list";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_DELETE]) {
+        request.realUri = @"/DeQrCode";
     }
     return request;
 }
@@ -67,11 +76,10 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
         return false;
     }
-    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
-         return false;
-    }
-    if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
-        return false;
+    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT];
+    
+    if ([noLoadings containsObject:request.uri] == false) {
+         [ABUITips showLoading];
     }
     return true;
 }
@@ -88,6 +96,7 @@
 
 /// Called to modify a result before completion.
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
+    [ABUITips hideLoading];
     NSArray *paychannels = @[
         @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel"},
         @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel"},
@@ -156,28 +165,6 @@
     
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
         NSArray *list = response[@"list"];
-        list = @[
-            @{
-                @"creatime":@"1592410495",
-                @"id":@1,
-                @"money":@1000
-            },
-            @{
-                @"creatime":@"1593410495",
-                @"id":@1,
-                @"money":@2000
-            },
-            @{
-                @"creatime":@"1593410195",
-                @"id":@1,
-                @"money":@100
-            },
-            @{
-                @"creatime":@"1593420495",
-                @"id":@1,
-                @"money":@5000
-            }
-        ];
         list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"native_id"] = @"chargeitem";
             return dic;
@@ -186,7 +173,8 @@
     }
     
     if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_LOWERS]) {
-        NSArray *list = [ABIteration iterationList:response[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        NSArray *list = [ABIteration iterationList:response[@"TeamList"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"last_id"] = response[@"last_id"];
             dic[@"avatar"] = dic[@"avater"];
             dic[@"native_id"] = @"loweritem";
             return dic;
@@ -205,63 +193,130 @@
 //            }
 //
 //        ];
-        return @{@"list":list, @"count":@(0)};
+        return @{@"list":list, @"count":[response stringValueForKey:@"TeanCount" defaultValue:@"0"], @"is_more":[response stringValueForKey:@"is_more" defaultValue:@"0"]};
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
-        return @{
-            @"list":@[
-                @{
-                    @"title":@"注册人数",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"投注人数",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"投注金额",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"中奖金额",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"充值金额",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"下级返点金额",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"团队返点金额",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                },
-                @{
-                    @"title":@"我的饭店金额",
-                    @"content":@"1083人",
-                    @"native_id":@"statisitem"
-                }
-            ]
-        };
+        NSArray *titles = @[@"注册人数",@"投注人数",@"投注金额",@"中奖金额",@"充值金额",@"下级返点金额",@"团队返点金额",@"我的返点金额"];
+        NSArray *keys = @[@"registerCount",@"betsCount",@"money",@"getMoney",@"recharge",@"feeMoney",@"feeMoney",@"userfeemoney"];
+        NSMutableArray *dataList = [[NSMutableArray alloc] init];
+        for (int i=0; i<keys.count; i++) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:titles[i] forKey:@"title"];
+            [dic setValue:@"statisitem" forKey:@"native_id"];
+            
+            NSString *content = @"0人";
+            if (response[keys[i]]) {
+                content = [NSString stringWithFormat:@"%@人", [response stringValueForKey:keys[i]]];
+                
+            }
+            [dic setValue:content forKey:@"content"];
+            [dataList addObject:dic];
+        }
+        
+        return @{@"list":dataList};
+    
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
-        NSArray *list = @[
-            @{
-                @"time":[ABTime time],
-                @"native_id":@"popularizecodeitem"
+        NSArray *list = [ABIteration iterationList:response[@"CodeList"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            NSString *extension_url = dic[@"extension_url"];
+            if ([extension_url hasPrefix:@"http"]) {
+                extension_url = [NSString stringWithFormat:@"http://%@", extension_url];
             }
-        ];
+            NSString *atime = [ABTime timestampToTime:[dic stringValueForKey:@"creatime"] format:@"YYYY-MM-dd"];
+            NSString *btime = [ABTime timestampToTime:[dic stringValueForKey:@"creatime"] format:@"HH:mm:ss"];
+            dic[@"time"] = [NSString stringWithFormat:@"%@\n%@", atime, btime];
+            dic[@"qrcode"] = extension_url;
+            dic[@"countstr"] = [NSString stringWithFormat:@"%@", dic[@"count"]];
+            dic[@"feestr"] = [NSString stringWithFormat:@"%@%%", dic[@"fee"]];
+            dic[@"native_id"] = @"popularizecodeitem";
+            return dic;
+        }];
+        return @{@"list":list};
+    }
+    
+    if ([request.uri isEqualToString:URI_ACCOUNT_BET_HISTORY]) {
+        //status:0等待开牌1结算完成2已取消3作废
+        NSDictionary *statusMap = @{@0:@"等待开牌", @1:@"结算完成", @2:@"已取消", @3:@"作废"};
+        NSDictionary *rr = @{@"player":@"闲",@"playerPair":@"闲对",
+                             @"tie":@"和",@"banker":@"庄",
+                             @"bankerPair":@"庄对",@"dragon":@"龙",
+                             @"tiger":@"虎"};
+        NSMutableDictionary *betMap = [[NSMutableDictionary alloc] initWithDictionary:rr];
+        for (int i=1; i<7; i++) {
+            NSString *key1 = [NSString stringWithFormat:@"x%i_equal", i];
+            NSString *key2 = [NSString stringWithFormat:@"x%i_double", i];
+            NSString *key3 = [NSString stringWithFormat:@"x%i_Super_Double", i];
+            
+            NSString *v1 = [NSString stringWithFormat:@"闲%i平倍", i];
+            NSString *v2 = [NSString stringWithFormat:@"闲%i翻倍", i];
+            NSString *v3 = [NSString stringWithFormat:@"闲%i超倍", i];
+            [betMap setValue:v1 forKey:key1];
+            [betMap setValue:v2 forKey:key2];
+            [betMap setValue:v3 forKey:key3];
+        }
+        
+        NSArray *arr = @[@"TianMen", @"ShunMen", @"FanMen"];
+        NSArray *arrv = @[@"天门", @"顺门", @"反门"];
+        for (int i=0; i<3; i++) {
+            NSString *key1 = [NSString stringWithFormat:@"%@_equal", arr[i]];
+            NSString *key2 = [NSString stringWithFormat:@"%@_double", arr[i]];
+            NSString *key3 = [NSString stringWithFormat:@"%@_Super_Double", arr[i]];
+            
+            NSString *v1 = [NSString stringWithFormat:@"%@平倍", arrv[i]];
+            NSString *v2 = [NSString stringWithFormat:@"%@翻倍", arrv[i]];
+            NSString *v3 = [NSString stringWithFormat:@"%@超倍", arrv[i]];
+            [betMap setValue:v1 forKey:key1];
+            [betMap setValue:v2 forKey:key2];
+            [betMap setValue:v3 forKey:key3];
+        }
+        NSDictionary *rResponse = response;
+        if ([response isKindOfClass:[NSNull class]]) {
+            rResponse = @{@"list":@[]};
+        }
+        NSArray *list = [ABIteration iterationList:rResponse[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"date"] = [ABTime timestampToTime:dic[@"creatime"]  format:@"YYYY-MM-dd"];
+            dic[@"detail"] = [NSString stringWithFormat:@"%@ %@ %@", [dic stringValueForKey:@"desk_name"], [dic stringValueForKey:@"boot_num"], [dic stringValueForKey:@"pave_num"]];
+            dic[@"money"] = [dic stringValueForKey:@""];
+            dic[@"time"] = [ABTime timestampToTime:dic[@"creatime"]  format:@"HH:mm:ss"];
+            dic[@"gmoney"] = [dic stringValueForKey:@"get_money"];
+            dic[@"statusStr"] = statusMap[dic[@"status"]];
+            
+            NSMutableString *betStr = [[NSMutableString alloc] init];
+            NSDictionary *bet_money = dic[@"bet_money"];
+            NSArray *allKeys = [bet_money allKeys];
+            
+            for (int i=0;i<allKeys.count;i++) {
+                NSString *key = allKeys[i];
+                NSString *money = [bet_money stringValueForKey:key];
+                if ([money intValue] > 0) {
+                    NSString *vv = betMap[key];
+                    if (i > 0 && (i % 2) == 0) {
+                        [betStr appendString:@"\n"];
+                    }
+                    [betStr appendString:[NSString stringWithFormat:@"%@ %i; ", vv, [money intValue]/100]];
+                }
+            }
+            dic[@"betStr"] = betStr;
+            NSInteger rowCount = allKeys.count/2.0;
+            if (allKeys.count % 2 != 0) {
+                rowCount++;
+            }
+            
+            CGSize size = [betStr sizeWithFont:[UIFont PingFangSC:12] constrainedToSize:CGSizeMake(SCREEN_WIDTH-30-52, MAXFLOAT)];
+            dic[@"betStrHeight"] = @(size.height);
+            dic[@"item.size.height"] = @(174-20+size.height);
+            dic[@"native_id"] = @"gamehistoryitem";
+            return dic;
+        }];
         return @{@"list":list};
     }
     return response;
+}
+
+- (void)didReceiveError:(ABNetRequest *)request error:(ABNetError *)error {
+    [ABUITips hideLoading];
+    if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
+        [ABUITips showError:error.message];
+    }
 }
 @end

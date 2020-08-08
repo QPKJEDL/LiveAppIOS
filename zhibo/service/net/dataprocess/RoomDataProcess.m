@@ -75,6 +75,9 @@
     if ([request.uri isEqualToString:URI_ROOM_SEND_GIFT]) {
         request.realUri = @"/send_gift";
     }
+    if ([request.uri isEqualToString:URI_ROOM_GIFTRECORD]) {
+        request.realUri = @"/gift_record";
+    }
     return request;
 }
 
@@ -149,7 +152,7 @@
             @"systime":response[@"list"][@"SysTime"],
             @"endtime":response[@"list"][@"EndTime"],
             @"rank":response[@"giftRankList"],
-            @"Status":response[@"list"][@"Status"]
+            @"status":response[@"list"][@"Status"]
         };
         
         return @{@"video":video, @"room":room, @"anchor":user, @"isFollowed":response[@"isFollowed"]};
@@ -229,6 +232,10 @@
 //            @"room_id": @"10000"
 //        };
     }
+    if ([request.uri isEqualToString:URI_ROOM_GIFTRECORD]) {
+        
+    }
+    
     return response;
 }
 

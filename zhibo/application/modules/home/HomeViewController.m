@@ -21,6 +21,8 @@
 @property (nonatomic, strong) HomeNavView *navView;
 @property (nonatomic, strong) UIButton *messageButton;
 
+@property (nonatomic, strong) ABUIWebView *webView;
+
 @end
 
 @implementation HomeViewController

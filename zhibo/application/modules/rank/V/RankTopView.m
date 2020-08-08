@@ -46,6 +46,9 @@
 }
 
 - (void)setRankList:(NSArray *)rankList {
+    [self.centerPodinumView clear];
+    [self.leftPodinumView clear];
+    [self.rightPodinumView clear];
     if (rankList.count >= 1) {
         [self.centerPodinumView setData:rankList[0]];
     }
