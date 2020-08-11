@@ -113,6 +113,14 @@
     return self;
 }
 
+- (void)receiveWenLu:(NSArray *)list {
+    NSDictionary *data = @{@"data":list};
+    NSString *jsonString = [data toJSONString];
+    [self.wenluWebView callFuncName:@"abc" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 - (void)onScene {
     [self.sceneButton setSelected:!self.sceneButton.isSelected];
     if (self.sceneButton.isSelected) {
@@ -125,8 +133,6 @@
         [[RoomContext shared].shixunPlayView remove];
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
     }
-    
-    
     
 }
 

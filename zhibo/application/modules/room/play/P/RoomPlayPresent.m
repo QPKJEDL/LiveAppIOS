@@ -84,6 +84,11 @@
             @"minlimit":@(self.MinLimit),
             @"maxlimit":@(self.MaxLimit)
         }];
+        
+        NSInteger game_id = [obj[@"GameId"] intValue];
+        if (game_id == 1 || game_id == 2) {
+            [self fetchPostUri:URI_GAME_RESULT_LIST params:@{@"game_id":@(game_id), @"boot_num":obj[@"BootNum"], @"desk_id":obj[@"DeskId"]}];
+        }
     }
     else if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
         self.rules = obj[@"rules"];
@@ -97,6 +102,9 @@
     }
     else if ([req.uri isEqualToString:URI_FOLLOW_FOLLOW]) {
         [ABUITips showSucceed:@"关注成功"];
+    }
+    else if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
+        [[RoomContext shared].playControl receiveWenLu:obj[@"list"]];
     }
     
 }

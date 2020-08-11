@@ -51,10 +51,16 @@
         request.realUri = @"/user_bet_list";
     }
     else if ([request.uri isEqualToString:URI_GAME_RESULT_LIST]) {
-        NSInteger gameid = [request.params[@"gameid"] intValue];
+        //        {
+        //            "desk_id" = 16;
+        //            "game_id" = 2;
+        //            "room_id" = 60034;
+        //        }
+        NSInteger gameid = [request.params[@"game_id"] intValue];
+        
         if (gameid == 1) {
             request.realUri = @"/bjl_game_list";
-        }else {
+        }else if (gameid == 2) {
             request.realUri = @"/lh_game_list";
         }
     }
@@ -149,6 +155,10 @@
             }
         ];
         
+        return @{@"list":list};
+    }
+    if ([request.uri isEqualToString:URI_GAME_RESULT_LIST]) {
+        NSArray *list = response[@"list"][0][@"list"];
         return @{@"list":list};
     }
     return response;

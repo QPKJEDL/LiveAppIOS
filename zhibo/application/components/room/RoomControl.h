@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onReceivePeerMessage:(NSDictionary *)message;
 
 - (void)receiveRoomInfo:(NSDictionary *)roomInfo;
+- (void)receiveWenLu:(NSArray *)list;
 - (void)refreshRank;
 
 //- (void)onFollow;

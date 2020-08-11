@@ -417,7 +417,7 @@ DEPENDENCIES:
   - CocoaAsyncSocket
   - FMDB
   - FSTextView
-  - gobelieve (from `/Users/qp/own/gobelieve`)
+  - gobelieve (from `https://github.com/whdevlab/gobelieve`)
   - HXPhotoPicker (~> 3.0)
   - IQKeyboardManager (from `/Users/qp/own/IQKeyboardManager`)
   - JSONModel
@@ -429,7 +429,7 @@ DEPENDENCIES:
   - SDCycleScrollView (>= 1.80)
   - SDWebImage
   - Toast
-  - TSHAlphaVideos (from `/Users/qp/own/TSHAlphaVideos`)
+  - TSHAlphaVideos (from `https://github.com/whdevlab/TSHAlphaVideos`)
   - TXLiteAVSDK_Smart
   - UINavigation-SXFixSpace
   - YBImageBrowser
@@ -463,11 +463,19 @@ EXTERNAL SOURCES:
   ABUIKit:
     :path: "/Users/qp/own/ABUIKit"
   gobelieve:
-    :path: "/Users/qp/own/gobelieve"
+    :git: https://github.com/whdevlab/gobelieve
   IQKeyboardManager:
     :path: "/Users/qp/own/IQKeyboardManager"
   TSHAlphaVideos:
-    :path: "/Users/qp/own/TSHAlphaVideos"
+    :git: https://github.com/whdevlab/TSHAlphaVideos
+
+CHECKOUT OPTIONS:
+  gobelieve:
+    :commit: eda29d86a677223b2db48dbe6133acc6eac3eaac
+    :git: https://github.com/whdevlab/gobelieve
+  TSHAlphaVideos:
+    :commit: d93ba241b74186d7e90d106c1780414c19b0ff32
+    :git: https://github.com/whdevlab/TSHAlphaVideos
 
 SPEC CHECKSUMS:
   ABFoundation: 24d5c9a443b5ba6cc02e3edf1b9397719c808c7b
@@ -496,6 +504,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 47f5a9cfd964e90f568df93be130b6b11e8ee535
+PODFILE CHECKSUM: b9dce5e80a563c68f2394d95388a5cd9febea3e6
 
 COCOAPODS: 1.9.3

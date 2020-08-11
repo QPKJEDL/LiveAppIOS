@@ -181,6 +181,7 @@
 		F144CA1D24DED09D0051EDD4 /* QrCodeSharePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */; };
 		F15D271724E0DE250026F847 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = F15D271624E0DE250026F847 /* abc.png */; };
 		F15D271A24E11DA80026F847 /* TencentCOS.m in Sources */ = {isa = PBXBuildFile; fileRef = F15D271924E11DA80026F847 /* TencentCOS.m */; };
+		F15D271D24E2697C0026F847 /* zhuangxian.json in Resources */ = {isa = PBXBuildFile; fileRef = F15D271C24E2697C0026F847 /* zhuangxian.json */; };
 		F16015C124AB3DCC0005ABBA /* LiveCommentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16015C024AB3DCC0005ABBA /* LiveCommentItemView.m */; };
 		F166616924BD3F0500B2607C /* RoomPushSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F166616824BD3F0500B2607C /* RoomPushSocket.m */; };
 		F166617024BD631D00B2607C /* RoomMessageHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = F166616F24BD631D00B2607C /* RoomMessageHandle.m */; };
@@ -603,6 +604,7 @@
 		F15D271624E0DE250026F847 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
 		F15D271824E11DA80026F847 /* TencentCOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TencentCOS.h; sourceTree = "<group>"; };
 		F15D271924E11DA80026F847 /* TencentCOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TencentCOS.m; sourceTree = "<group>"; };
+		F15D271C24E2697C0026F847 /* zhuangxian.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = zhuangxian.json; sourceTree = "<group>"; };
 		F16015BF24AB3DCC0005ABBA /* LiveCommentItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveCommentItemView.h; sourceTree = "<group>"; };
 		F16015C024AB3DCC0005ABBA /* LiveCommentItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveCommentItemView.m; sourceTree = "<group>"; };
 		F166616724BD3F0500B2607C /* RoomPushSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomPushSocket.h; sourceTree = "<group>"; };
@@ -1651,6 +1653,7 @@
 		F16CBB1E24AE0FDF00CA6C18 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				F15D271C24E2697C0026F847 /* zhuangxian.json */,
 				F15D271624E0DE250026F847 /* abc.png */,
 				F121927624D1825300630CA2 /* bjl.png */,
 				F121927424D17B9600630CA2 /* baijiale.html */,
@@ -1960,6 +1963,7 @@
 				F15D271724E0DE250026F847 /* abc.png in Resources */,
 				F16CBB2F24AE102800CA6C18 /* heJu.mp3 in Resources */,
 				F16CBB2E24AE102800CA6C18 /* xianPair.mp3 in Resources */,
+				F15D271D24E2697C0026F847 /* zhuangxian.json in Resources */,
 				F16CBB3324AE102800CA6C18 /* bankPair.mp3 in Resources */,
 				F121925E24D154FB00630CA2 /* A89.html in Resources */,
 				F121927224D17B8100630CA2 /* sangong.html in Resources */,
