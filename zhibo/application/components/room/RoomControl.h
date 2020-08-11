@@ -13,13 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RoomControl : UIView
 @property (nonatomic, strong) NSString *shixunPlayAddress;
 @property (nonatomic, strong) NSDictionary *roomInfo;
+@property (nonatomic, strong) ABUIWebView *wenluWebView;
 
 - (void)onReceiveRoomMessage:(NSDictionary *)message;
 - (void)onReceivePeerMessage:(NSDictionary *)message;
 
 - (void)receiveRoomInfo:(NSDictionary *)roomInfo;
 - (void)receiveWenLu:(NSArray *)list;
+- (void)receiveWenLuItem:(NSDictionary *)item;
 - (void)refreshRank;
+
+- (void)loadWenLu;
 
 //- (void)onFollow;
 - (void)onClose;

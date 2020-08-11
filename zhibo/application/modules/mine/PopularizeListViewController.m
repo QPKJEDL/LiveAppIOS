@@ -72,14 +72,13 @@
 }
 
 - (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
-    QrCodeSharePrompt *qsp = [[QrCodeSharePrompt alloc] initWithFrame:CGRectMake(26, 0, SCREEN_WIDTH-26-26, SCREEN_HEIGHT*0.8)];
-    [qsp.mainImageView sd_setImageWithURL:[NSURL URLWithString:item[@"bgimage"]] placeholderImage:nil];
-    [qsp.saveButton addTarget:self action:@selector(onSave) forControlEvents:UIControlEventTouchUpInside];
-    [qsp.deleteButton addTarget:self action:@selector(onDelete) forControlEvents:UIControlEventTouchUpInside];
-    qsp.qrcodeStr = item[@"qrcode"];
+    self.qsp = [[QrCodeSharePrompt alloc] initWithFrame:CGRectMake(26, 0, SCREEN_WIDTH-26-26, SCREEN_HEIGHT)];
+    [self.qsp.mainImageView sd_setImageWithURL:[NSURL URLWithString:item[@"bgimage"]] placeholderImage:nil];
+    [self.qsp.saveButton addTarget:self action:@selector(onSave) forControlEvents:UIControlEventTouchUpInside];
+    [self.qsp.deleteButton addTarget:self action:@selector(onDelete) forControlEvents:UIControlEventTouchUpInside];
+    self.qsp.qrcodeStr = item[@"qrcode"];
     self.codeid = [item[@"id"] intValue];
-    self.qsp = qsp;
-    [[ABUIPopUp shared] show:qsp from:ABPopUpDirectionCenter];
+    [[ABUIPopUp shared] show:self.qsp from:ABPopUpDirectionCenter];
 }
 
 - (void)onSave {

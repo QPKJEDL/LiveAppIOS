@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) UIButton *sceneButton;
 @property (nonatomic, strong) UIImageView *sceneImageView;
-@property (nonatomic, strong) ABUIWebView *wenluWebView;
+
 @end
 
 @implementation RoomControl
@@ -104,19 +104,31 @@
         [self addSubview:self.sceneImageView];
         self.sceneImageView.centerX = self.sceneButton.centerX;
         self.sceneImageView.top = self.sceneButton.centerY+3;
-
-        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, 100, 290, 130)];
-        self.wenluWebView.bounces = false;
-        [self addSubview:self.wenluWebView];
-        [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
+        
+        [self loadWenLu];
     }
     return self;
 }
 
+- (void)loadWenLu {
+    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, 100, 290, 130)];
+    self.wenluWebView.bounces = false;
+    [self addSubview:self.wenluWebView];
+    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
+}
+
 - (void)receiveWenLu:(NSArray *)list {
+//    NSDictionary *data = @{@"data":[ResourceUtil readDataWithFileName:@"zhuangxian"][@"data"]};
     NSDictionary *data = @{@"data":list};
     NSString *jsonString = [data toJSONString];
-    [self.wenluWebView callFuncName:@"abc" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+    [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+        NSLog(@"%@", error);
+    }];
+
+}
+
+- (void)receiveWenLuItem:(NSDictionary *)item {
+    [self.wenluWebView callFuncName:@"setNewResult" data:[item toJSONString] completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
         NSLog(@"%@", error);
     }];
 }

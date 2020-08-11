@@ -1,3 +1,3 @@
 {
-    "data":[{"bankerPair":"庄对","game":"和","id":49,"playerPair":""},{"bankerPair":"","game":"庄","id":50,"playerPair":""},{"bankerPair":"","game":"闲","id":51,"playerPair":""},{"bankerPair":"庄对","game":"庄","id":52,"playerPair":""},{"bankerPair":"","game":"庄","id":53,"playerPair":""},{"bankerPair":"","game":"闲","id":54,"playerPair":""},{"bankerPair":"","game":"庄","id":55,"playerPair":""},{"bankerPair":"庄对","game":"闲","id":56,"playerPair":""}]
+    "data":[{"bankerPair":"庄对","game":"和","id":49,"playerPair":""},{"bankerPair":"","game":"庄","id":50,"playerPair":""},{"bankerPair":"","game":"闲","id":51,"playerPair":""},{"bankerPair":"庄对","game":"和","id":49,"playerPair":""},{"bankerPair":"庄对","game":"庄","id":52,"playerPair":""},{"bankerPair":"","game":"庄","id":53,"playerPair":""},{"bankerPair":"","game":"闲","id":54,"playerPair":""},{"bankerPair":"","game":"庄","id":55,"playerPair":""},{"bankerPair":"庄对","game":"闲","id":56,"playerPair":""}]
 }

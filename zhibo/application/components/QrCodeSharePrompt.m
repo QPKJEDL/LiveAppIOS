@@ -10,6 +10,7 @@
 @interface QrCodeSharePrompt ()
 @property (nonatomic, strong) UIView *actionView;
 @property (nonatomic, strong) UIImageView *qrcodeImageView;
+@property (nonatomic, strong) UILabel *qrcodeLabel;
 
 @end
 @implementation QrCodeSharePrompt
@@ -20,13 +21,23 @@
     if (self) {
         
         
-        self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height-80)];
+        self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height*0.75)];
         self.mainImageView.backgroundColor = [UIColor hexColor:@"FF2B2B"];
         self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.mainImageView.clipsToBounds = true;
         [self addSubview:self.mainImageView];
+        self.mainImageView.centerY = self.height/2;
         
-        self.qrcodeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.height-80-150, 100, 100)];
+        self.qrcodeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.mainImageView.height-100-40, 100, 100)];
         [self.mainImageView addSubview:self.qrcodeImageView];
+        
+        self.qrcodeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.mainImageView.width, 44)];
+        self.qrcodeLabel.text = @"保存二维码";
+        self.qrcodeLabel.textColor = [UIColor whiteColor];
+        self.qrcodeLabel.font = [UIFont PingFangSC:14];
+        self.qrcodeLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:self.qrcodeLabel];
+        self.qrcodeLabel.top = self.qrcodeImageView.bottom+self.mainImageView.top;
         
         self.actionView = [[UIView alloc] initWithFrame:CGRectMake(-26, 0, SCREEN_WIDTH, 71)];
         self.actionView.backgroundColor = [UIColor whiteColor];

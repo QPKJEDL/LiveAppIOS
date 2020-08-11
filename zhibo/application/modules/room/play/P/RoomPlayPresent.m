@@ -86,7 +86,9 @@
         }];
         
         NSInteger game_id = [obj[@"GameId"] intValue];
+        [[RoomContext shared].playControl.wenluWebView setHidden:true];
         if (game_id == 1 || game_id == 2) {
+            [[RoomContext shared].playControl.wenluWebView setHidden:false];
             [self fetchPostUri:URI_GAME_RESULT_LIST params:@{@"game_id":@(game_id), @"boot_num":obj[@"BootNum"], @"desk_id":obj[@"DeskId"]}];
         }
     }
