@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) UIButton *sceneButton;
 @property (nonatomic, strong) UIImageView *sceneImageView;
+@property (nonatomic, strong) ABUIWebView *wenluWebView;
 @end
 
 @implementation RoomControl
@@ -103,7 +104,11 @@
         [self addSubview:self.sceneImageView];
         self.sceneImageView.centerX = self.sceneButton.centerX;
         self.sceneImageView.top = self.sceneButton.centerY+3;
-    
+
+        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, 100, 290, 130)];
+        self.wenluWebView.bounces = false;
+        [self addSubview:self.wenluWebView];
+        [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
     }
     return self;
 }
@@ -113,7 +118,6 @@
     if (self.sceneButton.isSelected) {
         [[RoomContext shared].shixunPlayView setHidden:false];
         [[RoomContext shared].shixunPlayView playURL:self.shixunPlayAddress];
-//        [[RoomContext shared].shixunPlayView playURL:@"http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8"];
         
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
     }else{

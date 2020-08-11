@@ -18,6 +18,7 @@
     self.containImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.containImageView.clipsToBounds = true;
     self.containImageView.layer.cornerRadius = 5;
+    self.containImageView.backgroundColor = [UIColor hexColor:@"dedede"];
     [self addSubview:self.containImageView];
 }
 

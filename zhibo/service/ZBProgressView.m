@@ -58,6 +58,12 @@
     return self;
 }
 
+- (void)setMaxValue:(NSInteger)maxValue {
+    _maxValue = maxValue;
+    self.rightLabel.text = [NSString stringWithFormat:@"%li", (long)maxValue];
+    self.progress = 0.5;
+}
+
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
     self.cursorView.width = self.mainView.width*progress;
@@ -65,7 +71,7 @@
     
     self.cursorLabel.left = self.cursorView.width-self.cursorLabel.width-5;
     
-    NSString *text = [NSString stringWithFormat:@"%.0f", progress*100];
+    NSString *text = [NSString stringWithFormat:@"%.0f", progress*self.maxValue];
     self.cursorLabel.text = text;
 }
 

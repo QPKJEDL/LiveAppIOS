@@ -12,7 +12,8 @@
 #import "LoginTipView.h"
 #import <AFNetworking/AFNetworking.h>
 #import "ZBUIImagePickerController.h"
-@interface MineTopView ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import "TencentCOS.h"
+@interface MineTopView ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, INetData>
 @property (nonatomic, strong) UIImageView *topView;
 @property (nonatomic, strong) LoginTipView *loginTipView;
 @property (nonatomic, strong) UserBriefView *briefView;
@@ -143,17 +144,20 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     [picker dismissViewControllerAnimated:true completion:nil];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     [self uploadAvatar:image];
 }
 
 - (void)uploadAvatar:(UIImage *)imageData {
-    [[ABNet shared] uploadWithURL:@"http://129.211.114.135:8933/code/Mycenter/upavater" image:imageData success:^(NSURLSessionDataTask *task, id  responseObject) {
-        [[Service shared].account updateInfo:@{@"Avater":responseObject[@"data"][@"avater"]}];
-        [self loadData:[Service shared].account.info];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+    [[TencentCOS shared] uploadImage:imageData foler:@"avatar" success:^(NSArray * _Nonnull urls) {
+        [self fetchPostUri:URI_ACCOUNT_INFO_UPDATE_AVATAR params:@{@"avater":urls[0]}];
     }];
+}
+
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips showSucceed:@"上传成功"];
+    [[Service shared].account updateInfo:@{@"Avater":obj[@"avater"]}];
+    [self loadData:[Service shared].account.info];
 }
 
 @end

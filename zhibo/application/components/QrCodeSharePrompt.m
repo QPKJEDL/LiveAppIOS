@@ -22,6 +22,7 @@
         
         self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height-80)];
         self.mainImageView.backgroundColor = [UIColor hexColor:@"FF2B2B"];
+        self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:self.mainImageView];
         
         self.qrcodeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.height-80-150, 100, 100)];

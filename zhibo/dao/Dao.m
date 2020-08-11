@@ -16,6 +16,7 @@
     self = [super init];
     if (self) {
         self.dic = [[NSMutableDictionary alloc] init];
+        self.fileName = @"data";
     }
     return self;
 }
@@ -25,12 +26,13 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
         self.dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@", self.dic);
     }
 }
 
 - (NSString *)_filePath {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) firstObject];
-    NSString *filePath = [NSString stringWithFormat:@"%@/data", documentsPath];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsPath, self.fileName];
     return filePath;
 }
 

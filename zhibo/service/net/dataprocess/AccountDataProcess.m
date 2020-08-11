@@ -65,6 +65,9 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_DELETE]) {
         request.realUri = @"/DeQrCode";
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_INFO_UPDATE_AVATAR]) {
+        request.realUri = @"/code/Mycenter/upavater";
+    }
     return request;
 }
 
@@ -229,6 +232,7 @@
             dic[@"countstr"] = [NSString stringWithFormat:@"%@", dic[@"count"]];
             dic[@"feestr"] = [NSString stringWithFormat:@"%@%%", dic[@"fee"]];
             dic[@"native_id"] = @"popularizecodeitem";
+            dic[@"bgimage"] = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597069188352&di=6322bfd9b065aed5a40266bbfcc309bc&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201710%2F22%2F100551dhl5ifua9qotj9k9.png";
             return dic;
         }];
         return @{@"list":list};

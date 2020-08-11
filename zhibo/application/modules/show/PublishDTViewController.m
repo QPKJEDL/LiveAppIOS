@@ -10,7 +10,8 @@
 #import "PickPhotoView.h"
 #import <YBImageBrowser/YBImageBrowser.h>
 #import <HXPhotoPicker/HXPhotoPicker.h>
-
+#import "TencentCOS.h"
+#import "AppDelegate.h"
 #define kPhotoViewMargin 12.0f
 
 @interface PublishDTViewController ()<PickPhotoViewDelegate, PickPhotoViewDataSource, HXPhotoViewDelegate, INetData>
@@ -21,6 +22,8 @@
 
 @property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, strong) HXPhotoManager *manager;
+
+@property (nonatomic, strong) NSArray<HXPhotoModel *> *photos;
 @end
 
 @implementation PublishDTViewController
@@ -41,7 +44,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _textView = [[QMUITextView alloc] initWithFrame:CGRectMake(25, 10, SCREEN_WIDTH-50, 60)];
+    _textView = [[QMUITextView alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 60)];
     _textView.placeholderColor = [UIColor hexColor:@"#8C939B"];
     _textView.font = [UIFont PingFangSC:16];
     _textView.placeholder = @"这一刻的想法";
@@ -50,6 +53,7 @@
     
     CGFloat width = self.view.frame.size.width;
     self.pickPhotoView = [HXPhotoView photoManager:self.manager scrollDirection:UICollectionViewScrollDirectionVertical];
+//    self.pickPhotoView.addImageName = @"dongtai";
     self.pickPhotoView.frame = CGRectMake(0, self.textView.bottom+10, width, 0);
     self.pickPhotoView.collectionView.contentInset = UIEdgeInsetsMake(0, 12, 0, 12);
     self.pickPhotoView.delegate = self;
@@ -58,6 +62,7 @@
     self.pickPhotoView.showAddCell = YES;
     self.pickPhotoView.collectionView.scrollEnabled = YES;
     [self.pickPhotoView.collectionView reloadData];
+    self.pickPhotoView.delegate = self;
     [self.view addSubview:self.pickPhotoView];
     
     _publishButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 0, 185, 50)];
@@ -73,42 +78,90 @@
     
 
     [self refreshLayout];
+    
 }
 
 - (void)onPublish {
-    [self fetchPostUri:URI_MOMENTS_PUBLISH params:@{@"content":self.textView.text}];
+    
+    
+    [self uploading];
+}
+
+- (void)doPublish:(NSArray *)photos {
+    NSString *photoStr = [photos componentsJoinedByString:@","];
+    NSString *videosStr = [@[] componentsJoinedByString:@","];
+    [self fetchPostUri:URI_MOMENTS_PUBLISH params:@{@"content":self.textView.text, @"photos":photoStr, @"video":videosStr}];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    [ABUITips showSucceed:@"发布成功"];
-    [self.navigationController popViewControllerAnimated:true];
+    [ABUITips hideLoading];
+    if ([req.uri isEqualToString:URI_MOMENTS_PUBLISH]) {
+        [ABUITips showSucceed:@"发布成功"];
+        [self.navigationController popViewControllerAnimated:true];
+    }
+}
+
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips hideLoading];
+    if ([req.uri isEqualToString:URI_MOMENTS_PUBLISH]) {
+        [ABUITips showSucceed:@"发布失败"];
+    }
 }
 
 - (NSInteger)pickPhotoViewNumberOfItems {
     return 1;
 }
 
-- (void)pickPhotoViewDidSelectAdd {
-    __weak __typeof(self) weakSelf  = self;
-    UIAlertController *alert =  [[UIAlertController alloc] init];
-    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-//        [[DeviceUtil shared] takep];
-        
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[DeviceUtil shared] selectPhotos:weakSelf];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
-    
-    [self presentViewController:alert animated:true completion:nil];
+- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
     
 }
 
-- (void)pickPhotoViewDidSelectItem:(NSInteger)index {
+- (void)uploading  {
+    if (self.photos.count == 0) {
+        [self doPublish:@[]];
+        return;
+    }
+
+    [ABUITips showLoading];
     
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    for (int i=0;i<self.photos.count;i++) {
+        HXPhotoModel *mm = self.photos[i];
+        [mm requestPreviewImageWithSize:PHImageManagerMaximumSize startRequestICloud:^(PHImageRequestID iCloudRequestId, HXPhotoModel * _Nullable model) {
+            
+        } progressHandler:^(double progress, HXPhotoModel * _Nullable model) {
+            
+        } success:^(UIImage * _Nullable image, HXPhotoModel * _Nullable model, NSDictionary * _Nullable info) {
+            [images addObject:image];
+            if (images.count == self.photos.count) {
+                [[TencentCOS shared] uploadImages:images foler:@"moments" success:^(NSArray * _Nonnull urls) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self doPublish:urls];
+                    });
+                }];
+            }
+        } failed:^(NSDictionary * _Nullable info, HXPhotoModel * _Nullable model) {
+            
+        }];
+    }
+}
+
+- (void)photoListViewControllerDidDone:(HXPhotoView *)photoView
+ allList:(NSArray<HXPhotoModel *> *)allList
+  photos:(NSArray<HXPhotoModel *> *)photos
+  videos:(NSArray<HXPhotoModel *> *)videos
+                              original:(BOOL)isOriginal {
+    
+    NSInteger pcount = photos.count;
+    if (pcount < 9) {
+        pcount++;
+    }
+    CGFloat row = (pcount/3);
+    if (pcount % 3 != 0) {
+        row++;
+    }
+    self.publishButton.top = self.textView.bottom+115*row+50;
+    self.photos = photos;
 }
 
 - (void)refreshLayout {

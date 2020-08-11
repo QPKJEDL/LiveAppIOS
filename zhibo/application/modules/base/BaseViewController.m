@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import <IQKeyboardManager.h>
 
-#define IQSets @[@"SettingViewController", @"LoginViewController", @"CashOutViewController"]
+#define IQSets @[@"SettingViewController", @"LoginViewController", @"CashOutViewController", @"PublishDTViewController"]
 
 @interface BaseViewController ()
 @end

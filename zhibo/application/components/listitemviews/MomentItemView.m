@@ -109,6 +109,9 @@
     self.likeButton.top = self.height-self.commentButton.height-10;
     
     self.photoListView.top = self.contentLabel.bottom+17;
+    if (self.contentLabel.height == 0) {
+        self.photoListView.top = self.contentLabel.top;
+    }
 }
 
 - (void)reload:(NSDictionary *)item {
@@ -136,12 +139,14 @@
     [self.photoListView setHidden:true];
     if (item[@"medias"] != nil) {
         [self.photoListView setHidden:false];
+        CGFloat w = floor((SCREEN_WIDTH-30-10)/3);
         [self.photoListView setDataList:item[@"medias"] css:@{
-            @"item.size.width":@"33%",
-            @"item.size.height":@"100"
+            @"item.size.width":@(w),
+            @"item.size.height":@(w),
+            @"item.rowSpacing":@"5",
         }];
     }
-    
+    self.photoListView.height = [item[@"mediash"] floatValue];
     [self.likeButton setSelected:[item[@"like"] intValue] == 1];
     
     

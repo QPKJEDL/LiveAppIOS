@@ -77,7 +77,33 @@
                 dic[@"contentw"] = @(SCREEN_WIDTH-30);
                 dic[@"contenth"] = @(contentSize.height);
             }
+            
+            NSArray *imgs = [[dic stringValueForKey:@"img"] componentsSeparatedByString:@","];
+            NSMutableArray *medias = [[NSMutableArray alloc] init];
+            
+            [imgs enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj hasPrefix:@"http"]) {
+                    [medias addObject:@{
+                        @"native_id":@"imageitem",
+                        @"src":obj
+                    }];
+                }
+            }];
+            
+            CGFloat w = floor((SCREEN_WIDTH-30-10)/3);
+            CGFloat mediash = 0;
+            if (medias.count > 0) {
+                NSInteger row = medias.count/3;
+                if (medias.count % 3 != 0) {
+                    row++;
+                }
+                height = height+row*w+10;
+                mediash = row*w+10;
+            }
 
+            
+            dic[@"medias"] = medias;
+            dic[@"mediash"] = @(mediash);
             dic[@"time"] = [[ABTime shared] howMuchTimePassed:createtime];
             dic[@"avatar"] = dic[@"avater"];
             dic[@"native_id"] = @"momentitem";

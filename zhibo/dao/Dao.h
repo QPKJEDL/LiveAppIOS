@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Dao : NSObject
+@property (nonatomic, strong) NSString *fileName;
 - (void)set:(nullable id)value key:(NSString *)key;
 - (id)get:(NSString *)key;
 - (BOOL)del:(NSString *)key;

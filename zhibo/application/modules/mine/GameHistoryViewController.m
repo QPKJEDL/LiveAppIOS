@@ -51,8 +51,6 @@
     }else{
         [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid": self.dataList.lastObject[@"id"],@"date":self.dateItemView.dateButton.titleLabel.text}];
     }
-   
-    
 }
 
 - (void)viewDidLayoutSubviews {

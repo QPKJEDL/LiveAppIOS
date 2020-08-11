@@ -45,6 +45,8 @@
 #define URI_ACCOUNT_POPULARIZE_ADD     @"/account/popularize/add"
 #define URI_ACCOUNT_POPULARIZE_DELETE     @"/account/popularize/delete"
 #define URI_ACCOUNT_BET_HISTORY             @"/account/bethistory"
+
+#define URI_ACCOUNT_INFO_UPDATE_AVATAR      @"/account/info/update/avatar"
 #pragma mark ------ zfnotice -------
 #define URI_ZFNOTICE_KEFU                   @"/zfnotice/kefu"
 
@@ -57,9 +59,11 @@
 #define URI_GAME_BET_FEE                @"/game/bet/fee"
 #define URI_GAME_DESK                   @"/game/desk"
 #define URI_GAME_DESKLIST               @"/game/desklist"
-#define URI_GAME_RESULTS               @"/game/results"
-#define URI_GAME_HISTORY               @"/game/history"
-#define URI_GAME_RULES               @"/game/rules"
+#define URI_GAME_RESULTS                @"/game/results"
+#define URI_GAME_HISTORY                @"/game/history"
+#define URI_GAME_RULES                  @"/game/rules"
+#define URI_GAME_RESULT_LIST           @"/game/result/list"
+
 #pragma mark --------- channel ---------
 #define URI_CHANNEL_LIST                @"/GetHasChannel"
 #define URI_LABEL_LIST                  @"/GetLabel"

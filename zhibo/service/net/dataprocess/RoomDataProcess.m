@@ -141,6 +141,7 @@
         
         NSDictionary *video = @{@"push":response[@"list"][@"Push"], @"pull":response[@"list"][@"PullRtmp"]};
         NSDictionary *user = response[@"liveinfo"];
+        NSInteger status = [response[@"list"][@"Status"] intValue];
         NSDictionary *room = @{
             @"room_id":response[@"list"][@"RoomId"],
             @"roomcount":response[@"list"][@"RoomCount"],
@@ -152,8 +153,9 @@
             @"systime":response[@"list"][@"SysTime"],
             @"endtime":response[@"list"][@"EndTime"],
             @"rank":response[@"giftRankList"],
-            @"status":response[@"list"][@"Status"]
+            @"status":@(status)
         };
+        
         
         return @{@"video":video, @"room":room, @"anchor":user, @"isFollowed":response[@"isFollowed"]};
     }

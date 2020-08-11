@@ -18,6 +18,7 @@
     self = [super init];
     if (self) {
         self.dao = [[Dao alloc] init];
+        self.dao.fileName = @"account";
         [self.dao load];
     }
     return self;

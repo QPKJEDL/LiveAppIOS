@@ -12,8 +12,6 @@
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
-
-@property (nonatomic, strong) ABUIWebView *webView;
 @end
 @implementation RoomPlayEndControl
 
@@ -54,17 +52,6 @@
         [self addSubview:self.backButton];
         
         self.backButton.centerX = self.width/2;
-        
-        
-        self.webView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SYS_STATUSBAR_HEIGHT, 290, 130)];
-        self.webView.webView.scrollView.showsVerticalScrollIndicator = false;
-        self.webView.webView.scrollView.showsHorizontalScrollIndicator = false;
-        self.webView.webView.scrollView.bounces = false;
-        self.webView.webView.scrollView.scrollEnabled = false;
-        
-//        self.webView.adapterSize = true;
-//        [self addSubview:self.webView];
-//        [self.webView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
     }
     return self;
 }
@@ -82,9 +69,6 @@
 }
 
 - (void)onBack {
-//    [NSRouter back];
-    [self.webView callFuncName:@"abc" data:@"1111" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-        
-    }];
+    [NSRouter back];
 }
 @end

@@ -72,31 +72,6 @@
     [self.dao save];
 }
 
-//- (BOOL)isLogin {
-//    NSDictionary *dic = [self.dao get:@"user"];
-//    if (dic != nil) {
-//        NSString *token = dic[@"token"];
-//        return token != nil;
-//    }
-//    return false;
-//}
-//
-//- (void)login:(NSDictionary *)dic {
-//    if (dic == nil || [dic isKindOfClass:[NSNull class]]) {
-//        return;
-//    }
-//    NSMutableDictionary *tmpdic = [[NSMutableDictionary alloc] initWithDictionary:dic];
-////    [tmpdic setValue:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587790448617&di=f14b92c18ecbadf438682d2534d7b094&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F06%2F20170706131313_M25Jr.jpeg" forKey:@"icon"];
-//    [self.dao set:tmpdic key:@"user"];
-//    [self.dao save];
-//}
-//
-//
-//- (void)logout {
-//    [self.dao del:@"user"];
-//    [self.dao save];
-//}
-
 - (NSDictionary *)userInfo {
     NSDictionary *user = [self.dao get:@"user"];
     if (user == nil) {

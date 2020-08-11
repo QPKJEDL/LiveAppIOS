@@ -50,6 +50,14 @@
     else if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
         request.realUri = @"/user_bet_list";
     }
+    else if ([request.uri isEqualToString:URI_GAME_RESULT_LIST]) {
+        NSInteger gameid = [request.params[@"gameid"] intValue];
+        if (gameid == 1) {
+            request.realUri = @"/bjl_game_list";
+        }else {
+            request.realUri = @"/lh_game_list";
+        }
+    }
     return request;
 }
 

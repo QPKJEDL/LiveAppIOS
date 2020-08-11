@@ -73,6 +73,7 @@
 
 - (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
     QrCodeSharePrompt *qsp = [[QrCodeSharePrompt alloc] initWithFrame:CGRectMake(26, 0, SCREEN_WIDTH-26-26, SCREEN_HEIGHT*0.8)];
+    [qsp.mainImageView sd_setImageWithURL:[NSURL URLWithString:item[@"bgimage"]] placeholderImage:nil];
     [qsp.saveButton addTarget:self action:@selector(onSave) forControlEvents:UIControlEventTouchUpInside];
     [qsp.deleteButton addTarget:self action:@selector(onDelete) forControlEvents:UIControlEventTouchUpInside];
     qsp.qrcodeStr = item[@"qrcode"];
