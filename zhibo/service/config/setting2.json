@@ -19,12 +19,6 @@
 						"key":"binding",
                         "native_id":"arrowitem"
 					},
-					{
-						"title":"消息通知",
-						"type":"arrow",
-						"key":"notice",
-                        "native_id":"arrowitem"
-					},
                     {
                         "title":"修改登录密码",
                         "type":"arrow",

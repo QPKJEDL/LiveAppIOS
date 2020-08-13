@@ -9,6 +9,7 @@
 #import "QrCodeSharePrompt.h"
 @interface QrCodeSharePrompt ()
 @property (nonatomic, strong) UIView *actionView;
+@property (nonatomic, strong) UIControl *qrcodeImageViewControl;
 @property (nonatomic, strong) UIImageView *qrcodeImageView;
 @property (nonatomic, strong) UILabel *qrcodeLabel;
 
@@ -25,8 +26,12 @@
         self.mainImageView.backgroundColor = [UIColor hexColor:@"FF2B2B"];
         self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.mainImageView.clipsToBounds = true;
+        [self.mainImageView setUserInteractionEnabled:true];
         [self addSubview:self.mainImageView];
         self.mainImageView.centerY = self.height/2;
+        
+        self.qrcodeImageViewControl = [[UIControl alloc] initWithFrame:self.mainImageView.bounds];
+        [self.mainImageView addSubview:self.qrcodeImageViewControl];
         
         self.qrcodeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.mainImageView.height-100-40, 100, 100)];
         [self.mainImageView addSubview:self.qrcodeImageView];
@@ -63,6 +68,14 @@
         self.qrcodeImageView.centerX = self.width/2;
     }
     return self;
+}
+
+- (void)onImageAction {
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [[ABUIPopUp shared] remove];
 }
 
 - (void)setQrcodeStr:(NSString *)qrcodeStr {

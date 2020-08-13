@@ -52,7 +52,7 @@
         self.textField = [[QMUITextField alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH-_accordLabel.right-15, 32)];
         self.textField.placeholder = @"请输入提现金额";
         self.textField.keyboardType = UIKeyboardTypeNumberPad;
-        self.textField.tintColor = [UIColor hexColor:@"00BFCB"];
+        self.textField.tintColor = [UIColor hexColor:@"FF2A40"];
         [self addSubview:self.textField];
         self.textField.top = self.accordLabel.top;
     }

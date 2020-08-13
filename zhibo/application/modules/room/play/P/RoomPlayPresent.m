@@ -22,6 +22,7 @@
     [self fetchPostUri:URI_ROOM_GAME params:@{@"room_id":@([RoomContext shared].roomid)}];
     [self fetchPostUri:URI_ROOM_MANAGER params:@{@"room_id":@([RoomContext shared].roomid)}];
     [self fetchPostUri:URI_ROOM_BANSTATUS params:@{@"room_id":@([RoomContext shared].roomid)}];
+    [self fetchPostUri:URI_ACCOUNT_SX_BANLANCE params:nil];
 }
 
 - (void)requestDeskInfo:(NSDictionary *)dic {
@@ -107,6 +108,10 @@
     }
     else if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
         [[RoomContext shared].playControl receiveWenLu:obj[@"list"]];
+    }
+    else if ([req.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
+        [RoomContext shared].balance = [obj[@"balance"] intValue];
+        [[RoomContext shared].playControl receiveBalance:[obj[@"balance"] intValue]];
     }
     
 }

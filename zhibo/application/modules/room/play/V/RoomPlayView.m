@@ -65,7 +65,7 @@
 }
 
 - (void)playURL:(NSString *)url {
-    NSLog(@"%@", url);
+    self.player.delegate = self;
     if ([url hasPrefix:@"rtmp"]) {
         [_player startPlay:url type:PLAY_TYPE_LIVE_RTMP];
     }else {
@@ -126,6 +126,7 @@
 
 - (void)remove {
     [self.player stopPlay];
+    self.player.delegate = nil;
 }
 
 - (void)free {

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<RoomPlayControlDelegate> delegate;
 - (void)receiveDeskInfo:(NSDictionary *)deskInfo;
 - (void)receiveBetRules:(NSDictionary *)betRules;
+- (void)receiveBalance:(NSInteger)balance;
 - (void)receiveBetSuccess;
 
 - (void)anchorLeave;

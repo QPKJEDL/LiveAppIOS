@@ -70,7 +70,7 @@
         self.loginButton.layer.cornerRadius = 20;
         self.loginButton.clipsToBounds = true;
         self.loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-        self.loginButton.backgroundColor = [UIColor hexColor:@"3dc2d5"];
+        self.loginButton.backgroundColor = [UIColor hexColor:@"FF2B2B"];
         [self addSubview:self.loginButton];
         [self.loginButton addTarget:self action:@selector(registerButtonAction) forControlEvents:UIControlEventTouchUpInside];
         self.loginButton.centerX = self.width/2;

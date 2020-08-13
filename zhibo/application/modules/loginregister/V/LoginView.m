@@ -49,7 +49,7 @@
         
         self.switchButton = [[UIButton alloc] initWithFrame:CGRectMake(self.width-31-60, self.passwordInput.bottom, 60, 44)];
         [self.switchButton setTitle:@"短信登录" forState:UIControlStateNormal];
-        [self.switchButton setTitleColor:[UIColor hexColor:@"#00BFCB"] forState:UIControlStateNormal];
+        [self.switchButton setTitleColor:[UIColor hexColor:@"#FF2B2B"] forState:UIControlStateNormal];
         self.switchButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [self.switchButton addTarget:self action:@selector(switchButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.switchButton];
@@ -58,7 +58,7 @@
         self.rmButton = [[UIButton alloc] initWithFrame:CGRectMake(30, self.passwordInput.bottom, 80, 44)];
         [self.rmButton setTitle:@" 记住密码" forState:UIControlStateNormal];
         self.rmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [self.rmButton setTitleColor:[UIColor hexColor:@"#00BFCB"] forState:UIControlStateNormal];
+        [self.rmButton setTitleColor:[UIColor hexColor:@"#FF2B2B"] forState:UIControlStateNormal];
         self.rmButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [self.rmButton addTarget:self action:@selector(rmButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [self.rmButton setImage:[UIImage imageNamed:@"cb_xuan"] forState:UIControlStateNormal];
@@ -71,7 +71,7 @@
         self.loginButton.layer.cornerRadius = 20;
         self.loginButton.clipsToBounds = true;
         self.loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-        self.loginButton.backgroundColor = [UIColor hexColor:@"3dc2d5"];
+        self.loginButton.backgroundColor = [UIColor hexColor:@"FF2B2B"];
         [self addSubview:self.loginButton];
         [self.loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
         self.loginButton.centerX = self.width/2;

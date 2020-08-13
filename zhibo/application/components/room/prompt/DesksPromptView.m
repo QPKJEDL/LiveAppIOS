@@ -51,7 +51,7 @@
         self.okButton = [[UIButton alloc] initWithFrame:CGRectMake(self.width/2+15, self.height-18-33, 75, 34)];
         [self.okButton setTitle:@"确定" forState:UIControlStateNormal];
         self.okButton.titleLabel.font = [UIFont PingFangSC:14];
-        self.okButton.backgroundColor = [UIColor hexColor:@"#2EE1EB"];
+        self.okButton.backgroundColor = [UIColor hexColor:@"#FF2A40"];
         [self.okButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.okButton];
         self.okButton.layer.cornerRadius = 34/2;

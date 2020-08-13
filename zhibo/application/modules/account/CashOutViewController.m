@@ -39,7 +39,7 @@
     self.footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
     UIButton *submitButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 50, 200, 40)];
     [submitButton setTitle:@"提现" forState:UIControlStateNormal];
-    [submitButton setBackgroundColor:[UIColor hexColor:@"00BFCB"]];
+    [submitButton setBackgroundColor:[UIColor hexColor:@"FF2A40"]];
     submitButton.layer.cornerRadius = 20;
     submitButton.titleLabel.font = [UIFont PingFangSC:17];
     submitButton.clipsToBounds = true;

@@ -117,7 +117,14 @@
 //}
 
 - (void)onClose {
-    [NSRouter back];
+    QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
+    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+         [NSRouter back];
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定退出直播？" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:action1];
+    [alertController addAction:action2];
+    [alertController showWithAnimated:YES];
 }
 
 #pragma mark ----------- betview delegate --------------
@@ -156,6 +163,10 @@
 
 - (void)receiveBetRules:(NSDictionary *)betRules {
     [self.betView setCoins:betRules[@"coins"] options:betRules[@"options"] sounds:betRules[@"sounds"] limit:betRules[@"tip"]];
+}
+
+- (void)receiveBalance:(NSInteger)balance {
+    [self.betView setBalance:balance];
 }
 
 - (void)receiveBetSuccess {

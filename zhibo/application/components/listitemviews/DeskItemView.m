@@ -18,9 +18,9 @@
     self.titleLabel.font = [UIFont PingFangSCBlod:14];
     self.titleLabel.textColor = [UIColor hexColor:@"#353535"];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.layer.borderColor = [UIColor hexColor:@"#2EE1EB"].CGColor;
+    self.titleLabel.layer.borderColor = [UIColor hexColor:@"#FF2A40"].CGColor;
     self.titleLabel.clipsToBounds = true;
-    self.titleLabel.layer.borderWidth = 1;
+    self.titleLabel.layer.borderWidth = LINGDIANWU;
     self.titleLabel.layer.cornerRadius = 34/2;
     [self addSubview:self.titleLabel];
 }
@@ -33,9 +33,11 @@
     
     BOOL selected = [extra[@"selected"] boolValue];
     if (selected) {
-        self.titleLabel.backgroundColor = [UIColor hexColor:@"#E2E2E2"];
+        self.titleLabel.backgroundColor = [UIColor hexColor:@"#FF2A40"];
+        self.titleLabel.textColor = [UIColor whiteColor];
     }else{
         self.titleLabel.backgroundColor = [UIColor hexColor:@"#FFFFFF"];
+        self.titleLabel.textColor = [UIColor hexColor:@"#353535"];
     }
 }
 

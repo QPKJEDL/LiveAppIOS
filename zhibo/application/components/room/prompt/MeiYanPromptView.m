@@ -25,7 +25,7 @@
 
         
         self.slider = [[QMUISlider alloc] initWithFrame:CGRectMake(20, 20, self.width-40, 40)];
-        self.slider.minimumTrackTintColor = [UIColor hexColor:@"#00BFCB"];
+        self.slider.minimumTrackTintColor = [UIColor hexColor:@"#FF2A40"];
         self.slider.maximumTrackTintColor = [UIColor hexColor:@"FFFFFF"];
         self.slider.thumbColor = [UIColor whiteColor];
         self.slider.thumbSize = CGSizeMake(20, 20);

@@ -39,6 +39,7 @@
         
 //        [[ABMQ shared] subscribe:self channels:@[@"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_ROOM_GAME, @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
+        [self.wenluWebView setHidden:true];
     }
     return self;
 }

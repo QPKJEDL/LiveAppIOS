@@ -108,9 +108,9 @@
         self.footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
         _listtView.footerView = self.footerView;
         
-        self.actionButton = [ViewUtil createButtonWithTitle:actions[@"title"] color:[UIColor hexColor:@"#00BFCB"] fontSize:16 isBold:true];
+        self.actionButton = [ViewUtil createButtonWithTitle:actions[@"title"] color:[UIColor hexColor:@"#FF2A40"] fontSize:16 isBold:true];
         [self.actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.actionButton.backgroundColor = [UIColor hexColor:@"#00BFCB"];
+        self.actionButton.backgroundColor = [UIColor hexColor:@"#FF2A40"];
         if (actions[@"bgcolor"]) {
             self.actionButton.backgroundColor = [UIColor hexColor:actions[@"bgcolor"]];
         }

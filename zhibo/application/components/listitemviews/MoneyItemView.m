@@ -27,7 +27,7 @@
     self.containView.layer.shadowRadius = 10;
     self.containView.layer.cornerRadius = 4.8;
     self.containView.layer.borderWidth = 1;
-    self.containView.layer.borderColor = [UIColor hexColor:@"#00BFCB"].CGColor;
+    self.containView.layer.borderColor = [UIColor hexColor:@"#FF2A40"].CGColor;
     
     self.cLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
     self.cLabel.text = @"¥";

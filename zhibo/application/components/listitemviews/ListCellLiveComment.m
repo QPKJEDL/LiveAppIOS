@@ -30,7 +30,7 @@
     NSString *title = [NSString stringWithFormat:@"%@:%@", item[@"name"], item[@"content"]];
     
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:title];;
-    [attrString addAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:@"3dc2d5"]} range:NSMakeRange(0, name.length)];
+    [attrString addAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:@"FF2A40"]} range:NSMakeRange(0, name.length)];
     self.titleLabel.attributedText = attrString;
     
     CGFloat contentHeight = [item[@"contentHeight"] floatValue];

@@ -112,9 +112,13 @@
 
 - (void)loadWenLu {
     self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, 100, 290, 130)];
+    [self.wenluWebView.webView setOpaque:false];
+    self.wenluWebView.backgroundColor = [UIColor clearColor];
+    self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.bounces = false;
     [self addSubview:self.wenluWebView];
-    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
+//    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
+    [self.wenluWebView loadWebWithPath:@"index.html"];
 }
 
 - (void)receiveWenLu:(NSArray *)list {
@@ -124,7 +128,6 @@
     [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
         NSLog(@"%@", error);
     }];
-
 }
 
 - (void)receiveWenLuItem:(NSDictionary *)item {

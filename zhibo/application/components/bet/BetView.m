@@ -105,6 +105,7 @@
         self.wenluButton.clipsToBounds = true;
         [self.wenluButton setImage:[UIImage imageNamed:@"wenlu"] forState:UIControlStateNormal];
         [self addSubview:self.wenluButton];
+        [self.wenluButton addTarget:self action:@selector(onWenLuButton) forControlEvents:UIControlEventTouchUpInside];
         self.wenluButton.centerY = 22;
         self.wenluButton.left = self.balanceLabel.right+10;
         
@@ -112,6 +113,10 @@
         
     }
     return self;
+}
+
+- (void)onWenLuButton {
+    [[RoomContext shared].playControl.wenluWebView setHidden:![RoomContext shared].playControl.wenluWebView.isHidden];
 }
 
 - (void)setEnabled:(BOOL)enabled {
@@ -166,9 +171,12 @@
     self.options = options;
     self.sounds = sounds;
     [self.tipLabel setText:limit];
-    self.balanceLabel.text = @"余额\n21334.00";
     
     [self _reload];
+}
+
+- (void)setBalance:(NSInteger)balnace {
+    self.balanceLabel.text = [NSString stringWithFormat:@"余额\n%ld", (long)balnace];
 }
 
 //重置未下注选择
@@ -222,11 +230,11 @@
 
 #pragma mark ------------ delegates -----------
 - (void)betCoinsView:(BetCoinsView *)betCoinsView didSelectItemAtIndex:(NSInteger)index {
-    if (self.enabled == false) {
-        [ABUITips showError:@"下注时间已过"];
-        [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
-        return;
-    }
+//    if (self.enabled == false) {
+//        [ABUITips showError:@"下注时间已过"];
+//        [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
+//        return;
+//    }
     
     self.coins = [ABIteration iterationList:self.coins block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
         dic[@"selected"] = @(0);

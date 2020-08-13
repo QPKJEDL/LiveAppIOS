@@ -34,7 +34,7 @@
     [self addSubview:self.avatarImageView];
     
     self.jiechuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 75, 34)];
-    self.jiechuButton.backgroundColor = [UIColor hexColor:@"#2EE1EB"];
+    self.jiechuButton.backgroundColor = [UIColor hexColor:@"#FF2A40"];
     [self.jiechuButton setTitle:@"解除" forState:UIControlStateNormal];
     self.jiechuButton.titleLabel.font = [UIFont PingFangSCBlod:14];
     self.jiechuButton.layer.cornerRadius = 34/2;

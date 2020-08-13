@@ -47,7 +47,7 @@
         self.backButton.layer.cornerRadius = 22;
         self.backButton.clipsToBounds = true;
         [self.backButton setTitle:@"返回" forState:UIControlStateNormal];
-        [self.backButton setBackgroundColor:[UIColor hexColor:@"00BFCB"]];
+        [self.backButton setBackgroundColor:[UIColor hexColor:@"FF2A40"]];
         [self.backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.backButton];
         

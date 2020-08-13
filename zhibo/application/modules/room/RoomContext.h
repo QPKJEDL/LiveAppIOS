@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isManager;
 @property (nonatomic, assign) BOOL isForbidden;
 
+@property (nonatomic, assign) NSInteger balance;
+
 @property (nonatomic, strong) NSMutableArray *banlist;
 @property (nonatomic, assign) NSInteger gameid;
 @end

@@ -55,7 +55,7 @@
         self.followButton.layer.cornerRadius = 44/2;
         self.followButton.clipsToBounds = true;
         [self.followButton setTitle:@"关注" forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:[UIColor hexColor:@"#00BFCB"]];
+        [self.followButton setBackgroundColor:[UIColor hexColor:@"#FF2A40"]];
         [self.followButton setTitleColor:[UIColor hexColor:@"#FFFFFF"] forState:UIControlStateNormal];
         self.followButton.titleLabel.font = [UIFont PingFangSC:12];
         [self addSubview:self.followButton];
@@ -119,7 +119,7 @@
         [self.followButton setBackgroundColor:[UIColor hexColor:@"#dedede"]];
     }else{
         [self.followButton setTitle:@"关注" forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:[UIColor hexColor:@"#00BFCB"]];
+        [self.followButton setBackgroundColor:[UIColor hexColor:@"#FF2A40"]];
     }
 }
 
@@ -132,7 +132,7 @@
     if (self.isFollow == false) {
         [self fetchPostUri:URI_FOLLOW_FOLLOW params:@{@"live_uid":@(self.uid)}];
     }else{
-        [QMUIAlertController appearance].sheetTitleAttributes = @{NSForegroundColorAttributeName:[UIColor hexColor:@"3dc2d5"],NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
+        [QMUIAlertController appearance].sheetTitleAttributes = @{NSForegroundColorAttributeName:[UIColor hexColor:@"FF2A40"],NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
         QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
 
         }];

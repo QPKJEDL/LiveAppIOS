@@ -110,7 +110,7 @@
 }
 
 - (void)onAvatar {
-    [QMUIAlertController appearance].sheetTitleAttributes = @{NSForegroundColorAttributeName:[UIColor hexColor:@"3dc2d5"],NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
+    [QMUIAlertController appearance].sheetTitleAttributes = @{NSForegroundColorAttributeName:[UIColor hexColor:@"FF2A40"],NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
 
     }];

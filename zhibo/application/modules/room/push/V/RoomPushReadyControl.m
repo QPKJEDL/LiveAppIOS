@@ -55,7 +55,7 @@
         self.zhiboButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.height-115-44, 228, 44)];
         self.zhiboButton.layer.cornerRadius = 22;
         self.zhiboButton.clipsToBounds = true;
-        self.zhiboButton.backgroundColor = [UIColor hexColor:@"#00BFCB"];
+        self.zhiboButton.backgroundColor = [UIColor hexColor:@"#FF2A40"];
         [self.zhiboButton setTitle:@"开始直播" forState:UIControlStateNormal];
         self.zhiboButton.titleLabel.font = [UIFont PingFangMedium:15];
         [self.zhiboButton addTarget:self action:@selector(onStartPush) forControlEvents:UIControlEventTouchUpInside];
@@ -103,7 +103,7 @@
 }
 
 - (void)titleViewOnCover:(RoomPushReadyTitleView *)titleView {
-    [QMUIAlertController appearance].sheetTitleAttributes = @{NSForegroundColorAttributeName:[UIColor hexColor:@"3dc2d5"],NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
+    [QMUIAlertController appearance].sheetTitleAttributes = @{NSForegroundColorAttributeName:[UIColor hexColor:@"FF2A40"],NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         
     }];

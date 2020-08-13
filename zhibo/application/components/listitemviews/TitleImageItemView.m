@@ -19,7 +19,7 @@
     
     self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
     self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.iconImageView.layer.borderColor = [UIColor hexColor:@"#00BFCB"].CGColor;
+    self.iconImageView.layer.borderColor = [UIColor hexColor:@"#FF2A40"].CGColor;
 //    self.iconImageView.layer.cornerRadius = 34/2;
     self.iconImageView.clipsToBounds = true;
     [self addSubview:self.iconImageView];

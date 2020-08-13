@@ -58,9 +58,10 @@
     [self.view addSubview:self.containScrollView];
 
     self.topView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 325)];
-    self.topView.backgroundColor = [UIColor systemPinkColor];
-    self.topView.image = [UIImage imageNamed:@"beijing"];
+//    self.topView.backgroundColor = [UIColor hexColor:@"FF2B2B"];
+//    self.topView.image = [UIImage imageNamed:@"beijing"];
     [self.containScrollView addSubview:self.topView];
+    [self.topView gradient:GRADIENTCOLORS direction:0];
     
     self.logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20+SYS_STATUSBAR_HEIGHT, 90, 90)];
     self.logoImageView.centerX = self.view.width/2;

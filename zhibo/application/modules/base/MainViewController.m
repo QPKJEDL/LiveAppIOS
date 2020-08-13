@@ -48,10 +48,10 @@
 
 
     [UITabBar appearance].backgroundColor = UIColor.whiteColor;
-    [UITabBar appearance].tintColor = [UIColor hexColor:@"#00BFCB"];
+    [UITabBar appearance].tintColor = [UIColor hexColor:@"#FF2A40"];
 
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:@"#C5C7D3"]} forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:@"#00BFCB"]} forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:@"#FF2A40"]} forState:UIControlStateSelected];
 
     self.tabBar.translucent = false;
     self.tabBar.layer.shadowColor = [[UIColor hexColor:@"3A4C82"] CGColor];

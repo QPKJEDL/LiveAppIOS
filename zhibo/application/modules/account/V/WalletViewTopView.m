@@ -25,7 +25,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor hexColor:@"00BFCB"];
+        self.backgroundColor = [UIColor hexColor:@"FF2A40"];
         
         self.zhiboDouLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, SYS_STATUSBAR_HEIGHT+80, self.width/2, 20)];
         [self.zhiboDouLabel setFont:[UIFont PingFangSCBlod:24]];
@@ -85,7 +85,7 @@
         _rechargeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.zhiboBiTextLabel.bottom+54, 122, 46)];
         [_rechargeButton setTitle:@"充值" forState:UIControlStateNormal];
         _rechargeButton.backgroundColor = [UIColor hexColor:@"ffffff"];
-        [_rechargeButton setTitleColor:[UIColor hexColor:@"#00BFCB"] forState:UIControlStateNormal];
+        [_rechargeButton setTitleColor:[UIColor hexColor:@"#FF2A40"] forState:UIControlStateNormal];
         _rechargeButton.titleLabel.font = [UIFont systemFontOfSize:15];
         _rechargeButton.layer.cornerRadius = 23;
         [self addSubview:_rechargeButton];

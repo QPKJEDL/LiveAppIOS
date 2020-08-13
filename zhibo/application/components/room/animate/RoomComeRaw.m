@@ -34,7 +34,7 @@
     [self.containView addTarget:self action:@selector(onButton) forControlEvents:UIControlEventTouchUpInside];
     
     self.nameLabel = [[QMUILabel alloc] initWithFrame:CGRectZero];
-    self.nameLabel.textColor = [UIColor hexColor:@"#00BFCB"];
+    self.nameLabel.textColor = [UIColor hexColor:@"#FF2A40"];
     self.nameLabel.font = [UIFont PingFangMedium:14];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     [self.containView addSubview:self.nameLabel];

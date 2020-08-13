@@ -34,6 +34,7 @@ typedef enum : NSInteger {
 - (void)resetUnBet;
 - (void)reset;
 - (void)winner:(id)data;
+- (void)setBalance:(NSInteger)balnace;
 
 @end
 

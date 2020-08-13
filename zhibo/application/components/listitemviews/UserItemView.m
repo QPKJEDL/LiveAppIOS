@@ -83,7 +83,7 @@
     BOOL isOpen = [item[@"status"] intValue] == 1;
     if (isOpen) {
         self.aniTextLabel.text = @"直播中";
-        self.aniTextLabel.textColor = [UIColor hexColor:@"#00BFCB"];
+        self.aniTextLabel.textColor = [UIColor hexColor:@"#FF2A40"];
         self.aniTextLabel.top = 52;
         [self.aniImageView startAnimating];
         self.isLoading = true;

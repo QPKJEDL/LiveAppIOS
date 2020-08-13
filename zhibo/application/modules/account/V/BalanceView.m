@@ -19,7 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) {
 //        [self gradient:GRADIENTCOLORS direction:0];
-        self.backgroundColor = [UIColor hexColor:@"00BFCB"];
+        self.backgroundColor = [UIColor hexColor:@"FF2A40"];
         self.layer.cornerRadius = 10;
         self.clipsToBounds = true;
         
