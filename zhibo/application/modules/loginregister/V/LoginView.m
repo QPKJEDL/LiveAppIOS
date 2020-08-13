@@ -61,8 +61,8 @@
         [self.rmButton setTitleColor:[UIColor hexColor:@"#FF2B2B"] forState:UIControlStateNormal];
         self.rmButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [self.rmButton addTarget:self action:@selector(rmButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.rmButton setImage:[UIImage imageNamed:@"cb_xuan"] forState:UIControlStateNormal];
-        [self.rmButton setImage:[UIImage imageNamed:@"cb_quan"] forState:UIControlStateSelected];
+        [self.rmButton setImage:[UIImage imageNamed:@"xuan"] forState:UIControlStateNormal];
+        [self.rmButton setImage:[UIImage imageNamed:@"quan"] forState:UIControlStateSelected];
 //        [self addSubview:self.rmButton];
         
         self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.passwordInput.bottom+64, 297, 44)];

@@ -44,8 +44,11 @@
 - (void)reload:(NSDictionary *)data {
     self.textLabel.text = [NSString stringWithFormat:@"%@", data[@"info"]];
     [self.textLabel sizeToFit];
+    
+    CGFloat top = (self.height-self.textLabel.height-_titleLabel.height)/2;
     self.textLabel.centerX = self.width/2;
-    self.textLabel.top = 39;
+    self.textLabel.top = top;
+    self.titleLabel.top = self.textLabel.bottom;
    
 }
 

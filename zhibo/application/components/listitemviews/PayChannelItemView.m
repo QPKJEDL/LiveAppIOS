@@ -57,9 +57,9 @@
     [self.titleLabel sizeToFit];
     
     if ([extra[@"selected"] intValue] == 1) {
-        [self.checkBoxImageView setImage:[UIImage imageNamed:@"cb_xuan"]];
+        [self.checkBoxImageView setImage:[UIImage imageNamed:@"xuan"]];
     }else{
-        [self.checkBoxImageView setImage:[UIImage imageNamed:@"cb_quan"]];
+        [self.checkBoxImageView setImage:[UIImage imageNamed:@"quan"]];
     }
 }
 
