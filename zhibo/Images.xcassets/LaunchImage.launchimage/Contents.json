@@ -2,7 +2,7 @@
   "images" : [
     {
       "extent" : "full-screen",
-      "filename" : "12422688@3x.jpg",
+      "filename" : "1242.2688.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "12.0",
       "orientation" : "portrait",
@@ -19,6 +19,7 @@
     },
     {
       "extent" : "full-screen",
+      "filename" : "828.1792.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "12.0",
       "orientation" : "portrait",
@@ -35,7 +36,7 @@
     },
     {
       "extent" : "full-screen",
-      "filename" : "11252436@3x.jpg",
+      "filename" : "1125.2436.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "11.0",
       "orientation" : "portrait",
@@ -52,7 +53,7 @@
     },
     {
       "extent" : "full-screen",
-      "filename" : "12422208@3x.jpg",
+      "filename" : "1242.2208.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
@@ -69,7 +70,7 @@
     },
     {
       "extent" : "full-screen",
-      "filename" : "7501334@3x.jpg",
+      "filename" : "750.1334.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
@@ -78,7 +79,7 @@
     },
     {
       "extent" : "full-screen",
-      "filename" : "640960@3x.jpg",
+      "filename" : "640.960.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
@@ -86,6 +87,7 @@
     },
     {
       "extent" : "full-screen",
+      "filename" : "640.1136.jpg",
       "idiom" : "iphone",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
@@ -94,18 +96,21 @@
     },
     {
       "extent" : "full-screen",
+      "filename" : "320.480.jpg",
       "idiom" : "iphone",
       "orientation" : "portrait",
       "scale" : "1x"
     },
     {
       "extent" : "full-screen",
+      "filename" : "640.960-1.jpg",
       "idiom" : "iphone",
       "orientation" : "portrait",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
+      "filename" : "640.1136-1.jpg",
       "idiom" : "iphone",
       "orientation" : "portrait",
       "scale" : "2x",
