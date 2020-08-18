@@ -59,6 +59,8 @@
     if ([extra[@"selected"] intValue] == 1) {
         self.containView.layer.borderWidth = 1;
     }
+    
+    [self layoutAdjustContents];
 }
 
 - (void)layoutAdjustContents {

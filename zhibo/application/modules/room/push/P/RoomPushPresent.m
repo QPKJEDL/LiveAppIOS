@@ -32,12 +32,6 @@
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    if ([req.uri isEqualToString:URI_ROOM_INFO]) { //房间信息
-        self.roomInfo = obj;
-        [RoomContext shared].anchorid = [obj[@"anchor"][@"UserId"] intValue];
-        [[RoomContext shared].socket startRoomWithID:[RoomContext shared].roomid];
-        [[RoomContext shared].pushControl receiveRoomInfo:self.roomInfo];
-    }
     if ([req.uri isEqualToString:URI_ROOM_SETCOVER]){
         [RoomContext shared].roomid = [obj[@"list"][@"RoomId"] intValue];
         self.address = obj[@"list"][@"Push"];

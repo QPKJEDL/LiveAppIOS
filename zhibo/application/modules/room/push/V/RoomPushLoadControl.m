@@ -30,7 +30,7 @@
         self.ttLabel.font = [UIFont PingFangSCBlod:50];
         [self addSubview:self.ttLabel];
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFreq) userInfo:nil repeats:true];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:[ABWeakProxy proxyWithTarget:self] selector:@selector(timerFreq) userInfo:nil repeats:true];
         [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
         [self timerFreq];
     }

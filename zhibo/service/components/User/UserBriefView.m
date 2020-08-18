@@ -54,6 +54,8 @@
         _zanCountLabel.textColor = [UIColor hexColor:@"FFFFFF"];
         _zanCountLabel.font = [UIFont fontMicrosoftYaHei:12];
         [self.containView addSubview:_zanCountLabel];
+        [_zanCountLabel setHidden:true];
+        
     }
     return self;
 }

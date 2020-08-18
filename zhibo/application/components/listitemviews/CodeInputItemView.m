@@ -1,19 +1,19 @@
 //
-//  InputItemView.m
+//  CodeInputItemView.m
 //  zhibo
 //
-//  Created by qp on 2020/7/24.
+//  Created by qp on 2020/8/15.
 //  Copyright © 2020 qp. All rights reserved.
 //
 
-#import "InputItemView.h"
-@interface InputItemView ()
+#import "CodeInputItemView.h"
+@interface CodeInputItemView ()
 @property (nonatomic, strong) UIView *containView;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) QMUITextField *textField;
+@property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) NSString *key;
 @end
-@implementation InputItemView
+@implementation CodeInputItemView
 
 - (void)setupAdjustContents {
     self.containView = [[UIView alloc] initWithFrame:self.bounds];
@@ -25,7 +25,7 @@
     self.titleLabel.textColor = [UIColor hexColor:@"222222"];
     [self.containView addSubview:self.titleLabel];
     
-    self.textField = [[QMUITextField alloc] initWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-15-114, self.height)];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-15-114, self.height)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged) name:UITextFieldTextDidChangeNotification object:nil];
     [self.containView addSubview:self.textField];
 }
@@ -53,9 +53,6 @@
     
     self.textField.textColor = [UIColor hexColor:@"222222"];
     [self.textField setEnabled:true];
-    if (item[@"max"] != nil) {
-        self.textField.maximumTextLength = [item[@"max"] intValue];
-    }
     if ([item[@"disable"] isEqualToString:@"count"]) {
         if (self.textField.text.length > 0) {
             self.textField.textColor = [UIColor hexColor:@"999999"];

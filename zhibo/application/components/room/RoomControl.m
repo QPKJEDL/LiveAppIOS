@@ -15,7 +15,10 @@
 #import "AnchorPromptView.h"
 #import "RoomGiftView.h"
 #import "GiftEffectsPlayView.h"
-@interface RoomControl ()<RoomBottomBarDelegate, RoomChatViewDelegate, INetData, RoomAnchorBriefViewDelegate>
+#import "GameStatusPlateView.h"
+#import "BetView.h"
+#import "GameManager.h"
+@interface RoomControl ()<RoomBottomBarDelegate, RoomChatViewDelegate, INetData, RoomAnchorBriefViewDelegate, GameStatusPlateViewDelegate, BetViewDelegate, IABMQSubscribe>
 @property (nonatomic, strong) UIView *bbbView;
 @property (nonatomic, strong) RoomAnchorBriefView *briefView;
 @property (nonatomic, strong) RoomBottomBar *bottomBar;
@@ -31,6 +34,8 @@
 @property (nonatomic, strong) UIButton *sceneButton;
 @property (nonatomic, strong) UIImageView *sceneImageView;
 
+@property (nonatomic, strong) GameStatusPlateView *plateView;
+
 @end
 
 @implementation RoomControl
@@ -39,6 +44,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         
         self.bbbView = [[UIView alloc] initWithFrame:self.bounds];
         [self addSubview:self.bbbView];
@@ -105,13 +111,29 @@
         self.sceneImageView.centerX = self.sceneButton.centerX;
         self.sceneImageView.top = self.sceneButton.centerY+3;
         
+        self.plateView = [[GameStatusPlateView alloc] initWithFrame:CGRectMake(self.width-66-10, self.height-TI_HEIGHT-44-66-10, 66, 66)];
+        self.plateView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.58];
+        self.plateView.layer.cornerRadius = 33;
+        [self addSubview:self.plateView];
+        [self.plateView addTarget:self action:@selector(onPlate) forControlEvents:UIControlEventTouchUpInside];
+        self.plateView.delegate = self;
+        [self.plateView watch];
+        [self.plateView setHidden:true];
+        
         [self loadWenLu];
+        
+        [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
+        
     }
     return self;
 }
 
+- (void)loadGame {
+    
+}
+
 - (void)loadWenLu {
-    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, 100, 290, 130)];
+    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 290, 130)];
     [self.wenluWebView.webView setOpaque:false];
     self.wenluWebView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
@@ -119,6 +141,7 @@
     [self addSubview:self.wenluWebView];
 //    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
     [self.wenluWebView loadWebWithPath:@"index.html"];
+    [self.wenluWebView setHidden:true];
 }
 
 - (void)receiveWenLu:(NSArray *)list {
@@ -136,16 +159,28 @@
     }];
 }
 
+- (void)onPlate {
+    if (RC.gameManager.rules == nil) {
+        [ABUITips showError:@"主播未设置游戏"];
+        return;
+    }
+    [RP promptBetView:[RoomContext shared].gameManager.rules hideBlock:^{
+        self.plateView.top = self.height-TI_HEIGHT-44-66-10;
+    } showBlock:^{
+        self.plateView.top = self.height-TI_HEIGHT-44-66-10-164;
+    }];
+}
+
 - (void)onScene {
     [self.sceneButton setSelected:!self.sceneButton.isSelected];
     if (self.sceneButton.isSelected) {
-        [[RoomContext shared].shixunPlayView setHidden:false];
-        [[RoomContext shared].shixunPlayView playURL:self.shixunPlayAddress];
+        [[RoomContext shared].gameManager.shixunPlayerView setHidden:false];
+        [[RoomContext shared].gameManager.shixunPlayerView playURL:RC.gameManager.shixunPlayAddress];
         
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
     }else{
-        [[RoomContext shared].shixunPlayView setHidden:true];
-        [[RoomContext shared].shixunPlayView remove];
+        [[RoomContext shared].gameManager.shixunPlayerView setHidden:true];
+        [[RoomContext shared].gameManager.shixunPlayerView remove];
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
     }
     
@@ -211,16 +246,23 @@
         [self.audienceView setList:rank];
     }
     else if (lmd == 9) { //游戏变更
-        [[RoomContext shared].playPresent requestDeskInfo:message];
+//        {
+//            DeskId = 3;
+//            GameId = 1;
+//            Lmd = 9;
+//            RoomId = 5;
+//        }
+        [RoomContext shared].gameManager.desk_id = [message[@"DeskId"] intValue];
+        [[RoomContext shared].gameManager _refreshDeskInfo];
     }
     else if (lmd == 10) {
         [self liveclose];
     }
     else if (lmd == 11) { //离开房间
-        [[RoomContext shared].playControl anchorLeave];
+        [self anchorLeave];
     }
     else if (lmd == 12) { //回到房间
-        [[RoomContext shared].playControl anchorReturn];
+        [self anchorReturn];
     }
 }
 
@@ -228,6 +270,7 @@
 - (void)liveclose {
     
 }
+
 - (void)receiveRoomInfo:(NSDictionary *)roomInfo {
     self.roomInfo = roomInfo;
     
@@ -248,7 +291,7 @@
 }
 
 - (void)receiveDeskInfo:(NSDictionary *)deskInfo {
-    
+    [self.plateView setHidden:false];
 }
 
 
@@ -275,7 +318,7 @@
 }
 
 - (void)onBriefView {
-    [RP promptUserWithUid:RC.anchorid];
+    [RP promptUserWithUid:RC.roomManager.anchorid];
 }
 
 - (void)onAuDienceView {
@@ -283,7 +326,7 @@
 }
 
 - (void)bottomBar:(RoomBottomBar *)bottomBar onText:(NSString *)text {
-    [[RoomContext shared].socket sendText:text];
+    [[RoomContext shared].roomManager sendText:text];
 }
 
 - (void)roomChatView:(RoomChatView *)roomChatView didSelectUid:(NSInteger)uid {
@@ -302,10 +345,11 @@
 
 //左侧用户试图
 - (void)roomAnchorBriefViewOnFollow:(RoomAnchorBriefView *)roomAnchorBriefView {
-    [self fetchPostUri:URI_FOLLOW_FOLLOW params:@{@"live_uid":@([RoomContext shared].anchorid)}];
+    [self fetchPostUri:URI_FOLLOW_FOLLOW params:@{@"live_uid":@([RoomContext shared].roomManager.anchorid)}];
 }
 
 - (void)bottomBarOnClose:(RoomBottomBar *)bottomBar {
+    [self.plateView stop];
     [self onClose];
 }
 
@@ -322,16 +366,119 @@
 }
 
 - (void)onGift {
-    [self.giftControl refreshWithRoomID:RC.roomid liveuid:RC.anchorid];
+    [self.giftControl refreshWithRoomID:RC.roomManager.roomid liveuid:RC.roomManager.anchorid];
     [[ABUIPopUp shared] show:self.giftControl from:ABPopUpDirectionBottom];
 }
 
 - (void)onMore {
-    
+    [RP promptMoreActions:^(NSInteger index) {
+        if (index == 0) {
+            [self onPlate];
+        }
+    }];
 }
 
 - (void)refreshRank {
-    [self fetchPostUri:URI_ROOM_GIFTRANK params:@{@"room_id":@(RC.roomid)}];
+    [self fetchPostUri:URI_ROOM_GIFTRANK params:@{@"room_id":@(RC.roomManager.roomid)}];
 }
+
+
+- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+    if ([channel isEqualToString:CHANNEL_GAME_RULES]) {
+        [self onPlate];
+        [self.plateView setHidden:false];
+    }
+    if ([channel isEqualToString:CHANNEL_ROOM_INFO]) {
+        [self receiveRoomInfo:message];
+    }
+    if ([channel isEqualToString:CHANNEL_ROOM_MESSAGE]) {
+        [self onReceiveRoomMessage:message];
+    }
+    if ([channel isEqualToString:CHANNEL_ROOM_PEER]) {
+        [self onReceivePeerMessage:message];
+    }
+    if ([channel isEqualToString:CHANNEL_GAME_STATUS]) {
+        NSDictionary *dic = (NSDictionary *)message;
+        NSInteger status = [dic[@"status"] integerValue];
+        NSDictionary *desk = dic[@"data"];
+        switch (status) {
+            case 0: //洗牌中
+                [self.plateView watch]; //变更洗牌中
+
+                [RoomPrompt shared].betView.enabled = false; //禁止下注
+                [[RoomPrompt shared].betView reset]; //重置下注盘
+                break;
+            case 1://开始下注
+                [self.plateView please:desk]; //开启下注倒计时
+
+                [RoomPrompt shared].betView.enabled = true; //开启下注
+                [self onPlate]; //弹出下注UI
+                [[RoomPrompt shared].betView reset]; //重置下注盘
+                break;
+            case 2://开牌中(停止下注)
+                [self.plateView wait]; //变更待开牌
+
+                [RoomPrompt shared].betView.enabled = false;//禁止下注
+                if ([RoomPrompt shared].betView.isBet == false) {
+                    [[RoomPrompt shared].betView reset];
+                }
+                break;
+            case 3://结算完成
+                [self.plateView finish];
+
+                [RoomPrompt shared].betView.enabled = false;//禁止下注
+                break;
+            case 4://结算完成(有结果)
+                [self.plateView finish];
+
+                [RoomPrompt shared].betView.enabled = false;//禁止下注
+                [RP promptGameResultWithGameId:RC.gameManager.game_id winner:desk[@"Winner"]];
+                
+                [self receiveWenLuItem:desk];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)plateView:(GameStatusPlateView *)plateView onStatusChanged:(GameStatusPlateViewStatus)status {
+    if (status == GameStatusPlateViewStatusWait) {
+        [RoomPrompt shared].betView.enabled = false;//禁止下注
+        if ([RoomPrompt shared].betView.isBet == false) {
+            [[RoomPrompt shared].betView reset];
+        }
+    }
+}
+
+- (void)anchorLeave {
+    
+}
+
+- (void)anchorReturn {
+    
+}
+
+//- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+//    if (![message isKindOfClass:[NSDictionary class]]) {
+//        return;
+//    }
+//
+//    NSDictionary *dic = (NSDictionary *)message;
+//    if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
+//        if ([dic isKindOfClass:[NSDictionary class]] && dic[@"Cmd"] != nil) {
+//            if ([self isSelf:dic] == false) {
+//                return;
+//            }
+//            [self refreshDesk:dic];
+//        }
+//    }
+//    else if ([channel isEqualToString:@"CHANNEL_ROOM_ROOM"]) {
+//        [self onReceiveRoomMessage:message];
+//    }
+//    else if ([channel isEqualToString:@"CHANNEL_ROOM_PEER"]) {
+//        [self onReceivePeerMessage:message];
+//    }
+//}
 @end
 

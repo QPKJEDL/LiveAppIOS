@@ -25,7 +25,7 @@
         self.imService.heartbeatHZ = 30;
         self.imService.deviceID = [Service shared].account.gmuid;
         self.imService.token = [Service shared].account.gmtoken;
-        [self.imService addRoomMessageObserver:self];
+        
 //        [self.imService addPeerMessageObserver:self];
         
         [self startListenAppStatus];
@@ -37,9 +37,9 @@
 }
 
 - (void)startListenAppStatus {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)applicationDidEnterBackground {
@@ -51,10 +51,19 @@
 }
 
 - (void)startRoomWithID:(int64_t)roomID {
+//    if (self.roomID > 0) {
+//        [self.imService leaveRoom:self.roomID];
+//    }
     self.roomID = roomID;
     [self.imService enterRoom:roomID];
     [self.imService start];
+    [self.imService addRoomMessageObserver:self];
 }
+
+- (void)leaveRoomWithID:(int64_t)roomID {
+    [self.imService leaveRoom:self.roomID];
+}
+
 
 - (void)stopRoom {
     [self.imService leaveRoom:self.roomID];
@@ -63,7 +72,7 @@
 //    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     
 
-    [self.imService removePeerMessageObserver:self];
+    [self.imService removeRoomMessageObserver:self];
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {

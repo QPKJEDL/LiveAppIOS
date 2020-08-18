@@ -94,6 +94,9 @@
     }
 }
 
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    
+}
 
 /*
 #pragma mark - Navigation

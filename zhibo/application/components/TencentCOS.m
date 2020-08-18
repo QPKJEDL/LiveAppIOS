@@ -95,7 +95,7 @@
 
 
 - (void)refreshSecretInfo {
-    [self fetchPostUri:@"http://129.211.114.135:8933/code/Mycenter/qr_fornow" params:nil];
+    [self fetchPostUri:URI_TENCENT_COSSECRET params:nil];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {

@@ -39,6 +39,11 @@
     self.listView.delegate = self;
     [self.listView setupPullRefresh];
     
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self fetchPostUri:URI_ACCOUNT_POPULARIZE_CODELIST params:nil];
 }
 

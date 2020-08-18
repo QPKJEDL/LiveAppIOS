@@ -59,6 +59,7 @@
                         "title":"昵称",
                         "type":"input",
                         "placeholder":"请填写昵称",
+                        "max":10,
                         "key":"nickname",
                         "native_id":"inputitem"
                     }
@@ -104,7 +105,7 @@
                         "title":"旧密码",
                         "type":"input",
                         "placeholder":"请填写旧密码",
-                        "key":"old_pwd",
+                        "key":"log_pwd",
                         "native_id":"inputitem"
                     },
                     {
@@ -112,6 +113,13 @@
                         "type":"input",
                         "placeholder":"请填写新密码",
                         "key":"new_pwd",
+                        "native_id":"inputitem"
+                    },
+                    {
+                        "title":"卡号",
+                        "type":"input",
+                        "placeholder":"请输入绑定的银行卡号",
+                        "key":"bank_card",
                         "native_id":"inputitem"
                     }
                 ]
@@ -272,56 +280,40 @@
 						"type":"input",
 						"placeholder":"例: 张三",
 						"key":"bank_username",
-                        "native_id":"inputitem"
+                        "native_id":"inputitem",
+                        "value":"CardName",
+                        "disable":"count"
 					},
 					{
 						"title":"选择银行",
-						"type":"select",
+						"type":"input",
 						"placeholder":"请选择银行",
 						"key":"bank_name",
-                        "native_id":"inputitem"
-					},
-					{
-						"title":"开户省",
-						"type":"select",
-						"placeholder":"请选择开户省",
-						"key":"bank_province",
-                        "native_id":"inputitem"
-					},
-					{
-						"title":"开户市",
-						"type":"select",
-						"placeholder":"请选择开户城市",
-						"key":"bank_city",
-                        "native_id":"inputitem"
+                        "native_id":"inputitem",
+                        "value":"BankName",
 					},
 					{
 						"title":"开户网点",
 						"type":"input",
 						"placeholder":"请填写开户网点",
 						"key":"bank_store",
-                        "native_id":"inputitem"
+                        "native_id":"inputitem",
+                        "value":"BankAddr",
 					},
 					{
 						"title":"银行卡号",
 						"type":"input",
 						"placeholder":"请填写卡号",
 						"key":"bank_cardnumber",
-                        "native_id":"inputitem"
+                        "native_id":"inputitem",
+                        "value":"bk",
 					},
 					{
-						"title":"确认卡号",
+						"title":"设置支付密码",
 						"type":"input",
-						"placeholder":"请填写卡号",
-						"key":"bank_cardnumber_r",
-                        "native_id":"inputitem"
-					},
-					{
-						"title":"资金密码",
-						"type":"input",
-						"placeholder":"请输入资金密码卡号",
-						"key":"bank_store",
-                        "native_id":"inputitem"
+						"placeholder":"请输入支付密码",
+						"key":"bank_pwd",
+                        "native_id":"inputitem",
 					}
 				]
 			}

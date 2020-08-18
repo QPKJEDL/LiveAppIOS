@@ -75,6 +75,7 @@
 }
 
 - (void)refreshData {
+    [super refreshData];
     NSInteger last_id = 0;
     if (_isPullRefresh == false) {
         last_id = [self.dataList.lastObject[@"last_id"] intValue]+1;
@@ -124,6 +125,10 @@
             self.dataList = [[NSMutableArray alloc] initWithArray:obj[@"list"]];
         }else{
             [self.dataList addObjectsFromArray:obj[@"list"]];
+        }
+        [self hideSeat];
+        if (self.dataList.count == 0) {
+            [self showSeat];
         }
         [self.listtView setDataList:self.dataList css:@{@"item.size.height":@"68", @"item.rowSpacing":@"1"}];
         if ([obj[@"is_more"] boolValue] == false) {

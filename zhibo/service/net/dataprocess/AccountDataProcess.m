@@ -38,6 +38,9 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BIND_ALIPAY]) {
         request.realUri = @"/ali_bind";
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_BIND_CARD]) {
+        request.realUri = @"/bank_bind";
+    }
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
         
     }
@@ -68,6 +71,23 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_INFO_UPDATE_AVATAR]) {
         request.realUri = @"/code/Mycenter/upavater";
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_DRAWPER]) {
+        request.realUri = @"/code/Mycenter/drawper";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_CASHOUT]) {
+        request.realUri = @"/code/Mycenter/draw";
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_EXCAHNGE]) {
+        request.realUri = @"/Exchange";
+        request.realParams = @{@"money":@([request.params[@"money"] floatValue]*100)};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_WITHDRAW]) {
+        request.realUri = @"/Withdraw";
+        request.realParams = @{@"money":@([request.params[@"money"] floatValue]*100)};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
+        request.realUri = @"/WebUserBalance";
+    }
     return request;
 }
 
@@ -79,7 +99,7 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
         return false;
     }
-    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT];
+    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT, URI_ACCOUNT_INFO];
     
     if ([noLoadings containsObject:request.uri] == false) {
          [ABUITips showLoading];
@@ -100,10 +120,16 @@
 /// Called to modify a result before completion.
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
     [ABUITips hideLoading];
+    NSDictionary *bank = [Service shared].account.bank;
+    NSString *str = @"提现到银行卡(未绑卡)";
+    NSString *bankName = bank[@"BankName"];
+    NSString *bankCard = [bank stringValueForKey:@"BankCard"];
+    if (bankName.length > 0) {
+        str = [NSString stringWithFormat:@"%@(%@)", bankName, [bankCard substringFromIndex:bankCard.length-4]];
+    }
+    
     NSArray *paychannels = @[
-        @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel"},
-        @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel"},
-        @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel"}
+        @{@"title":str, @"icon":@"yinlian", @"native_id":@"paychannel"}
     ];
     
     NSDictionary *css  = @{
@@ -220,6 +246,7 @@
     
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_POPULARIZE_CODELIST]) {
+        NSString *extensionimg = response[@"ExtensionImg"];
         NSArray *list = [ABIteration iterationList:response[@"CodeList"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             NSString *extension_url = dic[@"extension_url"];
             if ([extension_url hasPrefix:@"http"]) {
@@ -232,7 +259,8 @@
             dic[@"countstr"] = [NSString stringWithFormat:@"%@", dic[@"count"]];
             dic[@"feestr"] = [NSString stringWithFormat:@"%@%%", dic[@"fee"]];
             dic[@"native_id"] = @"popularizecodeitem";
-            dic[@"bgimage"] = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597069188352&di=6322bfd9b065aed5a40266bbfcc309bc&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201710%2F22%2F100551dhl5ifua9qotj9k9.png";
+            dic[@"bgimage"] = extensionimg;
+//            dic[@"bgimage"] = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597069188352&di=6322bfd9b065aed5a40266bbfcc309bc&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201710%2F22%2F100551dhl5ifua9qotj9k9.png";
             return dic;
         }];
         return @{@"list":list};
@@ -282,22 +310,26 @@
             dic[@"detail"] = [NSString stringWithFormat:@"%@ %@ %@", [dic stringValueForKey:@"desk_name"], [dic stringValueForKey:@"boot_num"], [dic stringValueForKey:@"pave_num"]];
             dic[@"money"] = [dic stringValueForKey:@""];
             dic[@"time"] = [ABTime timestampToTime:dic[@"creatime"]  format:@"HH:mm:ss"];
-            dic[@"gmoney"] = [dic stringValueForKey:@"get_money"];
+            
+            NSInteger gm = [dic[@"get_money"] intValue]/100;
+            dic[@"gmoney"] = [NSString stringWithFormat:@"%ld", (long)gm];
             dic[@"statusStr"] = statusMap[dic[@"status"]];
             
             NSMutableString *betStr = [[NSMutableString alloc] init];
             NSDictionary *bet_money = dic[@"bet_money"];
             NSArray *allKeys = [bet_money allKeys];
             
+            NSInteger ii = 0;
             for (int i=0;i<allKeys.count;i++) {
                 NSString *key = allKeys[i];
                 NSString *money = [bet_money stringValueForKey:key];
                 if ([money intValue] > 0) {
                     NSString *vv = betMap[key];
-                    if (i > 0 && (i % 2) == 0) {
+                    if (ii > 0 && (ii % 2) == 0) {
                         [betStr appendString:@"\n"];
                     }
                     [betStr appendString:[NSString stringWithFormat:@"%@ %i; ", vv, [money intValue]/100]];
+                    ii++;
                 }
             }
             dic[@"betStr"] = betStr;
@@ -313,6 +345,18 @@
             return dic;
         }];
         return @{@"list":list};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_DRAWPER]) {
+        
+    }
+    
+    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_INFO]) {
+        CGFloat balance = [response[@"info"] intValue]/100.0;
+        return @{@"info":@(balance)};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
+        CGFloat balance = [response[@"balance"] intValue]/100.0;
+        return @{@"balance":@(balance)};
     }
     return response;
 }

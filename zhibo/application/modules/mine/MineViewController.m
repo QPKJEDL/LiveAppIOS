@@ -98,6 +98,9 @@
     if ([icon isEqualToString:@"tuanduibaobiao"]) {
         [NSRouter gotoTeamForm];
     }
+    if ([icon isEqualToString:@"bangzhu"]) {
+        [NSRouter gotoHelp];
+    }
 }
 
 @end

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) IMService *imService;
 
 - (void)startRoomWithID:(int64_t)roomID;
+- (void)leaveRoomWithID:(int64_t)roomID;
 - (void)stopRoom;
 
 - (void)sendText:(NSString *)text;

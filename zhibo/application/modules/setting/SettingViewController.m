@@ -53,12 +53,12 @@
         return;
     }
 
-    [self.view makeToastActivity:CSToastPositionCenter];
+//    [self.view makeToastActivity:CSToastPositionCenter];
     if ([self.key isEqualToString:@"loginpwd"]) {
         [self fetchPostUri:URI_ACCOUNT_FORGET_LOGIN params:@{@"old_pwd":[[Stack shared] get:@"old_pwd"], @"new_pwd":[[Stack shared] get:@"new_pwd"]}];
     }
     if ([self.key isEqualToString:@"rechargepwd"]) {
-        [self fetchPostUri:URI_ACCOUNT_FORGET_RECHARGE params:@{@"old_pwd":[[Stack shared] get:@"old_pwd"], @"new_pwd":[[Stack shared] get:@"new_pwd"]}];
+        [self fetchPostUri:URI_ACCOUNT_FORGET_RECHARGE params:@{@"log_pwd":[[Stack shared] get:@"log_pwd"], @"new_pwd":[[Stack shared] get:@"new_pwd"], @"bank_card":[[Stack shared] get:@"bank_card"]}];
     }
     if ([self.key isEqualToString:@"editnick"]) {
         [self fetchPostUri:URI_ACCOUNT_EDIT_NICKNAME params:@{@"nickname":[[Stack shared] get:@"nickname"]}];
@@ -68,6 +68,22 @@
     }
     if ([self.key isEqualToString:@"binding_alipay"]) {
         [self fetchPostUri:URI_ACCOUNT_BIND_ALIPAY params:@{@"ali":[[Stack shared] get:@"alipay_account"], @"ali_name":[[Stack shared] get:@"alipay_name"]}];
+    }
+    if ([self.key isEqualToString:@"binding_bank"]) {
+        NSString *bankCardNumber = [[Stack shared] get:@"bank_cardnumber"];
+        if (![ABTools isValidBankCardNo:bankCardNumber]) {
+            [ABUITips showError:@"银行卡号码错误"];
+            return;
+        }
+        [self fetchPostUri:URI_ACCOUNT_BIND_CARD params:@{
+            @"card_name":[[Stack shared] get:@"bank_username"],
+            @"bank_name":[[Stack shared] get:@"bank_name"],
+            @"bank_card":bankCardNumber,
+            @"bank_addr":[[Stack shared] get:@"bank_store"],
+            @"draw_pwd1":[[Stack shared] get:@"bank_pwd"],
+            @"draw_pwd2":[[Stack shared] get:@"bank_pwd"],
+            @"type":@"1",
+        }];
     }
 }
 
@@ -93,6 +109,13 @@
     if ([req.uri isEqualToString:URI_ACCOUNT_BIND_ALIPAY]) {
          [ABUITips showSucceed:@"绑定成功"];
         [[Service shared].account updateBank:@{@"Ali":req.params[@"ali"], @"AliName":req.params[@"ali_name"]}];
+    }
+    if ([req.uri isEqualToString:URI_ACCOUNT_BIND_CARD]) {
+         [ABUITips showSucceed:@"绑定成功"];
+        [self fetchPostUri:URI_ACCOUNT_INFO params:nil];
+    }
+    if ([req.uri isEqualToString:URI_ACCOUNT_INFO]) {
+        [[Service shared].account setInfo:obj];
     }
 }
 

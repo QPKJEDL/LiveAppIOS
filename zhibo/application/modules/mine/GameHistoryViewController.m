@@ -35,6 +35,7 @@
     [self.view addSubview:self.listView];
     [self.listView adapterSafeArea];
     [self.listView setupLoadMore];
+    [self.listView setupPullRefresh];
     [self refreshData];
 }
 
@@ -71,6 +72,7 @@
     }
     self.isPullRefresh = false;
     [self.listView endLoadMore];
+    [self.listView endPullRefreshing];
     [self.listView setDataList:self.dataList css:@{
         @"item.size.width":@"100%",
         @"item.size.height":@"175",
@@ -87,4 +89,7 @@
     [self refreshData];
 }
 
+- (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
+    [self refreshData];
+}
 @end

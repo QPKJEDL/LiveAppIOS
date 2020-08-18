@@ -50,12 +50,12 @@
 // 具体实现. _livePuser 为当前TXLivePush实例对象
 #pragma mark - 前后台切换
 - (void)willResignActive:(NSNotification *)notification {
-    [self fetchPostUri:URI_ROOM_LEAVE params:@{@"room_id":@(RC.roomid)}];
+    [self fetchPostUri:URI_ROOM_LEAVE params:@{@"room_id":@(RC.roomManager.roomid)}];
     [self.pusher pausePush];
 }
 
 - (void)didBecomeActive:(NSNotification *)notification {
-    [self fetchPostUri:URI_ROOM_RETURN params:@{@"room_id":@(RC.roomid)}];
+    [self fetchPostUri:URI_ROOM_RETURN params:@{@"room_id":@(RC.roomManager.roomid)}];
     [self.pusher resumePush];
 }
 

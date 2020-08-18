@@ -79,7 +79,7 @@
     
     self.likeButton = [[QMUIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     [self.likeButton setTitleColor:[UIColor hexColor:@"#B7BBC3"] forState:UIControlStateNormal];
-    [self.likeButton setImage:[UIImage imageNamed:@"dianzhan"] forState:UIControlStateNormal];
+    [self.likeButton setImage:[UIImage imageNamed:@"dianzan"] forState:UIControlStateNormal];
     [self.likeButton setImage:[UIImage imageNamed:@"hongdianz"] forState:UIControlStateSelected];
     [self addSubview:self.likeButton];
     self.likeButton.titleLabel.font = [UIFont PingFangMedium:14];

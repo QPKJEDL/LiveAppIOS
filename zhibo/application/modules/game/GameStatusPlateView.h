@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)finish;
 - (void)wait;
 - (void)watch;
+- (void)stop;
 @end
 
 NS_ASSUME_NONNULL_END

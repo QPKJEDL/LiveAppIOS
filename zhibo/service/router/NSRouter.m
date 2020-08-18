@@ -34,6 +34,7 @@
 #import "PopularizeViewController.h"
 #import "TransformViewController.h"
 #import "PopularizeListViewController.h"
+#import "HelpViewController.h"
 @implementation NSRouter
 + (void)doLogin {
     LoginViewController *vc = [[LoginViewController alloc] init];
@@ -92,6 +93,9 @@
 }
 
 + (void)gotoProfile:(NSInteger)uid {
+    if (uid == 0) {
+        return;
+    }
     ProfileViewController *vc = [[ProfileViewController alloc] init];
     vc.props = @{@"uid":@(uid)};
     [NSRouter pushTo:vc props:@{}];
@@ -147,6 +151,28 @@
 }
 
 + (void)gotoKaibo {
+    if ([ABDevice isAvailableCamera] == false) {
+        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
+        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去授权" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+            [ABDevice gotoAppSetting];
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"无法使用相机，需要您的授权" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+        [alertController addAction:action1];
+        [alertController addAction:action2];
+        [alertController showWithAnimated:YES];
+        return;
+    }
+    if ([ABDevice isAvailableRecord] == false) {
+        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
+        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去授权" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+            [ABDevice gotoAppSetting];
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"无法使用麦克风，需要您的授权" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+        [alertController addAction:action1];
+        [alertController addAction:action2];
+        [alertController showWithAnimated:YES];
+        return;
+    }
     RoomPushViewController *vc = [[RoomPushViewController alloc] init];
     [[[UIApplication sharedApplication] topViewController] presentViewController:vc animated:true completion:nil];
 }
@@ -215,6 +241,12 @@
 + (void)gotoPopularizeList {
     PopularizeListViewController *vc = [[PopularizeListViewController alloc] init];
     vc.title = @"推广码";
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoHelp {
+    HelpViewController *vc = [[HelpViewController alloc] init];
+    vc.title = @"帮助与反馈";
     [NSRouter pushTo:vc props:@{}];
 }
 @end

@@ -38,7 +38,7 @@
         self.textField.font = [UIFont PingFangSC:14];
         self.textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 10);
         self.textField.backgroundColor = [UIColor hexColor:@"#EFEFEF"];
-        self.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [self addSubview:self.textField];
         
         self.balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,self.textField.bottom+10 , self.width, 40)];
@@ -86,10 +86,12 @@
 }
 
 - (void)onOk {
+    [ABUITips showLoading];
     [self fetchPostUri:URI_ACCOUNT_EXCAHNGE params:@{@"money":self.textField.text}];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips hideLoading];
     [ABUITips showError:@"转入成功"];
     [self onCancel];
     [[ABMQ shared] publish:@"" channel:@"refreshbalance"];
@@ -97,6 +99,7 @@
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     [ABUITips showError:err.message];
+    [ABUITips hideLoading];
 }
 
 - (void)removeFromSuperview {

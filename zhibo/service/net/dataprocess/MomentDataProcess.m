@@ -71,7 +71,7 @@
             NSString *createtime = [NSString stringWithFormat:@"%@", dic[@"creatime"]];
             NSString *content = [NSString stringWithFormat:@"%@", dic[@"content"]];
             if (content.length > 0) {
-                CGSize contentSize = [content sizeWithFont:[UIFont PingFangSC:17] constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT)];
+                CGSize contentSize = [content sizeWithFont:[UIFont PingFangSC:18] constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT)];
                 height = height+contentSize.height+17;
                 
                 dic[@"contentw"] = @(SCREEN_WIDTH-30);

@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)requestRoomInfo;
 - (void)requestDeskInfo:(NSDictionary *)dic;
 
-//- (void)followLiveWithUID:(NSInteger)uid;
-//- (void)unfollowLiveWithUID:(NSInteger)uid;
 - (void)doBet:(NSDictionary *)betInfo;
 - (void)doBetCancel:(NSDictionary *)info;
 @end

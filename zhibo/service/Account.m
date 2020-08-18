@@ -58,7 +58,13 @@
 
 - (void)setInfo:(NSDictionary *)info {
     [self.dao set:info[@"info"] key:@"account_info"];
-    [self.dao set:info[@"info"][@"Bank"] key:@"account_bank"];
+    NSMutableDictionary *bankInfo = [[NSMutableDictionary alloc] initWithDictionary:info[@"info"][@"Bank"]];
+    NSString *bankcard = [bankInfo stringValueForKey:@"BankCard"];
+    if ([bankcard isEqualToString:@"0"]) {
+        bankcard = @"";
+    }
+    [bankInfo setValue:[ABTools returnBankCard:bankcard] forKey:@"bk"];
+    [self.dao set:bankInfo key:@"account_bank"];
     [self.dao save];
 }
 
@@ -130,5 +136,10 @@
 }
 - (NSString *)avatar {
     return [self.dao get:@"account_info"][@"Avater"];
+}
+
+- (NSInteger)shenfen {
+    NSDictionary *account_info = [self.dao get:@"account_info"];
+    return [account_info[@"ShenFen"] integerValue];
 }
 @end

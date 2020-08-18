@@ -21,13 +21,11 @@
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 
         self.imService = [[IMService alloc] init];
-        self.imService.host = @"129.211.114.135";
+        self.imService.host = @"119.28.78.169";
         self.imService.port = 23002;
         self.imService.heartbeatHZ = 30;
         self.imService.deviceID = [Service shared].account.uidStr;
         self.imService.token = [Service shared].account.token;
-        [self.imService addPeerMessageObserver:self];
-        [self.imService addRoomMessageObserver:self];
         
         [self startListenAppStatus];
         
@@ -55,6 +53,8 @@
     self.roomID = roomID;
     [self.imService enterRoom:roomID];
     [self.imService start];
+    [self.imService addPeerMessageObserver:self];
+    [self.imService addRoomMessageObserver:self];
 }
 
 - (void)stopRoom {
@@ -64,15 +64,16 @@
     [self.imService stop];
 
     [self.imService removePeerMessageObserver:self];
+    [self.imService removeRoomMessageObserver:self];
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {
     NSLog(@"%@", rm.content);
-    [[ABMQ shared] publish:[rm.content toDictionary] channel:@"CHANNEL_ROOM_ROOM"];
+    [[ABMQ shared] publish:[rm.content toDictionary] channel:CHANNEL_ROOM_MESSAGE];
 }
 
 - (void)onPeerMessage:(IMMessage *)msg {
-    [[ABMQ shared] publish:[msg.content toDictionary] channel:@"CHANNEL_ROOM_PEER"];
+    [[ABMQ shared] publish:[msg.content toDictionary] channel:CHANNEL_ROOM_PEER];
 }
 
 - (void)sendText:(NSString *)text {

@@ -108,7 +108,23 @@
         return dic;
     }
     if ([request.uri isEqualToString:URI_GAME_DESK]) {
-        return response[@"list"][0];
+        if ([response[@"list"] count] == 0) {
+            return response[@"list"];
+        }
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:response[@"list"][0]];
+        NSString *tip = @"";
+        NSInteger game_id = [dic[@"GameId"] intValue];
+        if (game_id == 1) {
+            tip = [NSString stringWithFormat:@"庄闲:%@~%@\n和:%@~%@\n对子:%@~%@", dic[@"MinLimit"], dic[@"MaxLimit"], dic[@"TieMinLimit"], dic[@"TieMaxLimit"], dic[@"PairMinLimit"], dic[@"PairMaxLimit"]];
+        }
+        if (game_id == 2) {
+            tip = [NSString stringWithFormat:@"龙/虎:%@~%@\n和:%@~%@", dic[@"MinLimit"], dic[@"MaxLimit"], dic[@"TieMinLimit"], dic[@"TieMaxLimit"]];
+        }
+        if (game_id == 3 || game_id == 4 || game_id == 5) {
+            tip = [NSString stringWithFormat:@"平倍限红:%@~%@\n翻倍限红:%@~%@", dic[@"MinLimit"], dic[@"MaxLimit"], dic[@"TieMinLimit"], dic[@"TieMaxLimit"]];
+        }
+        [dic setValue:tip forKey:@"tip"];
+        return dic;
     }
     if ([request.uri isEqualToString:URI_GAME_RESULTS]) {
         return [self.dataHelper getGameBetResultWithParams:request.params];

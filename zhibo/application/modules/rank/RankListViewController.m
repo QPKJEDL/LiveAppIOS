@@ -9,7 +9,7 @@
 #import "RankListViewController.h"
 #import "RankTopView.h"
 #import "RankActionsView.h"
-@interface RankListViewController ()<INetData>
+@interface RankListViewController ()<INetData, ABUIListViewDelegate>
 @property (nonatomic, strong) ABUIListView *listView;
 @property (nonatomic, strong) RankTopView *rankTopView;
 @property (nonatomic, assign) NSInteger leftType;
@@ -45,6 +45,7 @@
     
     self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
     self.listView.headerView = self.rankTopView;
+    self.listView.delegate = self;
     [self.view addSubview:self.listView];
     
     [self fetchPostUri:URI_RANK_LIST params:@{@"type":@(self.leftType)}];
@@ -61,6 +62,14 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.listView.frame = self.view.bounds;
+}
+
+- (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
+    NSInteger index = [self.props[@"index"] intValue];
+    NSInteger live_uid = [item[@"live_uid"] intValue];
+    if (index == 0) {
+        [NSRouter gotoProfile:live_uid];
+    }
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {

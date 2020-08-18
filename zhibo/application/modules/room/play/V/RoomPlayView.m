@@ -44,6 +44,8 @@
         
         [self startListenAppStatus];
         
+
+        
     }
     return self;
 }
@@ -149,5 +151,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
 @end
 

@@ -34,9 +34,6 @@
     
 }
 
-- (void)followLiveWithUID:(NSInteger)uid {
-    [self fetchPostUri:URI_FOLLOW_FOLLOW params:@{@"live_uid":@(uid)}];
-}
 
 //#pragma mark --------- interface ----------
 - (void)doBet:(NSDictionary *)betInfo {

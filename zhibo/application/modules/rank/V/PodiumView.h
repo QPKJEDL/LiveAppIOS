@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PodiumView : UIView
+@interface PodiumView : UIControl
 @property (nonatomic, strong) UIImageView *avatarImageView;
 - (void)setTaiImageName:(NSString *)imageName mc:(NSInteger)mc;
 - (void)setData:(NSDictionary *)data;

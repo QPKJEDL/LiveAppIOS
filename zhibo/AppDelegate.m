@@ -34,7 +34,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    [WOCrashProtectorManager makeAllEffective];
+    [WOCrashProtectorManager makeAllEffective];
     [IQKeyboardManager sharedManager].enable = true;
     [IQKeyboardManager sharedManager].enableAutoToolbar = true;
     [self ready];
@@ -94,6 +94,7 @@
         @"moneysectionheader":@"MoneySectionHeaderView",
         @"arrowitem":@"ArrowItemView",
         @"inputitem":@"InputItemView",
+        @"codeinputitem":@"CodeInputItemView",
         @"switchitem":@"SwitchItemView",
         @"momentitem":@"MomentItemView",
         @"imageitem":@"ImageItemView",
@@ -127,8 +128,8 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[RoomContext shared].playControl refreshRank];
-    [[RoomContext shared].pushControl refreshRank];
+//    [[RoomContext shared].playControl refreshRank];
+//    [[RoomContext shared].pushControl refreshRank];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

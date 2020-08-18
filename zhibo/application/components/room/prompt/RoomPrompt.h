@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void (^TitleBlock)(NSString * _Nullable title);
+#import "BetView.h"
+NS_ASSUME_NONNULL_BEGIN
+typedef void (^IndexBlock)(NSInteger index);
+typedef void (^TitleBlock)(NSString *title);
 typedef void (^GameBlock)(NSInteger gameid, NSInteger deskid, NSString *title);
 
-NS_ASSUME_NONNULL_BEGIN
 #define RP [RoomPrompt shared]
 @interface RoomPrompt : NSObject
 + (RoomPrompt *)shared;
+@property (nonatomic, strong) BetView *betView;
 /// 主播用户视图
 - (void)promptAnchor;
 /// 用户视图
@@ -29,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 游戏结果
 - (void)promptGameResultWithGameId:(NSInteger)gameid winner:(id)winner;
 - (void)promptGameBlock:(GameBlock)block;
+/// 多功能
+- (void)promptMoreActions:(IndexBlock)block;
+/// 下注盘
+- (void)promptBetView:(NSDictionary *)rules hideBlock:(nonnull ABUIPopupBlock)hideBlock showBlock:(nonnull ABUIPopupBlock)showBlock;
 @end
 
 NS_ASSUME_NONNULL_END

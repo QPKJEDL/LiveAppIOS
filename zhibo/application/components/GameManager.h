@@ -7,7 +7,9 @@
 //  监听消息做处理
 
 #import <Foundation/Foundation.h>
-
+#import "RoomControl.h"
+#import "BetView.h"
+#import "RoomPlayView.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
     GAMESTAUTS_READY = 1, /// 洗牌中
@@ -24,9 +26,35 @@ typedef enum : NSUInteger {
 
 @end
 
+@protocol GameManagerProtocol <NSObject>
+
+
+@end
+
 @interface GameManager : NSObject
+@property (nonatomic, strong) NSDictionary *rules;//游戏规则视图
+@property (nonatomic, assign) NSInteger desk_id;
+@property (nonatomic, assign) NSInteger game_id;
+@property (nonatomic, assign) NSInteger room_id;
+@property (nonatomic, assign) NSInteger boot_num;
+
+@property (nonatomic, weak) RoomControl *control;
+@property (nonatomic, weak) BetView *betView;
+@property (nonatomic, weak) RoomPlayView *shixunPlayerView;
+@property (nonatomic, strong) NSString *shixunPlayAddress;
+
+@property (nonatomic, strong) NSString *tipStr;
+@property (nonatomic, strong) NSString *atipStr;
 // 设置游戏
-- (void)enterDeskId:(NSInteger)deskId;
+- (void)enterRoomId:(NSInteger)roomId;
+
+- (void)refreshBalance;
+
+- (void)_refreshDeskInfo;
+
+
+- (void)doBet:(NSDictionary *)data;
+- (void)doBetCancel;
 @end
 
 NS_ASSUME_NONNULL_END

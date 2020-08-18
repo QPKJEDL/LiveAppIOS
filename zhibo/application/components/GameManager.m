@@ -10,7 +10,17 @@
 #import "GameSocket.h"
 @interface GameManager ()<INetData, IABMQSubscribe>
 @property (nonatomic, strong) GameSocket *socket;
-@property (nonatomic, assign) NSInteger desk_id;
+
+@property (nonatomic, strong) NSDictionary *deskInfo;
+@property (nonatomic, strong) NSDictionary *desksubmit;
+@property (nonatomic, strong) NSString *DeskName;
+
+
+
+
+@property (nonatomic, assign) NSInteger MaxLimit;
+@property (nonatomic, assign) NSInteger MinLimit;
+
 @end
 @implementation GameManager
 - (instancetype)init
@@ -20,95 +30,180 @@
         self.socket = [[GameSocket alloc] init];
         
         [[ABMQ shared] subscribe:self channel:CHANNEL_ROOM_GAME autoAck:true];
+        
     }
     return self;
 }
 
-- (void)enterDeskId:(NSInteger)deskId {
-    self.desk_id = deskId;
-    [self.socket startRoomWithID:deskId];
+- (void)enterRoomId:(NSInteger)roomId {
+    self.room_id = roomId;
+    [self fetchPostUri:URI_ROOM_GAME params:@{@"room_id":@(roomId)}];
+}
+
+//- (void)enterDeskId:(NSInteger)deskId {
+//    self.desk_id = deskId;
+//    [self.socket startRoomWithID:deskId];
+//}
+
+- (void)refreshBalance {
+    [self fetchPostUri:URI_ACCOUNT_SX_BANLANCE params:nil];
 }
 
 - (void)_refreshDeskInfo {
+    [self.socket startRoomWithID:self.desk_id];
     [self fetchPostUri:URI_GAME_DESK params:@{@"desk_id":@(self.desk_id)}];
 }
 
-- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+
+
+- (void)_refreshDeskBetInfo { //费率，问路
+    [self fetchPostUri:URI_GAME_BET_FEE params:@{
+        @"game_id":@(self.game_id),
+        @"minlimit":@(self.MinLimit),
+        @"maxlimit":@(self.MaxLimit),
+        @"tip":self.tipStr,
+    }];
     
+    if (self.game_id == 1 || self.game_id == 2) {
+        [self fetchPostUri:URI_GAME_RESULT_LIST params:@{@"game_id":@(self.game_id), @"boot_num":@(self.boot_num), @"desk_id":@(self.desk_id)}];
+    }
 }
 
-//- (void)refreshDesk:(NSDictionary *)desk {
-//    if (desk == nil) {
-//        return;
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    if ([req.uri isEqualToString:URI_ROOM_GAME]) {
+        if ([obj isKindOfClass:[NSNull class]]) {
+            return;
+        }
+        self.desk_id = [obj[@"desk_id"] intValue];
+        self.game_id = [obj[@"game_id"] intValue];
+        [self _refreshDeskInfo];
+    }
+    if ([req.uri isEqualToString:URI_GAME_DESK]) {
+        self.boot_num = [obj[@"BootNum"] intValue];
+        self.MaxLimit = [obj[@"MaxLimit"] intValue];
+        self.MinLimit = [obj[@"MinLimit"] intValue];
+        self.game_id = [obj[@"GameId"] intValue];
+        self.DeskName = obj[@"DeskName"];
+        self.tipStr = obj[@"tip"];
+        [self _refreshDeskBetInfo];
+        [self refreshDesk:obj];
+        self.shixunPlayAddress = obj[@"LeftPlay"];
+    }
+    if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
+        self.rules = obj[@"rules"];
+        [[ABMQ shared] publish:self.rules channel:CHANNEL_GAME_RULES];
+        
+    }
+    if ([req.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
+//        [[ABMQ shared] publish:obj channel:CHANNEL_GAME_BALANCE];
+        [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
+    }
+    if ([req.uri isEqualToString:URI_GAME_BET]) {
+        [RP.betView betSuccess];
+        [ABUITips showError:@"下注成功"];
+        [self refreshBalance];
+    }
+    if ([req.uri isEqualToString:URI_GAME_UNBET]) {
+        NSInteger bb = [obj[@"balance"] intValue];
+        
+        [ABUITips showSucceed:[NSString stringWithFormat:@"取消返还:%ld", MAX(0, bb-RP.betView.bb)]];
+        [RP.betView reset];
+        [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
+    }
+    if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
+        [RC.gameManager.control receiveWenLu:obj[@"list"]];
+    }
+}
+
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips showError:err.message];
+    if ([req.uri isEqualToString:URI_GAME_BET]) {
+        [RP.betView betFailure];
+    }
+}
+
+- (void)doBet:(NSDictionary *)data {
+    NSInteger total = 0;
+    for (NSString *item in [data allValues]) {
+        total+=[item integerValue];
+    }
+//    if (total >= self.MinLimit && total <= self.MaxLimit) {
+        NSDictionary *info = [[NSMutableDictionary alloc] initWithDictionary:data];
+        [info setValuesForKeysWithDictionary:self.deskInfo];
+        [info setValue:self.DeskName forKey:@"DeskName"];
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:info];
+        [dic setValue:self.rules[@"uris"][@"bet"] forKey:@"uri"];
+        [self fetchPostUri:URI_GAME_BET params:dic];
+        
+//    }else{
+//        [ABUITips showError:@"下注超出限红"];
 //    }
-//    self.deskId = [desk[@"DeskId"] integerValue]; //刷新台桌ID
-//
-//    //下注时传递的台桌信息准备
-//    NSDictionary *mm = @{
-//        @"DeskName":@"DeskName",
-//        @"DeskId":@"desk_id",
-//        @"Boot_num":@"boot_num",
-//        @"Pave_num":@"pave_num",
-//        @"BootNum":@"boot_num",
-//        @"PaveNum":@"pave_num"
-//    };
-//    self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
-//    self.desk = desk;
-//    //获取台桌状态，执行相应UI更新
-//    //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
-//    //cmd: 10 下注成功
-//    int phase = -1;
-//    if (desk[@"Phase"] != nil) {
-//        phase = [desk[@"Phase"] intValue];
-//    }
-//
-//    int cmd = [desk[@"Cmd"] intValue];
-//    if (cmd == 6) {
-//        phase = 4;
-//    }
-//
-//    switch (phase) {
-//        case 0: //洗牌中
-//            [self.plateView watch]; //变更洗牌中
-//
-//            self.betView.enabled = false; //禁止下注
-//            [self.betView reset]; //重置下注盘
-//            break;
-//        case 1://开始下注
-//            [self.plateView please:desk]; //开启下注倒计时
-//
-//            self.betView.enabled = true; //开启下注
-//            [self showBetView]; //弹出下注UI
-//            [self.betView reset]; //重置下注盘
-//            break;
-//        case 2://开牌中(停止下注)
-//            [self.plateView wait]; //变更待开牌
-//
-//            self.betView.enabled = false;//禁止下注
-//            if (self.betView.isBet == false) {
-//                [self.betView reset];
-//            }
-//            break;
-//        case 3://结算完成
-//            [self.plateView finish];
-//
-//            self.betView.enabled = false;//禁止下注
-//            break;
-//        case 4://结算完成(有结果)
-//            [self.plateView finish];
-//
-//            self.betView.enabled = false;//禁止下注
-//            [self.jiesuanButton setHidden:false];
-//            [RP promptGameResultWithGameId:self.gameid winner:desk[@"Winner"]];
-//            [self showBetView];
-//
-//            break;
-//        default:
-//            break;
-//    }
-//}
+}
+
+- (void)doBetCancel {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:self.deskInfo];
+    [dic setValue:self.rules[@"uris"][@"unbet"] forKey:@"uri"];
+    [self fetchPostUri:URI_GAME_UNBET params:dic];
+}
+
+- (void)refreshDesk:(NSDictionary *)desk {
+    if (desk == nil) {
+        return;
+    }
+    self.desk_id = [desk[@"DeskId"] integerValue]; //刷新台桌ID
+
+    //下注时传递的台桌信息准备
+    NSDictionary *mm = @{
+        @"DeskName":@"DeskName",
+        @"DeskId":@"desk_id",
+        @"Boot_num":@"boot_num",
+        @"Pave_num":@"pave_num",
+        @"BootNum":@"boot_num",
+        @"PaveNum":@"pave_num"
+    };
+    self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
+    self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.deskInfo[@"DeskName"], self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
+    //获取台桌状态，执行相应UI更新
+    //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
+    //cmd: 10 下注成功
+    int phase = -1;
+    if (desk[@"Phase"] != nil) {
+        phase = [desk[@"Phase"] intValue];
+    }
+
+    int cmd = [desk[@"Cmd"] intValue];
+    if (cmd == 6) {
+        phase = 4;
+    }
+
+    [[ABMQ shared] publish:@{@"status":@(phase), @"data":desk} channel:CHANNEL_GAME_STATUS];
+}
+
+- (BOOL)isSelf:(NSDictionary *)dic {
+    NSInteger curDeskId = [dic[@"DeskId"] integerValue];
+    if (self.desk_id != curDeskId) {
+        return false;
+    }
+    return true;
+}
+
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
-    
+    if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
+        NSDictionary *dic = (NSDictionary *)message;
+        if ([dic isKindOfClass:[NSDictionary class]] && dic[@"Cmd"] != nil) {
+            if ([self isSelf:dic] == false) {
+                return;
+            }
+            [self refreshDesk:dic];
+        }
+    }
 }
+
+- (void)dealloc
+{
+    RP.betView = nil;
+}
+
 @end

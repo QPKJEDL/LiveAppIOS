@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CashOutInputView : UIView
 @property (nonatomic, assign) int num;
+@property (nonatomic, strong) QMUITextField *textField;
+- (void)setNoticeText:(NSString *)notice;
 @end
 
 NS_ASSUME_NONNULL_END

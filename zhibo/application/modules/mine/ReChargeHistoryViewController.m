@@ -10,6 +10,7 @@
 
 @interface ReChargeHistoryViewController ()<INetData, ABUIListViewDelegate>
 @property (nonatomic, strong) ABUIListView *listView;
+@property (nonatomic, strong) NSMutableArray *dataList;
 @end
 
 @implementation ReChargeHistoryViewController
@@ -28,6 +29,10 @@
     [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
 }
 
+- (void)refreshData {
+    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.listView.frame = self.view.bounds;
@@ -37,9 +42,32 @@
      [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
 }
 
+- (void)listViewOnLoadMore:(ABUIListView *)listView {
+    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":self.dataList.lastObject[@"id"]}];
+}
+
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    NSArray *newList = obj[@"list"];
+    if (self.listView.isLoadMoreing) {
+         [self.dataList addObjectsFromArray:newList];
+    }else{
+        self.dataList = [[NSMutableArray alloc] initWithArray:newList];
+    }
+    
+    if (newList.count == 0) {
+        [self.listView noMoreData];
+    }
+    
+    if (self.dataList.count == 0) {
+        [self showNoDataEmpty];
+    }else{
+        [self hideEmptyView];
+    }
+    
     [self.listView endPullRefreshing];
-    [self.listView setDataList:obj[@"list"] css:@{
+    [self.listView endLoadMore];
+    
+    [self.listView setDataList:self.dataList css:@{
         @"item.rowSpacing":@"1"
     }];
 }

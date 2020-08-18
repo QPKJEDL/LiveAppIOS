@@ -12,7 +12,7 @@
 @property (nonatomic, strong) UILabel *accordLabel;
 @property (nonatomic, strong) UIButton *allButton;
 @property (nonatomic, strong) QMUILabel *noticeLabel;
-@property (nonatomic, strong) QMUITextField *textField;
+
 @end
 @implementation CashOutInputView
 
@@ -41,12 +41,12 @@
         _accordLabel.font = [UIFont PingFangSC:40];
         [self addSubview:_accordLabel];
         
-        _noticeLabel = [[QMUILabel alloc] initWithFrame:CGRectMake(0, self.height-23, self.width, 23)];
+        _noticeLabel = [[QMUILabel alloc] initWithFrame:CGRectMake(0, self.height-23, self.width, 60)];
         _noticeLabel.textColor = [UIColor hexColor:@"#A8A8A8"];
         _noticeLabel.backgroundColor = [UIColor hexColor:@"#F7F8FA"];
-        _noticeLabel.text = @"提现换算单位：1元=1直播币=2直播豆";
         _noticeLabel.contentEdgeInsets = UIEdgeInsetsMake(0, 17, 0, 0);
-        _noticeLabel.font = [UIFont PingFangSCBlod:10];
+        _noticeLabel.font = [UIFont PingFangSCBlod:12];
+        _noticeLabel.numberOfLines = 0;
         [self addSubview:_noticeLabel];
         
         self.textField = [[QMUITextField alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH-_accordLabel.right-15, 32)];
@@ -59,8 +59,13 @@
     return self;
 }
 
+
 - (void)onall {
     self.textField.text = [NSString stringWithFormat:@"%d", self.num];
 }
 
+
+- (void)setNoticeText:(NSString *)notice {
+    self.noticeLabel.text = notice;
+}
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "ReChargeViewController.h"
-
+#import "JnPasswordView.h"
 @interface ReChargeViewController ()<ABUIListViewDelegate, ABUIListViewDataSource, INetData>
 @property (nonatomic, strong) ABUIListView *listView;
 @property (nonatomic, strong) UIView *footerView;
@@ -76,6 +76,13 @@
 
 - (void)onSubmit {
     [ABUITips showError:@"开发中"];
+//    [[JnPasswordView sharedInstance] showPasswordViewWithInputPwd:^(NSString *pwd) { NSLog(@"密码 = %@",pwd);
+//    } cancel:^{
+//        NSLog(@"点击了取消");
+//    } certain:^{
+//        NSLog(@"点击了确定");
+//        [ABUITips showError:@"开发中"];
+//    }];
 }
 
 @end

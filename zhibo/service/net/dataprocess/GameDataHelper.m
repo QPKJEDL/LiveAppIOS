@@ -26,8 +26,9 @@
     NSString *gid = params[@"game_id"];
     NSDictionary *fee = params[@"fee"];
     
-    NSString *minlimit = params[@"minlimit"];
-    NSString *maxlimit = params[@"maxlimit"];
+    NSString *tipstr = params[@"tip"];
+//    NSString *minlimit = params[@"minlimit"];
+//    NSString *maxlimit = params[@"maxlimit"];
     
 //    BOOL issuper = [params[@"issuper"] boolValue];
     
@@ -59,7 +60,8 @@
     }
     result[@"options"] = nOptions;
     result[@"coins"] = coins;
-    result[@"tip"] = [NSString stringWithFormat:@"限红\n%@-%@", minlimit, maxlimit];
+    result[@"tip"] = tipstr;
+//    result[@"tip"] = [NSString stringWithFormat:@"限红\n%@-%@", minlimit, maxlimit];
     return result;
 }
 

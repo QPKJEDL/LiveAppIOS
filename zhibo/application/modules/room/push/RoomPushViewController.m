@@ -15,6 +15,9 @@
 #import "RoomPushSocket.h"
 #import "GameSocket.h"
 #import <ABDevice.h>
+#import "RoomManager.h"
+#import "GameManager.h"
+#import "RoomPlayView.h"
 //#import "RoomPushReadyControl.h"
 //#import "KaiBoLoadingControl.h"
 //#import "KaiBoRoomControl.h"
@@ -30,6 +33,11 @@
 @property (nonatomic, strong) RoomPushSocket *socket;
 @property (nonatomic, strong) GameSocket *gameSocket;
 
+@property (nonatomic, strong) GameManager *gameManager;
+@property (nonatomic, strong) RoomManager *roomManager;
+
+@property (nonatomic, strong) RoomPlayView *shixunPlayView;
+
 @end
 
 @implementation RoomPushViewController
@@ -41,34 +49,35 @@
     self.pushView = [[RoomPushView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.pushView];
     
+    self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
+    [self.view addSubview:self.shixunPlayView];
+    [self.shixunPlayView setHidden:true];
+
     self.readyControl = [[RoomPushReadyControl alloc] initWithFrame:self.view.bounds];
     self.readyControl.vc = self;
     [self.view addSubview:self.readyControl];
     
-    self.socket = [[RoomPushSocket alloc] init];
-    
-    self.gameSocket = [[GameSocket alloc] init];
-    
+//    self.socket = [[RoomPushSocket alloc] init];
+//
+//    self.gameSocket = [[GameSocket alloc] init];
+//
     self.present = [[RoomPushPresent alloc] init];
     self.present.delegate = self;
     [self.pushView preview];
     
+    self.gameManager = [[GameManager alloc] init];
+    [RoomContext shared].gameManager = self.gameManager;
+    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
+    
+    self.roomManager = [[RoomManager alloc] init];
+    [RoomContext shared].roomManager = self.roomManager;
+    
+//
     [RoomContext shared].pushPresent = self.present;
     [RoomContext shared].pushView = self.pushView;
-    [RoomContext shared].socket = self.socket;
-    [RoomContext shared].readyControl = self.readyControl;
-    [RoomContext shared].gamesocket = self.gameSocket;
-    
-    if ([ABDevice isAvailableCamera] == false) {
-        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
-        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去授权" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
-            [ABDevice gotoAppSetting];
-        }];
-        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"无法使用相机，需要您的授权" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
-        [alertController addAction:action1];
-        [alertController addAction:action2];
-        [alertController showWithAnimated:YES];
-    }
+//    [RoomContext shared].socket = self.socket;
+//    [RoomContext shared].readyControl = self.readyControl;
+//    [RoomContext shared].gamesocket = self.gameSocket;
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -95,7 +104,12 @@
 
     [RoomContext shared].pushControl = self.roomControl;
     [self.pushView push:self.present.address];
-    [self.present requestRoomInfo];
+//    [self.present requestRoomInfo];
+    
+    [RoomContext shared].gameManager.control = self.roomControl;
+    
+    [self.gameManager enterRoomId:[RoomContext shared].roomid];
+    [self.roomManager enterRoomId:[RoomContext shared].roomid];
     
 }
 

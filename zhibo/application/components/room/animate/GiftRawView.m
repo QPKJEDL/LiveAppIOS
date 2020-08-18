@@ -27,9 +27,8 @@
         self.isFree = true;
         
         self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 0, 46, 46)];
-        self.iconImageView.backgroundColor = [UIColor redColor];
         self.iconImageView.layer.cornerRadius = 46/2;
-        self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.iconImageView.clipsToBounds = true;
         
 

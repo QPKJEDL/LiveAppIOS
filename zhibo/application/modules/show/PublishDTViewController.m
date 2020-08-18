@@ -14,7 +14,8 @@
 #import "AppDelegate.h"
 #define kPhotoViewMargin 12.0f
 
-@interface PublishDTViewController ()<PickPhotoViewDelegate, PickPhotoViewDataSource, HXPhotoViewDelegate, INetData>
+@interface PublishDTViewController ()<PickPhotoViewDelegate, PickPhotoViewDataSource, HXPhotoViewDelegate, INetData, QMUITextViewDelegate>
+@property (nonatomic, strong) UIScrollView *mainScrollView;
 @property (nonatomic, strong) QMUITextView *textView;
 @property (nonatomic, strong) UIButton *topicButton;
 @property (nonatomic, strong) HXPhotoView *pickPhotoView;
@@ -44,12 +45,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.mainScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.mainScrollView];
+    
     _textView = [[QMUITextView alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 60)];
     _textView.placeholderColor = [UIColor hexColor:@"#8C939B"];
+    _textView.delegate = self;
     _textView.font = [UIFont PingFangSC:16];
     _textView.placeholder = @"这一刻的想法";
+    _textView.maximumTextLength = 100;
     _textView.backgroundColor = self.view.backgroundColor;
-    [self.view addSubview:_textView];
+    [self.mainScrollView addSubview:_textView];
     
     CGFloat width = self.view.frame.size.width;
     self.pickPhotoView = [HXPhotoView photoManager:self.manager scrollDirection:UICollectionViewScrollDirectionVertical];
@@ -63,13 +69,13 @@
     self.pickPhotoView.collectionView.scrollEnabled = YES;
     [self.pickPhotoView.collectionView reloadData];
     self.pickPhotoView.delegate = self;
-    [self.view addSubview:self.pickPhotoView];
+    [self.mainScrollView addSubview:self.pickPhotoView];
     
     _publishButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 0, 185, 50)];
     [_publishButton setTitle:@"发布" forState:UIControlStateNormal];
     [_publishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_publishButton addTarget:self action:@selector(onPublish) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_publishButton];
+    [self.mainScrollView addSubview:_publishButton];
     _publishButton.centerX = self.view.width/2;
     _publishButton.clipsToBounds = true;
     _publishButton.layer.cornerRadius = 25;
@@ -80,6 +86,26 @@
     [self refreshLayout];
     
 }
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.mainScrollView.frame = self.view.bounds;
+}
+
+// 实现这个 delegate 方法就可以实现自增高
+- (void)textView:(QMUITextView *)textView newHeightAfterTextChanged:(CGFloat)height {
+    height = fmax(height, 60);
+    BOOL needsChangeHeight = CGRectGetHeight(textView.frame) != height;
+    if (needsChangeHeight) {
+        self.textView.height = height;
+        [self refreshLayout];
+    }
+}
+
+- (void)textView:(QMUITextView *)textView didPreventTextChangeInRange:(NSRange)range replacementText:(NSString *)replacementText {
+    [ABUITips showError:@"文字不能超过100 个"];
+}
+
 
 - (void)onPublish {
     
@@ -104,13 +130,15 @@
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     [ABUITips hideLoading];
     if ([req.uri isEqualToString:URI_MOMENTS_PUBLISH]) {
-        [ABUITips showSucceed:@"发布失败"];
+        [ABUITips showSucceed:err.message];
     }
 }
 
 - (NSInteger)pickPhotoViewNumberOfItems {
     return 1;
 }
+
+
 
 - (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
     
@@ -166,7 +194,19 @@
 
 - (void)refreshLayout {
     _pickPhotoView.top = _textView.bottom+10;
-    _publishButton.top = _pickPhotoView.bottom+160;
+//    _publishButton.top = _pickPhotoView.bottom+160;
+    
+    NSInteger pcount = self.photos.count;
+    if (pcount < 9) {
+        pcount++;
+    }
+    CGFloat row = (pcount/3);
+    if (pcount % 3 != 0) {
+        row++;
+    }
+    self.publishButton.top = self.textView.bottom+115*row+50;
+    
+    self.mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, _publishButton.bottom+100);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath isAddItem:(BOOL)isAddItem photoView:(HXPhotoView *)photoView{

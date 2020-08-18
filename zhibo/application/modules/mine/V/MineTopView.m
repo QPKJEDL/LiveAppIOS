@@ -107,6 +107,11 @@
     }else{
         [self.loginTipView setHidden:false];
     }
+    
+    [self.actionView setHidden:true];
+    if ([Service shared].account.shenfen == 1) {
+        [self.actionView setHidden:false];
+    }
 }
 
 - (void)onAvatar {

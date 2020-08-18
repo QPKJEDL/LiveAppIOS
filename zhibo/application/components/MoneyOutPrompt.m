@@ -39,7 +39,7 @@
         self.textField.font = [UIFont PingFangSC:14];
         self.textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 10);
         self.textField.backgroundColor = [UIColor hexColor:@"#EFEFEF"];
-        self.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [self addSubview:self.textField];
         
         self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.width/2-15-75, self.height-18-33, 75, 34)];
@@ -86,16 +86,19 @@
 }
 
 - (void)onOk {
+    [ABUITips showLoading];
     [self fetchPostUri:URI_ACCOUNT_WITHDRAW params:@{@"money":self.textField.text}];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips hideLoading];
     [ABUITips showError:@"转出成功"];
     [self onCancel];
     [[ABMQ shared] publish:@"" channel:@"refreshbalance"];
 }
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips hideLoading];
     [ABUITips showError:err.message];
 }
 

@@ -79,12 +79,17 @@
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     if ([req.uri isEqualToString:URI_ACCOUNT_POPULARIZE_ADD]) {
         [ABUITips showSucceed:@"添加成功"];
+        [self.navigationController popViewControllerAnimated:true];
     }else{
         self.textView.text = obj[@"ExtensionRules"];
-        self.progressView.maxValue = [obj[@"MaxFee"] intValue];
+        self.progressView.maxValue = MAX([obj[@"MaxFee"] intValue], 0);
         self.wodeLabel.text = [NSString stringWithFormat:@"我的返点比例%@%%", obj[@"UserFee"]];
     }
     
+}
+
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips showError:err.message];
 }
 
 /*

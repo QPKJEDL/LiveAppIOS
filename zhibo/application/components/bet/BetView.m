@@ -9,7 +9,7 @@
 #import "BetView.h"
 #import "BetCoinsView.h"
 #import "BetOptionsView.h"
-@interface BetView()<BetCoinsViewDelegate, BetOptionsViewDelegate>
+@interface BetView()<BetCoinsViewDelegate, BetOptionsViewDelegate, IABMQSubscribe>
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) BetCoinsView *coinsView;
 @property (nonatomic, strong) BetOptionsView *optionsView;
@@ -23,6 +23,10 @@
 @property (nonatomic, strong) NSDictionary *sounds;
 
 @property (nonatomic, strong) UIButton *wenluButton;
+
+@property (nonatomic, strong)NSString *tipStr;
+
+@property (nonatomic, assign) BOOL isBetting;
 @end
 
 @implementation BetView
@@ -31,7 +35,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.isBetting = false;
         self.mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.width, self.height-44)];
         self.mainView.backgroundColor = [UIColor redColor];
         self.mainView.backgroundColor = [[UIColor hexColor:@"#1B3F41"] colorWithAlphaComponent:0.4];
@@ -87,6 +91,7 @@
         self.tipLabel.clipsToBounds = true;
         [self addSubview:self.tipLabel];
         self.tipLabel.centerY = 22;
+        [self.tipLabel addTarget:self action:@selector(onTipAction) forControlEvents:UIControlEventTouchUpInside];
         
         self.balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tipLabel.right+2, 0, 60, 24)];
         self.balanceLabel.backgroundColor = [[UIColor hexColor:@"#3C3C3C"] colorWithAlphaComponent:0.6];
@@ -99,6 +104,8 @@
         [self addSubview:self.balanceLabel];
         self.balanceLabel.centerY = 22;
         
+        
+        
         self.wenluButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
         self.wenluButton.backgroundColor = self.tipLabel.backgroundColor;
         self.wenluButton.layer.cornerRadius = 32/2;
@@ -109,44 +116,59 @@
         self.wenluButton.centerY = 22;
         self.wenluButton.left = self.balanceLabel.right+10;
         
+        
         self.enabled = false;
+//        [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_BALANCE] autoAck:true];
         
     }
     return self;
 }
 
+- (void)onTipAction {
+    QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleCancel handler:NULL];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"限红" message:[NSString stringWithFormat:@"%@%@", RC.gameManager.atipStr, RC.gameManager.tipStr] preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:action1];
+    [alertController showWithAnimated:YES];
+}
+
 - (void)onWenLuButton {
-    [[RoomContext shared].playControl.wenluWebView setHidden:![RoomContext shared].playControl.wenluWebView.isHidden];
+//    [[RoomContext shared].playControl.wenluWebView setHidden:![RoomContext shared].playControl.wenluWebView.isHidden];
+    [RC.gameManager.control.wenluWebView setHidden:!RC.gameManager.control.wenluWebView.isHidden];
 }
 
 - (void)setEnabled:(BOOL)enabled {
     _enabled = enabled;
-//    if (enabled) {
-//        [self.okButton setHidden:false];
-//        [self.cancelButton setHidden:false];
-//        [self.tipLabel setHidden:false];
-//    }else{
-//        [self.okButton setHidden:true];
-//        [self.cancelButton setHidden:true];
-//        [self.tipLabel setHidden:true];
-//
-//    }
+    if (enabled) {
+        [self.okButton setHidden:false];
+        [self.cancelButton setHidden:false];
+    }else{
+        [self.okButton setHidden:true];
+        [self.cancelButton setHidden:true];
+    }
 }
 
 #pragma mark --------- loc action ----------
 - (void)onConfirm {
+    
+    if (self.isBetting) {
+        [ABUITips showError:@"正在下注"];
+        return;
+    }
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     for (int i=0; i<self.options.count; i++) {
         NSString *opid = self.options[i][@"id"];
-        if (self.options[i][@"num"] == nil) {
+        if (self.options[i][@"cnum"] == nil) {
             params[opid] = @"0";
         }else{
             
-            NSString *betNum = [NSString stringWithFormat:@"%@", self.options[i][@"num"]];
+            NSString *betNum = [NSString stringWithFormat:@"%@", self.options[i][@"cnum"]];
             params[opid] = betNum;
         }
     }
-//    [self.delegate ]
+    
+    [self resetUnBet];
+
     if ([self.delegate respondsToSelector:@selector(betView:onConfirmWithData:)]) {
         [self.delegate betView:self onConfirmWithData:params];
     }
@@ -167,15 +189,25 @@
 #pragma mark --------- reveice data ---------
 
 - (void)setCoins:(NSArray *)coins options:(NSArray *)options sounds:(NSDictionary *)sounds limit:(NSString *)limit {
+    self.isBetting = false;
+    self.tipStr = limit;
     self.coins = coins;
     self.options = options;
     self.sounds = sounds;
-    [self.tipLabel setText:limit];
+    [self.tipLabel setText:@"限红 >"];
     
     [self _reload];
+    
+    [self.wenluButton setHidden:true];
+    if (RC.gameManager.game_id == 1 || RC.gameManager.game_id == 2) {
+        [self.wenluButton setHidden:false];
+    }
+    
+    [[RoomContext shared].gameManager refreshBalance];
 }
 
 - (void)setBalance:(NSInteger)balnace {
+    self.bb = balnace;
     self.balanceLabel.text = [NSString stringWithFormat:@"余额\n%ld", (long)balnace];
 }
 
@@ -230,11 +262,11 @@
 
 #pragma mark ------------ delegates -----------
 - (void)betCoinsView:(BetCoinsView *)betCoinsView didSelectItemAtIndex:(NSInteger)index {
-//    if (self.enabled == false) {
-//        [ABUITips showError:@"下注时间已过"];
-//        [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
-//        return;
-//    }
+    if (self.enabled == false) {
+        [ABUITips showError:@"下注时间已过"];
+        [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
+        return;
+    }
     
     self.coins = [ABIteration iterationList:self.coins block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
         dic[@"selected"] = @(0);
@@ -245,6 +277,37 @@
     }];
     
     [self.coinsView reload:self.coins];
+}
+
+- (void)betSuccess {
+    [[ABAudio shared] playBundleFileWithName:@"bet_succeed.mp3"];
+    self.isBet = true;
+    self.isBetting = false;
+    
+    self.options = [ABIteration iterationList:self.options block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        dic[@"cnum"] = @(0);
+        dic[@"selected"] = @(0);
+        return dic;
+    }];
+    
+    [self _reload];
+}
+
+- (void)betFailure {
+    self.isBetting = false;
+    [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
+    self.options = [ABIteration iterationList:self.options block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        NSInteger num = [dic[@"num"] intValue]-[dic[@"cnum"] intValue];
+        if (num < 0) {
+            num = 0;
+        }
+        dic[@"cnum"] = @(0);
+        dic[@"num"] = @(num);
+        dic[@"selected"] = @(0);
+        return dic;
+    }];
+    
+    [self _reload];
 }
 
 - (void)betOptionsView:(BetOptionsView *)betOptionsView didSelectItemAtIndex:(NSInteger)index {
@@ -264,6 +327,7 @@
     self.options = [ABIteration iterationList:self.options block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
         if (index == idx) {
             dic[@"num"] = dic[@"num"]?@(selectCoinNum+[dic[@"num"] integerValue]):@(selectCoinNum);
+            dic[@"cnum"] = dic[@"cnum"]?@(selectCoinNum+[dic[@"cnum"] integerValue]):@(selectCoinNum);
             dic[@"selected"] = @(1);
         }else{
             dic[@"selected"] = @(0);
@@ -295,6 +359,50 @@
     }];
     
     [self.optionsView reload:self.options];
+}
+
+
+- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+    if ([channel isEqualToString:CHANNEL_GAME_BALANCE]) {
+        [self setBalance:[message[@"balance"] intValue]];
+    }
+    if ([channel isEqualToString:CHANNEL_GAME_STATUS]) {
+        NSDictionary *dic = (NSDictionary *)message;
+        NSInteger status = [dic[@"status"] integerValue];
+        NSDictionary *data = (NSDictionary *)message[@"data"];
+        
+        switch (status) {
+            case 0: //洗牌中
+                self.enabled = false; //禁止下注
+                [self reset]; //重置下注盘
+                break;
+            case 1://开始下注
+                self.enabled = true; //开启下注
+//                [self showBetView]; //弹出下注UI
+                [self reset]; //重置下注盘
+                break;
+            case 2://开牌中(停止下注)
+                self.enabled = false;//禁止下注
+                if (self.isBet == false) {
+                    [self reset];
+                }
+                break;
+            case 3://结算完成
+                self.enabled = false;//禁止下注
+                break;
+            case 4://结算完成(有结果)
+                self.enabled = false;//禁止下注
+                
+//                [RP promptGameResultWithGameId:self.gameid winner:desk[@"Winner"]];
+//                [self showBetView];
+//                [[RoomContext shared].playControl receiveWenLuItem:desk];
+                
+                break;
+            default:
+                break;
+        }
+        
+    }
 }
 
 @end

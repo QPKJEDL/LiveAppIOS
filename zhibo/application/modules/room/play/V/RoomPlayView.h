@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RoomPlayView : UIView
+@property (nonatomic, strong) NSString *abc;
 - (void)viewWillAppear;
 
 - (void)viewDisAppear;

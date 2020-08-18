@@ -10,14 +10,18 @@
 #import "Service.h"
 @implementation NetProvidor
 - (NSString *)host:(NSString *)uri {
+    
     if ([uri hasPrefix:@"/game"]) {
         return [Stack shared].game_url;
     }
-    if ([uri isEqualToString:URI_MOMENTS_PUBLISH] || [uri isEqualToString:URI_ACCOUNT_INFO_UPDATE_AVATAR]) {
-        return @"http://129.211.114.135:8933";
+    NSArray *baijiusansan = @[URI_ACCOUNT_DRAWPER, URI_MOMENTS_PUBLISH, URI_ACCOUNT_INFO_UPDATE_AVATAR, URI_ACCOUNT_CASHOUT, URI_TENCENT_COSSECRET];
+    if ([baijiusansan containsObject:uri]) {
+        return @"http://119.28.78.169:8933";
+//        return @"http://192.168.0.104:8212";
     }
-    return @"http://129.211.114.135:8212";
-//    return @"http://192.168.0.112:8212";
+    return @"http://119.28.78.169:8212";
+//    return @"http://129.211.114.135:8212";
+//    return @"http://192.168.0.114:8212";
 }
 
 - (NSDictionary *)headers:(NSString *)uri {

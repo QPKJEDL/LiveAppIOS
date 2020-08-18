@@ -15,7 +15,11 @@
 #import "GameSocket.h"
 #import "RoomPlayEndControl.h"
 #import "RoomPlayPresent.h"
-@interface RoomPlayViewController ()<RoomPlayControlDelegate, RoomPlayPresentDelegate>
+
+#import "GameManager.h"
+#import "RoomManager.h"
+
+@interface RoomPlayViewController ()<RoomPlayControlDelegate, RoomPlayPresentDelegate, IABMQSubscribe>
 @property (nonatomic, strong) RoomPlayView *playView;
 @property (nonatomic, strong) RoomPlayView *shixunPlayView;
 @property (nonatomic, strong) RoomPlayControl *controlView;
@@ -23,6 +27,10 @@
 @property (nonatomic, strong) RoomSocket *roomSocket;
 @property (nonatomic, strong) GameSocket *gameSocket;
 @property (nonatomic, strong) RoomPlayEndControl *endControl;
+
+@property (nonatomic, strong) GameManager *gameManager;
+@property (nonatomic, strong) RoomManager *roomManager;
+
 @end
 
 @implementation RoomPlayViewController
@@ -31,35 +39,49 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.isVisableNavigationBar = false;
-    
+
     self.playView = [[RoomPlayView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.playView];
-    
+
     self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
     [self.view addSubview:self.shixunPlayView];
     [self.shixunPlayView setHidden:true];
-    
+
     self.controlView = [[RoomPlayControl alloc] initWithFrame:self.view.bounds];
     self.controlView.delegate = self;
     [self.view addSubview:self.controlView];
     
-    self.roomSocket = [[RoomSocket alloc] init];
-    [self.roomSocket startRoomWithID:self.roomid];
+    self.gameManager = [[GameManager alloc] init];
+    [RoomContext shared].gameManager = self.gameManager;
     
-    self.gameSocket = [[GameSocket alloc] init];
+    self.roomManager = [[RoomManager alloc] init];
+    [RoomContext shared].roomManager = self.roomManager;
+    [RoomContext shared].gameManager.control = self.controlView;
     
-    self.present = [[RoomPlayPresent alloc] init];
-    self.present.delegate = self;
+    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
     
-    [RoomContext shared].playControl = self.controlView;
-    [RoomContext shared].playView = self.playView;
-    [RoomContext shared].shixunPlayView = self.shixunPlayView;
-    [RoomContext shared].socket = self.roomSocket;
-    [RoomContext shared].playPresent = self.present;
-    [RoomContext shared].roomid = self.roomid;
-    [RoomContext shared].gamesocket = self.gameSocket;
+    [self.gameManager enterRoomId:self.roomid];
+    [self.roomManager enterRoomId:self.roomid];
     
-    [self.present requestRoomInfo];
+    [[ABMQ shared] subscribe:self channel:CHANNEL_ROOM_INFO autoAck:true];
+//
+//    self.roomSocket = [[RoomSocket alloc] init];
+//    [self.roomSocket startRoomWithID:self.roomid];
+//
+//    self.gameSocket = [[GameSocket alloc] init];
+//
+//    self.present = [[RoomPlayPresent alloc] init];
+//    self.present.delegate = self;
+//
+//    [RoomContext shared].playControl = self.controlView;
+//    [RoomContext shared].playView = self.playView;
+//    [RoomContext shared].shixunPlayView = self.shixunPlayView;
+//    [RoomContext shared].socket = self.roomSocket;
+//    [RoomContext shared].playPresent = self.present;
+//    [RoomContext shared].roomid = self.roomid;
+//    [RoomContext shared].gamesocket = self.gameSocket;
+//
+//    [self.present requestRoomInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -93,6 +115,7 @@
     [self.playView free];
     [self.shixunPlayView free];
 
+    [[ABUIPopUp shared] remove:0];
     self.endControl = [[RoomPlayEndControl alloc] initWithFrame:self.view.bounds];
     [self.endControl setData:data];
     [self.view addSubview:self.endControl];
@@ -103,6 +126,12 @@
 {
     [self.playView free];
     [self.shixunPlayView free];
+}
+
+- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+    NSString *pullAddress = message[@"video"][@"pull"];
+//    pullAddress = @"http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8";
+    [self.playView playURL:pullAddress];
 }
 
 @end

@@ -36,14 +36,14 @@
 
 - (NSString *)game_wsurl {
     if (_game_wsurl == nil) {
-        return @"129.211.114.135";
+        return @"119.28.78.169";
     }
     return _game_wsurl;
 }
 
 - (NSString *)game_url {
     if (_game_url == nil) {
-        return @"http://129.211.114.135:8210";
+        return @"http://119.28.78.169:8210";
     }
     return _game_url;
 }

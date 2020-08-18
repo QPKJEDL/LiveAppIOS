@@ -7,7 +7,7 @@
 //
 
 #import "GameStatusPlateView.h"
-@interface GameStatusPlateView ()
+@interface GameStatusPlateView ()<IABMQSubscribe>
 @property (nonatomic, strong) UILabel *textLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) NSTimer *timer;
@@ -42,6 +42,8 @@
         
         self.layer.shadowOffset = CGSizeMake(0, 0);
         self.layer.shadowRadius = 5;
+        
+//        [[ABMQ shared] subscribe:self channel:CHANNEL_GAME_STATUS autoAck:true];
     }
     return self;
 }
@@ -69,7 +71,7 @@
     if (self.timer) {
         [self.timer invalidate];
     }
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFrequency) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:[ABWeakProxy proxyWithTarget:self] selector:@selector(timerFrequency) userInfo:nil repeats:true];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
     [self refreshDown];
@@ -108,6 +110,11 @@
 }
 
 - (void)wait {
+    if ([self.timer isValid]) {
+        [[ABAudio shared] playBundleFileWithName:@"stopBet.mp3"];
+        [self.timer invalidate];
+    }
+    
     self.textLabel.text = @"待开牌";
     self.timeLabel.text = @"";
     self.textLabel.textColor = [UIColor hexColor:@"#E62020"];
@@ -127,6 +134,36 @@
     
     self.layer.borderColor = [[UIColor hexColor:@"ffffff"] colorWithAlphaComponent:0.58].CGColor;
     self.layer.shadowColor = [[UIColor hexColor:@"ffffff"] colorWithAlphaComponent:0.58].CGColor;
+}
+
+//- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+//    NSDictionary *dic = (NSDictionary *)message;
+//    NSInteger status = [dic[@"status"] integerValue];
+//    NSDictionary *data = (NSDictionary *)message[@"data"];
+//    switch (status) {
+//        case 0: //洗牌中
+//            [self watch]; //变更洗牌中
+//            break;
+//        case 1://开始下注
+//            [self please:data]; //开启下注倒计时
+//            break;
+//        case 2://开牌中(停止下注)
+//            [self wait]; //变更待开牌
+//
+//            break;
+//        case 3://结算完成
+//            [self finish];
+//            break;
+//        case 4://结算完成(有结果)
+//            [self finish];
+//            break;
+//        default:
+//            break;
+//    }
+//}
+
+- (void)stop {
+    [self.timer invalidate];
 }
 
 - (void)dealloc {

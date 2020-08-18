@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *info;
 @property (nonatomic, strong) NSDictionary *chatinfo;
 @property (nonatomic, strong) NSDictionary *bank;
+@property (nonatomic, assign) NSInteger shenfen;
 - (void)login:(NSDictionary *)auth;
 - (void)logingm:(NSDictionary *)auth;
 - (void)logout;

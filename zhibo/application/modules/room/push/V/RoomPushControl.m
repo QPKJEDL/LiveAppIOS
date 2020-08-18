@@ -38,8 +38,9 @@
 //        self.roomMangerPromptView.delegate = self;
         
 //        [[ABMQ shared] subscribe:self channels:@[@"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
-        [[ABMQ shared] subscribe:self channels:@[CHANNEL_ROOM_GAME, @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
-        [self.wenluWebView setHidden:true];
+        
+        
+//        [[ABMQ shared] subscribe:self channels:@[CHANNEL_ROOM_GAME, @"CHANNEL_ROOM_ROOM", @"CHANNEL_ROOM_PEER"] autoAck:true];
     }
     return self;
 }
@@ -56,52 +57,8 @@
 
 - (void)didClose {
     [[RoomContext shared].pushView stop];
-    [self fetchPostUri:URI_ROOM_CLOSE params:@{@"room_id":@(RC.roomid)}];
+    [self fetchPostUri:URI_ROOM_CLOSE params:@{@"room_id":@(RC.roomManager.roomid)}];
     [NSRouter dismiss];
-}
-
-- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
-    if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
-        [self refreshDesk:message];
-        return;
-    }
-    if (![message isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-    
-    if ([channel isEqualToString:@"CHANNEL_ROOM_ROOM"]) {
-        [self onReceiveRoomMessage:message];
-    }
-    else if ([channel isEqualToString:@"CHANNEL_ROOM_PEER"]) {
-        [self onReceivePeerMessage:message];
-    }
-}
-
-- (void)refreshDesk:(NSDictionary *)desk {
-    if (desk == nil) {
-        return;
-    }
-
-    //获取台桌状态，执行相应UI更新
-    //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
-    //cmd: 10 下注成功
-    int phase = -1;
-    if (desk[@"Phase"] != nil) {
-        phase = [desk[@"Phase"] intValue];
-    }
-    
-    int cmd = [desk[@"Cmd"] intValue];
-    if (cmd == 6) {
-        phase = 4;
-    }
-    
-    switch (phase) {
-        case 4://结算完成(有结果)
-            [RP promptGameResultWithGameId:[RoomContext shared].gameid winner:desk[@"Winner"]];
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)onMore {
@@ -123,7 +80,9 @@
     if (index == 0) { // 游戏选择
         [[ABUIPopUp shared] show:self.gamesPrompView from:ABPopUpDirectionBottom];
     }
-    
+    if (index == 4) { // 游戏选择
+        [self onPlate];
+    }
 }
 
 - (void)gamesPromptView:(GamesPromptView *)gamesPromptView didSelectIndex:(NSInteger)index item:(NSDictionary *)item {

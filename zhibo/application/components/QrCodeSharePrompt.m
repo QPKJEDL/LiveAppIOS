@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UIImageView *qrcodeImageView;
 @property (nonatomic, strong) UILabel *qrcodeLabel;
 
+@property (nonatomic, strong) UIButton *closeButton;
+
 @end
 @implementation QrCodeSharePrompt
 
@@ -66,8 +68,17 @@
         self.deleteButton.clipsToBounds = true;
         [self.actionView addSubview:self.deleteButton];
         self.qrcodeImageView.centerX = self.width/2;
+        
+        self.closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.mainImageView.left+5, self.mainImageView.top+5, 44, 44)];
+        [self.closeButton setImage:[UIImage imageNamed:@"guan"] forState:UIControlStateNormal];
+        [self.closeButton addTarget:self action:@selector(onClose) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.closeButton];
     }
     return self;
+}
+
+- (void)onClose {
+    [[ABUIPopUp shared] remove];
 }
 
 - (void)onImageAction {

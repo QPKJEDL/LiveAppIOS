@@ -28,18 +28,19 @@
 #define URI_ACCOUNT_EDIT_NICKNAME           @"/account/edit/nickname"
 #define URI_ACCOUNT_BIND_WECHAT             @"/account/bind/wechat"
 #define URI_ACCOUNT_BIND_ALIPAY             @"/account/bind/alipay"
+#define URI_ACCOUNT_BIND_CARD             @"/account/bind/card"
 
 #define URI_ACCOUNT_BALANCE_RECHARGE        @"/account/balance/recharge"
 #define URI_ACCOUNT_BALANCE_CASHOUT        @"/account/balance/cashout"
-
+#define URI_ACCOUNT_CASHOUT                 @"/account/cashout"
 #define URI_ACCOUNT_CHANGER_LIST            @"/account/changer/list"
 
 #define URI_ROOM_USER_INFO               @"/RoomUserInfo"
 #define URI_ACCOUNT_TEAM_LOWERS            @"/account/team/lowers"
 #define URI_ACCOUNT_TEAM_STATIS            @"/account/team/statis"
-#define URI_ACCOUNT_SX_BANLANCE            @"/WebUserBalance"
-#define URI_ACCOUNT_EXCAHNGE                @"/Exchange"
-#define URI_ACCOUNT_WITHDRAW                @"/Withdraw"
+#define URI_ACCOUNT_SX_BANLANCE            @"/account/WebUserBalance"
+#define URI_ACCOUNT_EXCAHNGE                @"/account/exchange"
+#define URI_ACCOUNT_WITHDRAW                @"/account/withdraw"
 #define URI_ACCOUNT_WebUserBetsFee          @"/WebUserBetsFee"
 #define URI_ACCOUNT_POPULARIZE_CODELIST     @"/account/popularize/codelist"
 #define URI_ACCOUNT_POPULARIZE_ADD     @"/account/popularize/add"
@@ -93,6 +94,8 @@
 #define URI_ROOM_LEAVE                  @"/LiveLeaveRoom"
 #define URI_ROOM_RETURN                  @"/LiveReturnRoom"
 #define URI_ROOM_GIFTRECORD              @"/room/giftrecord"
+#define URI_ACCOUNT_DRAWPER             @"/account/drawper"
+
 #pragma mark -------- user ---------
 #define URI_FOLLOW_LIST                         @"/follow/list"
 #define URI_FOLLOW_FOLLOW                       @"/follow/follow"
@@ -109,6 +112,7 @@
 #define URI_MOMENTS_COMMENT_REPLY                     @"/moments/comment/reply"
 #define URI_MOMENTS_LIKE                        @"/moments/like"
 #define URI_MOMENTS_COMMENT_DELETE              @"/moments/comment/delete"
+#define URI_TENCENT_COSSECRET                   @"/code/Mycenter/qr_fornow"
 #pragma mark ---------- rank --------
 #define URI_RANK_LIST                        @"/rank/list"
 
@@ -121,4 +125,10 @@
 #define CHANNEL_COMMENT_CHANGED      @"CHANNEL_COMMENT_CHANGED" //评论发生变化
 #define CHANNEL_LIKE_CHANGED      @"CHANNEL_LIKE_CHANGED" //喜欢发生变化
 #define CHANNEL_ROOM_GAME          @"CHANNEL_ROOM_GAME" //游戏房间消息
+#define CHANNEL_GAME_STATUS          @"CHANNEL_GAME_STATUS" //游戏状态
+#define CHANNEL_GAME_RULES          @"CHANNEL_GAME_RULES" //游戏状态
+#define CHANNEL_ROOM_INFO          @"CHANNEL_ROOM_INFO" //游戏状态
+#define CHANNEL_ROOM_MESSAGE          @"CHANNEL_ROOM_MESSAGE" //游戏状态
+#define CHANNEL_ROOM_PEER          @"CHANNEL_ROOM_PEER" //游戏状态
+#define CHANNEL_GAME_BALANCE          @"CHANNEL_GAME_BALANCE" //游戏状态
 #endif /* HTTPURI_h */

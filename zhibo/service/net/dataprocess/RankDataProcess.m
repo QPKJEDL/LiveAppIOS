@@ -43,7 +43,11 @@
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
     [[UIApplication sharedApplication].keyWindow hideToastActivity];
     if ([request.uri isEqualToString:URI_RANK_LIST]) {
-        NSMutableArray *list = [[NSMutableArray alloc] initWithArray:response[@"list"]];
+        NSArray *olist = response[@"list"];
+        if (olist == nil) {
+            olist = @[];
+        }
+        NSMutableArray *list = [[NSMutableArray alloc] initWithArray:olist];
         NSInteger cha = 3-list.count;
         if (cha > 0) {
             for (int i=0; i<cha; i++) {

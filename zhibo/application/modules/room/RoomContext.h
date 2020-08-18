@@ -16,6 +16,9 @@
 #import "RoomPushPresent.h"
 #import "RoomPushReadyControl.h"
 #import "GameSocket.h"
+
+#import "GameManager.h"
+#import "RoomManager.h"
 NS_ASSUME_NONNULL_BEGIN
 
 #define RC  [RoomContext shared]
@@ -28,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) GameSocket *gamesocket;
 
 @property (nonatomic, assign) BOOL isPush;
-@property (nonatomic, weak) RoomPlayPresent *playPresent;
+//@property (nonatomic, weak) RoomPlayPresent *playPresent;
 @property (nonatomic, weak) RoomPushPresent *pushPresent;
 
 @property (nonatomic, weak) RoomPlayView *playView;
@@ -47,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *banlist;
 @property (nonatomic, assign) NSInteger gameid;
+
+@property (nonatomic, weak) GameManager *gameManager;
+@property (nonatomic, weak) RoomManager *roomManager;
 @end
 
 NS_ASSUME_NONNULL_END

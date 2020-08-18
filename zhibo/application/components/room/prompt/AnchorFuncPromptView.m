@@ -27,7 +27,7 @@
         
         NSArray *dataList = @[
             @{
-                @"title":@"游戏",
+                @"title":@"切换游戏",
                 @"icon":@"youxi",
                 @"native_id":@"titleimage"
             },
@@ -44,6 +44,11 @@
             @{
                 @"title":@"镜头",
                 @"icon":@"fanzhuan",
+                @"native_id":@"titleimage"
+            },
+            @{
+                @"title":@"下注",
+                @"icon":@"youxi",
                 @"native_id":@"titleimage"
             }
         ];

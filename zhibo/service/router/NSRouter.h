@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)gotoPopularize;
 + (void)gotoTransform;
 + (void)gotoPopularizeList;
+
++ (void)gotoHelp;
 @end
 
 NS_ASSUME_NONNULL_END
