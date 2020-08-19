@@ -31,14 +31,14 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) BOOL enabled; //是否可以下注
 @property (nonatomic, assign) BOOL isBet; //是否已经下注
 @property (nonatomic, assign) NSInteger game_id;
-@property (nonatomic, assign) NSInteger bb;
+@property (nonatomic, assign) CGFloat bb;
 - (void)setCoins:(NSArray *)coins options:(NSArray *)options sounds:(NSDictionary *)sounds limit:(NSString *)limit;
 - (void)resetUnBet;
 - (void)reset;
 - (void)betSuccess;
 - (void)betFailure;
 - (void)winner:(id)data;
-- (void)setBalance:(NSInteger)balnace;
+- (void)setBalance:(CGFloat)balnace;
 
 @end
 

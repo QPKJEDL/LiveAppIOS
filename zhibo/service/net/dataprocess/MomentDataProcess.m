@@ -66,16 +66,19 @@
         NSMutableArray *list = response[@"list"];
         list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             
-            CGFloat height = 84+44;
+            CGFloat height = 46+15+44+5;
+            height+=15;
             
             NSString *createtime = [NSString stringWithFormat:@"%@", dic[@"creatime"]];
             NSString *content = [NSString stringWithFormat:@"%@", dic[@"content"]];
+            content = [content trimmingNewLineAndWhiteSpace];
             if (content.length > 0) {
                 CGSize contentSize = [content sizeWithFont:[UIFont PingFangSC:18] constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT)];
-                height = height+contentSize.height+17;
+                CGFloat contentHeight = floor(contentSize.height);
+                height+=(contentHeight+15);
                 
                 dic[@"contentw"] = @(SCREEN_WIDTH-30);
-                dic[@"contenth"] = @(contentSize.height);
+                dic[@"contenth"] = @(contentHeight);
             }
             
             NSArray *imgs = [[dic stringValueForKey:@"img"] componentsSeparatedByString:@","];

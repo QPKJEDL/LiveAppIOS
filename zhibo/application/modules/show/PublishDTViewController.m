@@ -116,6 +116,14 @@
 - (void)doPublish:(NSArray *)photos {
     NSString *photoStr = [photos componentsJoinedByString:@","];
     NSString *videosStr = [@[] componentsJoinedByString:@","];
+    
+    NSString *contentStr = self.textView.text;
+    contentStr = [contentStr trimmingNewLineAndWhiteSpace];
+    
+    if (contentStr.length == 0 && photos.count == 0) {
+        [ABUITips showError:@"发个寂寞?"];
+        return;
+    }
     [self fetchPostUri:URI_MOMENTS_PUBLISH params:@{@"content":self.textView.text, @"photos":photoStr, @"video":videosStr}];
 }
 

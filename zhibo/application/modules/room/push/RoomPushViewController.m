@@ -113,4 +113,9 @@
     
 }
 
+- (void)dealloc
+{
+    [self.pushView stop];
+}
+
 @end

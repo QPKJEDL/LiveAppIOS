@@ -162,19 +162,22 @@
         [alertController showWithAnimated:YES];
         return;
     }
-    if ([ABDevice isAvailableRecord] == false) {
-        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
-        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去授权" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
-            [ABDevice gotoAppSetting];
-        }];
-        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"无法使用麦克风，需要您的授权" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
-        [alertController addAction:action1];
-        [alertController addAction:action2];
-        [alertController showWithAnimated:YES];
-        return;
-    }
-    RoomPushViewController *vc = [[RoomPushViewController alloc] init];
-    [[[UIApplication sharedApplication] topViewController] presentViewController:vc animated:true completion:nil];
+    
+    [ABDevice isAvailableRecord:^(BOOL isAvailable) {
+        if (isAvailable == false) {
+            QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
+            QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去授权" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+                [ABDevice gotoAppSetting];
+            }];
+            QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"无法使用麦克风，需要您的授权" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+            [alertController addAction:action1];
+            [alertController addAction:action2];
+            [alertController showWithAnimated:YES];
+        }else{
+            RoomPushViewController *vc = [[RoomPushViewController alloc] init];
+            [[[UIApplication sharedApplication] topViewController] presentViewController:vc animated:true completion:nil];
+        }
+    }];
 }
 
 

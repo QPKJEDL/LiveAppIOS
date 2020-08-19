@@ -165,4 +165,8 @@
     [self loadData:[Service shared].account.info];
 }
 
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips showError:err.message];
+}
+
 @end

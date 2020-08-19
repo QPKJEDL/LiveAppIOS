@@ -20,10 +20,10 @@
 
 /// Called immediately before a request will sent
 - (BOOL)canSend:(ABNetRequest *)request {
-    NSArray *noLoadings = @[URI_RANK_LIST];
-    if ([noLoadings containsObject:request.uri] == false) {
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
-    }
+//    NSArray *noLoadings = @[URI_RANK_LIST];
+//    if ([noLoadings containsObject:request.uri] == false) {
+//        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+//    }
     
 
     return true;
@@ -31,7 +31,11 @@
 
 /// Called immediately before a request is sent over the network (or stubbed).
 - (void)willSend:(ABNetRequest *)request {
-    
+    [ABUITips showLoading];
+}
+
+- (void)endSend:(ABNetRequest *)request {
+    [ABUITips hideLoading];
 }
 
 /// Called to modify a result before completion.
@@ -78,5 +82,6 @@
 
 - (void)didReceiveError:(ABNetRequest *)request error:(ABNetError *)error {
     [[UIApplication sharedApplication].keyWindow hideToastActivity];
+    [ABUITips showError:error.message];
 }
 @end

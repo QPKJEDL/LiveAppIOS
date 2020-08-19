@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseViewController : QMUICommonViewController
+@property (nonatomic, assign) UIEdgeInsets emptyViewInserts;
 - (void)showNoDataEmpty;
 - (void)showSeat;
 - (void)hideSeat;

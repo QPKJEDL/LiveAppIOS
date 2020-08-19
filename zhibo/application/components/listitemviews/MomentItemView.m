@@ -100,15 +100,15 @@
     self.followButton.centerY = self.avatarImageView.centerY;
     
     self.contentLabel.left = self.avatarImageView.left;
-    self.contentLabel.top = self.avatarImageView.bottom+13;
+    self.contentLabel.top = self.avatarImageView.bottom+15;
     
     self.commentButton.left = self.avatarImageView.left;
-    self.commentButton.top = self.height-self.commentButton.height-10;
+    self.commentButton.top = self.height-self.commentButton.height-5;
     
     self.likeButton.left = self.commentButton.right;
-    self.likeButton.top = self.height-self.commentButton.height-10;
+    self.likeButton.top = self.height-self.commentButton.height-5;
     
-    self.photoListView.top = self.contentLabel.bottom+17;
+    self.photoListView.top = self.contentLabel.bottom+15;
     if (self.contentLabel.height == 0) {
         self.photoListView.top = self.contentLabel.top;
     }
@@ -155,6 +155,8 @@
     if (self.followButton.isSelected) {
         self.followButton.backgroundColor = [UIColor hexColor:@"#999999"];
     }
+    
+    [self layoutAdjustContents];
 }
 
 - (void)onFollow {

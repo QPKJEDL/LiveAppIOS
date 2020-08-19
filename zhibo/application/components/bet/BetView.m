@@ -206,9 +206,9 @@
     [[RoomContext shared].gameManager refreshBalance];
 }
 
-- (void)setBalance:(NSInteger)balnace {
+- (void)setBalance:(CGFloat)balnace {
     self.bb = balnace;
-    self.balanceLabel.text = [NSString stringWithFormat:@"余额\n%ld", (long)balnace];
+    self.balanceLabel.text = [NSString stringWithFormat:@"余额\n%.2f", balnace];
 }
 
 //重置未下注选择
@@ -364,7 +364,7 @@
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
     if ([channel isEqualToString:CHANNEL_GAME_BALANCE]) {
-        [self setBalance:[message[@"balance"] intValue]];
+        [self setBalance:[message[@"balance"] floatValue]];
     }
     if ([channel isEqualToString:CHANNEL_GAME_STATUS]) {
         NSDictionary *dic = (NSDictionary *)message;

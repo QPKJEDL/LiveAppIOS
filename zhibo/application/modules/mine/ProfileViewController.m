@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.emptyViewInserts = UIEdgeInsetsMake(60, 0, 0, 0);
     
     self.topView = [[ProfileTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     [self.view addSubview:self.topView];
@@ -36,6 +37,8 @@
     [self reloadData];
     
     [[ABMQ shared] subscribe:self channels:@[CHANNEL_FOLLOW_CHANGED, CHANNEL_LIKE_CHANGED, CHANNEL_COMMENT_CHANGED] autoAck:true]; //关注，喜欢发生变化，刷新列表
+    
+    
 }
 
 

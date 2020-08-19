@@ -90,6 +90,7 @@
 - (void)stop {
     [self.pusher stopPreview];
     [self.pusher stopPush];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
@@ -106,4 +107,9 @@
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     NSLog(@"%@", err.message);
 }
+
+- (void)dealloc {
+    NSLog(@"%@ dealloc", [[self class] description]);
+}
+
 @end

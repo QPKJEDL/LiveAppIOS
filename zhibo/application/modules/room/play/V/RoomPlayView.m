@@ -148,7 +148,7 @@
 
 - (void)dealloc {
 //    [self.player stopPlay];
-    
+    NSLog(@"%@ dealloc", [[self class] description]);
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

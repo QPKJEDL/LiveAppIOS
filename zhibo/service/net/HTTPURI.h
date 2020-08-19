@@ -102,8 +102,6 @@
 #define URI_FOLLOW_UNFOLLOW                     @"/follow/unfollow"
 #define URI_USER_INFO                           @"/user/info"
 #define URI_MESSAGE_LIST                        @"/message/list"
-
-
 #pragma mark ---------- moments --------
 #define URI_MOMENTS_LIST                        @"/moments/list"
 #define URI_MOMENTS_PUBLISH                     @"/moments/publish"

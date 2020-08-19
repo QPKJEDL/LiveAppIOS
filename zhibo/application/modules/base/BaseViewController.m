@@ -27,6 +27,11 @@
     self.view.backgroundColor = [UIColor hexColor:@"F7F9FD"];
 }
 
+- (void)showEmptyView {
+    [super showEmptyView];
+    self.emptyView.frame = CGRectMake(0, self.emptyViewInserts.top, self.view.width, self.view.height-self.emptyViewInserts.top-self.emptyViewInserts.bottom);
+}
+
 - (void)showNoDataEmpty {
     [self showEmptyViewWithImage:[UIImage imageNamed:@"shuju"] text:@"暂无数据" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(refreshData)];
 }

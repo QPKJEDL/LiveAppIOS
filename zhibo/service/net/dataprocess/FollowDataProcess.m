@@ -30,12 +30,12 @@
 
 /// Called immediately before a request is sent over the network (or stubbed).
 - (void)willSend:(ABNetRequest *)request {
-    
+    [ABUITips showLoading];
 }
 
 
 - (void)endSend:(ABNetRequest *)request {
-    
+    [ABUITips hideLoading];
 }
 /// Called to modify a result before completion.
 - (void)didReceive:(ABNetRequest *)request response:(NSDictionary *)response {

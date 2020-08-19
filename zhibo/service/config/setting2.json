@@ -141,18 +141,6 @@
 						"type":"arrow",
 						"key":"binding_bank",
                         "native_id":"arrowitem"
-					},
-					{
-						"title":"支付宝绑定",
-						"type":"arrow",
-						"key":"binding_alipay",
-                        "native_id":"arrowitem"
-					},
-					{
-						"title":"微信绑定",
-						"type":"arrow",
-						"key":"binding_wechat",
-                        "native_id":"arrowitem"
 					}
 				]
 			}

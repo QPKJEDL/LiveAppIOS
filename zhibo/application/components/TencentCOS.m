@@ -99,7 +99,7 @@
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    self.uploadKeys = obj;
+    self.uploadKeys = obj[@"credentials"];
     [self _upload];
 }
 

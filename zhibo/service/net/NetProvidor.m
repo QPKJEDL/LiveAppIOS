@@ -36,9 +36,9 @@
 }
 
 - (NSString *)dataKey:(ABNetRequest *)request {
-    if ([request.uri isEqualToString:@"/code/Mycenter/qr_fornow"]) {
-        return @"credentials";
-    }
+//    if ([request.uri isEqualToString:URI_TECENTSECRET_REFRESH]) {
+//        return @"credentials";
+//    }
     return @"data";
 }
 - (NSString *)contentType {

@@ -104,9 +104,10 @@
         [self refreshBalance];
     }
     if ([req.uri isEqualToString:URI_GAME_UNBET]) {
-        NSInteger bb = [obj[@"balance"] intValue];
+        CGFloat bb = [obj[@"balance"] floatValue];
+        CGFloat cha = MAX(0, bb-RP.betView.bb);
         
-        [ABUITips showSucceed:[NSString stringWithFormat:@"取消返还:%ld", MAX(0, bb-RP.betView.bb)]];
+        [ABUITips showSucceed:[NSString stringWithFormat:@"取消返还:%.2f", cha]];
         [RP.betView reset];
         [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
     }
@@ -163,7 +164,7 @@
         @"PaveNum":@"pave_num"
     };
     self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
-    self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.deskInfo[@"DeskName"], self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
+    self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.DeskName, self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
     //获取台桌状态，执行相应UI更新
     //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
     //cmd: 10 下注成功
