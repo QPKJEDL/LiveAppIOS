@@ -57,7 +57,7 @@
             return;
         }
         [RoomContext shared].anchorid = [obj[@"anchor"][@"UserId"] intValue];
-        [[RoomContext shared].playControl receiveRoomInfo:self.roomInfo];
+//        [[RoomContext shared].playControl receiveRoomInfo:self.roomInfo];
         [[RoomContext shared].playView playURL:self.roomInfo[@"video"][@"pull"]];
     }
     else if ([req.uri isEqualToString:URI_ROOM_MANAGER]) {
@@ -74,7 +74,7 @@
     }
     else if ([req.uri isEqualToString:URI_GAME_DESK]) {
         self.deskInfo = obj;
-        [[RoomContext shared].playControl receiveDeskInfo:obj];
+//        [[RoomContext shared].playControl receiveDeskInfo:obj];
         self.MaxLimit = [obj[@"MaxLimit"] intValue];
         self.MinLimit = [obj[@"MinLimit"] intValue];
         [self fetchPostUri:URI_GAME_BET_FEE params:@{
@@ -84,18 +84,18 @@
         }];
         
         NSInteger game_id = [obj[@"GameId"] intValue];
-        [[RoomContext shared].playControl.wenluWebView setHidden:true];
+//        [[RoomContext shared].playControl.wenluWebView setHidden:true];
         if (game_id == 1 || game_id == 2) {
-            [[RoomContext shared].playControl.wenluWebView setHidden:false];
+//            [[RoomContext shared].playControl.wenluWebView setHidden:false];
             [self fetchPostUri:URI_GAME_RESULT_LIST params:@{@"game_id":@(game_id), @"boot_num":obj[@"BootNum"], @"desk_id":obj[@"DeskId"]}];
         }
     }
     else if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
         self.rules = obj[@"rules"];
-        [[RoomContext shared].playControl receiveBetRules:obj[@"rules"]];
+//        [[RoomContext shared].playControl receiveBetRules:obj[@"rules"]];
     }
     else if ([req.uri isEqualToString:URI_GAME_BET]) {
-        [[RoomContext shared].playControl receiveBetSuccess];
+//        [[RoomContext shared].playControl receiveBetSuccess];
     }
     else if ([req.uri isEqualToString:URI_GAME_UNBET]) {
         [ABUITips showSucceed:@"取消成功"];
@@ -104,11 +104,11 @@
         [ABUITips showSucceed:@"关注成功"];
     }
     else if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
-        [[RoomContext shared].playControl receiveWenLu:obj[@"list"]];
+//        [[RoomContext shared].playControl receiveWenLu:obj[@"list"]];
     }
     else if ([req.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
         [RoomContext shared].balance = [obj[@"balance"] intValue];
-        [[RoomContext shared].playControl receiveBalance:[obj[@"balance"] intValue]];
+//        [[RoomContext shared].playControl receiveBalance:[obj[@"balance"] intValue]];
     }
     
 }

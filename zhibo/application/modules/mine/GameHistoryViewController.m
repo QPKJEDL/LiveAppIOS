@@ -62,7 +62,7 @@
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     NSArray *newList = obj[@"list"];
-    if (self.isPullRefresh == false) {
+    if (self.listView.isLoadMoreing) {
         [self.dataList addObjectsFromArray:newList];
     }else{
         self.dataList = [[NSMutableArray alloc] initWithArray:newList];

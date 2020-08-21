@@ -35,6 +35,8 @@
 @property (nonatomic, strong) UIButton *sceneButton;
 @property (nonatomic, strong) UIImageView *sceneImageView;
 
+@property (nonatomic, strong) RoomPlayView *shixunPlayView;
+
 
 
 @end
@@ -54,7 +56,7 @@
         self.briefView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         self.briefView.layer.cornerRadius = self.briefView.height/2;
         self.briefView.delegate = self;
-        [self addSubview:self.briefView];
+        
         [self.briefView addTarget:self action:@selector(onBriefView) forControlEvents:UIControlEventTouchUpInside];
         [self.briefView setHidden:true];
         
@@ -65,7 +67,7 @@
         
         _audienceView = [[RoomAudienceView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-164-16,SYS_STATUSBAR_HEIGHT+10, 164, 30)];
         _audienceView.layer.cornerRadius = 15;
-        [self addSubview:_audienceView];
+       
         [_audienceView.countLabel addTarget:self action:@selector(onAuDienceView) forControlEvents:UIControlEventTouchUpInside];
         [_audienceView setHidden:true];
         
@@ -73,6 +75,12 @@
         _chatView.delegate = self;
         [self.bbbView addSubview:_chatView];
         _bottomBar.commentView = _bbbView;
+        
+        self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
+        [self addSubview:self.shixunPlayView];
+        [self.shixunPlayView setHidden:true];
+        [self addSubview:self.briefView];
+         [self addSubview:_audienceView];
         
         self.comeAnimateBanner = [[ABUIAnimateBanner alloc] initWithFrame:CGRectMake(0, _chatView.top-30-5, SCREEN_WIDTH, 30)];
 //        self.comeAnimateBanner.backgroundColor = [UIColor redColor];
@@ -174,13 +182,13 @@
 - (void)onScene {
     [self.sceneButton setSelected:!self.sceneButton.isSelected];
     if (self.sceneButton.isSelected) {
-        [[RoomContext shared].gameManager.shixunPlayerView setHidden:false];
-        [[RoomContext shared].gameManager.shixunPlayerView playURL:RC.gameManager.shixunPlayAddress];
+        [self.shixunPlayView setHidden:false];
+        [self.shixunPlayView playURL:RC.gameManager.shixunPlayAddress];
         
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
     }else{
-        [[RoomContext shared].gameManager.shixunPlayerView setHidden:true];
-        [[RoomContext shared].gameManager.shixunPlayerView remove];
+        [self.shixunPlayView setHidden:true];
+        [self.shixunPlayView remove];
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
     }
     
@@ -196,6 +204,7 @@
     else if (lmd == 3) { //踢人
         [ABUITips showError:@"您被踢出"];
         [NSRouter back];
+        [self.plateView stop];
     }
     else if (lmd == 4) { //设置管理员
         [ABUITips showError:@"您被设置管理"];
@@ -332,7 +341,7 @@
 }
 
 - (void)roomChatView:(RoomChatView *)roomChatView didSelectUid:(NSInteger)uid {
-    [RP promptUserWithUid:uid];
+//    [RP promptUserWithUid:uid];
 }
 
 #pragma mark ----- delegates -------
@@ -428,15 +437,15 @@
                 break;
             case 4://结算完成(有结果)
             {
-                            [self.plateView finish];
-                            
-                            [RoomPrompt shared].betView.enabled = false;//禁止下注
-            //                [RP promptGameResultWithGameId:RC.gameManager.game_id winner:desk[@"Winner"]];
-                            
-                            [self receiveWenLuItem:desk];
-                            [RC.gameManager refreshBalance];
-                            NSString *name = [[BetTransform shared] getMusicGid:RC.gameManager.game_id winner:desk[@"Winner"]];
-                            [[ABAudio shared] playBundleFileWithName:name];
+                [self.plateView finish];
+                
+                [RoomPrompt shared].betView.enabled = false;//禁止下注
+//                [RP promptGameResultWithGameId:RC.gameManager.game_id winner:desk[@"Winner"]];
+                
+                [self receiveWenLuItem:desk];
+                [RC.gameManager refreshBalance];
+                NSString *name = [[BetTransform shared] getMusicGid:RC.gameManager.game_id winner:desk[@"Winner"]];
+                [[ABAudio shared] playBundleFileWithMultipleName:name];
             }
 
                 
@@ -467,11 +476,16 @@
 
 - (void)free {
     [self.plateView stop];
+    [[ABMQ shared] unsubscribe:self];
+    [self.shixunPlayView free];
 }
 
 - (void)dealloc
 {
     [self.plateView stop];
+    [self.shixunPlayView free];
+    [[ABMQ shared] unsubscribe:self];
+    
 }
 
 //- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {

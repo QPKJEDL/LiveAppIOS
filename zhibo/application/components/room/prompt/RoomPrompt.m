@@ -187,11 +187,6 @@
             @"title":@"下注",
             @"icon":@"youxi",
             @"native_id":@"titleimage"
-        },
-        @{
-            @"title":@"分享",
-            @"icon":@"guanliyuan",
-            @"native_id":@"titleimage"
         }
     ];
     

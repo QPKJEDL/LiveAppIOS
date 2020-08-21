@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface RoomPushReadyTitleView : UIView
-@property (nonatomic, strong) id<RoomPushReadyTitleViewDelegate> delegate;
+@property (nonatomic, weak) id<RoomPushReadyTitleViewDelegate> delegate;
 @property (nonatomic, strong) UIImage *cover;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *label;

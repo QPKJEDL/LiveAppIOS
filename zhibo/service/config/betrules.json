@@ -51,9 +51,9 @@
                 {"title":"顺门","id":"ShunMen_equal","oddType":"Equal","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
                 {"title":"天门","id":"TianMen_equal","oddType":"Equal","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#FFC62E","title.font":"15"}},
                 {"title":"反门","id":"FanMen_equal","oddType":"Equal","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
-				{"title":"顺门超倍","id":"ShunMen_Super_Double","oddType":"Double","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
-				{"title":"天门超倍","id":"TianMen_Super_Double","oddType":"Double","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#FFC62E","title.font":"15"}},
-				{"title":"反门超倍","id":"FanMen_Super_Double","oddType":"Double","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}}]
+				{"title":"顺门超倍","id":"ShunMen_Super_Double","oddType":"SuperDouble","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}},
+				{"title":"天门超倍","id":"TianMen_Super_Double","oddType":"SuperDouble","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#FFC62E","title.font":"15"}},
+				{"title":"反门超倍","id":"FanMen_Super_Double","oddType":"SuperDouble","native_id":"betoption","css":{"w":"33%","h":"50%","title.color":"#F72EFF","title.font":"15"}}]
 		}
 	}
 }

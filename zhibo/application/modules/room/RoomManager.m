@@ -18,6 +18,8 @@
     if (self) {
         self.roomSocket = [[RoomSocket alloc] init];
         self.isAnchor = false;
+        [UIApplication sharedApplication].idleTimerDisabled = true;
+        [[UIApplication sharedApplication] addObserver:self forKeyPath:@"idleTimerDisabled"options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -32,6 +34,13 @@
     }else{
         [self fetchPostUri:URI_ROOM_MANAGER params:@{@"room_id":@(roomId)}];
         [self fetchPostUri:URI_ROOM_BANSTATUS params:@{@"room_id":@(roomId)}];
+    }
+    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void*)context{
+    if ([UIApplication sharedApplication].idleTimerDisabled == false) {
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
     }
     
 }
@@ -75,6 +84,13 @@
 
 - (void)sendText:(NSString *)text {
     [self.roomSocket sendText:text];
+}
+
+- (void)dealloc
+{
+    [[UIApplication sharedApplication] removeObserver:self forKeyPath:@"idleTimerDisabled"];
+
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 @end
 

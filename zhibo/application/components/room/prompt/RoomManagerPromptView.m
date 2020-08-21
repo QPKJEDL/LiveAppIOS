@@ -58,6 +58,7 @@
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [self hideEmpty];
     if ([req.uri isEqualToString:URI_ROOM_MANAGERLIST]) {
         self.index = -1;
         NSArray *list = [ABIteration iterationList:obj[@"ManagerList"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {

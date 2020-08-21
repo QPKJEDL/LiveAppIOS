@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface MessagePresent : NSObject
-@property (nonatomic, strong) id<MessagePresentDelegate> delegate;
+@property (nonatomic, weak) id<MessagePresentDelegate> delegate;
 @property (nonatomic, strong) NSArray *messageList;
 - (void)getMessageList:(NSInteger)tag;
 @end

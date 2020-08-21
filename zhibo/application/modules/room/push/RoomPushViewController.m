@@ -36,7 +36,6 @@
 @property (nonatomic, strong) GameManager *gameManager;
 @property (nonatomic, strong) RoomManager *roomManager;
 
-@property (nonatomic, strong) RoomPlayView *shixunPlayView;
 
 @end
 
@@ -48,10 +47,7 @@
     
     self.pushView = [[RoomPushView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.pushView];
-    
-    self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
-    [self.view addSubview:self.shixunPlayView];
-    [self.shixunPlayView setHidden:true];
+
 
     self.readyControl = [[RoomPushReadyControl alloc] initWithFrame:self.view.bounds];
     self.readyControl.vc = self;
@@ -67,7 +63,7 @@
     
     self.gameManager = [[GameManager alloc] init];
     [RoomContext shared].gameManager = self.gameManager;
-    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
+//    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
     
     self.roomManager = [[RoomManager alloc] init];
     [RoomContext shared].roomManager = self.roomManager;
@@ -117,7 +113,7 @@
 {
     [self.roomControl free];
     [self.pushView stop];
-    [self.shixunPlayView free];
+    self.roomControl = nil;
 }
 
 @end

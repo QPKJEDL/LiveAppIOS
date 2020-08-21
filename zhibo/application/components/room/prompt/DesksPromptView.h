@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface DesksPromptView : UIView
-@property (nonatomic, strong) id<DesksPromptViewDelegate> delegate;
+@property (nonatomic, weak) id<DesksPromptViewDelegate> delegate;
 - (void)refreshWithGameID:(NSInteger)gameid;
 @end
 

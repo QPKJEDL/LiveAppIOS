@@ -63,10 +63,13 @@
 
 - (void)refreshWithGameID:(NSInteger)gameid {
     [self fetchPostUri:URI_GAME_DESKLIST params:@{@"game_id":@(gameid)}];
+    [ABUITips showLoading];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    
     if ([req.uri isEqualToString:URI_GAME_DESKLIST]) {
+        [ABUITips hideLoading];
         self.index = -1;
         NSArray *list = [ABIteration iterationList:obj[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"native_id"] = @"deskitem";
@@ -78,6 +81,10 @@
         [ABUITips showSucceed:@"设置成功"];
         [[ABUIPopUp shared] remove];
     }
+}
+
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips hideLoading];
 }
 
 - (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface SettingPresent : NSObject
-@property (nonatomic, strong) id<SettingPresentDelegate> delegate;
+@property (nonatomic, weak) id<SettingPresentDelegate> delegate;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSDictionary *actions;
 @property (nonatomic, strong) NSArray<NSArray *> *settingSections;

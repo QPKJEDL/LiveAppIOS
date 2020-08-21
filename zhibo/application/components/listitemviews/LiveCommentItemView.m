@@ -8,19 +8,21 @@
 
 #import "LiveCommentItemView.h"
 @interface LiveCommentItemView ()
-@property (nonatomic, strong) UIView *containView;
+@property (nonatomic, strong) UIControl *containView;
 @property (nonatomic, strong) QMUILabel *titleLabel;
+@property (nonatomic, assign) NSInteger uid;
 @end
 
 @implementation LiveCommentItemView
 
 - (void)setupAdjustContents {
     self.backgroundColor = [UIColor clearColor];
-    self.containView = [[UIView alloc] initWithFrame:self.bounds];
+    self.containView = [[UIControl alloc] initWithFrame:self.bounds];
     self.containView.layer.cornerRadius = 10;
     self.containView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
     self.containView.clipsToBounds = true;
     [self addSubview:self.containView];
+    [self.containView addTarget:self action:@selector(onButton) forControlEvents:UIControlEventTouchUpInside];
 
     self.titleLabel = [[QMUILabel alloc] initWithFrame:CGRectZero];
     self.titleLabel.textColor = [UIColor whiteColor];
@@ -31,6 +33,7 @@
 }
 
 - (void)reload:(NSDictionary *)item {
+    self.uid = [item[@"uid"] intValue];
     NSString *name = item[@"name"];
     NSString *title = [NSString stringWithFormat:@"%@:%@", item[@"name"], item[@"content"]];
     if (name.length == 0) {
@@ -52,6 +55,10 @@
     CGFloat contentWeight = [css[@"w"] floatValue];
     self.titleLabel.frame = CGRectMake(14, 10, contentWeight, contentHeight);
     self.containView.frame = CGRectMake(0, 0, self.titleLabel.width+28, self.titleLabel.height+20);
+}
+
+- (void)onButton {
+    [RP promptUserWithUid:self.uid];
 }
 
 - (void)layoutAdjustContents {

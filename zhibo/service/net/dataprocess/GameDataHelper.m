@@ -55,6 +55,11 @@
             CGFloat odd = [fee[dic[@"id"]] integerValue]/100.0;
             dic[@"odd"] = [NSString stringWithFormat:@"1翻%.2f", odd];
         }
+        if ([gid intValue] == 5) {
+            CGFloat odd = [fee[dic[@"oddType"]] integerValue]/100.0;
+            dic[@"odd"] = [NSString stringWithFormat:@"1翻%.2f", odd];
+        }
+        
         dic[@"native_id"] = @"betoption";
         [nOptions addObject:dic];
     }

@@ -21,7 +21,6 @@
 
 @interface RoomPlayViewController ()<RoomPlayControlDelegate, RoomPlayPresentDelegate, IABMQSubscribe>
 @property (nonatomic, strong) RoomPlayView *playView;
-@property (nonatomic, strong) RoomPlayView *shixunPlayView;
 @property (nonatomic, strong) RoomPlayControl *controlView;
 @property (nonatomic, strong) RoomPlayPresent *present;
 @property (nonatomic, strong) RoomSocket *roomSocket;
@@ -43,10 +42,6 @@
     self.playView = [[RoomPlayView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.playView];
 
-    self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
-    [self.view addSubview:self.shixunPlayView];
-    [self.shixunPlayView setHidden:true];
-
     self.controlView = [[RoomPlayControl alloc] initWithFrame:self.view.bounds];
     self.controlView.delegate = self;
     [self.view addSubview:self.controlView];
@@ -58,7 +53,7 @@
     [RoomContext shared].roomManager = self.roomManager;
     [RoomContext shared].gameManager.control = self.controlView;
     
-    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
+//    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
     
     [self.gameManager enterRoomId:self.roomid];
     [self.roomManager enterRoomId:self.roomid];
@@ -114,7 +109,6 @@
     [self.controlView free];
     [self.controlView removeFromSuperview];
     [self.playView free];
-    [self.shixunPlayView free];
 
     [[ABUIPopUp shared] remove:0];
     self.endControl = [[RoomPlayEndControl alloc] initWithFrame:self.view.bounds];
@@ -127,7 +121,8 @@
 {
     [self.playView free];
     [self.controlView free];
-    [self.shixunPlayView free];
+    NSLog(@"%@", [self.controlView valueForKey:@"retainCount"]);
+    self.controlView = nil;
 }
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {

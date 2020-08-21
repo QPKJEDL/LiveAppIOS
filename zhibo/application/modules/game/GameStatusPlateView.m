@@ -163,6 +163,7 @@
 //}
 
 - (void)stop {
+    [[ABUIPopUp shared] remove];
     if ([self.timer isValid]) {
         [self.timer invalidate];
     }

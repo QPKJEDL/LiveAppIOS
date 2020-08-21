@@ -47,6 +47,7 @@
 - (void)applicationDidBecomeActive {
     NSLog(@"applicationDidBecomeActive");
     [self startRoomWithID:self.roomID];
+     [UIApplication sharedApplication].idleTimerDisabled = true;
 }
 
 - (void)startRoomWithID:(int64_t)roomID {

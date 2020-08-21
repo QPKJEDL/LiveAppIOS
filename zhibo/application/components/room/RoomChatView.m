@@ -101,9 +101,9 @@
     }
 }
 
-- (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
-    [self.delegate roomChatView:self didSelectUid:[item[@"uid"] intValue]];
-}
+//- (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
+//    [self.delegate roomChatView:self didSelectUid:[item[@"uid"] intValue]];
+//}
 
 
 - (void)listViewDidScrollToBottom:(ABUIListView *)listView {
