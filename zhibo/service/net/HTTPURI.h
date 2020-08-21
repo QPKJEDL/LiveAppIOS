@@ -48,7 +48,7 @@
 #define URI_ACCOUNT_BET_HISTORY             @"/account/bethistory"
 
 #define URI_ACCOUNT_INFO_UPDATE_AVATAR      @"/account/info/update/avatar"
-#define URI_SMS_SEND                        @"/DtSend"
+#define URI_SMS_SEND                        @"/account/DtSend"
 #pragma mark ------ zfnotice -------
 #define URI_ZFNOTICE_KEFU                   @"/zfnotice/kefu"
 

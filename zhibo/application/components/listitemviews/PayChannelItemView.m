@@ -61,7 +61,13 @@
     }else{
         [self.checkBoxImageView setImage:[UIImage imageNamed:@"quan"]];
     }
-    [self.checkBoxImageView setHidden:true];
+    
+    if ([item[@"count"] intValue] > 1) {
+        [self.checkBoxImageView setHidden:false];
+    }else{
+        [self.checkBoxImageView setHidden:true];
+    }
+    
 }
 
 @end

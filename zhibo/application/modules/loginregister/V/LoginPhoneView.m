@@ -8,7 +8,7 @@
 
 #import "LoginPhoneView.h"
 #import "ABUICodeInput.h"
-@interface LoginPhoneView ()<ABUICodeInputDelegate>
+@interface LoginPhoneView ()<ABUICodeInputDelegate, INetData>
 @property (nonatomic, strong) ABUITextInput *phoneInput;
 @property (nonatomic, strong) ABUICodeInput *codeInput;
 
@@ -83,7 +83,17 @@
         return;
     }
     
+
+    [self fetchPostUri:URI_SMS_SEND params:@{@"type":@0, @"mobile":self.phoneInput.text}];
+}
+
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     [self.codeInput start];
+    [ABUITips showError:@"发送成功"];
+}
+
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    [ABUITips showError:err.des];
 }
 
 - (void)loginButtonAction {
@@ -96,8 +106,8 @@
         [ABUITips showError:@"手机号不合法"];
         return;
     }
-    if (![ABTools isValidPhone:self.codeInput.text]) {
-        [ABUITips showError:@"清输入验证码"];
+    if (self.codeInput.text.length == 0) {
+        [ABUITips showError:@"请输入验证码"];
         return;
     }
     

@@ -80,7 +80,7 @@
                         "type":"input",
                         "placeholder":"请输入新密码",
                         "key":"newpwd",
-                        "native_id":"inputitem"
+                        "native_id":"inputitem",
                     },
                     {
                         "title":"确认密码",
@@ -95,7 +95,8 @@
                         "placeholder":"请输入短信验证码",
                         "key":"sms",
                         "tt":"number",
-                        "native_id":"smsitem"
+                        "native_id":"smsitem",
+                        "smstype":1,
                     }
                 ]
             }
@@ -129,7 +130,8 @@
                         "placeholder":"请输入短信验证码",
                         "key":"sms",
                         "tt":"number",
-                        "native_id":"smsitem"
+                        "native_id":"smsitem",
+                        "smstype":2,
                     }
                 ]
             }

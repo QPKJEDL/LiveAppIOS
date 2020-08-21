@@ -156,7 +156,7 @@
 }
 
 - (void)loginPhoneView:(LoginView *)loginView onLoginPhone:(NSString *)phone code:(NSString *)code {
-    
+    [self.lrPresent login:phone code:code];
 }
 
 #pragma mark --------------- jxcategory delegaete --------------

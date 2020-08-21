@@ -231,7 +231,6 @@
 		F17513BB24EE25AA008729D7 /* bet_cancel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513BA24EE25AA008729D7 /* bet_cancel.mp3 */; };
 		F17513BE24EE42F3008729D7 /* GameBetResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513BD24EE42F3008729D7 /* GameBetResultView.m */; };
 		F17513C124EE5656008729D7 /* BetTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513C024EE5656008729D7 /* BetTransform.m */; };
-		F17513C324EE67D4008729D7 /* bankPair.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C224EE67D4008729D7 /* bankPair.mp3 */; };
 		F17513C724EE681D008729D7 /* xian5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C424EE681C008729D7 /* xian5.mp3 */; };
 		F17513C824EE681D008729D7 /* xian4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C524EE681C008729D7 /* xian4.mp3 */; };
 		F17513C924EE681D008729D7 /* xian6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C624EE681C008729D7 /* xian6.mp3 */; };
@@ -239,6 +238,7 @@
 		F17513CE24EE68B9008729D7 /* shunMen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513CB24EE68B8008729D7 /* shunMen.mp3 */; };
 		F17513CF24EE68B9008729D7 /* tianMen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513CC24EE68B9008729D7 /* tianMen.mp3 */; };
 		F17513D224EE7A55008729D7 /* SMSInputItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513D124EE7A55008729D7 /* SMSInputItemView.m */; };
+		F17513D424EF62CB008729D7 /* bankPair.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513D324EF62CB008729D7 /* bankPair.mp3 */; };
 		F18AA63D24B810E7002846AB /* RoomAnchorBriefView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA63C24B810E7002846AB /* RoomAnchorBriefView.m */; };
 		F18AA64024B848AF002846AB /* RoomControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA63F24B848AF002846AB /* RoomControl.m */; };
 		F18AA64324B84CFC002846AB /* MeiYanPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA64224B84CFC002846AB /* MeiYanPromptView.m */; };
@@ -734,7 +734,6 @@
 		F17513BD24EE42F3008729D7 /* GameBetResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameBetResultView.m; sourceTree = "<group>"; };
 		F17513BF24EE5656008729D7 /* BetTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BetTransform.h; sourceTree = "<group>"; };
 		F17513C024EE5656008729D7 /* BetTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BetTransform.m; sourceTree = "<group>"; };
-		F17513C224EE67D4008729D7 /* bankPair.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bankPair.mp3; path = ../../../../../hqgame/assets/resources/audio/bankPair.mp3; sourceTree = "<group>"; };
 		F17513C424EE681C008729D7 /* xian5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian5.mp3; sourceTree = "<group>"; };
 		F17513C524EE681C008729D7 /* xian4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian4.mp3; sourceTree = "<group>"; };
 		F17513C624EE681C008729D7 /* xian6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian6.mp3; sourceTree = "<group>"; };
@@ -743,6 +742,7 @@
 		F17513CC24EE68B9008729D7 /* tianMen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tianMen.mp3; sourceTree = "<group>"; };
 		F17513D024EE7A55008729D7 /* SMSInputItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSInputItemView.h; sourceTree = "<group>"; };
 		F17513D124EE7A55008729D7 /* SMSInputItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSInputItemView.m; sourceTree = "<group>"; };
+		F17513D324EF62CB008729D7 /* bankPair.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bankPair.mp3; sourceTree = "<group>"; };
 		F18AA63B24B810E7002846AB /* RoomAnchorBriefView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAnchorBriefView.h; sourceTree = "<group>"; };
 		F18AA63C24B810E7002846AB /* RoomAnchorBriefView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAnchorBriefView.m; sourceTree = "<group>"; };
 		F18AA63E24B848AF002846AB /* RoomControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomControl.h; sourceTree = "<group>"; };
@@ -1787,13 +1787,13 @@
 		F16CBB1F24AE102700CA6C18 /* audio */ = {
 			isa = PBXGroup;
 			children = (
+				F17513D324EF62CB008729D7 /* bankPair.mp3 */,
 				F17513CA24EE68B8008729D7 /* fanMen.mp3 */,
 				F17513CB24EE68B8008729D7 /* shunMen.mp3 */,
 				F17513CC24EE68B9008729D7 /* tianMen.mp3 */,
 				F17513C524EE681C008729D7 /* xian4.mp3 */,
 				F17513C424EE681C008729D7 /* xian5.mp3 */,
 				F17513C624EE681C008729D7 /* xian6.mp3 */,
-				F17513C224EE67D4008729D7 /* bankPair.mp3 */,
 				F17513BA24EE25AA008729D7 /* bet_cancel.mp3 */,
 				F17513B824EE2480008729D7 /* raise.mp3 */,
 				F1D272B524EB8460003FFABE /* bet_succeed.mp3 */,
@@ -2138,7 +2138,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F17513C324EE67D4008729D7 /* bankPair.mp3 in Resources */,
 				F1D2727524E3BC6A003FFABE /* test.js in Resources */,
 				F1D2727A24E3BC6A003FFABE /* xian_b2.png in Resources */,
 				F10FB5BA24BC023600857E1E /* 1_720.mp4 in Resources */,
@@ -2189,6 +2188,7 @@
 				559F3EC42453F8E3001280F2 /* sysmessagelist.json in Resources */,
 				F16CBB3424AE102800CA6C18 /* starBet.mp3 in Resources */,
 				557C07F124515E7C008868E6 /* popup.json in Resources */,
+				F17513D424EF62CB008729D7 /* bankPair.mp3 in Resources */,
 				557C079724500E2D008868E6 /* tabbar.json in Resources */,
 				F1B7950624596EA7000BD333 /* wallet.json in Resources */,
 				F1D2729024E3BC6A003FFABE /* index.css in Resources */,

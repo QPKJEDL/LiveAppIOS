@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DateItemView : UIView
 @property (nonatomic, strong) QMUIButton *dateButton;
 @property (nonatomic, strong) QMUIButton *selectButton;
+
+@property (nonatomic, strong) NSString *dateTitle;
 @end
 
 NS_ASSUME_NONNULL_END

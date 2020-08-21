@@ -13,6 +13,8 @@
 @property (nonatomic, strong) QMUITextField *textField;
 @property (nonatomic, strong) NSString *key;
 @property (nonatomic, strong) ABCountDownButton *cbButton;
+
+@property (nonatomic, assign) NSInteger smstype;
 @end
 @implementation SMSInputItemView
 
@@ -43,7 +45,7 @@
 - (void)cbButtonAction {
     NSString *mobile = [Service shared].account.info[@"Account"];
     [ABUITips showLoading];
-    [self fetchPostUri:URI_SMS_SEND params:@{@"mobile":mobile}];
+    [self fetchPostUri:URI_SMS_SEND params:@{@"mobile":mobile, @"type":@(self.smstype)}];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
@@ -58,6 +60,7 @@
 }
 
 - (void)reload:(NSDictionary *)item {
+    self.smstype = [item[@"smstype"] intValue];
     self.titleLabel.text = item[@"title"];
     [self.titleLabel sizeToFit];
     

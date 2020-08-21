@@ -48,9 +48,9 @@
 
 - (void)refreshData {
     if (self.dataList.count == 0) {
-        [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid":@(0),@"date":self.dateItemView.dateButton.titleLabel.text}];
+        [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid":@(0),@"date":self.dateItemView.dateTitle}];
     }else{
-        [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid": self.dataList.lastObject[@"id"],@"date":self.dateItemView.dateButton.titleLabel.text}];
+        [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid": self.dataList.lastObject[@"id"],@"date":self.dateItemView.dateTitle}];
     }
 }
 
@@ -90,6 +90,6 @@
 }
 
 - (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
-    [self refreshData];
+    [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid":@(0),@"date":self.dateItemView.dateTitle}];
 }
 @end

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LoginRegPresent : NSObject<INetData>
 @property (nonatomic, weak) id<LoginRegPresentDelegate> delegate;
 - (void)login:(NSString *)username passsword:(NSString *)password;
+- (void)login:(NSString *)phone code:(NSString *)code;
 - (void)reg:(NSString *)username nickname:(NSString *)nickname passsword:(NSString *)password;
 @end
 

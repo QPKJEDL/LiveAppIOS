@@ -12,7 +12,12 @@
 /// Called to modify a request before sending.
 - (ABNetRequest *)prepare:(ABNetRequest *)request {
     if ([request.uri isEqualToString:URI_ACCOUNT_LOGIN]) {
-        request.realUri = @"/login";
+        if (request.params[@"code"] == nil) {
+            request.realUri = @"/login";
+        }else{
+            request.realUri = @"/Codelogin";
+        }
+        
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_INFO]) {
         request.realUri = @"/user_balance";
@@ -91,6 +96,14 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
         request.realUri = @"/WebUserBalance";
     }
+    if ([request.uri isEqualToString:URI_SMS_SEND]) {
+        NSInteger type = [request.params[@"type"] intValue];
+        if (type == 0) {
+            request.realUri = @"/LoginSend";
+        }else{
+            request.realUri = @"/DtSend";
+        }
+    }
     return request;
 }
 
@@ -156,9 +169,9 @@
         }
         
         NSArray *pays = @[
-            @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel"},
-            @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel"},
-            @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel"}
+            @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel", @"count":@(3)},
+            @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel", @"count":@(3)},
+            @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel", @"count":@(3)}
         ];
         
         CGFloat w = floor((SCREEN_WIDTH-14)/3);
