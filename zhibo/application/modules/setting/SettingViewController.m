@@ -42,7 +42,11 @@
 - (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
     NSString *type = item[@"type"];
     if ([type isEqualToString:@"arrow"]) {
-        [NSRouter gotoSettingPage:item[@"key"]];
+        NSString *key = item[@"key"];
+        if ([key isEqualToString:@"binding_bank"] && [Service shared].account.isBindBank) {
+            key = @"editing_bank";
+        }
+        [NSRouter gotoSettingPage:key];
     }
 }
 
@@ -55,10 +59,44 @@
 
 //    [self.view makeToastActivity:CSToastPositionCenter];
     if ([self.key isEqualToString:@"loginpwd"]) {
-        [self fetchPostUri:URI_ACCOUNT_FORGET_LOGIN params:@{@"old_pwd":[[Stack shared] get:@"old_pwd"], @"new_pwd":[[Stack shared] get:@"new_pwd"]}];
+        NSString *newpwd = [[[Stack shared] get:@"newpwd"] trimmingNewLineAndWhiteSpace];
+        NSString *renewpwd = [[[Stack shared] get:@"renewpwd"] trimmingNewLineAndWhiteSpace];
+        NSString *smscode = [[[Stack shared] get:@"sms"] trimmingNewLineAndWhiteSpace];
+        if (newpwd.length == 0) {
+            [ABUITips showError:@"请输入密码"];
+            return;
+        }
+        if (![newpwd isEqualToString:renewpwd]) {
+            [ABUITips showError:@"密码输入不一致"];
+            return;
+        }
+        
+        if (smscode.length == 0) {
+            [ABUITips showError:@"请输入验证码"];
+            return;
+        }
+        
+        [self fetchPostUri:URI_ACCOUNT_FORGET_LOGIN params:@{@"new_pwd":newpwd, @"code":smscode}];
     }
     if ([self.key isEqualToString:@"rechargepwd"]) {
-        [self fetchPostUri:URI_ACCOUNT_FORGET_RECHARGE params:@{@"log_pwd":[[Stack shared] get:@"log_pwd"], @"new_pwd":[[Stack shared] get:@"new_pwd"], @"bank_card":[[Stack shared] get:@"bank_card"]}];
+        NSString *newpwd = [[[Stack shared] get:@"newpwd"] trimmingNewLineAndWhiteSpace];
+        NSString *renewpwd = [[[Stack shared] get:@"renewpwd"] trimmingNewLineAndWhiteSpace];
+        NSString *smscode = [[[Stack shared] get:@"sms"] trimmingNewLineAndWhiteSpace];
+        if (newpwd.length == 0) {
+            [ABUITips showError:@"请输入密码"];
+            return;
+        }
+        if (![newpwd isEqualToString:renewpwd]) {
+            [ABUITips showError:@"密码输入不一致"];
+            return;
+        }
+        
+        if (smscode.length == 0) {
+            [ABUITips showError:@"请输入验证码"];
+            return;
+        }
+        
+        [self fetchPostUri:URI_ACCOUNT_FORGET_RECHARGE params:@{@"new_pwd":newpwd, @"code":smscode}];
     }
     if ([self.key isEqualToString:@"editnick"]) {
         [self fetchPostUri:URI_ACCOUNT_EDIT_NICKNAME params:@{@"nickname":[[Stack shared] get:@"nickname"]}];
@@ -69,19 +107,81 @@
     if ([self.key isEqualToString:@"binding_alipay"]) {
         [self fetchPostUri:URI_ACCOUNT_BIND_ALIPAY params:@{@"ali":[[Stack shared] get:@"alipay_account"], @"ali_name":[[Stack shared] get:@"alipay_name"]}];
     }
-    if ([self.key isEqualToString:@"binding_bank"]) {
+    if ([self.key isEqualToString:@"editing_bank"]) {
         NSString *bankCardNumber = [[Stack shared] get:@"bank_cardnumber"];
+        bankCardNumber = [bankCardNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![ABTools isValidBankCardNo:bankCardNumber]) {
             [ABUITips showError:@"银行卡号码错误"];
             return;
         }
+        NSString *bank_username = [[Stack shared] get:@"bank_username"];
+        NSString *bank_name = [[Stack shared] get:@"bank_name"];
+        NSString *bank_store = [[Stack shared] get:@"bank_store"];
+        if (bank_username.length == 0) {
+            [ABUITips showError:@"请输入持卡人姓名"];
+            return;
+        }
+        if (bank_name.length == 0) {
+            [ABUITips showError:@"请输入银行名称"];
+            return;
+        }
+        if (bank_store.length == 0) {
+            [ABUITips showError:@"请输入开户网点"];
+            return;
+        }
         [self fetchPostUri:URI_ACCOUNT_BIND_CARD params:@{
-            @"card_name":[[Stack shared] get:@"bank_username"],
-            @"bank_name":[[Stack shared] get:@"bank_name"],
+            @"card_name":bank_username,
+            @"bank_name":bank_name,
             @"bank_card":bankCardNumber,
-            @"bank_addr":[[Stack shared] get:@"bank_store"],
-            @"draw_pwd1":[[Stack shared] get:@"bank_pwd"],
-            @"draw_pwd2":[[Stack shared] get:@"bank_pwd"],
+            @"bank_addr":bank_store,
+            @"type":@"2",
+        }];
+    }
+    if ([self.key isEqualToString:@"binding_bank"]) {
+        NSString *bankCardNumber = [[Stack shared] get:@"bank_cardnumber"];
+        bankCardNumber = [bankCardNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (![ABTools isValidBankCardNo:bankCardNumber]) {
+            [ABUITips showError:@"银行卡号码错误"];
+            return;
+        }
+        NSString *draw_pwd1 = [[Stack shared] get:@"bank_pwd"];
+        NSString *draw_pwd2 = [[Stack shared] get:@"rebank_pwd"];
+        NSString *bank_username = [[Stack shared] get:@"bank_username"];
+        NSString *bank_name = [[Stack shared] get:@"bank_name"];
+        NSString *bank_store = [[Stack shared] get:@"bank_store"];
+        if (bank_username.length == 0) {
+            [ABUITips showError:@"请输入持卡人姓名"];
+            return;
+        }
+        if (bank_name.length == 0) {
+            [ABUITips showError:@"请输入银行名称"];
+            return;
+        }
+        if (bank_store.length == 0) {
+            [ABUITips showError:@"请输入开户网点"];
+            return;
+        }
+        if (draw_pwd1.length == 0) {
+            [ABUITips showError:@"请填写支付密码"];
+            return;
+        }
+        if (draw_pwd2.length == 0) {
+            [ABUITips showError:@"请再次填写支付密码"];
+            return;
+        }
+        
+        if ([draw_pwd2 isEqualToString:draw_pwd1] == false) {
+            [ABUITips showError:@"两次支付密码输入不一致"];
+            return;
+        }
+        
+        [self fetchPostUri:URI_ACCOUNT_BIND_CARD params:@{
+            @"card_name":bank_username,
+            @"bank_name":bank_name,
+            @"bank_card":bankCardNumber,
+            @"bank_addr":bank_store,
+            @"draw_pwd1":draw_pwd1,
+            @"draw_pwd2":draw_pwd2,
             @"type":@"1",
         }];
     }
@@ -113,6 +213,7 @@
     if ([req.uri isEqualToString:URI_ACCOUNT_BIND_CARD]) {
          [ABUITips showSucceed:@"绑定成功"];
         [self fetchPostUri:URI_ACCOUNT_INFO params:nil];
+       [self.navigationController popViewControllerAnimated:true];
     }
     if ([req.uri isEqualToString:URI_ACCOUNT_INFO]) {
         [[Service shared].account setInfo:obj];

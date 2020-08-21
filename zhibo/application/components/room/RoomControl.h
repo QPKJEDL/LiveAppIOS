@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GameStatusPlateView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RoomControl : UIView
 @property (nonatomic, strong) NSString *shixunPlayAddress;
 @property (nonatomic, strong) NSDictionary *roomInfo;
 @property (nonatomic, strong) ABUIWebView *wenluWebView;
+@property (nonatomic, strong) GameStatusPlateView *plateView;
 
 - (void)onReceiveRoomMessage:(NSDictionary *)message;
 - (void)onReceivePeerMessage:(NSDictionary *)message;
@@ -36,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)anchorReturn;
 
 - (void)onPlate;
+
+- (void)free;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -78,7 +78,7 @@
     
     NSMutableArray *list = [[NSMutableArray alloc] init];
     if (self.uid != [Service shared].account.uid) {
-        [list addObject:@{@"title":@"+关注", @"title_hl":@"已关注", @"color":@"#FF2A40", @"native_id":@"userpromptaction", @"selected":@(self.isFollowed), @"key":@"gz"}];
+//        [list addObject:@{@"title":@"+关注", @"title_hl":@"已关注", @"color":@"#FF2A40", @"native_id":@"userpromptaction", @"selected":@(self.isFollowed), @"key":@"gz"}];
         BOOL isFangzhu = [RoomContext shared].roomManager.anchorid == [Service shared].account.uid;
         if (([RoomContext shared].isManager && self.isManager == false) || isFangzhu) {//自己是管理，点击的用户非管理非房主
             [list addObject:@{@"title":@"踢人", @"title_hl":@"已踢",@"color":@"#313131", @"native_id":@"userpromptaction", @"selected":@(self.isTi), @"key":@"kick"}];

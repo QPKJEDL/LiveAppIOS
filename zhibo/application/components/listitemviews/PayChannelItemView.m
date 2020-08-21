@@ -61,6 +61,7 @@
     }else{
         [self.checkBoxImageView setImage:[UIImage imageNamed:@"quan"]];
     }
+    [self.checkBoxImageView setHidden:true];
 }
 
 @end

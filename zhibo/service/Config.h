@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Config : NSObject
 + (NSArray *)getMe;
 + (NSArray *)getMeActions;
++ (NSDictionary *)getBank;
 @end
 
 NS_ASSUME_NONNULL_END

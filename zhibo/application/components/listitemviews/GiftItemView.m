@@ -38,8 +38,8 @@
     NSString *name = item[@"giftname"];
     self.titleLabel.text = name;
     
-    NSInteger price = [item[@"price"] integerValue];
-    self.priceLabel.text = [NSString stringWithFormat:@"%ld金币", (long)price];
+//    NSInteger price = [item[@"price"] integerValue];
+    self.priceLabel.text = [NSString stringWithFormat:@"%@金币", item[@"price"]];
     
     [self.iconImageView loadImage:item[@"imgurl"]];
 }

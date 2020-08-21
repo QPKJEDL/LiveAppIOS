@@ -163,7 +163,17 @@
 //}
 
 - (void)stop {
-    [self.timer invalidate];
+    if ([self.timer isValid]) {
+        [self.timer invalidate];
+    }
+    
+    self.textLabel.text = @"待开牌";
+    self.timeLabel.text = @"";
+    self.textLabel.textColor = [UIColor hexColor:@"#E62020"];
+    self.textLabel.centerY = self.height/2;
+    
+    self.layer.borderColor = [[UIColor hexColor:@"E62020"] colorWithAlphaComponent:0.58].CGColor;
+    self.layer.shadowColor = [[UIColor hexColor:@"E62020"] colorWithAlphaComponent:0.58].CGColor;
 }
 
 - (void)dealloc {

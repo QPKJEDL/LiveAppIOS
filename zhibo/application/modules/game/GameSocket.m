@@ -48,6 +48,8 @@
 
 - (void)applicationDidBecomeActive {
     [self startRoomWithID:self.roomID];
+    
+    [RC.gameManager refresh];
 }
 
 - (void)startRoomWithID:(int64_t)roomID {
@@ -58,6 +60,7 @@
     [self.imService enterRoom:roomID];
     [self.imService start];
     [self.imService addRoomMessageObserver:self];
+    [self.imService addPeerMessageObserver:self];
 }
 
 - (void)leaveRoomWithID:(int64_t)roomID {
@@ -73,6 +76,7 @@
     
 
     [self.imService removeRoomMessageObserver:self];
+    [self.imService removePeerMessageObserver:self];
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {
@@ -83,7 +87,9 @@
 
 - (void)onPeerMessage:(IMMessage *)msg { //游戏事件
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[msg.content dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    [[ABMQ shared] publish:dic channel:CHANNEL_ROOM_GAME];
+    if (dic[@"Cmd"] != nil && [dic[@"Cmd"] intValue] == 7) {
+        [[ABMQ shared] publish:dic channel:CHANNEL_ROOM_GAME];
+    }
 }
 
 - (void)sendText:(NSString *)text {

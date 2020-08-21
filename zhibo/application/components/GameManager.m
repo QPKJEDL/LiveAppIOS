@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) NSDictionary *deskInfo;
 @property (nonatomic, strong) NSDictionary *desksubmit;
-@property (nonatomic, strong) NSString *DeskName;
 
 
 
@@ -38,6 +37,10 @@
 - (void)enterRoomId:(NSInteger)roomId {
     self.room_id = roomId;
     [self fetchPostUri:URI_ROOM_GAME params:@{@"room_id":@(roomId)}];
+}
+
+- (void)refresh {
+    [self fetchPostUri:URI_ROOM_GAME params:@{@"room_id":@(self.room_id)}];
 }
 
 //- (void)enterDeskId:(NSInteger)deskId {
@@ -107,6 +110,7 @@
         CGFloat bb = [obj[@"balance"] floatValue];
         CGFloat cha = MAX(0, bb-RP.betView.bb);
         
+        [[ABAudio shared] playBundleFileWithName:@"bet_cancel.mp3"];
         [ABUITips showSucceed:[NSString stringWithFormat:@"取消返还:%.2f", cha]];
         [RP.betView reset];
         [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
@@ -119,7 +123,8 @@
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     [ABUITips showError:err.message];
     if ([req.uri isEqualToString:URI_GAME_BET]) {
-        [RP.betView betFailure];
+        [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
+        [RP.betView timeEnd];
     }
 }
 
@@ -176,6 +181,9 @@
     int cmd = [desk[@"Cmd"] intValue];
     if (cmd == 6) {
         phase = 4;
+    }
+    if (cmd == 7) {
+        phase = 7;
     }
 
     [[ABMQ shared] publish:@{@"status":@(phase), @"data":desk} channel:CHANNEL_GAME_STATUS];

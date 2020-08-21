@@ -111,6 +111,7 @@
 }
 
 - (void)close:(NSDictionary *)data {
+    [self.controlView free];
     [self.controlView removeFromSuperview];
     [self.playView free];
     [self.shixunPlayView free];
@@ -125,6 +126,7 @@
 - (void)dealloc
 {
     [self.playView free];
+    [self.controlView free];
     [self.shixunPlayView free];
 }
 

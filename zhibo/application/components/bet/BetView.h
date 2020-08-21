@@ -34,6 +34,7 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) CGFloat bb;
 - (void)setCoins:(NSArray *)coins options:(NSArray *)options sounds:(NSDictionary *)sounds limit:(NSString *)limit;
 - (void)resetUnBet;
+- (void)timeEnd;
 - (void)reset;
 - (void)betSuccess;
 - (void)betFailure;

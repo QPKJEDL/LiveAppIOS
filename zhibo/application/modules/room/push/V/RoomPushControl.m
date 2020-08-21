@@ -48,6 +48,7 @@
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
     QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
         [self didClose];
+        [self.plateView stop];
     }];
       QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定关闭直播？" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
       [alertController addAction:action1];

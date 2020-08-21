@@ -211,7 +211,6 @@
 		F16CBB3024AE102800CA6C18 /* xian1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2224AE102700CA6C18 /* xian1.mp3 */; };
 		F16CBB3124AE102800CA6C18 /* xian3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2324AE102700CA6C18 /* xian3.mp3 */; };
 		F16CBB3224AE102800CA6C18 /* xian2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2424AE102700CA6C18 /* xian2.mp3 */; };
-		F16CBB3324AE102800CA6C18 /* bankPair.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2524AE102700CA6C18 /* bankPair.mp3 */; };
 		F16CBB3424AE102800CA6C18 /* starBet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2624AE102700CA6C18 /* starBet.mp3 */; };
 		F16CBB3524AE102800CA6C18 /* xianWin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2724AE102700CA6C18 /* xianWin.mp3 */; };
 		F16CBB3624AE102800CA6C18 /* lastTenM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F16CBB2824AE102700CA6C18 /* lastTenM.mp3 */; };
@@ -226,6 +225,20 @@
 		F16F6D4224A9B591003A51A6 /* GameDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F16F6D4124A9B591003A51A6 /* GameDataHelper.m */; };
 		F16F6D4424A9C7BD003A51A6 /* betrules.json in Resources */ = {isa = PBXBuildFile; fileRef = F16F6D4324A9C7BC003A51A6 /* betrules.json */; };
 		F16F6D6F24AB1010003A51A6 /* NetErrorPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F16F6D6E24AB1010003A51A6 /* NetErrorPlugin.m */; };
+		F17513B324ED012B008729D7 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513B124ED012B008729D7 /* UncaughtExceptionHandler.m */; };
+		F17513B724EE2387008729D7 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = F17513B624EE2387008729D7 /* index.html */; };
+		F17513B924EE2480008729D7 /* raise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513B824EE2480008729D7 /* raise.mp3 */; };
+		F17513BB24EE25AA008729D7 /* bet_cancel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513BA24EE25AA008729D7 /* bet_cancel.mp3 */; };
+		F17513BE24EE42F3008729D7 /* GameBetResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513BD24EE42F3008729D7 /* GameBetResultView.m */; };
+		F17513C124EE5656008729D7 /* BetTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513C024EE5656008729D7 /* BetTransform.m */; };
+		F17513C324EE67D4008729D7 /* bankPair.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C224EE67D4008729D7 /* bankPair.mp3 */; };
+		F17513C724EE681D008729D7 /* xian5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C424EE681C008729D7 /* xian5.mp3 */; };
+		F17513C824EE681D008729D7 /* xian4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C524EE681C008729D7 /* xian4.mp3 */; };
+		F17513C924EE681D008729D7 /* xian6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513C624EE681C008729D7 /* xian6.mp3 */; };
+		F17513CD24EE68B9008729D7 /* fanMen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513CA24EE68B8008729D7 /* fanMen.mp3 */; };
+		F17513CE24EE68B9008729D7 /* shunMen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513CB24EE68B8008729D7 /* shunMen.mp3 */; };
+		F17513CF24EE68B9008729D7 /* tianMen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513CC24EE68B9008729D7 /* tianMen.mp3 */; };
+		F17513D224EE7A55008729D7 /* SMSInputItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513D124EE7A55008729D7 /* SMSInputItemView.m */; };
 		F18AA63D24B810E7002846AB /* RoomAnchorBriefView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA63C24B810E7002846AB /* RoomAnchorBriefView.m */; };
 		F18AA64024B848AF002846AB /* RoomControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA63F24B848AF002846AB /* RoomControl.m */; };
 		F18AA64324B84CFC002846AB /* MeiYanPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA64224B84CFC002846AB /* MeiYanPromptView.m */; };
@@ -265,7 +278,6 @@
 		F1B7950624596EA7000BD333 /* wallet.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950524596EA6000BD333 /* wallet.json */; };
 		F1B7950924597214000BD333 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B7950824597214000BD333 /* BillViewController.m */; };
 		F1B7950B24597A7C000BD333 /* footprint.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950A24597A7C000BD333 /* footprint.json */; };
-		F1D2727424E3BC6A003FFABE /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725524E3BC69003FFABE /* index.html */; };
 		F1D2727524E3BC6A003FFABE /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725624E3BC69003FFABE /* test.js */; };
 		F1D2727624E3BC6A003FFABE /* zhuang.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725824E3BC69003FFABE /* zhuang.png */; };
 		F1D2727724E3BC6A003FFABE /* hong_xie.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725924E3BC69003FFABE /* hong_xie.png */; };
@@ -694,7 +706,6 @@
 		F16CBB2224AE102700CA6C18 /* xian1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian1.mp3; sourceTree = "<group>"; };
 		F16CBB2324AE102700CA6C18 /* xian3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian3.mp3; sourceTree = "<group>"; };
 		F16CBB2424AE102700CA6C18 /* xian2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian2.mp3; sourceTree = "<group>"; };
-		F16CBB2524AE102700CA6C18 /* bankPair.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bankPair.mp3; sourceTree = "<group>"; };
 		F16CBB2624AE102700CA6C18 /* starBet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starBet.mp3; sourceTree = "<group>"; };
 		F16CBB2724AE102700CA6C18 /* xianWin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xianWin.mp3; sourceTree = "<group>"; };
 		F16CBB2824AE102700CA6C18 /* lastTenM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lastTenM.mp3; sourceTree = "<group>"; };
@@ -714,6 +725,24 @@
 		F16F6D4324A9C7BC003A51A6 /* betrules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = betrules.json; sourceTree = "<group>"; };
 		F16F6D6D24AB1010003A51A6 /* NetErrorPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetErrorPlugin.h; sourceTree = "<group>"; };
 		F16F6D6E24AB1010003A51A6 /* NetErrorPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetErrorPlugin.m; sourceTree = "<group>"; };
+		F17513B124ED012B008729D7 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		F17513B224ED012B008729D7 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		F17513B624EE2387008729D7 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		F17513B824EE2480008729D7 /* raise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = raise.mp3; sourceTree = "<group>"; };
+		F17513BA24EE25AA008729D7 /* bet_cancel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bet_cancel.mp3; sourceTree = "<group>"; };
+		F17513BC24EE42F3008729D7 /* GameBetResultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameBetResultView.h; sourceTree = "<group>"; };
+		F17513BD24EE42F3008729D7 /* GameBetResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameBetResultView.m; sourceTree = "<group>"; };
+		F17513BF24EE5656008729D7 /* BetTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BetTransform.h; sourceTree = "<group>"; };
+		F17513C024EE5656008729D7 /* BetTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BetTransform.m; sourceTree = "<group>"; };
+		F17513C224EE67D4008729D7 /* bankPair.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bankPair.mp3; path = ../../../../../hqgame/assets/resources/audio/bankPair.mp3; sourceTree = "<group>"; };
+		F17513C424EE681C008729D7 /* xian5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian5.mp3; sourceTree = "<group>"; };
+		F17513C524EE681C008729D7 /* xian4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian4.mp3; sourceTree = "<group>"; };
+		F17513C624EE681C008729D7 /* xian6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xian6.mp3; sourceTree = "<group>"; };
+		F17513CA24EE68B8008729D7 /* fanMen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fanMen.mp3; sourceTree = "<group>"; };
+		F17513CB24EE68B8008729D7 /* shunMen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shunMen.mp3; sourceTree = "<group>"; };
+		F17513CC24EE68B9008729D7 /* tianMen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tianMen.mp3; sourceTree = "<group>"; };
+		F17513D024EE7A55008729D7 /* SMSInputItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSInputItemView.h; sourceTree = "<group>"; };
+		F17513D124EE7A55008729D7 /* SMSInputItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSInputItemView.m; sourceTree = "<group>"; };
 		F18AA63B24B810E7002846AB /* RoomAnchorBriefView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAnchorBriefView.h; sourceTree = "<group>"; };
 		F18AA63C24B810E7002846AB /* RoomAnchorBriefView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAnchorBriefView.m; sourceTree = "<group>"; };
 		F18AA63E24B848AF002846AB /* RoomControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomControl.h; sourceTree = "<group>"; };
@@ -789,7 +818,6 @@
 		F1B7950724597214000BD333 /* BillViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillViewController.h; sourceTree = "<group>"; };
 		F1B7950824597214000BD333 /* BillViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillViewController.m; sourceTree = "<group>"; };
 		F1B7950A24597A7C000BD333 /* footprint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = footprint.json; sourceTree = "<group>"; };
-		F1D2725524E3BC69003FFABE /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		F1D2725624E3BC69003FFABE /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		F1D2725824E3BC69003FFABE /* zhuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhuang.png; sourceTree = "<group>"; };
 		F1D2725924E3BC69003FFABE /* hong_xie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hong_xie.png; sourceTree = "<group>"; };
@@ -875,6 +903,8 @@
 				F11AA4E224D4012900FCFE18 /* HTAsyncSocket.m */,
 				F11AA52324D79D4000FCFE18 /* ZBProgressView.h */,
 				F11AA52424D79D4000FCFE18 /* ZBProgressView.m */,
+				F17513BF24EE5656008729D7 /* BetTransform.h */,
+				F17513C024EE5656008729D7 /* BetTransform.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1357,6 +1387,8 @@
 		55FD3674244FDCBB00D84DD9 /* zhibo */ = {
 			isa = PBXGroup;
 			children = (
+				F17513B224ED012B008729D7 /* UncaughtExceptionHandler.h */,
+				F17513B124ED012B008729D7 /* UncaughtExceptionHandler.m */,
 				F11AA4E424D4032B00FCFE18 /* GCDAsyncSocketManager */,
 				F16CBBD324B063C100CA6C18 /* QMUIConfigurationTemplate */,
 				F16CBB1E24AE0FDF00CA6C18 /* resource */,
@@ -1689,6 +1721,8 @@
 				F11AA53C24D9027100FCFE18 /* PopularizeCodeItemView.m */,
 				F1D272AD24E7CE08003FFABE /* CodeInputItemView.h */,
 				F1D272AE24E7CE08003FFABE /* CodeInputItemView.m */,
+				F17513D024EE7A55008729D7 /* SMSInputItemView.h */,
+				F17513D124EE7A55008729D7 /* SMSInputItemView.m */,
 			);
 			path = listitemviews;
 			sourceTree = "<group>";
@@ -1753,6 +1787,15 @@
 		F16CBB1F24AE102700CA6C18 /* audio */ = {
 			isa = PBXGroup;
 			children = (
+				F17513CA24EE68B8008729D7 /* fanMen.mp3 */,
+				F17513CB24EE68B8008729D7 /* shunMen.mp3 */,
+				F17513CC24EE68B9008729D7 /* tianMen.mp3 */,
+				F17513C524EE681C008729D7 /* xian4.mp3 */,
+				F17513C424EE681C008729D7 /* xian5.mp3 */,
+				F17513C624EE681C008729D7 /* xian6.mp3 */,
+				F17513C224EE67D4008729D7 /* bankPair.mp3 */,
+				F17513BA24EE25AA008729D7 /* bet_cancel.mp3 */,
+				F17513B824EE2480008729D7 /* raise.mp3 */,
 				F1D272B524EB8460003FFABE /* bet_succeed.mp3 */,
 				F19E90DC24B2C48000FFF38C /* bet_failed.mp3 */,
 				F16CBB2024AE102700CA6C18 /* xianPair.mp3 */,
@@ -1760,7 +1803,6 @@
 				F16CBB2224AE102700CA6C18 /* xian1.mp3 */,
 				F16CBB2324AE102700CA6C18 /* xian3.mp3 */,
 				F16CBB2424AE102700CA6C18 /* xian2.mp3 */,
-				F16CBB2524AE102700CA6C18 /* bankPair.mp3 */,
 				F16CBB2624AE102700CA6C18 /* starBet.mp3 */,
 				F16CBB2724AE102700CA6C18 /* xianWin.mp3 */,
 				F16CBB2824AE102700CA6C18 /* lastTenM.mp3 */,
@@ -1826,6 +1868,8 @@
 				F18AA65C24B86E7A002846AB /* RoomChatView.m */,
 				F10FB5BB24BC034000857E1E /* GiftEffectsPlayView.h */,
 				F10FB5BC24BC034000857E1E /* GiftEffectsPlayView.m */,
+				F17513BC24EE42F3008729D7 /* GameBetResultView.h */,
+				F17513BD24EE42F3008729D7 /* GameBetResultView.m */,
 			);
 			path = room;
 			sourceTree = "<group>";
@@ -1984,7 +2028,7 @@
 		F1D2725424E3BC69003FFABE /* wenlu */ = {
 			isa = PBXGroup;
 			children = (
-				F1D2725524E3BC69003FFABE /* index.html */,
+				F17513B624EE2387008729D7 /* index.html */,
 				F1D2725624E3BC69003FFABE /* test.js */,
 				F1D2725724E3BC69003FFABE /* images */,
 				F1D2727224E3BC6A003FFABE /* index.css */,
@@ -2094,6 +2138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17513C324EE67D4008729D7 /* bankPair.mp3 in Resources */,
 				F1D2727524E3BC6A003FFABE /* test.js in Resources */,
 				F1D2727A24E3BC6A003FFABE /* xian_b2.png in Resources */,
 				F10FB5BA24BC023600857E1E /* 1_720.mp4 in Resources */,
@@ -2105,6 +2150,7 @@
 				F1D2728024E3BC6A003FFABE /* zhuang_a1b2.png in Resources */,
 				F16CBB3924AE102800CA6C18 /* stopBet.mp3 in Resources */,
 				F1D2727C24E3BC6A003FFABE /* dyz_hong_a1b2.png in Resources */,
+				F17513C724EE681D008729D7 /* xian5.mp3 in Resources */,
 				F1D2728624E3BC6A003FFABE /* he.png in Resources */,
 				F1D2728824E3BC6A003FFABE /* xian_a1b2.png in Resources */,
 				F16CBB3624AE102800CA6C18 /* lastTenM.mp3 in Resources */,
@@ -2115,9 +2161,10 @@
 				F15D271724E0DE250026F847 /* abc.png in Resources */,
 				F16CBB2F24AE102800CA6C18 /* heJu.mp3 in Resources */,
 				F16CBB2E24AE102800CA6C18 /* xianPair.mp3 in Resources */,
+				F17513B724EE2387008729D7 /* index.html in Resources */,
 				F15D271D24E2697C0026F847 /* zhuangxian.json in Resources */,
 				F1D2727824E3BC6A003FFABE /* lans.png in Resources */,
-				F16CBB3324AE102800CA6C18 /* bankPair.mp3 in Resources */,
+				F17513B924EE2480008729D7 /* raise.mp3 in Resources */,
 				F1D2727624E3BC6A003FFABE /* zhuang.png in Resources */,
 				F121925E24D154FB00630CA2 /* A89.html in Resources */,
 				F1D2727724E3BC6A003FFABE /* hong_xie.png in Resources */,
@@ -2129,11 +2176,14 @@
 				F16CBB3524AE102800CA6C18 /* xianWin.mp3 in Resources */,
 				F1D2728A24E3BC6A003FFABE /* xian_a1.png in Resources */,
 				F1D2728F24E3BC6A003FFABE /* zhuang_b2.png in Resources */,
+				F17513C824EE681D008729D7 /* xian4.mp3 in Resources */,
+				F17513CD24EE68B9008729D7 /* fanMen.mp3 in Resources */,
 				F121927024D17B8100630CA2 /* niuniu.html in Resources */,
+				F17513C924EE681D008729D7 /* xian6.mp3 in Resources */,
 				F1D2727924E3BC6A003FFABE /* zhuang_a1.png in Resources */,
 				F16CBB3124AE102800CA6C18 /* xian3.mp3 in Resources */,
+				F17513CF24EE68B9008729D7 /* tianMen.mp3 in Resources */,
 				F1D2728B24E3BC6A003FFABE /* lan.png in Resources */,
-				F1D2727424E3BC6A003FFABE /* index.html in Resources */,
 				F1B7950B24597A7C000BD333 /* footprint.json in Resources */,
 				F1D2727E24E3BC6A003FFABE /* dyz_lan_a1.png in Resources */,
 				559F3EC42453F8E3001280F2 /* sysmessagelist.json in Resources */,
@@ -2159,6 +2209,8 @@
 				F1D2728324E3BC6A003FFABE /* hong.png in Resources */,
 				F1D2728124E3BC6A003FFABE /* dyz_hong_b2.png in Resources */,
 				F12191FF24CA79B900630CA2 /* mineconfig.json in Resources */,
+				F17513CE24EE68B9008729D7 /* shunMen.mp3 in Resources */,
+				F17513BB24EE25AA008729D7 /* bet_cancel.mp3 in Resources */,
 				F1D2728D24E3BC6A003FFABE /* lan_xie.png in Resources */,
 				559F3F0624567A3E001280F2 /* setting.json in Resources */,
 				559F3E5A24528A1C001280F2 /* momentlist.json in Resources */,
@@ -2311,6 +2363,7 @@
 				F11AA4DD24D2F55E00FCFE18 /* ReChargeHistoryViewController.m in Sources */,
 				F16CBB0724ACBEAE00CA6C18 /* RegisterView.m in Sources */,
 				F1A4D87924C567A8003A6031 /* GiftHistoryItemView.m in Sources */,
+				F17513BE24EE42F3008729D7 /* GameBetResultView.m in Sources */,
 				F121922424CECC1600630CA2 /* RankViewController.m in Sources */,
 				F121923724CFD35F00630CA2 /* RankItemView.m in Sources */,
 				F11682F924A0A315004DD6B8 /* BetOptionView.m in Sources */,
@@ -2342,12 +2395,14 @@
 				F121923E24CFFBB700630CA2 /* RankTopView.m in Sources */,
 				F18AA63D24B810E7002846AB /* RoomAnchorBriefView.m in Sources */,
 				557C07CF24511FD2008868E6 /* NSMediator.m in Sources */,
+				F17513C124EE5656008729D7 /* BetTransform.m in Sources */,
 				F10FB5CC24BC5FD500857E1E /* RoomMessageWelcomeItemView.m in Sources */,
 				F121924A24D0403800630CA2 /* GameHistoryItemView.m in Sources */,
 				F166618E24BEF6B000B2607C /* RoomAnchorActionView.m in Sources */,
 				F166EE2E24B5CF5D00178F0F /* Stack.m in Sources */,
 				F11AA51D24D53C3000FCFE18 /* GFCalendarCell.m in Sources */,
 				F10FB5BD24BC034000857E1E /* GiftEffectsPlayView.m in Sources */,
+				F17513B324ED012B008729D7 /* UncaughtExceptionHandler.m in Sources */,
 				F10FB5B124BB1D9D00857E1E /* AnchorPromptView.m in Sources */,
 				557C07A724501955008868E6 /* BaseNavigationController.m in Sources */,
 				559F3E6624529790001280F2 /* FollowPresent.m in Sources */,
@@ -2379,6 +2434,7 @@
 				F166617E24BDBE8A00B2607C /* RoomManagerPromptView.m in Sources */,
 				F166617724BD724D00B2607C /* GameStatusPlateView.m in Sources */,
 				F1A4D87C24C57F5C003A6031 /* GameManager.m in Sources */,
+				F17513D224EE7A55008729D7 /* SMSInputItemView.m in Sources */,
 				F11AA53224D835A500FCFE18 /* MoneyInPrompt.m in Sources */,
 				F18AA67F24B89827002846AB /* RoomPlayPresent.m in Sources */,
 				F10FB5C024BC0F1800857E1E /* GiftRawView.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "MoneyInPrompt.h"
-@interface MoneyInPrompt ()<INetData>
+@interface MoneyInPrompt ()<INetData, QMUITextFieldDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *balanceLabel;
 @property (nonatomic, strong) QMUITextField *textField;
@@ -35,6 +35,7 @@
         self.textField.textColor = [UIColor hexColor:@"#474747"];
         self.textField.layer.cornerRadius = 5;
         self.textField.clipsToBounds = true;
+        self.textField.delegate = self;
         self.textField.font = [UIFont PingFangSC:14];
         self.textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 10);
         self.textField.backgroundColor = [UIColor hexColor:@"#EFEFEF"];
@@ -106,5 +107,16 @@
     [self.textField resignFirstResponder];
     [super removeFromSuperview];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * str = [NSString stringWithFormat:@"%@%@",textField.text,string];
+    //匹配以0开头的数字
+    NSPredicate * predicate0 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0][0-9]+$"];
+    //匹配两位小数、整数
+    NSPredicate * predicate1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^(([1-9]{1}[0-9]*|[0])\.?[0-9]{0,2})$"];
+    BOOL sucess = ![predicate0 evaluateWithObject:str] && [predicate1 evaluateWithObject:str] ? YES : NO;
+    return sucess;
+}
+
 
 @end

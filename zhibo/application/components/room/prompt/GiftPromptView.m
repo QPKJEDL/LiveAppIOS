@@ -57,6 +57,8 @@
 
 - (void)reload {
     NSArray *list = [ABIteration iterationList:self.giftList block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+//        dic[@""]
+        dic[@"price"] = [NSString stringWithFormat:@"%.2f", [dic[@"price"] floatValue]/100.0];
         dic[@"native_id"] = @"giftitem";
         return dic;
     }];

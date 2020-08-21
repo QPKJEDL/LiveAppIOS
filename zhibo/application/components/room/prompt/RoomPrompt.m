@@ -19,6 +19,7 @@
 #import "AnchorPromptView.h"
 #import "GameResultPromptView.h"
 #import "BetView.h"
+#import "GameBetResultView.h"
 @interface RoomPrompt ()<TopicsPromptViewDelegate, ChannelsPromptViewDelegate, GamesPromptViewDelegate, DesksPromptViewDelegate, ABUIListViewDelegate, BetViewDelegate>
 @property (nonatomic, strong) UserPromptView *userPromptView; //聊天点击展示用户试图
 @property (nonatomic, strong) AnchorPromptView *anchorPromptView; //主播视图
@@ -225,6 +226,25 @@
 
 - (void)betViewOnCancel:(BetView *)betView {
     [RC.gameManager doBetCancel];
+}
+
+- (void)promptGameBetResult:(NSDictionary *)data {
+    [[ABUIPopUp shared] remove:0];
+    GameBetResultView *gbrv = [[GameBetResultView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-30, 300)];
+//    [gbrv setData:@{
+//        @"Balance":@1308,
+//        @"Boot_num": @1,
+//        @"Cmd": @7,
+//        @"DeskId": @1,
+//        @"Desk_name":@"CS2",
+//        @"GameType":@2,
+//        @"Pave_num": @50,
+//        @"Result" :@1,
+//        @"Sumgetmoney":@400,
+//        @"Todaymoney":@1100,
+//    }];
+    [gbrv setData:data];
+    [[ABUIPopUp shared] show:gbrv from:ABPopUpDirectionCenter duration:5];
 }
 
 @end

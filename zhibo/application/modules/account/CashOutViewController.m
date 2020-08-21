@@ -59,10 +59,29 @@
     [self.view addSubview:self.listView];
     
     self.selectIndex = 0;
+
     
+    [self tip];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self fetchPostUri:URI_ACCOUNT_BALANCE_INFO params:nil];
     [self fetchPostUri:URI_ACCOUNT_BALANCE_CASHOUT params:nil];
     [self fetchPostUri:URI_ACCOUNT_DRAWPER params:nil];
+}
+
+- (void)tip {
+    if ([Service shared].account.isBindBank == false) {
+        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"暂不" style:QMUIAlertActionStyleCancel handler:NULL];
+        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去绑定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+            [NSRouter gotoSettingPage:@"binding_bank"];
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"未绑定银行卡" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+        [alertController addAction:action1];
+        [alertController addAction:action2];
+        [alertController showWithAnimated:YES];
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -85,6 +104,7 @@
     if ([req.uri isEqualToString:URI_ACCOUNT_CASHOUT]) {
         [[JnPasswordView sharedInstance] dismissPasswordView];
         [ABUITips showSucceed:@"申请成功"];
+        [self fetchPostUri:URI_ACCOUNT_BALANCE_INFO params:nil];
     }
     
 }
@@ -103,6 +123,17 @@
 }
 
 - (void)onSubmit {
+    if ([Service shared].account.isBindBank == false) {
+        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"暂不" style:QMUIAlertActionStyleCancel handler:NULL];
+        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"去绑定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+            [NSRouter gotoSettingPage:@"binding_bank"];
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"未绑定银行卡" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+        [alertController addAction:action1];
+        [alertController addAction:action2];
+        [alertController showWithAnimated:YES];
+        return;
+    }
     if (self.inputView.textField.text.length == 0) {
         [ABUITips showError:@"请输入提现金额"];
         return;

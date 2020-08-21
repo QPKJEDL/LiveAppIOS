@@ -8,7 +8,7 @@
 
 #import "MoneyOutPrompt.h"
 
-@interface MoneyOutPrompt ()<INetData>
+@interface MoneyOutPrompt ()<INetData, QMUITextFieldDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *balanceLabel;
 @property (nonatomic, strong) QMUITextField *textField;
@@ -40,6 +40,7 @@
         self.textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 10);
         self.textField.backgroundColor = [UIColor hexColor:@"#EFEFEF"];
         self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+        self.textField.delegate = self;
         [self addSubview:self.textField];
         
         self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.width/2-15-75, self.height-18-33, 75, 34)];
@@ -106,5 +107,46 @@
     [self.textField resignFirstResponder];
     [super removeFromSuperview];
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * str = [NSString stringWithFormat:@"%@%@",textField.text,string];
+    //匹配以0开头的数字
+    NSPredicate * predicate0 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0][0-9]+$"];
+    //匹配两位小数、整数
+    NSPredicate * predicate1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^(([1-9]{1}[0-9]*|[0])\.?[0-9]{0,2})$"];
+    BOOL sucess = ![predicate0 evaluateWithObject:str] && [predicate1 evaluateWithObject:str] ? YES : NO;
+    return sucess;
+}
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//
+//
+//    NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+//    [futureString insertString:string atIndex:range.location];
+//
+//    NSInteger flag = 0;
+//    // 这个可以自定义,保留到小数点后两位,后几位都可以
+//    const NSInteger limited = 2;
+//
+//    for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+//
+//        if ([futureString characterAtIndex:i] == '.') {
+//            // 如果大于了限制的就提示
+//            if (flag > limited) {
+//
+////                [SVProgressHUD showErrorWithStatus:@"输入金额请控制在小数点后两位" duration:2.0];
+//                return NO;
+//            }
+//
+//            break;
+//        }
+//
+//        flag++;
+//    }
+//
+//    return YES;
+//}
+
 
 @end

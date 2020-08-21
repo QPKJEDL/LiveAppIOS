@@ -115,7 +115,9 @@
 
 - (void)dealloc
 {
+    [self.roomControl free];
     [self.pushView stop];
+    [self.shixunPlayView free];
 }
 
 @end

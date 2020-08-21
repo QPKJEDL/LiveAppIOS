@@ -37,7 +37,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger game_id;
 @property (nonatomic, assign) NSInteger room_id;
 @property (nonatomic, assign) NSInteger boot_num;
-
+@property (nonatomic, strong) NSString *DeskName;
 @property (nonatomic, weak) RoomControl *control;
 @property (nonatomic, weak) BetView *betView;
 @property (nonatomic, weak) RoomPlayView *shixunPlayerView;
@@ -51,7 +51,7 @@ typedef enum : NSUInteger {
 - (void)refreshBalance;
 
 - (void)_refreshDeskInfo;
-
+- (void)refresh;
 
 - (void)doBet:(NSDictionary *)data;
 - (void)doBetCancel;

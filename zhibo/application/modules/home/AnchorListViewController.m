@@ -29,6 +29,8 @@
     self.present = [[AnchorPresent alloc] init];
     self.present.delegate = self;
     [self refreshData];
+    
+    
 }
 
 

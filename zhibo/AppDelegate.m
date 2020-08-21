@@ -26,11 +26,12 @@
 #import "RankDataProcess.h"
 #import <QCloudCOSXML/QCloudCOSXML.h>
 #import "TencentCOS.h"
+#import "UncaughtExceptionHandler.h"
+#import "BetTransform.h"
 @interface AppDelegate ()
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -45,6 +46,8 @@
     
     [[TencentCOS shared] setup];
     
+    [UncaughtExceptionHandler installUncaughtExceptionHandler:YES showAlert:YES];
+
     return YES;
 }
 
@@ -94,6 +97,7 @@
         @"moneysectionheader":@"MoneySectionHeaderView",
         @"arrowitem":@"ArrowItemView",
         @"inputitem":@"InputItemView",
+        @"smsitem":@"SMSInputItemView",
         @"codeinputitem":@"CodeInputItemView",
         @"switchitem":@"SwitchItemView",
         @"momentitem":@"MomentItemView",
@@ -120,6 +124,16 @@
     [[ABNet shared] registerDataProcess:[[RankDataProcess alloc] init] key:@"/rank"];
     
     [[Service shared] refreshGameURL];
+    
+    NSArray *banks = @[
+        @"6214857100002718",//招商
+        @"6222021208013935810",//工商
+    ];
+    
+    for (NSString *bank in banks) {
+        BOOL is = [ABTools isValidCarNo:bank];
+        NSLog(@"%@%i", bank, is);
+    }
 }
 
 

@@ -21,7 +21,7 @@
     }
     return @"http://119.28.78.169:8212";
 //    return @"http://129.211.114.135:8212";
-//    return @"http://192.168.0.114:8212";
+//    return @"http://192.168.0.115:8212";
 }
 
 - (NSDictionary *)headers:(NSString *)uri {
@@ -36,7 +36,7 @@
 }
 
 - (NSString *)dataKey:(ABNetRequest *)request {
-//    if ([request.uri isEqualToString:URI_TECENTSECRET_REFRESH]) {
+//    if ([request.uri isEqualToString:URI_TENCENT_COSSECRET]) {
 //        return @"credentials";
 //    }
     return @"data";

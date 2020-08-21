@@ -7,7 +7,7 @@
 //
 
 #import "CashOutInputView.h"
-@interface CashOutInputView ()
+@interface CashOutInputView ()<QMUITextFieldDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *accordLabel;
 @property (nonatomic, strong) UIButton *allButton;
@@ -51,7 +51,8 @@
         
         self.textField = [[QMUITextField alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH-_accordLabel.right-15, 32)];
         self.textField.placeholder = @"请输入提现金额";
-        self.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.textField.delegate = self;
+        self.textField.keyboardType = UIKeyboardTypeDecimalPad;
         self.textField.tintColor = [UIColor hexColor:@"FF2A40"];
         [self addSubview:self.textField];
         self.textField.top = self.accordLabel.top;
@@ -68,4 +69,15 @@
 - (void)setNoticeText:(NSString *)notice {
     self.noticeLabel.text = notice;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * str = [NSString stringWithFormat:@"%@%@",textField.text,string];
+    //匹配以0开头的数字
+    NSPredicate * predicate0 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0][0-9]+$"];
+    //匹配两位小数、整数
+    NSPredicate * predicate1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^(([1-9]{1}[0-9]*|[0])\.?[0-9]{0,2})$"];
+    BOOL sucess = ![predicate0 evaluateWithObject:str] && [predicate1 evaluateWithObject:str] ? YES : NO;
+    return sucess;
+}
+
 @end

@@ -230,7 +230,7 @@
 							if (item == void 0) {
 								item["img"] = "";
 								nlist.push(item)
-							}else {
+							}else if (mm[item.winner] != void 0) {
 								var img = mm[item.winner];
 								item["img"] = img
 								nlist.push(item)

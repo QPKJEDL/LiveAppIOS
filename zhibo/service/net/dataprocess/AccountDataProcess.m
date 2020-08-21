@@ -75,6 +75,9 @@
         request.realUri = @"/code/Mycenter/drawper";
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_CASHOUT]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:request.params];
+        dic[@"draw_money"] =  @([request.params[@"draw_money"] floatValue]*100);
+        request.realParams = dic;
         request.realUri = @"/code/Mycenter/draw";
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_EXCAHNGE]) {
@@ -124,7 +127,7 @@
     NSString *str = @"提现到银行卡(未绑卡)";
     NSString *bankName = bank[@"BankName"];
     NSString *bankCard = [bank stringValueForKey:@"BankCard"];
-    if (bankName.length > 0) {
+    if (bankName.length > 0 && bankCard.length > 4) {
         str = [NSString stringWithFormat:@"%@(%@)", bankName, [bankCard substringFromIndex:bankCard.length-4]];
     }
     
@@ -195,6 +198,7 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
         NSArray *list = response[@"list"];
         list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"money"] intValue]/100.0];
             dic[@"native_id"] = @"chargeitem";
             return dic;
         }];
@@ -352,11 +356,11 @@
     
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_INFO]) {
         CGFloat balance = [response[@"info"] intValue]/100.0;
-        return @{@"info":@(balance)};
+        return @{@"info":[NSString stringWithFormat:@"%.2f", balance]};
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
         CGFloat balance = [response[@"balance"] intValue]/100.0;
-        return @{@"balance":@(balance)};
+        return @{@"balance":[NSString stringWithFormat:@"%.2f", balance]};
     }
     return response;
 }

@@ -88,26 +88,26 @@
     self.registerView.delegate = self;
     [self.containScrollView addSubview:self.registerView];
     
-    self.categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(22, 206, self.view.width-44, 40)];
-    [self.categoryView setAverageCellSpacingEnabled:false];
-    self.categoryView.cellSpacing = 0;
-    self.categoryView.contentEdgeInsetLeft = 0;
-    self.categoryView.backgroundColor = UIColor.clearColor;
-    self.categoryView.delegate = self;
-    self.categoryView.titleLabelZoomEnabled = true;
-    self.categoryView.titleColor = [[UIColor hexColor:@"#FFFFFF"] colorWithAlphaComponent:0.65];
-    self.categoryView.titleSelectedColor = [UIColor hexColor:@"#FFFFFF"];
-    self.categoryView.titleFont = [UIFont boldSystemFontOfSize:20];
-    self.categoryView.cellWidth = self.categoryView.width/2;
-    [self.containScrollView addSubview:self.categoryView];
-    self.categoryView.titles = @[@"登录", @"注册"];
-    self.categoryView.titleColorGradientEnabled = YES;
+//    self.categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(22, 206, self.view.width-44, 40)];
+//    [self.categoryView setAverageCellSpacingEnabled:false];
+//    self.categoryView.cellSpacing = 0;
+//    self.categoryView.contentEdgeInsetLeft = 0;
+//    self.categoryView.backgroundColor = UIColor.clearColor;
+//    self.categoryView.delegate = self;
+//    self.categoryView.titleLabelZoomEnabled = true;
+//    self.categoryView.titleColor = [[UIColor hexColor:@"#FFFFFF"] colorWithAlphaComponent:0.65];
+//    self.categoryView.titleSelectedColor = [UIColor hexColor:@"#FFFFFF"];
+//    self.categoryView.titleFont = [UIFont boldSystemFontOfSize:20];
+//    self.categoryView.cellWidth = self.categoryView.width/2;
+//    [self.containScrollView addSubview:self.categoryView];
+//    self.categoryView.titles = @[@"登录", @"注册"];
+//    self.categoryView.titleColorGradientEnabled = YES;
     
-    UIImage *im = [UIImage imageNamed:@"triggle"];
-    self.corsorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, im.size.width, im.size.height)];
-    [self.corsorImageView setImage:im];
-    [self.containScrollView addSubview:self.corsorImageView];
-    self.corsorImageView.top = self.loginView.top-self.corsorImageView.height;
+//    UIImage *im = [UIImage imageNamed:@"triggle"];
+//    self.corsorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, im.size.width, im.size.height)];
+//    [self.corsorImageView setImage:im];
+//    [self.containScrollView addSubview:self.corsorImageView];
+//    self.corsorImageView.top = self.loginView.top-self.corsorImageView.height;
 }
 
 - (BOOL)shouldHideKeyboardWhenTouchInView:(UIView *)view {

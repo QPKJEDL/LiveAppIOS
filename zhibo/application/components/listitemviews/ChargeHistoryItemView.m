@@ -24,6 +24,7 @@
     self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.timeLabel.textColor = [UIColor hexColor:@"999999"];
     self.timeLabel.font = [UIFont PingFangSC:12];
+    self.timeLabel.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.timeLabel];
 }
 
@@ -41,6 +42,8 @@
     
     self.timeLabel.text = [ABTime timestampToTime:item[@"creatime"] format:nil];
     [self.timeLabel sizeToFit];
+    
+    [self layoutAdjustContents];
 }
 
 @end

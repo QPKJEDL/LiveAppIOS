@@ -73,12 +73,12 @@
             NSString *content = [NSString stringWithFormat:@"%@", dic[@"content"]];
             content = [content trimmingNewLineAndWhiteSpace];
             if (content.length > 0) {
-                CGSize contentSize = [content sizeWithFont:[UIFont PingFangSC:18] constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT)];
+                CGSize contentSize = [content sizeWithFont:[UIFont PingFangSC:17] constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT)];
                 CGFloat contentHeight = floor(contentSize.height);
                 height+=(contentHeight+15);
                 
                 dic[@"contentw"] = @(SCREEN_WIDTH-30);
-                dic[@"contenth"] = @(contentHeight);
+                dic[@"contenth"] = @(contentHeight+5);
             }
             
             NSArray *imgs = [[dic stringValueForKey:@"img"] componentsSeparatedByString:@","];

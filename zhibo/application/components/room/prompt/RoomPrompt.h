@@ -36,6 +36,7 @@ typedef void (^GameBlock)(NSInteger gameid, NSInteger deskid, NSString *title);
 - (void)promptMoreActions:(IndexBlock)block;
 /// 下注盘
 - (void)promptBetView:(NSDictionary *)rules hideBlock:(nonnull ABUIPopupBlock)hideBlock showBlock:(nonnull ABUIPopupBlock)showBlock;
+- (void)promptGameBetResult:(NSDictionary *)data;
 @end
 
 NS_ASSUME_NONNULL_END

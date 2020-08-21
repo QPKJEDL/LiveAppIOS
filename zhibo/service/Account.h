@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *chatinfo;
 @property (nonatomic, strong) NSDictionary *bank;
 @property (nonatomic, assign) NSInteger shenfen;
+@property (nonatomic, assign) BOOL isBindBank;
 - (void)login:(NSDictionary *)auth;
 - (void)logingm:(NSDictionary *)auth;
 - (void)logout;

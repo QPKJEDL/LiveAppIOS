@@ -86,4 +86,8 @@
     ];
 }
 
++ (NSDictionary *)getBank {
+    return nil;
+}
+
 @end

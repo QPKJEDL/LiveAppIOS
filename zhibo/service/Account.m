@@ -134,6 +134,15 @@
 - (NSDictionary *)bank {
     return [self.dao get:@"account_bank"];
 }
+
+- (BOOL)isBindBank {
+    NSString *cardname = [self.dao get:@"account_bank"][@"CardName"];
+    if (cardname && cardname.length > 0) {
+        return true;
+    }
+    return false;
+}
+
 - (NSString *)avatar {
     return [self.dao get:@"account_info"][@"Avater"];
 }

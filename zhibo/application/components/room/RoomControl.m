@@ -18,6 +18,7 @@
 #import "GameStatusPlateView.h"
 #import "BetView.h"
 #import "GameManager.h"
+#import "BetTransform.h"
 @interface RoomControl ()<RoomBottomBarDelegate, RoomChatViewDelegate, INetData, RoomAnchorBriefViewDelegate, GameStatusPlateViewDelegate, BetViewDelegate, IABMQSubscribe>
 @property (nonatomic, strong) UIView *bbbView;
 @property (nonatomic, strong) RoomAnchorBriefView *briefView;
@@ -34,7 +35,7 @@
 @property (nonatomic, strong) UIButton *sceneButton;
 @property (nonatomic, strong) UIImageView *sceneImageView;
 
-@property (nonatomic, strong) GameStatusPlateView *plateView;
+
 
 @end
 
@@ -123,7 +124,6 @@
         [self loadWenLu];
         
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
-        
     }
     return self;
 }
@@ -254,9 +254,11 @@
 //        }
         [RoomContext shared].gameManager.desk_id = [message[@"DeskId"] intValue];
         [[RoomContext shared].gameManager _refreshDeskInfo];
+        [self.plateView stop];
     }
     else if (lmd == 10) {
         [self liveclose];
+        [self.plateView stop];
     }
     else if (lmd == 11) { //离开房间
         [self anchorLeave];
@@ -349,7 +351,6 @@
 }
 
 - (void)bottomBarOnClose:(RoomBottomBar *)bottomBar {
-    [self.plateView stop];
     [self onClose];
 }
 
@@ -417,11 +418,8 @@
                 break;
             case 2://开牌中(停止下注)
                 [self.plateView wait]; //变更待开牌
-
+                [[RoomPrompt shared].betView timeEnd];
                 [RoomPrompt shared].betView.enabled = false;//禁止下注
-                if ([RoomPrompt shared].betView.isBet == false) {
-                    [[RoomPrompt shared].betView reset];
-                }
                 break;
             case 3://结算完成
                 [self.plateView finish];
@@ -429,13 +427,23 @@
                 [RoomPrompt shared].betView.enabled = false;//禁止下注
                 break;
             case 4://结算完成(有结果)
-                [self.plateView finish];
+            {
+                            [self.plateView finish];
+                            
+                            [RoomPrompt shared].betView.enabled = false;//禁止下注
+            //                [RP promptGameResultWithGameId:RC.gameManager.game_id winner:desk[@"Winner"]];
+                            
+                            [self receiveWenLuItem:desk];
+                            [RC.gameManager refreshBalance];
+                            NSString *name = [[BetTransform shared] getMusicGid:RC.gameManager.game_id winner:desk[@"Winner"]];
+                            [[ABAudio shared] playBundleFileWithName:name];
+            }
 
-                [RoomPrompt shared].betView.enabled = false;//禁止下注
-                [RP promptGameResultWithGameId:RC.gameManager.game_id winner:desk[@"Winner"]];
                 
-                [self receiveWenLuItem:desk];
                 break;
+            case 7://结算完成(下注后有结果)
+                [RP promptGameBetResult:desk];
+               break;
             default:
                 break;
         }
@@ -445,9 +453,7 @@
 - (void)plateView:(GameStatusPlateView *)plateView onStatusChanged:(GameStatusPlateViewStatus)status {
     if (status == GameStatusPlateViewStatusWait) {
         [RoomPrompt shared].betView.enabled = false;//禁止下注
-        if ([RoomPrompt shared].betView.isBet == false) {
-            [[RoomPrompt shared].betView reset];
-        }
+        [RP.betView timeEnd];
     }
 }
 
@@ -457,6 +463,15 @@
 
 - (void)anchorReturn {
     
+}
+
+- (void)free {
+    [self.plateView stop];
+}
+
+- (void)dealloc
+{
+    [self.plateView stop];
 }
 
 //- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {

@@ -227,6 +227,27 @@
     [self _reload];
 }
 
+//重置未下注选择
+- (void)timeEnd {
+    self.isBet = true;
+    self.coins = [ABIteration iterationList:self.coins block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        dic[@"selected"] = @(0);
+        return dic;
+    }];
+    
+    self.options = [ABIteration iterationList:self.options block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        NSInteger num = [dic[@"num"] intValue]-[dic[@"cnum"] intValue];
+        if (num < 0) {
+            num = 0;
+        }
+        dic[@"cnum"] = @(0);
+        dic[@"num"] = @(num);
+        dic[@"selected"] = @(0);
+        return dic;
+    }];
+    
+    [self _reload];
+}
 //重置所有选择
 - (void)reset {
     self.isBet = false;
@@ -236,6 +257,7 @@
     }];
     
     self.options = [ABIteration iterationList:self.options block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+        dic[@"cnum"] = @(0);
         dic[@"num"] = @(0);
         dic[@"selected"] = @(0);
         return dic;
@@ -322,6 +344,8 @@
         [ABUITips showError:@"请选择筹码"];
         return;
     }
+    
+    [[ABAudio shared] playBundleFileWithName:@"raise.mp3"];
     
     NSInteger selectCoinNum = [coinDic[@"num"] integerValue];
     self.options = [ABIteration iterationList:self.options block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
