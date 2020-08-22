@@ -63,6 +63,15 @@
         }else if (gameid == 2) {
             request.realUri = @"/lh_game_list";
         }
+        else if (gameid == 3) { //niuniu
+            request.realUri = @"/nnGameRecord";
+        }
+        else if (gameid == 4) { //三公
+            request.realUri = @"/SgGameRecord";
+        }
+        else if (gameid == 5) { //A89
+            request.realUri = @"/A89GameRecord";
+        }
     }
     return request;
 }

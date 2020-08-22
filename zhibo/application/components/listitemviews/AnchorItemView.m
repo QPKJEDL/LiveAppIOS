@@ -81,7 +81,7 @@
 
 - (void)reload:(NSDictionary *)item {
     self.nameLabel.text = item[@"nickname"];
-    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageWithColor:[[UIColor hexColor:@"222222"] colorWithAlphaComponent:0.1] frame:self.coverImageView.bounds]];
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageNamed:@"room_default"]];
     
     [self.nameLabel sizeToFit];
     self.nameLabel.height = 12;

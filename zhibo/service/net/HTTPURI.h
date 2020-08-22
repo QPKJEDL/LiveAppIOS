@@ -130,4 +130,11 @@
 #define CHANNEL_ROOM_MESSAGE          @"CHANNEL_ROOM_MESSAGE" //游戏状态
 #define CHANNEL_ROOM_PEER          @"CHANNEL_ROOM_PEER" //游戏状态
 #define CHANNEL_GAME_BALANCE          @"CHANNEL_GAME_BALANCE" //游戏状态
+
+
+#define ID_GAME_BAIJIALE      1
+#define ID_GAME_LONGHU      2
+#define ID_GAME_NIUNIU      3
+#define ID_GAME_SANGONG      4
+#define ID_GAME_A89      5
 #endif /* HTTPURI_h */

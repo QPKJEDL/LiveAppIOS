@@ -132,23 +132,29 @@
 
 - (void)titleViewOnTip:(RoomPushReadyTitleView *)titleView {
     [self endEditing:true];
+    __weak __typeof(&*self) weakSelf = self;
     [RP promptGameBlock:^(NSInteger gameid, NSInteger deskid, NSString *title) {
-        self.gameid = gameid;
-        self.deskid = deskid;
-        self.titleView.label = title;
+        weakSelf.gameid = gameid;
+        weakSelf.deskid = deskid;
+        weakSelf.titleView.label = title;
     }];
 }
 
 - (void)titleViewOnChannel:(RoomPushReadyTitleView *)titleView{
     [self endEditing:true];
+    __weak __typeof(&*self) weakSelf = self;
     [RP promptChannels:^(NSString * _Nullable title) {
-        self.titleView.channel = title;
+        weakSelf.titleView.channel = title;
     }];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+}
 
+- (void)dealloc
+{
+    NSLog(@"%@ dealloc", [[self class] description]);
 }
 
 @end

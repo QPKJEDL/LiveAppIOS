@@ -147,7 +147,7 @@
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.bounces = false;
     [self addSubview:self.wenluWebView];
-//    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index.html"];
+//    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index2.html"];
     [self.wenluWebView loadWebWithPath:@"index.html"];
     [self.wenluWebView setHidden:true];
 }
@@ -172,10 +172,16 @@
         [ABUITips showError:@"主播未设置游戏"];
         return;
     }
+    __weak __typeof(&*self) weakSelf = self;
     [RP promptBetView:[RoomContext shared].gameManager.rules hideBlock:^{
-        self.plateView.top = self.height-TI_HEIGHT-44-66-10;
+        [UIView animateWithDuration:0.1 animations:^{
+            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10;
+        }];
+        
     } showBlock:^{
-        self.plateView.top = self.height-TI_HEIGHT-44-66-10-164;
+        [UIView animateWithDuration:0.1 animations:^{
+            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10-164;
+        }];
     }];
 }
 
@@ -394,6 +400,7 @@
 
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+
     if ([channel isEqualToString:CHANNEL_GAME_RULES]) {
         [self onPlate];
         [self.plateView setHidden:false];
@@ -407,6 +414,7 @@
     if ([channel isEqualToString:CHANNEL_ROOM_PEER]) {
         [self onReceivePeerMessage:message];
     }
+
     if ([channel isEqualToString:CHANNEL_GAME_STATUS]) {
         NSDictionary *dic = (NSDictionary *)message;
         NSInteger status = [dic[@"status"] integerValue];
@@ -482,6 +490,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"%@ dealloc", [[self class] description]);
     [self.plateView stop];
     [self.shixunPlayView free];
     [[ABMQ shared] unsubscribe:self];
