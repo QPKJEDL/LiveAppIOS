@@ -461,6 +461,9 @@
             case 7://结算完成(下注后有结果)
                 [RP promptGameBetResult:desk];
                break;
+            case 8://换靴
+                [self receiveWenLu:@[]];
+                break;
             default:
                 break;
         }

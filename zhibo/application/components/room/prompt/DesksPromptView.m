@@ -71,12 +71,8 @@
     if ([req.uri isEqualToString:URI_GAME_DESKLIST]) {
         [ABUITips hideLoading];
         self.index = -1;
-        NSArray *list = [ABIteration iterationList:obj[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
-            dic[@"native_id"] = @"deskitem";
-            return dic;
-        }];
-        self.dataList = list;
-        [self.listView setDataList:list css:@{@"item.size.width":@"33%", @"item.size.height":@"50"}];
+        self.dataList = obj[@"list"];
+        [self.listView setDataList:self.dataList css:@{@"item.size.width":@"33%", @"item.size.height":@"50"}];
     }else{
         [ABUITips showSucceed:@"设置成功"];
         [[ABUIPopUp shared] remove];

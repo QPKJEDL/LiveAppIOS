@@ -177,13 +177,17 @@
     if (desk[@"Phase"] != nil) {
         phase = [desk[@"Phase"] intValue];
     }
-
+    
     int cmd = [desk[@"Cmd"] intValue];
     if (cmd == 6) {
         phase = 4;
     }
     if (cmd == 7) {
         phase = 7;
+    }
+    
+    if (cmd == 2) {
+        phase = 8;
     }
 
     [[ABMQ shared] publish:@{@"status":@(phase), @"data":desk} channel:CHANNEL_GAME_STATUS];

@@ -186,6 +186,21 @@
         NSArray *list = response[@"list"][0][@"list"];
         return @{@"list":list};
     }
+    if ([request.uri isEqualToString:URI_GAME_DESKLIST]) {
+        NSArray *list = response[@"list"];
+        NSMutableArray *nlist = [[NSMutableArray alloc] init];
+        for (NSDictionary *dic in list) {
+            if ([dic[@"GameId"] intValue] != 0) {
+                [nlist addObject:dic];
+            }
+        }
+        
+        NSArray *listt = [ABIteration iterationList:nlist block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"native_id"] = @"deskitem";
+            return dic;
+        }];
+        return @{@"list":listt};
+    }
     return response;
 }
 
