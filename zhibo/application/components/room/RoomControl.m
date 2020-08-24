@@ -162,9 +162,18 @@
 }
 
 - (void)receiveWenLuItem:(NSDictionary *)item {
-    [self.wenluWebView callFuncName:@"setNewResult" data:[item toJSONString] completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-        NSLog(@"%@", error);
-    }];
+    id winner = item[@"Winner"];
+    if ([winner isKindOfClass:[NSString class]] && [(NSString *)winner containsString:@"game"]) {
+        NSDictionary *winner = [item[@"Winner"] toDictionary];
+        NSDictionary *dic = @{@"Winner":winner};
+        [self.wenluWebView callFuncName:@"setNewResult" data:[dic toJSONString] completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            NSLog(@"%@", error);
+        }];
+    }else{
+        [self.wenluWebView callFuncName:@"setNewResult" data:[item toJSONString] completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            NSLog(@"%@", error);
+        }];
+    }
 }
 
 - (void)onPlate {
