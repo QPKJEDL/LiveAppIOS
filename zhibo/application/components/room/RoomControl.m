@@ -497,6 +497,7 @@
     [self.plateView stop];
     [self.shixunPlayView free];
     [[ABMQ shared] unsubscribe:self];
+    [self.wenluWebView free];
     
 }
 

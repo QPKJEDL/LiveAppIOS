@@ -239,6 +239,7 @@
 		F17513CF24EE68B9008729D7 /* tianMen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513CC24EE68B9008729D7 /* tianMen.mp3 */; };
 		F17513D224EE7A55008729D7 /* SMSInputItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513D124EE7A55008729D7 /* SMSInputItemView.m */; };
 		F17513D424EF62CB008729D7 /* bankPair.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F17513D324EF62CB008729D7 /* bankPair.mp3 */; };
+		F17513DD24F3B539008729D7 /* LoadingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F17513DC24F3B539008729D7 /* LoadingPlugin.m */; };
 		F18AA63D24B810E7002846AB /* RoomAnchorBriefView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA63C24B810E7002846AB /* RoomAnchorBriefView.m */; };
 		F18AA64024B848AF002846AB /* RoomControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA63F24B848AF002846AB /* RoomControl.m */; };
 		F18AA64324B84CFC002846AB /* MeiYanPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18AA64224B84CFC002846AB /* MeiYanPromptView.m */; };
@@ -743,6 +744,8 @@
 		F17513D024EE7A55008729D7 /* SMSInputItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSInputItemView.h; sourceTree = "<group>"; };
 		F17513D124EE7A55008729D7 /* SMSInputItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSInputItemView.m; sourceTree = "<group>"; };
 		F17513D324EF62CB008729D7 /* bankPair.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bankPair.mp3; sourceTree = "<group>"; };
+		F17513DB24F3B539008729D7 /* LoadingPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadingPlugin.h; sourceTree = "<group>"; };
+		F17513DC24F3B539008729D7 /* LoadingPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadingPlugin.m; sourceTree = "<group>"; };
 		F18AA63B24B810E7002846AB /* RoomAnchorBriefView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAnchorBriefView.h; sourceTree = "<group>"; };
 		F18AA63C24B810E7002846AB /* RoomAnchorBriefView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAnchorBriefView.m; sourceTree = "<group>"; };
 		F18AA63E24B848AF002846AB /* RoomControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomControl.h; sourceTree = "<group>"; };
@@ -1601,6 +1604,8 @@
 				F14250712499E7C2003E83D8 /* NetProvidor.m */,
 				F16F6D6D24AB1010003A51A6 /* NetErrorPlugin.h */,
 				F16F6D6E24AB1010003A51A6 /* NetErrorPlugin.m */,
+				F17513DB24F3B539008729D7 /* LoadingPlugin.h */,
+				F17513DC24F3B539008729D7 /* LoadingPlugin.m */,
 			);
 			path = net;
 			sourceTree = "<group>";
@@ -2276,6 +2281,7 @@
 				F121924124CFFFBF00630CA2 /* PodiumView.m in Sources */,
 				55FD3677244FDCBB00D84DD9 /* AppDelegate.m in Sources */,
 				F1A4D88B24C68871003A6031 /* MoneySectionHeaderView.m in Sources */,
+				F17513DD24F3B539008729D7 /* LoadingPlugin.m in Sources */,
 				F1B7950924597214000BD333 /* BillViewController.m in Sources */,
 				F1D272B224E7E0B5003FFABE /* HelpViewController.m in Sources */,
 				559F3E4524519FA6001280F2 /* SearchViewController.m in Sources */,
