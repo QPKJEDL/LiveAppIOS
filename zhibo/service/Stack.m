@@ -24,6 +24,10 @@
     self = [super init];
     if (self) {
         self.dic = [[NSMutableDictionary alloc] init];
+        self.commentCountMap = [[NSMutableDictionary alloc] init];
+        self.likeCountMap = [[NSMutableDictionary alloc] init];
+        self.likeZoneMap = [[NSMutableDictionary alloc] init];
+        self.followUserMap = [[NSMutableDictionary alloc] init];
     }
     return self;
 }

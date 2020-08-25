@@ -111,12 +111,21 @@
             dic[@"avatar"] = dic[@"avater"];
             dic[@"native_id"] = @"momentitem";
             dic[@"item.size.height"] = @(height);
-            dic[@"like_count"] = [dic stringValueForKey:@"thumb_num"];
-            dic[@"comment_count"] = [dic stringValueForKey:@"comment_num"];
+            NSString *thumb_num = [dic stringValueForKey:@"thumb_num"];
+            dic[@"like_count"] = thumb_num;
+            NSString *comment_num = [dic stringValueForKey:@"comment_num"];
+            dic[@"comment_count"] = comment_num;
             if (dic[@"live_uid"] == nil) {
                 dic[@"live_uid"] = request.params[@"live_uid"];
             }
             dic[@"content"] = content;
+            
+            NSString *zone_id = [dic stringValueForKey:@"zone_id"];
+            NSString *live_uid = [dic stringValueForKey:@"live_uid"];
+            [Stack shared].commentCountMap[zone_id] = @([comment_num intValue]);
+            [Stack shared].likeCountMap[zone_id] = @([thumb_num intValue]);
+            [Stack shared].likeZoneMap[zone_id] = @([dic[@"like"] intValue]);
+            [Stack shared].followUserMap[live_uid] = @([dic[@"IsFollowed"] intValue]);
             return dic;
         }];
         return @{@"list":list};
@@ -125,6 +134,9 @@
     if ([request.uri isEqualToString:URI_MOMENTS_COMMENTS]) {
         NSArray *list = [ABIteration iterationList:response[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             NSString *comment = dic[@"comment"];
+            if (dic[@"live_uid"] == nil) {
+                dic[@"live_uid"] = request.params[@"live_uid"];
+            }
             
             CGSize commentSize = [comment sizeWithFont:[UIFont PingFangSC:15] constrainedToSize:CGSizeMake(SCREEN_WIDTH-75, MAXFLOAT)];
             
@@ -163,6 +175,19 @@
             return dic;
         }];
         return @{@"list":list, @"totalcount":[response stringValueForKey:@"commSum"]};
+    }
+    if ([request.uri isEqualToString:URI_MOMENTS_COMMENT_SEND]) {
+        NSString *zone_id = [request.params stringValueForKey:@"zone_id"];
+        [Stack shared].commentCountMap[zone_id] = @([[Stack shared].commentCountMap[zone_id] intValue]+1);
+    }
+    if ([request.uri isEqualToString:URI_MOMENTS_COMMENT_DELETE]) {
+        NSString *zone_id = [request.params stringValueForKey:@"zone_id"];
+        [Stack shared].commentCountMap[zone_id] = @([[Stack shared].commentCountMap[zone_id] intValue]-1);
+    }
+    if ([request.uri isEqualToString:URI_MOMENTS_LIKE]) {
+        NSString *zone_id = [request.params stringValueForKey:@"zone_id"];
+        [Stack shared].likeCountMap[zone_id] = @([[Stack shared].likeCountMap[zone_id] intValue]+1);
+        [Stack shared].likeZoneMap[zone_id] = @(1);
     }
     return response;
 }

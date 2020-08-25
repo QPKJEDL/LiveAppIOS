@@ -33,7 +33,8 @@
 }
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
-    [self refreshData];
+//    [self refreshData];
+    [self.listView reloadData];
 }
 
 - (void)refreshData {

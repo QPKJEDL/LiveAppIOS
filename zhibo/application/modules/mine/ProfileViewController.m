@@ -47,9 +47,9 @@
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
     if ([channel isEqualToString:CHANNEL_FOLLOW_CHANGED]) {
         [self fetchPostUri:URI_USER_INFO params:@{@"touid":self.props[@"uid"], @"room_id":@"0"}];
-        [self fetchPostUri:URI_MOMENTS_LIST params:@{@"live_uid":self.props[@"uid"], @"lastid":@"0"}];
+        [self.listView reloadData];
     }else{
-        [self fetchPostUri:URI_MOMENTS_LIST params:@{@"live_uid":self.props[@"uid"], @"lastid":@"0"}];
+        [self.listView reloadData];
     }
 }
 

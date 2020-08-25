@@ -50,7 +50,7 @@
 }
 
 - (void)longPress:(UILongPressGestureRecognizer *)sender{
-    if (self.data[@"live_uid"] != [Service shared].account.uid) {
+    if ([self.data[@"live_uid"] intValue] != [Service shared].account.uid) {
         return;
     }
     //进行判断,在什么时候触发事件

@@ -44,6 +44,13 @@
 
 /// Called to modify a result before completion.
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
+    NSString *live_uid = [request.params stringValueForKey:@"live_uid"];
+    if ([request.uri isEqualToString:URI_FOLLOW_FOLLOW]) {
+        [Stack shared].followUserMap[live_uid] = @(1);
+    }
+    if ([request.uri isEqualToString:URI_FOLLOW_UNFOLLOW]) {
+        [Stack shared].followUserMap[live_uid] = @(0);
+    }
     return response;
 }
 - (void)didReceiveError:(ABNetRequest *)request error:(ABNetError *)error {

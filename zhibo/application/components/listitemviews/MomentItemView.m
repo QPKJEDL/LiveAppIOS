@@ -116,6 +116,8 @@
 
 - (void)reload:(NSDictionary *)item {
     self.data = item;
+    NSString *zone_id = [item stringValueForKey:@"zone_id"];
+    NSString *live_uid = [item stringValueForKey:@"live_uid"];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
     
     self.nickNameLabel.text = item[@"nickname"];
@@ -128,8 +130,15 @@
     self.contentLabel.text = item[@"content"];
     [self.contentLabel sizeToFit];
     
-    [self.commentButton setTitle:item[@"comment_count"] forState:UIControlStateNormal];
-    [self.likeButton setTitle:item[@"like_count"] forState:UIControlStateNormal];
+    
+    int comment_count = [[Stack shared].commentCountMap[zone_id] intValue];
+    NSString *comment_countStr = [ABTools convertNumberToKW:comment_count];
+    
+    int like_count = [[Stack shared].likeCountMap[zone_id] intValue];
+    NSString *like_countStr = [ABTools convertNumberToKW:like_count];
+    
+    [self.commentButton setTitle:comment_countStr forState:UIControlStateNormal];
+    [self.likeButton setTitle:like_countStr forState:UIControlStateNormal];
     
     self.medias = item[@"medias"];
     
@@ -146,11 +155,15 @@
             @"item.rowSpacing":@"5",
         }];
     }
+    
+    BOOL isLike = [[Stack shared].likeZoneMap[zone_id] intValue] == 1 ;
+    BOOL isFollowed = [[Stack shared].followUserMap[live_uid] intValue] == 1;
+    
     self.photoListView.height = [item[@"mediash"] floatValue];
-    [self.likeButton setSelected:[item[@"like"] intValue] == 1];
+    [self.likeButton setSelected:isLike];
     
     
-    [self.followButton setSelected:[item[@"IsFollowed"] boolValue]];
+    [self.followButton setSelected:isFollowed];
     self.followButton.backgroundColor = [UIColor hexColor:@"#FF2A40"];
     if (self.followButton.isSelected) {
         self.followButton.backgroundColor = [UIColor hexColor:@"#999999"];

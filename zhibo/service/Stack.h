@@ -21,6 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int game_tcpport;
 @property (nonatomic, strong) NSString *game_url;
 @property (nonatomic, strong) NSString *game_wsurl;
+
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *commentCountMap;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *likeCountMap;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *followUserMap;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *likeZoneMap;
 @end
 
 NS_ASSUME_NONNULL_END

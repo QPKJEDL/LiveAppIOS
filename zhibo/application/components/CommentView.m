@@ -14,10 +14,11 @@
 @property (nonatomic, assign) NSInteger live_uid;
 @property (nonatomic, assign) NSInteger zone_id;
 
-@property (nonatomic, strong) ABUIListView *listView;
+@property (nonatomic, strong) ABUIRefreshListView *listView;
 @property (nonatomic, strong) ZBInputView  *inputView;
 @property (nonatomic, assign) NSInteger user_id;
 @property (nonatomic, assign) NSInteger comm_id;
+@property (nonatomic, strong) NSMutableArray *dataList;
 
 
 @end
@@ -51,7 +52,7 @@
         [self.containView addSubview:self.titleLabel];
         
         
-        self.listView = [[ABUIListView alloc] initWithFrame:CGRectMake(0, 31, self.width, self.containView.height-31-44)];
+        self.listView = [[ABUIRefreshListView alloc] initWithFrame:CGRectMake(0, 31, self.width, self.containView.height-31-44)];
         self.listView.delegate = self;
         [self.containView addSubview:self.listView];
         
@@ -80,6 +81,8 @@
 }
 
 - (void)refreshData {
+    [self.listView resetNoMoreData];
+    [self.listView scrollToTop:true];
     [self fetchPostUri:URI_MOMENTS_COMMENTS params:@{@"zone_id":@(self.zone_id), @"lastid":@0, @"live_uid":@(self.live_uid), @"avatar":self.data[@"avatar"], @"nick":self.data[@"nickname"]}];
 }
 
@@ -87,11 +90,7 @@
     if ([req.uri isEqualToString:URI_MOMENTS_COMMENTS]) {
         self.titleLabel.text = [NSString stringWithFormat:@"%@条评论", obj[@"totalcount"]];
         NSArray *list = obj[@"list"];
-        if (list.count == 0) {
-            
-        }else{
-            [self.listView setDataList:list css:nil];
-        }
+        [self.listView setDataList:list css:nil];
     }
 
     if ([req.uri isEqualToString:URI_MOMENTS_COMMENT_SEND]) {
@@ -124,6 +123,15 @@
     self.user_id = [item[@"user_id"] intValue];
     self.comm_id = [item[@"comm_id"] intValue];
     [self.inputView becomeFirstResponder];
+}
+
+- (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
+    [self fetchPostUri:URI_MOMENTS_COMMENTS params:@{@"zone_id":@(self.zone_id), @"lastid":@0, @"live_uid":@(self.live_uid), @"avatar":self.data[@"avatar"], @"nick":self.data[@"nickname"]}];
+}
+
+- (void)listViewOnLoadMore:(ABUIListView *)listView {
+    NSInteger xx = [[self.listView._dataList lastObject][@"comm_id"] intValue];
+    [self fetchPostUri:URI_MOMENTS_COMMENTS params:@{@"zone_id":@(self.zone_id), @"lastid":@(xx), @"live_uid":@(self.live_uid), @"avatar":self.data[@"avatar"], @"nick":self.data[@"nickname"]}];
 }
 
 @end
