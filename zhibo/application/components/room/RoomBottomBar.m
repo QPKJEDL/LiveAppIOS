@@ -42,7 +42,7 @@
 //                                       NSForegroundColorAttributeName: self.textView.textColor
     };
     // 限制可输入的字符长度
-    self.textView.maximumTextLength = 50;
+    self.textView.maximumTextLength = 30;
     
     // 限制输入框自增高的最大高度
     self.textView.maximumHeight = 200;
@@ -140,6 +140,15 @@
         btn.centerY = (self.height-TI_HEIGHT)/2;
         index++;
     }
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *view = [super hitTest:point withEvent:event];
+    CGPoint tempPoint = [self.textView convertPoint:point fromView:self];
+    if ([self.textView pointInside:tempPoint withEvent:event]) {
+        return self.textView;
+    }
+    return view;
 }
 
 @end
