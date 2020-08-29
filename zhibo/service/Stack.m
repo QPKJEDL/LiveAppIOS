@@ -40,21 +40,21 @@
 
 - (NSString *)game_wsurl {
     if (_game_wsurl == nil) {
-        return @"119.28.78.169";
+        return @"hqgame.zbzx6088.com";
     }
     return _game_wsurl;
 }
 
 - (NSString *)game_url {
     if (_game_url == nil) {
-        return @"http://119.28.78.169:8210";
+        return @"https://hqgame.zbzx6088.com:8215";
     }
     return _game_url;
 }
 
 - (int)game_tcpport {
     if (_game_tcpport == 0) {
-        return 23001;
+        return 24430;
     }
     return _game_tcpport;
 }
