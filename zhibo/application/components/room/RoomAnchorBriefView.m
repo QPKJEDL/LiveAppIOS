@@ -50,6 +50,7 @@
         self.followButton.layer.cornerRadius = 9;
         self.followButton.clipsToBounds = true;
         [self.followButton addTarget:self action:@selector(onButton) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return self;
 }
@@ -64,7 +65,7 @@
     [self.nameLabel sizeToFit];
     self.nameLabel.width = 70;
     
-    [self.avatarImageView loadImage:icon];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
     self.fansTextLabel.text = fansCount;
     [self.fansTextLabel sizeToFit];
     

@@ -23,7 +23,7 @@
 }
 
 - (void)reload:(NSDictionary *)item extra:(NSDictionary *)extra indexPath:(NSIndexPath *)indexPath {
-    [self.avatarImageView loadImage:item[@"Avater"]];
+    [self.avatarImageView sd_setImageWithURL:item[@"Avater"] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
 }
 
 - (void)layoutAdjustContents {

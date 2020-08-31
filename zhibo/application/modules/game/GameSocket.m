@@ -27,6 +27,9 @@
         self.imService.token = [Service shared].account.gmtoken;
         
 //        [self.imService addPeerMessageObserver:self];
+        if (self.imService.port == 23001) {
+            self.imService.ssl = false;
+        }
         
         [self startListenAppStatus];
         

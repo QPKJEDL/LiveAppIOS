@@ -81,7 +81,7 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self performSelector:@selector(autohidden) withObject:nil afterDelay:3];
     
-    [self.iconImageView loadImage:data[@"Avater"]];
+    [self.iconImageView sd_setImageWithURL:data[@"Avater"] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
     self.nameLabel.text = data[@"UserNickname"];
     if (data[@"GiftNum"] != nil) {
         self.num = self.num+[data[@"GiftNum"] intValue];

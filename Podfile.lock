@@ -470,7 +470,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   gobelieve:
-    :commit: a329fd587ebd3872fb2192350f2ff7043b7114d4
+    :commit: 269727086099ba2828e38cbc9901c93a2c52f5b1
     :git: https://github.com/whdevlab/gobelieve
   TSHAlphaVideos:
     :commit: d93ba241b74186d7e90d106c1780414c19b0ff32

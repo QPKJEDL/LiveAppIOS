@@ -62,4 +62,9 @@
 //    }
 }
 
+- (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {
+    int userid = [item[@"UserId"] intValue];
+    [RP promptUserWithUid:userid];
+}
+
 @end

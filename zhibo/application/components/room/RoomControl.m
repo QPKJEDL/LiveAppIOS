@@ -110,7 +110,8 @@
         self.sceneButton.titleLabel.font = [UIFont PingFangSC:12];
         [self addSubview:self.sceneButton];
         self.sceneButton.centerY = self.briefView.centerY;
-        self.sceneButton.left = self.briefView.right+38;
+        self.sceneButton.left = self.width-15-56;
+        self.sceneButton.top = _audienceView.bottom+5;
         [self.sceneButton addTarget:self action:@selector(onScene) forControlEvents:UIControlEventTouchUpInside];
         
         self.sceneImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
@@ -130,6 +131,8 @@
         [self.plateView setHidden:true];
         
         [self loadWenLu];
+        
+        RC.briefView = self.briefView;
         
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
     }
@@ -179,6 +182,23 @@
 - (void)onPlate {
     if (RC.gameManager.rules == nil) {
         [ABUITips showError:@"主播未设置游戏"];
+        return;
+    }
+    __weak __typeof(&*self) weakSelf = self;
+    [RP promptBetView:[RoomContext shared].gameManager.rules hideBlock:^{
+        [UIView animateWithDuration:0.1 animations:^{
+            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10;
+        }];
+        
+    } showBlock:^{
+        [UIView animateWithDuration:0.1 animations:^{
+            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10-164;
+        }];
+    }];
+}
+
+- (void)onPlate2 {
+    if (RC.gameManager.rules == nil) {
         return;
     }
     __weak __typeof(&*self) weakSelf = self;
@@ -411,7 +431,7 @@
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
 
     if ([channel isEqualToString:CHANNEL_GAME_RULES]) {
-        [self onPlate];
+        [self onPlate2];
         [self.plateView setHidden:false];
     }
     if ([channel isEqualToString:CHANNEL_ROOM_INFO]) {
@@ -439,7 +459,7 @@
                 [self.plateView please:desk]; //开启下注倒计时
 
                 [RoomPrompt shared].betView.enabled = true; //开启下注
-                [self onPlate]; //弹出下注UI
+                [self onPlate2]; //弹出下注UI
                 [[RoomPrompt shared].betView reset]; //重置下注盘
                 break;
             case 2://开牌中(停止下注)

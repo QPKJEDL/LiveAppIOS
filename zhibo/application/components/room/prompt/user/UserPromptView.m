@@ -36,7 +36,7 @@
         
         self.avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 72, 72)];
         self.avatarImageView.backgroundColor = [UIColor hexColor:@"dedede"];
-        self.avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.avatarImageView.clipsToBounds = true;
         self.avatarImageView.layer.cornerRadius = 72/2;
         [self addSubview:self.avatarImageView];
@@ -77,8 +77,11 @@
 - (void)reloadActionView {
     
     NSMutableArray *list = [[NSMutableArray alloc] init];
+    if (self.uid == RC.roomManager.anchorid && self.uid != [Service shared].account.uid) {
+         [list addObject:@{@"title":@"+关注", @"title_hl":@"已关注", @"color":@"#FF2A40", @"native_id":@"userpromptaction", @"selected":@(self.isFollowed), @"key":@"gz"}];
+    }
     if (self.uid != [Service shared].account.uid) {
-//        [list addObject:@{@"title":@"+关注", @"title_hl":@"已关注", @"color":@"#FF2A40", @"native_id":@"userpromptaction", @"selected":@(self.isFollowed), @"key":@"gz"}];
+
         BOOL isFangzhu = [RoomContext shared].roomManager.anchorid == [Service shared].account.uid;
         if (([RoomContext shared].isManager && self.isManager == false) || isFangzhu) {//自己是管理，点击的用户非管理非房主
             [list addObject:@{@"title":@"踢人", @"title_hl":@"已踢",@"color":@"#313131", @"native_id":@"userpromptaction", @"selected":@(self.isTi), @"key":@"kick"}];
@@ -87,20 +90,31 @@
         if (isFangzhu) {
             [list addObject:@{@"title":@"设置管理", @"title_hl":@"移除管理",@"color":@"#313131", @"native_id":@"userpromptaction", @"selected":@(self.isManager), @"key":@"mm"}];
         }
+        
     }
 
-    CGFloat w = self.width/list.count;
-    [self.actionsView setDataList:list css:@{
-        @"item.size.width":@(w),
-        @"item.size.height":@(50)
-    }];
+
+    if (list.count == 0) {
+//        [self.actionsView removeFromSuperview];
+//        self.height = 168+72/2+TI_HEIGHT;
+//        self.containView.frame = CGRectMake(0, 72/2, self.width, self.height-72/2);
+//        self.top = SCREEN_HEIGHT-self.height;
+    }else{
+        CGFloat w = self.width/list.count;
+        [self.actionsView setDataList:list css:@{
+            @"item.size.width":@(w),
+            @"item.size.height":@(50)
+        }];
+    }
+    
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     [[UIApplication sharedApplication].keyWindow hideToastActivity];
+    
     NSString *toastMessage = @"";
     if ([req.uri isEqualToString:URI_USER_INFO]) {
-        [self.avatarImageView loadImage:obj[@"Avater"]];
+        [self.avatarImageView sd_setImageWithURL:obj[@"Avater"] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
         self.nameLabel.text = obj[@"NickName"];
         [self.nameLabel sizeToFit];
         
@@ -132,10 +146,19 @@
     else if ([req.uri isEqualToString:URI_FOLLOW_FOLLOW]) {
         toastMessage = @"关注成功";
         self.isFollowed = true;
+        NSInteger liveuid = [req.params[@"live_uid"] intValue];
+        if (liveuid == RC.roomManager.anchorid) {
+            RC.briefView.isFollowed = true;
+        }
     }
     else if ([req.uri isEqualToString:URI_FOLLOW_UNFOLLOW]) {
         toastMessage = @"取关成功";
         self.isFollowed = false;
+        NSInteger liveuid = [req.params[@"live_uid"] intValue];
+        if (liveuid == RC.roomManager.anchorid) {
+            RC.briefView.isFollowed = false;
+        }
+        
     }
     else if ([req.uri isEqualToString:URI_ROOM_SETMANAGER]) {
         toastMessage = @"设置成功";

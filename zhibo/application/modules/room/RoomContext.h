@@ -19,6 +19,7 @@
 
 #import "GameManager.h"
 #import "RoomManager.h"
+#import "RoomAnchorBriefView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 #define RC  [RoomContext shared]
@@ -53,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) GameManager *gameManager;
 @property (nonatomic, weak) RoomManager *roomManager;
+
+@property (nonatomic, weak) RoomAnchorBriefView *briefView;
 @end
 
 NS_ASSUME_NONNULL_END
