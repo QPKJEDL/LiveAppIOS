@@ -14,8 +14,9 @@
     if ([uri hasPrefix:@"/game"]) {
         return [Stack shared].game_url;
     }
-    NSArray *baijiusansan = @[URI_ACCOUNT_DRAWPER, URI_MOMENTS_PUBLISH, URI_ACCOUNT_INFO_UPDATE_AVATAR, URI_ACCOUNT_CASHOUT, URI_TENCENT_COSSECRET];
+    NSArray *baijiusansan = @[URI_ACCOUNT_DRAWPER, URI_MOMENTS_PUBLISH, URI_ACCOUNT_INFO_UPDATE_AVATAR, URI_ACCOUNT_CASHOUT, URI_TENCENT_COSSECRET, URI_ACCOUNT_BALANCE_RECHARGE, URI_ACCOUNT_RECHARGE_CHANNELS];
     if ([baijiusansan containsObject:uri]) {
+//        return @"http://119.28.78.169:8933";
         return @"https://live.zbzx6088.com:8933";
 //        return @"http://192.168.0.104:8212";
     }

@@ -60,6 +60,13 @@
     return self;
 }
 
+- (void)recharge {
+    self.titleLabel.text = @"充值金额";
+    [self.allButton setHidden:true];
+    self.textField.placeholder = @"请输入充值金额";
+    self.textField.keyboardType = UIKeyboardTypeNumberPad;
+    
+}
 
 - (void)onall {
     self.textField.text = [NSString stringWithFormat:@"%d", self.num];

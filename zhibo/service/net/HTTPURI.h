@@ -34,6 +34,7 @@
 #define URI_ACCOUNT_BALANCE_CASHOUT        @"/account/balance/cashout"
 #define URI_ACCOUNT_CASHOUT                 @"/account/cashout"
 #define URI_ACCOUNT_CHANGER_LIST            @"/account/changer/list"
+#define URI_ACCOUNT_RECHARGE_CHANNELS       @"/account/recharge/channels"
 
 #define URI_ROOM_USER_INFO               @"/RoomUserInfo"
 #define URI_ACCOUNT_TEAM_LOWERS            @"/account/team/lowers"

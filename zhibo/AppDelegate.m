@@ -110,7 +110,8 @@
         @"chargeitem":@"ChargeHistoryItemView",
         @"loweritem":@"TeamLowerItemView",
         @"statisitem":@"TeamStatisItemView",
-        @"popularizecodeitem":@"PopularizeCodeItemView"
+        @"popularizecodeitem":@"PopularizeCodeItemView",
+        @"rechargechannel":@"RechargeChannelItemView",
     }];
     
     [ABNet shared].errorHandle = [[NetErrorPlugin alloc] init];

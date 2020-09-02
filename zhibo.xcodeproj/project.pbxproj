@@ -276,6 +276,7 @@
 		F1A4D88824C67C0F003A6031 /* MoneyItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A4D88724C67C0F003A6031 /* MoneyItemView.m */; };
 		F1A4D88B24C68871003A6031 /* MoneySectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A4D88A24C68871003A6031 /* MoneySectionHeaderView.m */; };
 		F1A4D89D24CA6C66003A6031 /* ZBUIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A4D89C24CA6C66003A6031 /* ZBUIImagePickerController.m */; };
+		F1B0395424FF7ABA008B02C1 /* RechargeChannelItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B0395324FF7ABA008B02C1 /* RechargeChannelItemView.m */; };
 		F1B7950624596EA7000BD333 /* wallet.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950524596EA6000BD333 /* wallet.json */; };
 		F1B7950924597214000BD333 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B7950824597214000BD333 /* BillViewController.m */; };
 		F1B7950B24597A7C000BD333 /* footprint.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950A24597A7C000BD333 /* footprint.json */; };
@@ -817,6 +818,8 @@
 		F1A4D88A24C68871003A6031 /* MoneySectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneySectionHeaderView.m; sourceTree = "<group>"; };
 		F1A4D89B24CA6C66003A6031 /* ZBUIImagePickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBUIImagePickerController.h; sourceTree = "<group>"; };
 		F1A4D89C24CA6C66003A6031 /* ZBUIImagePickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBUIImagePickerController.m; sourceTree = "<group>"; };
+		F1B0395224FF7ABA008B02C1 /* RechargeChannelItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeChannelItemView.h; sourceTree = "<group>"; };
+		F1B0395324FF7ABA008B02C1 /* RechargeChannelItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeChannelItemView.m; sourceTree = "<group>"; };
 		F1B7950524596EA6000BD333 /* wallet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallet.json; sourceTree = "<group>"; };
 		F1B7950724597214000BD333 /* BillViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillViewController.h; sourceTree = "<group>"; };
 		F1B7950824597214000BD333 /* BillViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillViewController.m; sourceTree = "<group>"; };
@@ -1728,6 +1731,8 @@
 				F1D272AE24E7CE08003FFABE /* CodeInputItemView.m */,
 				F17513D024EE7A55008729D7 /* SMSInputItemView.h */,
 				F17513D124EE7A55008729D7 /* SMSInputItemView.m */,
+				F1B0395224FF7ABA008B02C1 /* RechargeChannelItemView.h */,
+				F1B0395324FF7ABA008B02C1 /* RechargeChannelItemView.m */,
 			);
 			path = listitemviews;
 			sourceTree = "<group>";
@@ -2331,6 +2336,7 @@
 				F121926B24D16F1E00630CA2 /* ZBInputView.m in Sources */,
 				F11AA51E24D53C3000FCFE18 /* GFCalendarView.m in Sources */,
 				F121920524CA7AD800630CA2 /* Config.m in Sources */,
+				F1B0395424FF7ABA008B02C1 /* RechargeChannelItemView.m in Sources */,
 				F121926124D15A2D00630CA2 /* CommentView.m in Sources */,
 				F121925624D052EE00630CA2 /* WebViewViewController.m in Sources */,
 				559F3EB62453DF4F001280F2 /* MessagePresent.m in Sources */,

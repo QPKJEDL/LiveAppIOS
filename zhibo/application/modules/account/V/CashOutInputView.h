@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int num;
 @property (nonatomic, strong) QMUITextField *textField;
 - (void)setNoticeText:(NSString *)notice;
+- (void)recharge;
 @end
 
 NS_ASSUME_NONNULL_END

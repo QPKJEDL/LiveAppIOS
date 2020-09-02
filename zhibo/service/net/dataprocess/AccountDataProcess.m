@@ -49,8 +49,11 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
         
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_RECHARGE_CHANNELS]) {
+        request.realUri = @"/code/Mycenter/czlist";
+    }
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
-        
+        request.realUri = @"/code/Mycenter/chongzhi";
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
         request.realUri = @"/account_changer_list";
@@ -112,9 +115,6 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
         return false;
     }
-    if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
-        return false;
-    }
     NSArray *noLoadings = @[URI_ROOM_SEND_GIFT, URI_ACCOUNT_INFO];
     
     if ([noLoadings containsObject:request.uri] == false) {
@@ -155,57 +155,87 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
         return @{@"css":css, @"items":paychannels};
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_RECHARGE_CHANNELS]) {
+        NSArray *list = response[@"list"];
+        NSArray *pays = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
+            dic[@"native_id"] = @"rechargechannel";
+            dic[@"title"] = dic[@"pay_aisle"];
+            dic[@"xian"] = [NSString stringWithFormat:@"%@-%@", dic[@"min_price"], dic[@"max_price"]];
+            return dic;
+        }];
+        CGFloat w = floor((SCREEN_WIDTH-14)/2);
+        NSArray *results =  @[@{
+               @"css":@{
+                       @"item.size.width":@(w),
+                       @"item.size.height":@"68",
+                       @"header.size.height":@"44",
+                       @"header.size.width":@"100%",
+                       @"section.inset.left":@(7),
+                       @"section.inset.right":@(7),
+               },
+               @"header":@{
+                          @"title":@"支付方式",
+                          @"native_id":@"moneysectionheader"
+                      },
+               @"items":pays
+        }];
+        return @{@"list":results};
+    }
+    
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_RECHARGE]) {
-        NSArray *numbers = @[@"20", @"30", @"50", @"80", @"100"];
-        NSMutableArray *numberItems = [[NSMutableArray alloc] init];
-        for (int i=0; i<numbers.count; i++) {
-            NSInteger num = [numbers[i] intValue];
-            NSString *dou = [NSString stringWithFormat:@"直播豆%ld", num*2];
-            [numberItems addObject:@{
-                @"number":numbers[i],
-                @"dou":dou,
-                @"native_id":@"moneyitem"
-            }];
+        if ([response isKindOfClass:[NSString class]]) {
+            return @{@"url":(NSString *)response};
         }
-        
-        NSArray *pays = @[
-            @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel", @"count":@(3)},
-            @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel", @"count":@(3)},
-            @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel", @"count":@(3)}
-        ];
-        
-        CGFloat w = floor((SCREEN_WIDTH-14)/3);
-        NSArray *list = @[
-            @{
-                @"css":@{
-                        @"item.size.width":@(w),
-                        @"item.size.height":@"68",
-                        @"header.size.height":@"44",
-                        @"header.size.width":@"100%",
-                        @"section.inset.left":@(7),
-                        @"section.inset.right":@(7),
-                },
-                @"header":@{
-                           @"title":@"充值金额",
-                           @"native_id":@"moneysectionheader"
-                       },
-                @"items":numberItems
-            },
-            @{
-                @"css":@{
-                        @"item.size.width":@"100%",
-                        @"item.size.height":@"60",
-                        @"header.size.height":@"44",
-                        @"header.size.width":@"100%"
-                },
-                @"header":@{
-                           @"title":@"充值方式",
-                           @"native_id":@"moneysectionheader"
-                       },
-                @"items":pays
-            },
-        ];
-        return @{@"list":list};
+//        NSArray *numbers = @[@"20", @"30", @"50", @"80", @"100"];
+//        NSMutableArray *numberItems = [[NSMutableArray alloc] init];
+//        for (int i=0; i<numbers.count; i++) {
+//            NSInteger num = [numbers[i] intValue];
+//            NSString *dou = [NSString stringWithFormat:@"直播豆%ld", num*2];
+//            [numberItems addObject:@{
+//                @"number":numbers[i],
+//                @"dou":dou,
+//                @"native_id":@"moneyitem"
+//            }];
+//        }
+//
+//        NSArray *pays = @[
+//            @{@"title":@"微信支付", @"icon":@"weixin", @"native_id":@"paychannel", @"count":@(3)},
+//            @{@"title":@"支付宝支付", @"icon":@"zhifubao", @"native_id":@"paychannel", @"count":@(3)},
+//            @{@"title":@"银行卡支付", @"icon":@"yinlian", @"native_id":@"paychannel", @"count":@(3)}
+//        ];
+//
+//        CGFloat w = floor((SCREEN_WIDTH-14)/3);
+//        NSArray *list = @[
+//            @{
+//                @"css":@{
+//                        @"item.size.width":@(w),
+//                        @"item.size.height":@"68",
+//                        @"header.size.height":@"44",
+//                        @"header.size.width":@"100%",
+//                        @"section.inset.left":@(7),
+//                        @"section.inset.right":@(7),
+//                },
+//                @"header":@{
+//                           @"title":@"充值金额",
+//                           @"native_id":@"moneysectionheader"
+//                       },
+//                @"items":numberItems
+//            },
+//            @{
+//                @"css":@{
+//                        @"item.size.width":@"100%",
+//                        @"item.size.height":@"60",
+//                        @"header.size.height":@"44",
+//                        @"header.size.width":@"100%"
+//                },
+//                @"header":@{
+//                           @"title":@"充值方式",
+//                           @"native_id":@"moneysectionheader"
+//                       },
+//                @"items":pays
+//            },
+//        ];
+//        return @{@"list":list};
     }
     
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
