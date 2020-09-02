@@ -28,7 +28,7 @@
 #import "TencentCOS.h"
 #import "UncaughtExceptionHandler.h"
 #import "BetTransform.h"
-@interface AppDelegate ()
+@interface AppDelegate ()<INetData>
 @end
 
 @implementation AppDelegate
@@ -48,7 +48,33 @@
     
     [UncaughtExceptionHandler installUncaughtExceptionHandler:YES showAlert:YES];
 
+    [self checkVersion];
     return YES;
+}
+
+- (void)checkVersion {
+    NSString *appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    [self fetchPostUri:URI_VERSION params:@{@"version_no":appVersion}];
+}
+
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips hideLoading];
+    NSString *url = obj[@"url"];
+    NSInteger force = [obj[@"force"] intValue];
+    NSString *detail = obj[@"detail"];
+    QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+
+    }];
+    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"立即更新" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"版本更新" message:detail preferredStyle:QMUIAlertControllerStyleAlert];
+    if (force == 0) {
+        [alertController addAction:action1];
+    }
+    
+    [alertController addAction:action2];
+    [alertController showWithAnimated:YES];
 }
 
 //init window and display

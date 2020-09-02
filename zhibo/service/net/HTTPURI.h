@@ -12,6 +12,8 @@
 
 #define HTTPHost          @"http://192.168.1.6/code"
 
+#define URI_VERSION                         @"/code/Mycenter/version"
+
 #define mark ----- index -----
 #define URI_INDEX_UPDATE                    @"/index/update"
 #define URI_BANNER_LIST                     @"/banner_list"
