@@ -61,43 +61,60 @@
     
     NSArray *arr = @[
         @{
-            @"title":@"号台",
+            @"title":@"号台：",
             @"value":data[@"Desk_name"]
         },
         @{
-            @"title":@"靴次",
+            @"title":@"靴次：",
             @"value":[data stringValueForKey:@"Boot_num"]
         },
         @{
-            @"title":@"铺次",
+            @"title":@"铺次：",
             @"value":[data stringValueForKey:@"Pave_num"]
         },
         @{
-            @"title":@"开台结果",
+            @"title":@"开台结果：",
             @"value":resultStr
         },
         @{
-            @"title":@"可用余额",
+            @"title":@"可用余额：",
             @"value":[NSString stringWithFormat:@"%.2f", [data[@"Balance"] floatValue]]
         },
         @{
-            @"title":@"本局输赢",
+            @"title":@"本局输赢：",
             @"value":[data stringValueForKey:@"Sumgetmoney"]
         }
 
     ];
     
     CGFloat top = 0;
-
+    
     for (int i=0; i<arr.count; i++) {
-        NSString *str = [NSString stringWithFormat:@"%@：%@", arr[i][@"title"], arr[i][@"value"]];
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, top, self.contetView.width, 30)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, top, 100, 30)];
+        titleLabel.numberOfLines = 0;
+        titleLabel.font = [UIFont PingFangSC:16];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.textAlignment = NSTextAlignmentRight;
+        titleLabel.text = arr[i][@"title"];
+        [self.contetView addSubview:titleLabel];
+        
+        
+        NSString *str = arr[i][@"value"];
+        CGSize strSize = [str sizeWithFont:[UIFont PingFangSC:16] constrainedToSize:CGSizeMake(self.contetView.width-100, 200)];
+        CGFloat h = MAX(strSize.height, 30);
+
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, top, self.contetView.width-100, h)];
+        textLabel.numberOfLines = 0;
         [textLabel setText:str];
         textLabel.font = [UIFont PingFangSC:16];
         textLabel.textColor = [UIColor whiteColor];
+        
         [self.contetView addSubview:textLabel];
         top = textLabel.bottom;
+        
     }
+    self.closeButton.top = top+40+10;
+    self.height = self.closeButton.bottom+10;
 }
 
 @end

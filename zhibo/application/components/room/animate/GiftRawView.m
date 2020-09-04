@@ -17,6 +17,7 @@
 @property (nonatomic, assign) NSInteger num;
 
 @property (nonatomic, assign) NSInteger giftid;
+@property (nonatomic, assign) NSInteger userid;
 @end
 @implementation GiftRawView
 
@@ -72,12 +73,18 @@
 }
 
 - (BOOL)isRefresh:(NSDictionary *)dic {
-    NSInteger gkey = [dic[@"gift"][@"id"] intValue];
-    return (gkey == self.giftid) || self.giftid == -1;
+    if (self.userid == [dic[@"UserId"] intValue]) {
+        NSInteger gkey = [dic[@"gift"][@"id"] intValue];
+        return (gkey == self.giftid) || self.giftid == -1;
+    }
+    
+    return false;
+    
 }
 
 - (void)showWithData:(NSDictionary *)data {
     self.giftid = [data[@"gift"][@"id"] intValue];
+    self.userid = [data[@"UserId"] intValue];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self performSelector:@selector(autohidden) withObject:nil afterDelay:3];
     

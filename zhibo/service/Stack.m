@@ -28,6 +28,7 @@
         self.likeCountMap = [[NSMutableDictionary alloc] init];
         self.likeZoneMap = [[NSMutableDictionary alloc] init];
         self.followUserMap = [[NSMutableDictionary alloc] init];
+        self.gslogs = [[NSMutableArray alloc] init];
     }
     return self;
 }

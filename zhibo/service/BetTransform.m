@@ -94,6 +94,7 @@
         }
         if (one) {
             [str appendString:one];
+            [str appendString:@" "];
         }
     }
     return str;

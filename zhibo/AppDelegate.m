@@ -29,12 +29,14 @@
 #import "UncaughtExceptionHandler.h"
 #import "BetTransform.h"
 @interface AppDelegate ()<INetData>
+@property (nonatomic, assign) NSInteger force;
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.force = 0;
     [WOCrashProtectorManager makeAllEffective];
     [IQKeyboardManager sharedManager].enable = true;
     [IQKeyboardManager sharedManager].enableAutoToolbar = true;
@@ -47,8 +49,8 @@
     [[TencentCOS shared] setup];
     
     [UncaughtExceptionHandler installUncaughtExceptionHandler:YES showAlert:YES];
-
     [self checkVersion];
+    
     return YES;
 }
 
@@ -57,11 +59,20 @@
     [self fetchPostUri:URI_VERSION params:@{@"version_no":appVersion}];
 }
 
+//{
+//    "url": "http://www.baidu.com",  //更新网址
+//    "detail": "1.0.1", //版本号
+//    "force": "2" //0 非强制更新 1 强制更新 2不更新
+//}
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     [ABUITips hideLoading];
     NSString *url = obj[@"url"];
     NSInteger force = [obj[@"force"] intValue];
     NSString *detail = obj[@"detail"];
+    self.force = force;
+    if (force == 2) {
+        return;
+    }
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
 
     }];
@@ -151,16 +162,6 @@
     [[ABNet shared] registerDataProcess:[[RankDataProcess alloc] init] key:@"/rank"];
     
     [[Service shared] refreshGameURL];
-    
-    NSArray *banks = @[
-        @"6214857100002718",//招商
-        @"6222021208013935810",//工商
-    ];
-    
-    for (NSString *bank in banks) {
-        BOOL is = [ABTools isValidCarNo:bank];
-        NSLog(@"%@%i", bank, is);
-    }
 }
 
 
@@ -169,6 +170,9 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    if (self.force == 1) {
+        [self checkVersion];
+    }
 //    [[RoomContext shared].playControl refreshRank];
 //    [[RoomContext shared].pushControl refreshRank];
 }

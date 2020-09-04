@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *likeCountMap;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *followUserMap;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *likeZoneMap;
+
+@property (nonatomic, strong) NSMutableArray *gslogs;
 @end
 
 NS_ASSUME_NONNULL_END

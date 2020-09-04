@@ -149,9 +149,29 @@
 
 #pragma mark --------- loc action ----------
 - (void)onConfirm {
-    
     if (self.isBetting) {
         [ABUITips showError:@"正在下注"];
+        return;
+    }
+    
+    NSDictionary *coinDic = [self selectCoin];
+    if (coinDic == nil) {
+        [ABUITips showError:@"请选择筹码"];
+        return;
+    }
+    
+    BOOL isNoMoney = true;
+    for (int i=0; i<self.options.count; i++) {
+        NSDictionary *obj = self.options[i];
+        if ([obj[@"cnum"] intValue] > 0) {
+            isNoMoney = false;
+            break;
+        }
+    }
+    
+    
+    if (isNoMoney) {
+        [ABUITips showError:@"请选择下注选项"];
         return;
     }
     
@@ -289,7 +309,6 @@
         [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
         return;
     }
-    
     self.coins = [ABIteration iterationList:self.coins block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
         dic[@"selected"] = @(0);
         if (index == idx) {
