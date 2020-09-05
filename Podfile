@@ -27,4 +27,5 @@ pod 'HXPhotoPicker', '~> 3.0'
 pod 'CocoaAsyncSocket'
 pod 'JSONModel'
 pod 'QCloudCOSXML'
+pod 'CocoaLumberjack'
 end

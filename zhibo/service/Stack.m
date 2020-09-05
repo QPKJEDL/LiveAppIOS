@@ -59,4 +59,17 @@
     }
     return _game_tcpport;
 }
+
+- (void)addgslogs:(NSDictionary *)logs {
+    if (self.gslogs.count > 50) {
+        [self.gslogs removeLastObject];
+    }
+    
+    [self.gslogs insertObject:logs atIndex:0];
+}
+
+- (void)addgshttplogs:(NSDictionary *)logs {
+    
+}
+
 @end

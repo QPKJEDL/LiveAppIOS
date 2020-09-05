@@ -61,6 +61,9 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.6.4)
+  - CocoaLumberjack (3.6.2):
+    - CocoaLumberjack/Core (= 3.6.2)
+  - CocoaLumberjack/Core (3.6.2)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -415,6 +418,7 @@ DEPENDENCIES:
   - ABUIKit (from `/Users/qp/own/ABUIKit`)
   - AFNetworking
   - CocoaAsyncSocket
+  - CocoaLumberjack
   - FMDB
   - FSTextView
   - gobelieve (from `https://github.com/whdevlab/gobelieve`)
@@ -438,6 +442,7 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - CocoaAsyncSocket
+    - CocoaLumberjack
     - FMDB
     - FSTextView
     - HXPhotoPicker
@@ -481,6 +486,7 @@ SPEC CHECKSUMS:
   ABUIKit: 9ecc86ba81184f4f7cfbf7a6fb524c03e957446f
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
   gobelieve: e8f4b63419a95bf73b12d8bad14ad960b4523f74
@@ -503,6 +509,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 1afbd2f3777c5d0fb0fc7908a6ebf47487b6a5f5
+PODFILE CHECKSUM: bb9fcaf14ed8c47bca033f726ac98ce4a972b74a
 
 COCOAPODS: 1.9.3

@@ -85,6 +85,7 @@
 - (void)onRoomMessage:(RoomMessage *)rm {
     NSLog(@"%@", rm.content);
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[rm.content dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+//    {"Cmd":6,"DeskId":15,"Status":2,"Winner":"作废","Boot_num":1,"Pave_num":13}
     [[ABMQ shared] publish:dic channel:CHANNEL_ROOM_GAME];
 }
 

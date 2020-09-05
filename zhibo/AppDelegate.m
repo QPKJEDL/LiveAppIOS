@@ -149,6 +149,7 @@
         @"statisitem":@"TeamStatisItemView",
         @"popularizecodeitem":@"PopularizeCodeItemView",
         @"rechargechannel":@"RechargeChannelItemView",
+        @"xxxx":@"XXXXItemView",
     }];
     
     [ABNet shared].errorHandle = [[NetErrorPlugin alloc] init];

@@ -299,6 +299,7 @@
         [RoomContext shared].gameManager.desk_id = [message[@"DeskId"] intValue];
         [[RoomContext shared].gameManager _refreshDeskInfo];
         [self.plateView stop];
+        [RC.gameManager.control.wenluWebView setHidden:true];
     }
     else if (lmd == 10) {
         [self liveclose];

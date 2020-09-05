@@ -35,6 +35,7 @@
 #import "TransformViewController.h"
 #import "PopularizeListViewController.h"
 #import "HelpViewController.h"
+#import "XXXXViewController.h"
 @implementation NSRouter
 + (void)doLogin {
     LoginViewController *vc = [[LoginViewController alloc] init];
@@ -250,6 +251,11 @@
 + (void)gotoHelp {
     HelpViewController *vc = [[HelpViewController alloc] init];
     vc.title = @"帮助与反馈";
+    [NSRouter pushTo:vc props:@{}];
+}
+
++ (void)gotoXXXX {
+    XXXXViewController *vc = [[XXXXViewController alloc] init];
     [NSRouter pushTo:vc props:@{}];
 }
 @end

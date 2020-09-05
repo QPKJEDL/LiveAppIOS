@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *likeZoneMap;
 
 @property (nonatomic, strong) NSMutableArray *gslogs;
+@property (nonatomic, strong) NSMutableArray *httplogs;
+- (void)addgslogs:(NSDictionary *)logs;
+- (void)addgshttplogs:(NSDictionary *)logs;
 @end
 
 NS_ASSUME_NONNULL_END

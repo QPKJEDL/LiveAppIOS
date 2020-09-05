@@ -188,6 +188,11 @@
                 dic[@"game_icon"] = map[channel];
             }
             dic[@"last_id"] = request.params[@"last_id"];
+            NSString *roomName = dic[@"CoverName"];
+            if (roomName.length == 0) {
+                roomName = dic[@"nickname"];
+            }
+            dic[@"roomname"] = roomName;
             return dic;
         }];
         

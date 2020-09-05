@@ -80,11 +80,11 @@
 }
 
 - (void)reload:(NSDictionary *)item {
-    self.nameLabel.text = item[@"nickname"];
+    self.nameLabel.text = item[@"roomname"];
     [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageNamed:@"room_default"]];
     
     [self.nameLabel sizeToFit];
-    self.nameLabel.height = 12;
+    self.nameLabel.height = 15;
     if (item[@"roomcount"] == nil) {
          _watchCountLabel.text = @"0";
     }else{

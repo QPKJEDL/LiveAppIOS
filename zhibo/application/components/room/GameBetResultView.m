@@ -57,7 +57,9 @@
     
     NSInteger gid = [data[@"GameType"] intValue];
     NSString *resultStr = [[BetTransform shared] getBetDescriptionGid:gid winner:data[@"Result"]];
-    
+    if (resultStr.length == 0) {
+        resultStr = @"作废";
+    }
     
     NSArray *arr = @[
         @{

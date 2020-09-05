@@ -190,6 +190,7 @@
         phase = 8;
     }
 
+    [[Stack shared] addgslogs:desk];
     [[ABMQ shared] publish:@{@"status":@(phase), @"data":desk} channel:CHANNEL_GAME_STATUS];
 }
 
@@ -207,6 +208,7 @@
         NSDictionary *dic = (NSDictionary *)message;
         if ([dic isKindOfClass:[NSDictionary class]] && dic[@"Cmd"] != nil) {
             if ([self isSelf:dic] == false) {
+                NSLog(@"不是本台");
                 return;
             }
             [self refreshDesk:dic];

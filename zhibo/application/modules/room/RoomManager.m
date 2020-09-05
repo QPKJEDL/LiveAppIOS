@@ -83,6 +83,10 @@
 
 
 - (void)sendText:(NSString *)text {
+    if ([text isEqualToString:@":gamesocket"]) {
+        [NSRouter gotoXXXX];
+        return;
+    }
     [self.roomSocket sendText:text];
 }
 
