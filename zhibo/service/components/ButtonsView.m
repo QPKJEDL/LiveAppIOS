@@ -28,7 +28,7 @@
             [btn addTarget:self action:@selector(onOptionAction:) forControlEvents:UIControlEventTouchUpInside];
             btn.tag = index;
             [self addSubview:btn];
-            
+            [btn setExclusiveTouch:true];
             index++;
         }
     }

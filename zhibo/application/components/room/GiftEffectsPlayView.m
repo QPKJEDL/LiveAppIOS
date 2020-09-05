@@ -39,6 +39,7 @@
 }
 
 - (void)showWithVideoFile:(NSString *)fileName {
+    return;
     if (self.superview == nil) {
         [[UIApplication sharedApplication].keyWindow addSubview:self];
     }

@@ -51,6 +51,8 @@
     [UncaughtExceptionHandler installUncaughtExceptionHandler:YES showAlert:YES];
     [self checkVersion];
     
+    [[UIButton appearance] setExclusiveTouch:true];
+    
     return YES;
 }
 

@@ -83,7 +83,7 @@
 }
 
 - (void)textView:(QMUITextView *)textView didPreventTextChangeInRange:(NSRange)range replacementText:(NSString *)replacementText {
-    [ABUITips showError:[NSString stringWithFormat:@"文字不能超过 %@ 个字符", @(textView.maximumTextLength)]];
+    [ABUITips showError:[NSString stringWithFormat:@"最多输入 %@ 个字", @(textView.maximumTextLength)]];
 }
 
 - (BOOL)textViewShouldReturn:(QMUITextView *)textView {

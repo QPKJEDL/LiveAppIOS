@@ -71,6 +71,7 @@
         [dongtaiButton setImage:[UIImage imageNamed:@"dongtai2"] forState:UIControlStateNormal];
         [self.actionView addSubview:dongtaiButton];
         [dongtaiButton addTarget:self action:@selector(onDongTai) forControlEvents:UIControlEventTouchUpInside];
+        [dongtaiButton setExclusiveTouch:true];
         
         QMUIButton *zhiboButton = [[QMUIButton alloc] initWithFrame:CGRectMake(dongtaiButton.right, 0, 110/2, 54)];
         zhiboButton.imagePosition = QMUIButtonImagePositionTop;
@@ -80,6 +81,7 @@
         [zhiboButton setImage:[UIImage imageNamed:@"dongtai2"] forState:UIControlStateNormal];
         [self.actionView addSubview:zhiboButton];
         [zhiboButton addTarget:self action:@selector(onZhibo) forControlEvents:UIControlEventTouchUpInside];
+        [zhiboButton setExclusiveTouch:true];
     }
     return self;
 }

@@ -98,7 +98,7 @@
    
     [_watchCountLabel sizeToFit];
     
-    _nameLabel.width = 100;
+    _nameLabel.width = self.containView.width;
 }
 @end
 

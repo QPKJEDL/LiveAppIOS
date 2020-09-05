@@ -32,6 +32,7 @@
         self.textField = [[QMUITextField alloc] initWithFrame:CGRectMake(self.coverImageView.right+15, 12, self.width-self.coverImageView.right-15, 40)];
         self.textField.placeholder = @"请输入您的标题";
         self.textField.textColor = [UIColor whiteColor];
+        self.textField.maximumTextLength = 10;
         self.textField.placeholderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
         [self addSubview:self.textField];
         
