@@ -72,6 +72,10 @@
     }
 }
 
+- (void)refreshwenlu {
+    [self fetchPostUri:URI_GAME_RESULT_LIST params:@{@"game_id":@(self.game_id), @"boot_num":@(self.boot_num), @"desk_id":@(self.desk_id)}];
+}
+
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     if ([req.uri isEqualToString:URI_ROOM_GAME]) {
         if ([obj isKindOfClass:[NSNull class]]) {

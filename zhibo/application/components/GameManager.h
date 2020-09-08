@@ -52,6 +52,7 @@ typedef enum : NSUInteger {
 
 - (void)_refreshDeskInfo;
 - (void)refresh;
+- (void)refreshwenlu;
 
 - (void)doBet:(NSDictionary *)data;
 - (void)doBetCancel;

@@ -480,7 +480,8 @@
                 [RoomPrompt shared].betView.enabled = false;//禁止下注
 //                [RP promptGameResultWithGameId:RC.gameManager.game_id winner:desk[@"Winner"]];
                 
-                [self receiveWenLuItem:desk];
+//                [self receiveWenLuItem:desk];
+                [RC.gameManager refreshwenlu];
                 [RC.gameManager refreshBalance];
                 NSString *name = [[BetTransform shared] getMusicGid:RC.gameManager.game_id winner:desk[@"Winner"]];
                 [[ABAudio shared] playBundleFileWithMultipleName:name];
