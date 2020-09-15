@@ -28,7 +28,7 @@
     if (self) {
         self.socket = [[GameSocket alloc] init];
         
-        [[ABMQ shared] subscribe:self channel:CHANNEL_ROOM_GAME autoAck:true];
+        [[ABMQ shared] subscribe:self channels:@[CHANNEL_ROOM_GAME,@"refreshbalance"] autoAck:true];
         
     }
     return self;
@@ -217,6 +217,9 @@
             }
             [self refreshDesk:dic];
         }
+    }
+    if ([channel isEqualToString:@"refreshbalance"]) {
+        [self refreshBalance];
     }
 }
 

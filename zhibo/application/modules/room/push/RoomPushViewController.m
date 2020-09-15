@@ -86,10 +86,11 @@
 - (void)present:(RoomPushPresent *)present startLive:(NSDictionary *)info {
     [self.readyControl removeFromSuperview];
 //    [self controlOnFinish:nil];
-    
-    self.loadControl = [[RoomPushLoadControl alloc] initWithFrame:self.view.bounds];
-    self.loadControl.delegate = self;
-    [self.view addSubview:self.loadControl];
+  
+    [self controlOnFinish:self.loadControl];
+//    self.loadControl = [[RoomPushLoadControl alloc] initWithFrame:self.view.bounds];
+//    self.loadControl.delegate = self;
+//    [self.view addSubview:self.loadControl];
 }
 
 - (void)controlOnFinish:(RoomPushLoadControl *)control {
