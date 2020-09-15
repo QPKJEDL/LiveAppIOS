@@ -20,6 +20,7 @@
 #import "GameResultPromptView.h"
 #import "BetView.h"
 #import "GameBetResultView.h"
+#import "MoneyInPrompt.h"
 @interface RoomPrompt ()<TopicsPromptViewDelegate, ChannelsPromptViewDelegate, GamesPromptViewDelegate, DesksPromptViewDelegate, ABUIListViewDelegate, BetViewDelegate>
 @property (nonatomic, strong) UserPromptView *userPromptView; //聊天点击展示用户试图
 @property (nonatomic, strong) AnchorPromptView *anchorPromptView; //主播视图
@@ -186,6 +187,11 @@
         @{
             @"title":@"下注",
             @"icon":@"youxi",
+            @"native_id":@"titleimage"
+        },
+        @{
+            @"title":@"额度转换",
+            @"icon":@"jinbi",
             @"native_id":@"titleimage"
         }
     ];

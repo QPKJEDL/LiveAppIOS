@@ -50,6 +50,11 @@
                 @"title":@"下注",
                 @"icon":@"youxi",
                 @"native_id":@"titleimage"
+            },
+            @{
+                @"title":@"额度转换",
+                @"icon":@"jinbi",
+                @"native_id":@"titleimage"
             }
         ];
         

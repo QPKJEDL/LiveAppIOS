@@ -11,6 +11,7 @@
 #import "DesksPromptView.h"
 #import "AnchorFuncPromptView.h"
 #import "RoomManagerPromptView.h"
+#import "MoneyInPrompt.h"
 @interface RoomPushControl ()<ABUIListViewDelegate, AnchorFuncPromptViewDelegate, GamesPromptViewDelegate, DesksPromptViewDelegate, IABMQSubscribe>
 @property (nonatomic, strong) AnchorFuncPromptView *anchorFuncPromptView;
 @property (nonatomic, strong) DesksPromptView *desksPromptView;
@@ -83,6 +84,9 @@
     }
     if (index == 4) { // 游戏选择
         [self onPlate];
+    }
+    if (index == 5) { // 额度转换
+        [self edu];
     }
 }
 

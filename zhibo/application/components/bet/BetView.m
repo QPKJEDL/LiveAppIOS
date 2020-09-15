@@ -107,17 +107,6 @@
         self.balanceLabel.centerY = 22;
         
         
-        self.zzButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 24)];
-        self.zzButton.backgroundColor = self.tipLabel.backgroundColor;
-        self.zzButton.layer.cornerRadius = 24/2;
-        self.zzButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        self.zzButton.clipsToBounds = true;
-        [self.zzButton setTitle:@"转入" forState:UIControlStateNormal];
-        [self addSubview:self.zzButton];
-        [self.zzButton addTarget:self action:@selector(onZZ) forControlEvents:UIControlEventTouchUpInside];
-        self.zzButton.centerY = 22;
-        self.zzButton.left = self.balanceLabel.right+10;
-        
         self.wenluButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
         self.wenluButton.backgroundColor = self.tipLabel.backgroundColor;
         self.wenluButton.layer.cornerRadius = 32/2;
@@ -126,10 +115,8 @@
         [self addSubview:self.wenluButton];
         [self.wenluButton addTarget:self action:@selector(onWenLuButton) forControlEvents:UIControlEventTouchUpInside];
         self.wenluButton.centerY = 22;
-        self.wenluButton.left = self.zzButton.right+10;
-        
-
-        
+        self.wenluButton.left = self.balanceLabel.right+10;
+    
         
         self.enabled = false;
 //        [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_BALANCE] autoAck:true];
@@ -137,24 +124,6 @@
     }
     return self;
 }
-
-- (void)onZZ {
-    [self fetchPostUri:URI_ACCOUNT_BALANCE_INFO params:nil];
-}
-
-- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    if ([req.uri isEqualToString:URI_ACCOUNT_BALANCE_INFO]) {
-        NSString *balanceText = [obj stringValueForKey:@"info"];
-        [[ABUIPopUp shared] remove:0];
-        MoneyInPrompt *prompt = [[MoneyInPrompt alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH-30, 200)];
-        [prompt.layer setCornerRadius:10];
-        [prompt setBalance:balanceText];
-        [[ABUIPopUp shared] show:prompt from:ABPopUpDirectionTop distance:SCREEN_HEIGHT/4 hideBlock:^{
-            
-        }];
-    }
-}
-
 
 
 - (void)onTipAction {

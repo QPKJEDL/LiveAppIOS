@@ -19,6 +19,7 @@
 #import "BetView.h"
 #import "GameManager.h"
 #import "BetTransform.h"
+#import "MoneyInPrompt.h"
 @interface RoomControl ()<RoomBottomBarDelegate, RoomChatViewDelegate, INetData, RoomAnchorBriefViewDelegate, GameStatusPlateViewDelegate, BetViewDelegate, IABMQSubscribe>
 @property (nonatomic, strong) UIView *bbbView;
 @property (nonatomic, strong) RoomAnchorBriefView *briefView;
@@ -388,6 +389,15 @@
     if ([req.uri isEqualToString:URI_ROOM_GIFTRANK]) {
         [self.audienceView setList:obj[@"list"]];
     }
+    if ([req.uri isEqualToString:URI_ACCOUNT_BALANCE_INFO]) {
+        NSString *balanceText = [obj stringValueForKey:@"info"];
+        [[ABUIPopUp shared] remove:0];
+        MoneyInPrompt *prompt = [[MoneyInPrompt alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH-30, 200)];
+        [prompt.layer setCornerRadius:10];
+        [prompt setBalance:balanceText];
+        [[ABUIPopUp shared] show:prompt from:ABPopUpDirectionTop distance:SCREEN_HEIGHT/4 hideBlock:^{
+        }];
+    }
 }
 
 //左侧用户试图
@@ -420,6 +430,9 @@
     [RP promptMoreActions:^(NSInteger index) {
         if (index == 0) {
             [self onPlate];
+        }
+        if (index == 1) {
+            [self edu];
         }
     }];
 }
@@ -553,5 +566,10 @@
 //        [self onReceivePeerMessage:message];
 //    }
 //}
+
+- (void)edu {
+    [self fetchPostUri:URI_ACCOUNT_BALANCE_INFO params:nil];
+}
+
 @end
 

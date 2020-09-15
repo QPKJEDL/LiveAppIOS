@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onPlate;
 
 - (void)free;
+- (void)edu;
 @end
 
 NS_ASSUME_NONNULL_END
