@@ -21,8 +21,16 @@
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 
         self.imService = [[IMService alloc] init];
-        self.imService.host = @"live.zbzx6088.com";
-        self.imService.port = 24430;
+        if (ISENABLESSL) {
+            self.imService.ssl = true;
+            self.imService.host = @"live.zbzx6088.com";
+            self.imService.port = 24430;
+        }else{
+            self.imService.ssl = false;
+            self.imService.host = @"124.156.149.44";
+            self.imService.port = 23002;
+        }
+        
         self.imService.heartbeatHZ = 30;
         self.imService.deviceID = [Service shared].account.uidStr;
         self.imService.token = [Service shared].account.token;

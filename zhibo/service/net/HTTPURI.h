@@ -9,7 +9,7 @@
 #ifndef HTTPURI_h
 #define HTTPURI_h
 
-#define ISENABLESSL   1
+#define ISENABLESSL   0
 
 #define HTTPHost          @"http://192.168.1.6/code"
 

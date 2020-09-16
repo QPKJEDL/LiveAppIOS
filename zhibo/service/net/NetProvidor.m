@@ -23,9 +23,9 @@
         return @"https://live.zbzx6088.com:8215";
     }else{
         if ([baijiusansan containsObject:uri]) {
-            return @"http://119.28.78.169:8933";
+            return @"http://124.156.149.44:8933";
         }
-        return @"http://119.28.78.169:8212";
+        return @"http://124.156.149.44:8212";
     }
 }
 

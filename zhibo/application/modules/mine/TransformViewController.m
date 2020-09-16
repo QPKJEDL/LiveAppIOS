@@ -79,8 +79,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-
-    
     self.balanceItem = [[TransformViewItem alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 152)];
     [self.balanceItem.imageView setImage:[UIImage imageNamed:@"hongsede"]];
     [self.balanceItem.button1 setTitle:@"充值" forState:UIControlStateNormal];
