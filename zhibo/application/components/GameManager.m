@@ -57,7 +57,22 @@
     [self fetchPostUri:URI_GAME_DESK params:@{@"desk_id":@(self.desk_id)}];
 }
 
-
+- (void)refreshCards {
+    if (self.game_id == 1 || self.game_id == 2) {
+        return;
+    }
+    if (self.game_id == 3) {
+        [self.control.pokerView setMaxColumn:5];
+    }
+    if (self.game_id == 4) {
+        [self.control.pokerView setMaxColumn:3];
+        self.control.pokerView.height = 163+120;
+    }
+    if (self.game_id == 5) {
+        [self.control.pokerView setMaxColumn:2];
+    }
+    [self fetchPostUri:URI_GAME_CARDS params:@{@"game_id":@(self.game_id), @"boot_num":@(self.boot_num), @"desk_id":@(self.desk_id), @"pave_num":@(self.pave_num)}];
+}
 
 - (void)_refreshDeskBetInfo { //费率，问路
     [self fetchPostUri:URI_GAME_BET_FEE params:@{
@@ -82,11 +97,14 @@
             return;
         }
         self.desk_id = [obj[@"desk_id"] intValue];
+        self.ddesk_id = self.desk_id;
         self.game_id = [obj[@"game_id"] intValue];
         [self _refreshDeskInfo];
+
     }
     if ([req.uri isEqualToString:URI_GAME_DESK]) {
         self.boot_num = [obj[@"BootNum"] intValue];
+        self.pave_num = [obj[@"PaveNum"] intValue];
         self.MaxLimit = [obj[@"MaxLimit"] intValue];
         self.MinLimit = [obj[@"MinLimit"] intValue];
         self.game_id = [obj[@"GameId"] intValue];
@@ -94,6 +112,7 @@
         self.tipStr = obj[@"tip"];
         [self _refreshDeskBetInfo];
         [self refreshDesk:obj];
+        [self refreshCards];
         self.shixunPlayAddress = obj[@"LeftPlay"];
     }
     if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
@@ -121,6 +140,9 @@
     }
     if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
         [RC.gameManager.control receiveWenLu:obj[@"list"]];
+    }
+    if ([req.uri isEqualToString:URI_GAME_CARDS]) {
+        [RC.gameManager.control receiveCards:obj gameid:self.game_id];
     }
 }
 
@@ -161,7 +183,10 @@
     if (desk == nil) {
         return;
     }
-    self.desk_id = [desk[@"DeskId"] integerValue]; //刷新台桌ID
+    if (desk[@"DeskId"] != nil) {
+        self.desk_id = [desk[@"DeskId"] integerValue]; //刷新台桌ID
+    }
+    
 
     //下注时传递的台桌信息准备
     NSDictionary *mm = @{
@@ -173,6 +198,8 @@
         @"PaveNum":@"pave_num"
     };
     self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
+    self.pave_num = [self.deskInfo[@"pave_num"] intValue];
+    self.boot_num = [self.deskInfo[@"boot_num"] intValue];
     self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.DeskName, self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
     //获取台桌状态，执行相应UI更新
     //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
@@ -193,6 +220,9 @@
     if (cmd == 2) {
         phase = 8;
     }
+    if (cmd == 9) { //发牌
+        phase = 9;
+    }
 
     [[Stack shared] addgslogs:desk];
     [[ABMQ shared] publish:@{@"status":@(phase), @"data":desk} channel:CHANNEL_GAME_STATUS];
@@ -211,6 +241,10 @@
     if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
         NSDictionary *dic = (NSDictionary *)message;
         if ([dic isKindOfClass:[NSDictionary class]] && dic[@"Cmd"] != nil) {
+            if ([dic[@"Cmd"] intValue] == 9) {
+                [self refreshDesk:dic];
+                return;
+            }
             if ([self isSelf:dic] == false) {
                 NSLog(@"不是本台");
                 return;

@@ -69,6 +69,7 @@
 #define URI_GAME_HISTORY                @"/game/history"
 #define URI_GAME_RULES                  @"/game/rules"
 #define URI_GAME_RESULT_LIST           @"/game/result/list"
+#define URI_GAME_CARDS                  @"/game/cards"
 
 #pragma mark --------- channel ---------
 #define URI_CHANNEL_LIST                @"/GetHasChannel"

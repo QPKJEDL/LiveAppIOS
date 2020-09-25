@@ -28,6 +28,7 @@
 #import "TencentCOS.h"
 #import "UncaughtExceptionHandler.h"
 #import "BetTransform.h"
+#import "PokerView.h"
 @interface AppDelegate ()<INetData>
 @property (nonatomic, assign) NSInteger force;
 @end
@@ -152,6 +153,7 @@
         @"popularizecodeitem":@"PopularizeCodeItemView",
         @"rechargechannel":@"RechargeChannelItemView",
         @"xxxx":@"XXXXItemView",
+        @"pokerraw":@"PokerRawView"
     }];
     
     [ABNet shared].errorHandle = [[NetErrorPlugin alloc] init];

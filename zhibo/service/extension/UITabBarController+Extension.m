@@ -23,7 +23,7 @@
         UIViewController *vc = [[NSClassFromString(module) alloc] init];
         vc.title = title;
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
-    
+        
         //create image from image name
         UIImage *nmImage = [[UIImage imageNamed:nmIconName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage *hlImage = [[UIImage imageNamed:hlIconName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

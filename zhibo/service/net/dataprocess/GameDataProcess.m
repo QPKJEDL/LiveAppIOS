@@ -50,6 +50,19 @@
     else if ([request.uri isEqualToString:URI_GAME_HISTORY]) {
         request.realUri = @"/user_bet_list";
     }
+    else if ([request.uri isEqualToString:URI_GAME_CARDS]) {
+       
+        NSInteger gameid = [request.params[@"game_id"] intValue];
+        if (gameid == 3) {
+            request.realUri = @"/RoomCard";
+        }
+        if (gameid == 4) {
+            request.realUri = @"/SgRoomCard";
+        }
+        if (gameid == 5) {
+            request.realUri = @"/A89RoomCard";
+        }
+    }
     else if ([request.uri isEqualToString:URI_GAME_RESULT_LIST]) {
         //        {
         //            "desk_id" = 16;
@@ -200,6 +213,63 @@
             return dic;
         }];
         return @{@"list":listt};
+    }
+    if ([request.uri isEqualToString:URI_GAME_CARDS]) {
+        NSInteger gameid = [request.params[@"game_id"] intValue];
+        NSMutableArray *dataList = [[NSMutableArray alloc] init];
+        if (gameid == 3) {//牛牛
+            NSDictionary *nameMap = @{@"BankerCard":@"庄", @"IdleOneCard":@"闲1", @"IdleTwoCard":@"闲2", @"IdleThreeCard":@"闲3"};
+            NSDictionary *resultMap = @{@"BankerCard":@"Bankeresult", @"IdleOneCard":@"IdleOneresult", @"IdleTwoCard":@"IdleTworesult", @"IdleThreeCard":@"idleThreeresult"};
+            NSArray *keys = @[@"BankerCard",@"IdleOneCard",@"IdleTwoCard",@"IdleThreeCard"];
+            for (NSString *key in keys) {
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                dic[@"title"] = nameMap[key];
+                dic[@"native_id"] = @"pokerraw";
+                dic[@"list"] = response[key];
+                dic[@"result"] = response[resultMap[key]];
+                
+                [dataList addObject:dic];
+            }
+        }
+        if (gameid == 4) {//三公
+            NSDictionary *nameMap = @{@"BankerCard":@"庄", @"IdleOneCard":@"闲1", @"IdleTwoCard":@"闲2", @"IdleThreeCard":@"闲3",@"IdleFourCard":@"闲4", @"IdleFiveCard":@"闲5", @"IdleSixCard":@"闲6"};
+            NSDictionary *resultMap = @{@"BankerCard":@"Bankerresult", @"IdleOneCard":@"IdleOneresult", @"IdleTwoCard":@"IdleTworesult", @"IdleThreeCard":@"IdleThreeresult", @"IdleFourCard":@"IdleFourresult",@"IdleFiveCard":@"IdleFiveresult", @"IdleSixCard":@"IdleSixresult"};
+            NSArray *keys = @[@"BankerCard",@"IdleOneCard",@"IdleTwoCard",@"IdleThreeCard",@"IdleFourCard",@"IdleFiveCard",@"IdleSixCard"];
+            for (NSString *key in keys) {
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                dic[@"title"] = nameMap[key];
+                dic[@"native_id"] = @"pokerraw";
+                dic[@"list"] = response[key];
+                dic[@"result"] = response[resultMap[key]];
+                
+                [dataList addObject:dic];
+            }
+        }
+        if (gameid == 5) {//A89
+            NSDictionary *nameMap = @{@"BankerCard":@"庄", @"ShunCard":@"顺门", @"TianCard":@"天门", @"FanCard":@"反门"};
+            NSDictionary *resultMap = @{@"BankerCard":@"Bankerresult", @"FanCard":@"Fanresult", @"ShunCard":@"Shunresult", @"TianCard":@"Tianresult"};
+            NSArray *keys = @[@"BankerCard", @"ShunCard",@"TianCard",@"FanCard"];
+            for (NSString *key in keys) {
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                dic[@"title"] = nameMap[key];
+                dic[@"native_id"] = @"pokerraw";
+//
+//                NSMutableArray *arr = [[NSMutableArray alloc] init];
+//                NSDictionary *listdic = response[key];
+//                NSArray *keys = @[@"Card1",@"Card2"];
+//                for (NSString *key in keys) {
+//                    if (listdic[key] != nil) {
+//                        [arr addObject:@{@"Cardnum":listdic[key]}];
+//                    }
+//                }
+                dic[@"list"] = response[key];
+                dic[@"result"] = response[resultMap[key]];
+                [dataList addObject:dic];
+            }
+            
+        }
+        
+        return @{@"list":dataList};
     }
     return response;
 }

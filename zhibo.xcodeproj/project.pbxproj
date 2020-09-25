@@ -179,6 +179,7 @@
 		F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1425079249A102C003E83D8 /* AnchorItemView.m */; };
 		F144CA0924DA5CC80051EDD4 /* DateItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F144CA0824DA5CC80051EDD4 /* DateItemView.m */; };
 		F144CA1D24DED09D0051EDD4 /* QrCodeSharePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */; };
+		F15BFD7225144B9D00FD292D /* PokerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F15BFD7125144B9D00FD292D /* PokerView.m */; };
 		F15D271724E0DE250026F847 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = F15D271624E0DE250026F847 /* abc.png */; };
 		F15D271A24E11DA80026F847 /* TencentCOS.m in Sources */ = {isa = PBXBuildFile; fileRef = F15D271924E11DA80026F847 /* TencentCOS.m */; };
 		F15D271D24E2697C0026F847 /* zhuangxian.json in Resources */ = {isa = PBXBuildFile; fileRef = F15D271C24E2697C0026F847 /* zhuangxian.json */; };
@@ -652,6 +653,8 @@
 		F144CA0824DA5CC80051EDD4 /* DateItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateItemView.m; sourceTree = "<group>"; };
 		F144CA1B24DED09C0051EDD4 /* QrCodeSharePrompt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QrCodeSharePrompt.h; sourceTree = "<group>"; };
 		F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QrCodeSharePrompt.m; sourceTree = "<group>"; };
+		F15BFD7025144B9D00FD292D /* PokerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokerView.h; sourceTree = "<group>"; };
+		F15BFD7125144B9D00FD292D /* PokerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokerView.m; sourceTree = "<group>"; };
 		F15D271624E0DE250026F847 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
 		F15D271824E11DA80026F847 /* TencentCOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TencentCOS.h; sourceTree = "<group>"; };
 		F15D271924E11DA80026F847 /* TencentCOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TencentCOS.m; sourceTree = "<group>"; };
@@ -1885,6 +1888,8 @@
 				F10FB5BC24BC034000857E1E /* GiftEffectsPlayView.m */,
 				F17513BC24EE42F3008729D7 /* GameBetResultView.h */,
 				F17513BD24EE42F3008729D7 /* GameBetResultView.m */,
+				F15BFD7025144B9D00FD292D /* PokerView.h */,
+				F15BFD7125144B9D00FD292D /* PokerView.m */,
 			);
 			path = room;
 			sourceTree = "<group>";
@@ -2477,6 +2482,7 @@
 				F10FB5B824BBE47600857E1E /* GiftRankItemView.m in Sources */,
 				F11AA50924D4495100FCFE18 /* TeamFormLowerViewController.m in Sources */,
 				F1A4D89D24CA6C66003A6031 /* ZBUIImagePickerController.m in Sources */,
+				F15BFD7225144B9D00FD292D /* PokerView.m in Sources */,
 				F1D2729D24E542B3003FFABE /* LiveRoom.m in Sources */,
 				F121920824CA7CBE00630CA2 /* ArrowItemView.m in Sources */,
 				557C077F24500BCF008868E6 /* FollowViewController.m in Sources */,

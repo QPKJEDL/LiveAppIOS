@@ -431,6 +431,7 @@
                 if (self.isBet == false) {
                     [self reset];
                 }
+                
                 break;
             case 3://结算完成
                 self.enabled = false;//禁止下注

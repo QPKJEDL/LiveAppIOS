@@ -39,7 +39,6 @@
 @property (nonatomic, strong) RoomPlayView *shixunPlayView;
 
 
-
 @end
 
 @implementation RoomControl
@@ -134,6 +133,8 @@
         [self loadWenLu];
         
         RC.briefView = self.briefView;
+        [self loadPokerView];
+
         
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
     }
@@ -142,6 +143,13 @@
 
 - (void)loadGame {
     
+}
+
+- (void)loadPokerView {
+    self.pokerView = [[PokerView alloc] initWithFrame:CGRectMake(0, self.wenluWebView.bottom, 264, 163)];
+    self.pokerView.alpha = 0.70;
+    [self addSubview:self.pokerView];
+    [self.pokerView setHidden:true];
 }
 
 - (void)loadWenLu {
@@ -154,6 +162,10 @@
 //    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index2.html"];
     [self.wenluWebView loadWebWithPath:@"index.html"];
     [self.wenluWebView setHidden:true];
+}
+- (void)receiveCards:(NSDictionary *)data gameid:(NSInteger)gameid {
+    NSMutableArray *dataList = data[@"list"];
+    [self.pokerView setDataList:dataList];
 }
 
 - (void)receiveWenLu:(NSArray *)list {
@@ -336,6 +348,8 @@
     
     [self.audienceView setList:roomInfo[@"room"][@"rank"]];
     [self.audienceView setCount:[roomInfo[@"room"][@"roomcount"] intValue]];
+
+    
 }
 
 - (void)receiveDeskInfo:(NSDictionary *)deskInfo {
@@ -441,7 +455,6 @@
     [self fetchPostUri:URI_ROOM_GIFTRANK params:@{@"room_id":@(RC.roomManager.roomid)}];
 }
 
-
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
 
     if ([channel isEqualToString:CHANNEL_GAME_RULES]) {
@@ -468,6 +481,7 @@
 
                 [RoomPrompt shared].betView.enabled = false; //禁止下注
                 [[RoomPrompt shared].betView reset]; //重置下注盘
+                [self.pokerView setHidden:true];
                 break;
             case 1://开始下注
                 [self.plateView please:desk]; //开启下注倒计时
@@ -480,11 +494,13 @@
                 [self.plateView wait]; //变更待开牌
                 [[RoomPrompt shared].betView timeEnd];
                 [RoomPrompt shared].betView.enabled = false;//禁止下注
+                [self.pokerView setHidden:false];
                 break;
             case 3://结算完成
                 [self.plateView finish];
 
                 [RoomPrompt shared].betView.enabled = false;//禁止下注
+                [self.pokerView setHidden:true];
                 break;
             case 4://结算完成(有结果)
             {
@@ -507,6 +523,10 @@
                break;
             case 8://换靴
                 [self receiveWenLu:@[]];
+                break;
+            case 9://发牌
+                [RC.gameManager.control.pokerView setHidden:false];
+                [RC.gameManager refreshCards];
                 break;
             default:
                 break;

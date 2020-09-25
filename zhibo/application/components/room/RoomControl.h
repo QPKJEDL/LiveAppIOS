@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GameStatusPlateView.h"
+#import "PokerView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RoomControl : UIView
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *roomInfo;
 @property (nonatomic, strong) ABUIWebView *wenluWebView;
 @property (nonatomic, strong) GameStatusPlateView *plateView;
-
+@property (nonatomic, strong) PokerView *pokerView;
 - (void)onReceiveRoomMessage:(NSDictionary *)message;
 - (void)onReceivePeerMessage:(NSDictionary *)message;
 
@@ -41,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)free;
 - (void)edu;
+
+- (void)receiveCards:(NSDictionary *)data gameid:(NSInteger)gameid;
 @end
 
 NS_ASSUME_NONNULL_END

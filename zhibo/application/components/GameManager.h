@@ -34,9 +34,11 @@ typedef enum : NSUInteger {
 @interface GameManager : NSObject
 @property (nonatomic, strong) NSDictionary *rules;//游戏规则视图
 @property (nonatomic, assign) NSInteger desk_id;
+@property (nonatomic, assign) NSInteger ddesk_id;
 @property (nonatomic, assign) NSInteger game_id;
 @property (nonatomic, assign) NSInteger room_id;
 @property (nonatomic, assign) NSInteger boot_num;
+@property (nonatomic, assign) NSInteger pave_num;
 @property (nonatomic, strong) NSString *DeskName;
 @property (nonatomic, weak) RoomControl *control;
 @property (nonatomic, weak) BetView *betView;
@@ -56,6 +58,8 @@ typedef enum : NSUInteger {
 
 - (void)doBet:(NSDictionary *)data;
 - (void)doBetCancel;
+
+- (void)refreshCards;
 @end
 
 NS_ASSUME_NONNULL_END
