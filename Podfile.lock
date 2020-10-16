@@ -26,8 +26,12 @@ PODS:
     - ABUIKit/ABExtension (= 0.0.1)
     - ABUIKit/ABUIAnimateBanner (= 0.0.1)
     - ABUIKit/ABUIButtons (= 0.0.1)
+    - ABUIKit/ABUIChatView (= 0.0.1)
     - ABUIKit/ABUILabels (= 0.0.1)
     - ABUIKit/ABUIListView (= 0.0.1)
+    - ABUIKit/ABUIListViewItems (= 0.0.1)
+    - ABUIKit/ABUINavBar (= 0.0.1)
+    - ABUIKit/ABUITabBar (= 0.0.1)
     - ABUIKit/ABUITextFields (= 0.0.1)
     - ABUIKit/ABUIWebView (= 0.0.1)
     - Toast
@@ -37,9 +41,17 @@ PODS:
     - Toast
   - ABUIKit/ABUIButtons (0.0.1):
     - Toast
+  - ABUIKit/ABUIChatView (0.0.1):
+    - Toast
   - ABUIKit/ABUILabels (0.0.1):
     - Toast
   - ABUIKit/ABUIListView (0.0.1):
+    - Toast
+  - ABUIKit/ABUIListViewItems (0.0.1):
+    - Toast
+  - ABUIKit/ABUINavBar (0.0.1):
+    - Toast
+  - ABUIKit/ABUITabBar (0.0.1):
     - Toast
   - ABUIKit/ABUITextFields (0.0.1):
     - Toast
@@ -483,7 +495,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ABFoundation: 24d5c9a443b5ba6cc02e3edf1b9397719c808c7b
-  ABUIKit: 9ecc86ba81184f4f7cfbf7a6fb524c03e957446f
+  ABUIKit: 74482ac10f9d2969c19fabafc8d4b830b85c7c5e
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
