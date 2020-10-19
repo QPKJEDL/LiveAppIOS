@@ -107,6 +107,9 @@
             request.realUri = @"/DtSend";
         }
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_HELP]) {
+        request.realUri = @"/kefu_url";
+    }
     return request;
 }
 
@@ -120,6 +123,9 @@
     if ([noLoadings containsObject:request.uri] == false) {
          [ABUITips showLoading];
     }
+//    if ([request.uri isEqualToString:URI_ACCOUNT_HELP]) {
+//        return false;
+//    }
     return true;
 }
 
@@ -296,7 +302,7 @@
         NSString *extensionimg = response[@"ExtensionImg"];
         NSArray *list = [ABIteration iterationList:response[@"CodeList"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             NSString *extension_url = dic[@"extension_url"];
-            if ([extension_url hasPrefix:@"http"]) {
+            if ([extension_url hasPrefix:@"http"] == false) {
                 extension_url = [NSString stringWithFormat:@"http://%@", extension_url];
             }
             NSString *atime = [ABTime timestampToTime:[dic stringValueForKey:@"creatime"] format:@"YYYY-MM-dd"];
@@ -404,6 +410,10 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
         CGFloat balance = [response[@"balance"] intValue]/100.0;
         return @{@"balance":[NSString stringWithFormat:@"%.2f", balance]};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_HELP]) {
+        NSString *kefu_url = response[@"kefu_url"];
+        return @{@"address":kefu_url};
     }
     return response;
 }

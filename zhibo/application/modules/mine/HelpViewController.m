@@ -8,8 +8,8 @@
 
 #import "HelpViewController.h"
 
-@interface HelpViewController ()
-
+@interface HelpViewController ()<INetData>
+@property (nonatomic, strong) ABUIWebView *webView;
 @end
 
 @implementation HelpViewController
@@ -17,16 +17,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.webView = [[ABUIWebView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.webView];
+    
+    [self fetchPostUri:URI_ACCOUNT_HELP params:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.webView.frame = CGRectMake(0, 0, self.view.width, self.view.height-SAFEHEIGHT);
+    
 }
-*/
 
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    if ([obj[@"address"] hasPrefix:@"http"]) {
+        [self.webView loadWebWithPath:obj[@"address"]];
+    }else{
+        [ABUITips showError:@"功能未上线"];
+    }
+}
 @end

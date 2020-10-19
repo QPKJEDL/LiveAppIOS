@@ -117,7 +117,8 @@
         return dic;
     }
     if ([request.uri isEqualToString:URI_GAME_DESK]) {
-        if ([response[@"list"] count] == 0) {
+        NSArray *list = response[@"list"];
+        if (list.count == 0) {
             return response[@"list"];
         }
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:response[@"list"][0]];

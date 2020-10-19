@@ -10,7 +10,7 @@
 #import "MineTopView.h"
 #import "MinePresent.h"
 #import "MineNavView.h"
-@interface MineViewController ()<MinePresentDelegate, ABUIListViewDelegate>
+@interface MineViewController ()<MinePresentDelegate, ABUIListViewDelegate, INetData>
 @property (nonatomic, strong) ABUIListView *listView;
 @property (nonatomic, strong) MineTopView *topView;
 @property (nonatomic, strong) MinePresent *present;
@@ -99,8 +99,17 @@
         [NSRouter gotoTeamForm];
     }
     if ([icon isEqualToString:@"bangzhu"]) {
-        [NSRouter gotoHelp];
+//        [NSRouter gotoHelp];
+        [self fetchPostUri:URI_ACCOUNT_HELP params:nil];
     }
 }
 
+- (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    if ([obj[@"address"] hasPrefix:@"http"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:obj[@"address"]]];
+    }else{
+        [ABUITips showError:@"功能未上线"];
+    }
+    
+}
 @end
