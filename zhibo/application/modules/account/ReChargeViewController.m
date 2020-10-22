@@ -101,7 +101,7 @@
 
 - (void)onSubmit {
     if (self.selectIndex < 0 || self.selectIndex >= self.dataList.count) {
-        [ABUITips showError:@"请选择支付方式"];
+        [ABUITips showError:@"请选择充值通道"];
         return;
     }
     

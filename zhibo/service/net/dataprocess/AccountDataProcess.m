@@ -412,7 +412,7 @@
         return @{@"balance":[NSString stringWithFormat:@"%.2f", balance]};
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_HELP]) {
-        NSString *kefu_url = response[@"kefu_url"];
+        NSString *kefu_url = [response stringValueForKey:@"kefu_url"];
         return @{@"address":kefu_url};
     }
     return response;
