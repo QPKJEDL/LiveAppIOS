@@ -45,6 +45,7 @@
 @property (nonatomic, strong) TeamTextItem *itemA; //团队
 @property (nonatomic, strong) TeamTextItem *itemB; //投注金额
 @property (nonatomic, strong) TeamTextItem *itemC; //返点金额
+@property (nonatomic, strong) TeamTextItem *itemD; //返点金额
 @property (nonatomic, strong) QMUIButton *btn;
 @end
 
@@ -75,7 +76,7 @@
     [self addSubview:self.idLabel];
     
     
-    CGFloat w = floor(self.width/3);
+    CGFloat w = floor(self.width/4);
     self.itemA = [[TeamTextItem alloc] initWithFrame:CGRectMake(0, self.height-55, w, 50)];
     self.itemA.bLabel.text = @"团队人数";
     [self addSubview:self.itemA];
@@ -87,6 +88,10 @@
     self.itemC = [[TeamTextItem alloc] initWithFrame:CGRectMake(w*2, self.height-55, w, 50)];
     self.itemC.bLabel.text = @"返点金额";
     [self addSubview:self.itemC];
+    
+    self.itemD = [[TeamTextItem alloc] initWithFrame:CGRectMake(w*3, self.height-55, w, 50)];
+    self.itemD.bLabel.text = @"百分比";
+    [self addSubview:self.itemD];
     
     self.btn = [[QMUIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
     [self.btn setTitle:@"查看" forState:UIControlStateNormal];
@@ -108,6 +113,7 @@
     self.itemA.top = self.height-55;
     self.itemB.top = self.height-55;
     self.itemC.top = self.height-55;
+    self.itemD.top = self.height-55;
     
     self.btn.left = self.width-15-40;
     self.btn.centerY = self.avatarImageView.centerY;
@@ -127,17 +133,20 @@
     [self.itemA setHidden:true];
     [self.itemB setHidden:true];
     [self.itemC setHidden:true];
+    [self.itemD setHidden:true];
     [self.btn setHidden:false];
     if (extra[@"info"]) {
         [self.btn setHidden:true];
         [self.itemA setHidden:false];
         [self.itemB setHidden:false];
         [self.itemC setHidden:false];
+        [self.itemD setHidden:false];
         NSDictionary *info = extra[@"info"];
         
         self.itemA.aLabel.text = [info stringValueForKey:@"teamcount"];
         self.itemB.aLabel.text = [info stringValueForKey:@"betsmoney"];
         self.itemC.aLabel.text = [info stringValueForKey:@"getmoney"];
+        self.itemD.aLabel.text = [NSString stringWithFormat:@"%@%%", [info stringValueForKey:@"fee"]];
     }
 //    self.itemA.aLabel.text = @"2000";
 //    self.itemB.aLabel.text = @"555";

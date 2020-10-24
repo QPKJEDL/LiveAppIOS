@@ -135,7 +135,11 @@
             [self.listtView noMoreData];
         }
     }else{
-        [self.infoDic setValue:obj forKey:obj[@"userid"]];
+        NSString *uidStr = obj[@"userid"];
+        if ([uidStr intValue] == 0) {
+            uidStr = req.params[@"touid"];
+        }
+        [self.infoDic setValue:obj forKey:uidStr];
         [self.listtView reloadData];
     }
 }
