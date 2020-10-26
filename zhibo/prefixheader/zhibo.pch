@@ -30,5 +30,6 @@
 
 #import "UIFont+Extension.h"
 #import "RoomContext.h"
+#import "NSNull+XY.h"
 #endif
 #endif /* zhibo_pch */

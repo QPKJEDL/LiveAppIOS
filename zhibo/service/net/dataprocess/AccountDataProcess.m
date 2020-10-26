@@ -286,10 +286,14 @@
             [dic setValue:titles[i] forKey:@"title"];
             [dic setValue:@"statisitem" forKey:@"native_id"];
             
-            NSString *content = @"0人";
+            NSString *content = @"0";
+            NSString *title = titles[i];
             if (response[keys[i]]) {
-                content = [NSString stringWithFormat:@"%@人", [response stringValueForKey:keys[i]]];
-                
+                if ([title containsString:@"人数"]) {
+                    content = [NSString stringWithFormat:@"%@人", [response stringValueForKey:keys[i]]];
+                }else{
+                    content = [NSString stringWithFormat:@"%@元", [response stringValueForKey:keys[i]]];
+                }
             }
             [dic setValue:content forKey:@"content"];
             [dataList addObject:dic];

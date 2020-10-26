@@ -48,7 +48,7 @@
     [[UIApplication sharedApplication].keyWindow hideToastActivity];
     if ([request.uri isEqualToString:URI_RANK_LIST]) {
         NSArray *olist = response[@"list"];
-        if (olist == nil) {
+        if (olist == nil || [olist isKindOfClass:[NSNull class]]) {
             olist = @[];
         }
         NSMutableArray *list = [[NSMutableArray alloc] initWithArray:olist];
