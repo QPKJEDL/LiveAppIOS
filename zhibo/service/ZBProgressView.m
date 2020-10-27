@@ -10,7 +10,6 @@
 @interface ZBProgressView ()
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIView *cursorView;
-@property (nonatomic, strong) UILabel *cursorLabel;
 
 @property (nonatomic, strong) UILabel *leftLabel;
 @property (nonatomic, strong) UILabel *rightLabel;

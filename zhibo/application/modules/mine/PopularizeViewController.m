@@ -73,7 +73,8 @@
 }
 
 - (void)onButton {
-    [self fetchPostUri:URI_ACCOUNT_POPULARIZE_ADD params:@{@"fee":@(self.progressView.progress*self.progressView.maxValue)}];
+    int fee = [self.progressView.cursorLabel.text intValue];
+    [self fetchPostUri:URI_ACCOUNT_POPULARIZE_ADD params:@{@"fee":@(fee)}];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
