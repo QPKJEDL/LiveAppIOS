@@ -19,7 +19,8 @@
 @property (nonatomic, strong) NSDate *currentMonthDate;
 
 @property (nonatomic, strong) NSMutableArray *monthArray;
-
+@property (nonatomic, strong) NSDate *lastSelecteDate;
+@property (nonatomic, strong) NSString *lastSelectDateString;
 @end
 
 @implementation GFCalendarScrollView
@@ -34,7 +35,6 @@ static NSString *const kCellIdentifier = @"cell";
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if ([super initWithFrame:frame]) {
-        
         self.backgroundColor = [UIColor clearColor];
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
@@ -185,6 +185,7 @@ static NSString *const kCellIdentifier = @"cell";
                     cell.todayLabel.textColor = [UIColor whiteColor];
                 } else {
                     cell.todayCircle.backgroundColor = [UIColor clearColor];
+
                 }
             } else {
                 cell.todayCircle.backgroundColor = [UIColor clearColor];
@@ -218,18 +219,29 @@ static NSString *const kCellIdentifier = @"cell";
             cell.todayLabel.textColor = [UIColor darkGrayColor];
             cell.userInteractionEnabled = YES;
             
+            
+            BOOL isToay = false;
             // 标识今天
             if ((monthInfo.month == [[NSDate date] dateMonth]) && (monthInfo.year == [[NSDate date] dateYear])) {
                 if (indexPath.row == [[NSDate date] dateDay] + firstWeekday - 1) {
+                    isToay = true;
                     cell.todayCircle.backgroundColor = kCalendarBasicColor;
                     cell.todayLabel.textColor = [UIColor whiteColor];
                 } else {
                     cell.todayCircle.backgroundColor = [UIColor clearColor];
+
                 }
             } else {
                 cell.todayCircle.backgroundColor = [UIColor clearColor];
             }
             
+            if (isToay == false) {
+                NSString *c = [NSString stringWithFormat:@"%li-%li-%i", (long)monthInfo.year, (long)monthInfo.month, [cell.todayLabel.text intValue]];
+                if ([self.lastSelectDateString isEqualToString:c]) {
+                    cell.todayCircle.backgroundColor = [UIColor hexColor:@"3dc2d5"];
+                    cell.todayLabel.textColor = [UIColor whiteColor];
+                }
+            }
         }
         // 补上前后月的日期，淡色显示
         else if (indexPath.row < firstWeekday) {
@@ -305,13 +317,15 @@ static NSString *const kCellIdentifier = @"cell";
         NSDate *currentDate = [calendar dateFromComponents:components];
         
         GFCalendarCell *cell = (GFCalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.todayCircle.backgroundColor = kCalendarBasicColor;
-        cell.todayLabel.textColor = [UIColor whiteColor];
+//        cell.todayCircle.backgroundColor = kCalendarBasicColor;
+//        cell.todayLabel.textColor = [UIColor whiteColor];
 
         NSInteger year = [currentDate dateYear];
         NSInteger month = [currentDate dateMonth];
         NSInteger day = [cell.todayLabel.text integerValue];
         
+        self.lastSelectDateString = [NSString stringWithFormat:@"%li-%li-%li", (long)year, (long)month, (long)day];
+        [collectionView reloadData];
         self.didSelectDayHandler(year, month, day); // 执行回调
     }
     

@@ -57,6 +57,10 @@
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
         request.realUri = @"/account_changer_list";
+        int type = [request.params[@"type"] intValue];
+        if (type == 3) {
+            request.realUri = @"/own_bill";
+        }
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_LOWERS]) {
         request.realUri = @"/TeamList";
@@ -245,10 +249,20 @@
     }
     
     if ([request.uri isEqualToString:URI_ACCOUNT_CHANGER_LIST]) {
+        int type = [request.params[@"type"] intValue];
         NSArray *list = response[@"list"];
         list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
-            dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"money"] intValue]/100.0];
             dic[@"native_id"] = @"chargeitem";
+            if (type == 3) {
+                NSInteger score = [dic[@"score"] integerValue];
+                if (score == 0) {
+                    return nil;
+                }
+                dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"score"] integerValue]/100.0];
+                dic[@"status"] = dic[@"remark"];
+            }else{
+                dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"money"] integerValue]/100.0];
+            }
             return dic;
         }];
         return @{@"list":list};
@@ -279,7 +293,7 @@
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_TEAM_STATIS]) {
         NSArray *titles = @[@"注册人数",@"投注人数",@"投注金额",@"中奖金额",@"充值金额",@"下级返点金额",@"团队返点金额",@"我的返点金额"];
-        NSArray *keys = @[@"registerCount",@"betsCount",@"money",@"getMoney",@"recharge",@"feeMoney",@"feeMoney",@"userfeemoney"];
+        NSArray *keys = @[@"registerCount",@"betsCount",@"money",@"getMoney",@"recharge",@"xiajiMoney",@"feeMoney",@"userfeemoney"];
         NSMutableArray *dataList = [[NSMutableArray alloc] init];
         for (int i=0; i<keys.count; i++) {
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

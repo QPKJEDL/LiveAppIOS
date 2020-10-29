@@ -132,7 +132,6 @@
 		F11AA53524D83F3D00FCFE18 /* MoneyOutPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53424D83F3D00FCFE18 /* MoneyOutPrompt.m */; };
 		F11AA53924D8F11500FCFE18 /* PopularizeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53824D8F11400FCFE18 /* PopularizeListViewController.m */; };
 		F11AA53D24D9027200FCFE18 /* PopularizeCodeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11AA53C24D9027100FCFE18 /* PopularizeCodeItemView.m */; };
-		F11E918C2546D4560015D6A2 /* NSNull+XY.m in Sources */ = {isa = PBXBuildFile; fileRef = F11E918B2546D4560015D6A2 /* NSNull+XY.m */; };
 		F11F7BA024BEFAF300DB96B3 /* UserPromptActionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7B9F24BEFAF300DB96B3 /* UserPromptActionItemView.m */; };
 		F11F7C3124BFEA3F00DB96B3 /* RoomComeRaw.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7C3024BFEA3F00DB96B3 /* RoomComeRaw.m */; };
 		F11F7C3424BFEA6300DB96B3 /* RoomComeContainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11F7C3324BFEA6300DB96B3 /* RoomComeContainView.m */; };
@@ -566,8 +565,6 @@
 		F11AA53824D8F11400FCFE18 /* PopularizeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopularizeListViewController.m; sourceTree = "<group>"; };
 		F11AA53B24D9027100FCFE18 /* PopularizeCodeItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopularizeCodeItemView.h; sourceTree = "<group>"; };
 		F11AA53C24D9027100FCFE18 /* PopularizeCodeItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopularizeCodeItemView.m; sourceTree = "<group>"; };
-		F11E918A2546D4560015D6A2 /* NSNull+XY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+XY.h"; sourceTree = "<group>"; };
-		F11E918B2546D4560015D6A2 /* NSNull+XY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+XY.m"; sourceTree = "<group>"; };
 		F11F7B9E24BEFAF300DB96B3 /* UserPromptActionItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptActionItemView.h; sourceTree = "<group>"; };
 		F11F7B9F24BEFAF300DB96B3 /* UserPromptActionItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptActionItemView.m; sourceTree = "<group>"; };
 		F11F7C2F24BFEA3F00DB96B3 /* RoomComeRaw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomComeRaw.h; sourceTree = "<group>"; };
@@ -1401,8 +1398,6 @@
 		55FD3674244FDCBB00D84DD9 /* zhibo */ = {
 			isa = PBXGroup;
 			children = (
-				F11E918A2546D4560015D6A2 /* NSNull+XY.h */,
-				F11E918B2546D4560015D6A2 /* NSNull+XY.m */,
 				F17513B224ED012B008729D7 /* UncaughtExceptionHandler.h */,
 				F17513B124ED012B008729D7 /* UncaughtExceptionHandler.m */,
 				F11AA4E424D4032B00FCFE18 /* GCDAsyncSocketManager */,
@@ -2374,7 +2369,6 @@
 				559F3F142456CD9D001280F2 /* ViewUtil.m in Sources */,
 				F11AA4F524D4032C00FCFE18 /* GACErrorManager.m in Sources */,
 				557C07B7245030C3008868E6 /* BasePageViewController.m in Sources */,
-				F11E918C2546D4560015D6A2 /* NSNull+XY.m in Sources */,
 				F11682F324A09DCA004DD6B8 /* BetCoinsView.m in Sources */,
 				557C08092451798F008868E6 /* PickPhotoCell.m in Sources */,
 				F11682F624A09E1B004DD6B8 /* BetOptionsView.m in Sources */,

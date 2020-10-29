@@ -7,10 +7,11 @@
 //
 
 #import "ReChargeHistoryViewController.h"
-
+#import "DateItemView.h"
 @interface ReChargeHistoryViewController ()<INetData, ABUIListViewDelegate>
 @property (nonatomic, strong) ABUIListView *listView;
 @property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) DateItemView *dateItemView;
 @end
 
 @implementation ReChargeHistoryViewController
@@ -19,6 +20,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.dateItemView = [[DateItemView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    [self.dateItemView.selectButton addTarget:self action:@selector(onDate) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.dateItemView];
+    
     self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
     self.listView.delegate = self;
     [self.view addSubview:self.listView];
@@ -26,24 +31,27 @@
     
     
     
-    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
+    [self refreshData];
 }
 
+- (void)onDate {
+    [self refreshData];
+}
 - (void)refreshData {
-    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
+    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"date":self.dateItemView.dateTitle, @"type":@(self.type), @"lastid":@"0"}];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.listView.frame = self.view.bounds;
+    self.listView.frame = CGRectMake(0, 44, self.view.width, self.view.height);
 }
 
 - (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
-     [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":@"0"}];
+     [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"date":self.dateItemView.dateTitle,@"type":@(self.type), @"lastid":@"0"}];
 }
 
 - (void)listViewOnLoadMore:(ABUIListView *)listView {
-    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"type":@(self.type), @"lastid":self.dataList.lastObject[@"id"]}];
+    [self fetchPostUri:URI_ACCOUNT_CHANGER_LIST params:@{@"date":self.dateItemView.dateTitle,@"type":@(self.type), @"lastid":self.dataList.lastObject[@"id"]}];
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
@@ -60,6 +68,7 @@
     
     if (self.dataList.count == 0) {
         [self showNoDataEmpty];
+        [self.view bringSubviewToFront:self.dateItemView];
     }else{
         [self hideEmptyView];
     }

@@ -88,7 +88,7 @@
     if ([req.uri isEqualToString:URI_ACCOUNT_WebUserBetsFee]) {
         self.itemA.aLabel.text = [obj stringValueForKey:@"teamcount"];
         self.itemB.aLabel.text = [obj stringValueForKey:@"betsmoney"];
-        self.itemC.aLabel.text = [obj stringValueForKey:@"getmoney"];
+        self.itemC.aLabel.text = [obj stringValueForKey:@"feemoney"];
     }else {
         [self.listtView setDataList:obj[@"list"] css:@{@"item.rowSpacing":@"2", @"section.inset.top":@"2"}];
     }

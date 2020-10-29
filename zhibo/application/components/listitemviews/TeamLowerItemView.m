@@ -57,6 +57,7 @@
     self.avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.avatarImageView.clipsToBounds = true;
     self.avatarImageView.layer.cornerRadius = 20;
+    self.avatarImageView.backgroundColor = [UIColor hexColor:@"f6f6f6"];
     [self addSubview:self.avatarImageView];
     
     self.nickNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -90,7 +91,7 @@
     [self addSubview:self.itemC];
     
     self.itemD = [[TeamTextItem alloc] initWithFrame:CGRectMake(w*3, self.height-55, w, 50)];
-    self.itemD.bLabel.text = @"百分比";
+    self.itemD.bLabel.text = @"返点比例";
     [self addSubview:self.itemD];
     
     self.btn = [[QMUIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
@@ -145,7 +146,7 @@
         
         self.itemA.aLabel.text = [info stringValueForKey:@"teamcount"];
         self.itemB.aLabel.text = [info stringValueForKey:@"betsmoney"];
-        self.itemC.aLabel.text = [info stringValueForKey:@"getmoney"];
+        self.itemC.aLabel.text = [info stringValueForKey:@"feemoney"];
         self.itemD.aLabel.text = [NSString stringWithFormat:@"%@%%", [info stringValueForKey:@"fee"]];
     }
 //    self.itemA.aLabel.text = @"2000";

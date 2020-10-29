@@ -9,6 +9,7 @@
 #import "DateItemView.h"
 #import "GFCalendarView.h"
 @interface DateItemView ()
+@property (nonatomic, strong) GFCalendarView *calendarView;
 @end
 @implementation DateItemView
 
@@ -40,21 +41,25 @@
         self.selectButton.layer.borderColor = [UIColor hexColor:@"#A8A8A8"].CGColor;
         self.selectButton.centerY = self.height/2;
         
+        self.calendarView = [[GFCalendarView alloc] initWithFrameOrigin:CGPointMake(15, 0) width:SCREEN_WIDTH-2*15];
     }
     return self;
 }
 
 - (void)onDateButton {
-    GFCalendarView *calendarView = [[GFCalendarView alloc] initWithFrameOrigin:CGPointMake(15, 0) width:SCREEN_WIDTH-2*15];
-    calendarView.backgroundColor = [UIColor whiteColor];
-    calendarView.didSelectDayHandler = ^(NSInteger year, NSInteger month, NSInteger day) {
+//    GFCalendarView *calendarView = [[GFCalendarView alloc] initWithFrameOrigin:CGPointMake(15, 0) width:SCREEN_WIDTH-2*15];
+    __weak __typeof(&*self) weakSelf = self;
+    _calendarView.backgroundColor = [UIColor whiteColor];
+    _calendarView.didSelectDayHandler = ^(NSInteger year, NSInteger month, NSInteger day) {
         NSLog(@"=====%zd=====%zd=====%zd", year, month, day);
         NSString *newDateStr = [NSString stringWithFormat:@"%zd-%02ld-%02ld", year, (long)month, (long)day];
-        [self.dateButton setTitle:newDateStr forState:UIControlStateNormal];
-        self.dateTitle = newDateStr;
+        [weakSelf.dateButton setTitle:newDateStr forState:UIControlStateNormal];
+        weakSelf.dateTitle = newDateStr;
         [[ABUIPopUp shared] remove];
+        
+        [weakSelf.selectButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     };
-    [[ABUIPopUp shared] show:calendarView from:ABPopUpDirectionCenter];
+    [[ABUIPopUp shared] show:_calendarView from:ABPopUpDirectionCenter];
     
 }
 

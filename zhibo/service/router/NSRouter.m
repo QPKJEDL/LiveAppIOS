@@ -219,8 +219,10 @@
     vc.type = type;
     if (type == 1) {
         vc.title = @"充值记录";
-    }else{
+    }else if (type == 2){
         vc.title = @"提现记录";
+    }else{
+        vc.title = @"流水记录";
     }
     [NSRouter pushTo:vc props:@{}];
 }
