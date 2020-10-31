@@ -32,7 +32,7 @@
 		},
 		"4":{
 			"game_id":4,
-			"xian":6,
+			"xian":3,
 			"uris":{"bet":"/SgBets", "unbet":"/SgcancelBets", "record":"/SgGameRecord", "card":"/SgRoomCard"},
 			"game_name":"三公"
 		},
