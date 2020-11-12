@@ -84,6 +84,7 @@
 #define URI_ROOM_CLOSE                @"/room/close"
 #define URI_ROOM_LABELS                @"/room/labels"
 #define URI_ROOM_CHANNEL                @"/room/channel"
+#define URI_ROOM_SYSTEM                @"/room/system"
 
 #define URI_ROOM_GAME                   @"/room/game"
 #define URI_LIVE_COMMENT_LIST           @"/live/comment/list"

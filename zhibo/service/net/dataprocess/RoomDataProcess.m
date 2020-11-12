@@ -78,6 +78,9 @@
     if ([request.uri isEqualToString:URI_ROOM_GIFTRECORD]) {
         request.realUri = @"/gift_record";
     }
+    if ([request.uri isEqualToString:URI_ROOM_SYSTEM]) {
+        request.realUri = @"/code/Mycenter/roomFixed";
+    }
     return request;
 }
 

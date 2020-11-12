@@ -26,7 +26,6 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
         self.dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@", self.dic);
     }
 }
 

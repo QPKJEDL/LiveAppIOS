@@ -28,4 +28,5 @@ pod 'CocoaAsyncSocket'
 pod 'JSONModel'
 pod 'QCloudCOSXML'
 pod 'CocoaLumberjack'
+pod 'Bugly'
 end

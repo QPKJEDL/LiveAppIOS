@@ -72,6 +72,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Bugly (2.5.71)
   - CocoaAsyncSocket (7.6.4)
   - CocoaLumberjack (3.6.2):
     - CocoaLumberjack/Core (= 3.6.2)
@@ -429,6 +430,7 @@ DEPENDENCIES:
   - ABFoundation (from `/Users/qp/own/ABFoundation`)
   - ABUIKit (from `/Users/qp/own/ABUIKit`)
   - AFNetworking
+  - Bugly
   - CocoaAsyncSocket
   - CocoaLumberjack
   - FMDB
@@ -453,6 +455,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Bugly
     - CocoaAsyncSocket
     - CocoaLumberjack
     - FMDB
@@ -495,8 +498,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ABFoundation: 24d5c9a443b5ba6cc02e3edf1b9397719c808c7b
-  ABUIKit: 74482ac10f9d2969c19fabafc8d4b830b85c7c5e
+  ABUIKit: b283bd275a3e8f34bf96c0f64440c24573fd8631
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -521,6 +525,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: bb9fcaf14ed8c47bca033f726ac98ce4a972b74a
+PODFILE CHECKSUM: c81611aa72a17e94ed5c83a2a02bcdcc7f139d40
 
 COCOAPODS: 1.9.3

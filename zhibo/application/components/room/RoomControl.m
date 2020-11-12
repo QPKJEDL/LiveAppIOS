@@ -93,8 +93,7 @@
         
         self.giftControl = [[GiftPromptView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     
-        NSString *tip = @"欢迎来到直播间！严禁未成年人进行直播或打赏，清大家共同遵守，监督。直播间内严禁出现违法违规、低俗色情、吸烟酗酒等内容。若有违规内容请及时举报。如主播直播过程中以陪玩、送礼等方式进行诱导打赏、私下交易，清谨慎判断、以防人身或财产损失。清大家注意财产安全，谨防网络诈骗";
-        [self.chatView receiveNewMessage:[self chatItem:@"" content:tip uid:@"0" nativeid:@"livecomment"]];
+//        [self.chatView receiveNewMessage:[self chatItem:@"" content:tip uid:@"0" nativeid:@"livecomment"]];
 //        NSString *name = [Service shared].account.info[@"NickName"];
 //        [self.chatView receiveNewNotice:@{@"name":name, @"uid":@([Service shared].account.uid)}];
         
@@ -136,6 +135,8 @@
         RC.briefView = self.briefView;
         
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
+        
+        [self fetchPostUri:URI_ROOM_SYSTEM params:nil];
     }
     return self;
 }
@@ -154,6 +155,8 @@
 //    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index2.html"];
     [self.wenluWebView loadWebWithPath:@"index.html"];
     [self.wenluWebView setHidden:true];
+    self.wenluWebView.top = self.briefView.bottom+10;
+    RC.gameManager.wenluView = self.wenluWebView;
 }
 
 - (void)receiveWenLu:(NSArray *)list {
@@ -220,12 +223,14 @@
     if (self.sceneButton.isSelected) {
         [self.shixunPlayView setHidden:false];
         [self.shixunPlayView playURL:RC.gameManager.shixunPlayAddress];
+        self.wenluWebView.top = self.shixunPlayView.bottom;
         
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
     }else{
         [self.shixunPlayView setHidden:true];
         [self.shixunPlayView remove];
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
+        self.wenluWebView.top = self.briefView.bottom+10;
     }
     
 }
@@ -383,6 +388,11 @@
 
 #pragma mark ----- delegates -------
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    if ([req.uri isEqualToString:URI_ROOM_SYSTEM]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[self chatItem:@"" content:obj[@"text"] uid:@"0" nativeid:@"livecomment"]];
+        dic[@"color"] = obj[@"color"];
+        [self.chatView receiveNewMessage:dic];
+    }
     if ([req.uri isEqualToString:URI_FOLLOW_FOLLOW]) {
         self.briefView.isFollowed = true;
     }
@@ -443,10 +453,13 @@
 
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
-
     if ([channel isEqualToString:CHANNEL_GAME_RULES]) {
         [self onPlate2];
         [self.plateView setHidden:false];
+        if ([RoomContext shared].gameManager.game_id == 1 || [RoomContext shared].gameManager.game_id == 2) {
+            [self.wenluWebView setHidden:false];
+        }
+        
     }
     if ([channel isEqualToString:CHANNEL_ROOM_INFO]) {
         [self receiveRoomInfo:message];

@@ -82,9 +82,10 @@
         self.numLabel.font = [UIFont PingFangMedium:17];
     }
     
-    [self.avatarImageView loadImage:@"http://img.ewebweb.com/uploads/20191127/13/1574832815-IAhzkoVxXw.jpg"];
+    [self.avatarImageView sd_setImageWithURL:item[@"Avater"] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
+//    [self.avatarImageView loadImage:item[@"Avatar"]];
     
-    self.giftNumLabel.text = [NSString stringWithFormat:@"%@", item[@"GiftMoney"]];
+    self.giftNumLabel.text = [NSString stringWithFormat:@"%.2f", [item[@"GiftMoney"] floatValue]/100];
     [self.giftNumLabel sizeToFit];
     
     self.nameLabel.width = self.width/3;

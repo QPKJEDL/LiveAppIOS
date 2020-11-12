@@ -78,8 +78,9 @@
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     if ([req.uri isEqualToString:URI_ROOM_GAME]) {
-        if ([obj isKindOfClass:[NSNull class]]) {
-            return;
+        if (obj == nil) {
+            self.desk_id = 0;
+            self.game_id = 0;
         }
         self.desk_id = [obj[@"desk_id"] intValue];
         self.game_id = [obj[@"game_id"] intValue];

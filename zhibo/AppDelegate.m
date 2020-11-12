@@ -28,6 +28,8 @@
 #import "TencentCOS.h"
 #import "UncaughtExceptionHandler.h"
 #import "BetTransform.h"
+#import <Bugly/Bugly.h>
+
 @interface AppDelegate ()<INetData>
 @property (nonatomic, assign) NSInteger force;
 @end
@@ -36,6 +38,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Bugly startWithAppId:@"7dd91fe103"];
     self.force = 0;
     [WOCrashProtectorManager makeAllEffective];
     [IQKeyboardManager sharedManager].enable = true;
