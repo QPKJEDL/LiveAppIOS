@@ -72,6 +72,8 @@
                 money = [NSString stringWithFormat:@"%@%%", money];
             }
             dic[@"money"] = money;
+            CGFloat cmoney = [money floatValue]/100;
+            dic[@"cmoney"] = [NSString stringWithFormat:@"%.2f", cmoney];
             dic[@"native_id"] = @"rankitem";
             return dic;
         }];

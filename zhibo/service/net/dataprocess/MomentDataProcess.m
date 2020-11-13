@@ -12,6 +12,7 @@
 /// Called to modify a request before sending.
 - (ABNetRequest *)prepare:(ABNetRequest *)request {
     if ([request.uri isEqualToString:URI_MOMENTS_LIST]) {
+        request.isShowLoading = false;
         if (request.params[@"live_uid"] != nil) {
             request.realUri = @"/live_zone_list";
         }else{
@@ -40,12 +41,7 @@
 }
 
 /// Called immediately before a request will sent
-- (BOOL)canSend:(ABNetRequest *)request {
-    NSArray *noLoadings = @[URI_MOMENTS_LIST];
-    if ([noLoadings containsObject:request.uri] == false) {
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
-    }
-    
+- (BOOL)canSend:(ABNetRequest *)request {    
     return true;
 }
 

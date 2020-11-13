@@ -47,6 +47,12 @@
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     if ([req.uri isEqualToString:URI_ROOM_INFO]) { //房间信息
+        int status = [obj[@"room"][@"status"] intValue];
+        self.isOnline = (status == 1);
+        if (status == 0) {
+            [ABUITips showError:@"主播未开播"];
+            return;
+        }
         [[ABMQ shared] publish:obj channel:CHANNEL_ROOM_INFO];
         self.anchorid = [obj[@"anchor"][@"UserId"] intValue];
 //        self.roomInfo = obj;

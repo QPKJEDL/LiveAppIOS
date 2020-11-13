@@ -70,6 +70,7 @@
         self.index = -1;
         NSArray *list = [ABIteration iterationList:obj[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"native_id"] = @"giftrankitem";
+            dic[@"cmoney"] = [NSString stringWithFormat:@"%.2f", [dic[@"GiftMoney"] floatValue]/100];
             return dic;
         }];
         self.dataList = list;

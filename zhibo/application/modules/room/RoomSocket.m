@@ -94,8 +94,7 @@
         @"text":text,
         @"user":[Service shared].account.chatinfo
     };
-    
-    NSString *message = [dic toJSONString];
+    NSString *message = [dic toJSONString2];
     
     RoomMessage *m = [[RoomMessage alloc] init];
     m.sender = [Service shared].account.uid;

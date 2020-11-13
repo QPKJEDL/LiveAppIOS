@@ -986,20 +986,32 @@ function getRoadList (list,gameID) {
 			}
 		}
 	}
-	// //return;
-
-	// /*console.log("kkkkkkkkkkkk");
-	// console.log(LtempArray)
-	// console.log(HtempArray)*/
-	// self.removeLast(tempArray)
-	// self.removeLast(DYtempArray)
-	// self.removeLast(XLtempArray)
-	// self.removeLast(YYtempArray)
-
-	// self.tempArray = tempArray;
-	// self.DYtempArray = DYtempArray;
-	// self.XLtempArray = XLtempArray;
-	// self.YYtempArray = YYtempArray;
+    removeLast(tempArray)
+    removeLast(DYtempArray)
+    removeLast(XLtempArray)
+    removeLast(YYtempArray)
 
 	return {temp:tempArray, DYtemp:DYtempArray, XLtemp:XLtempArray, YYtemp:YYtempArray,L:LtempArray,H:HtempArray}
+}
+
+function removeLast(a) {
+    console.log("aaaaaaa")
+    let sign=true
+    let i=a.length-1
+    let index=0
+
+    while (sign){
+        if(!a[i]) return;
+        for(let s=0;s<a[i].length;s++){
+            if(a[i][s]!=null){
+                sign=false;
+                index=i;
+                break;
+            }
+        }
+        i--
+    }
+    a.splice(index+1)
+    // cc.log(a)
+    return index+1;
 }

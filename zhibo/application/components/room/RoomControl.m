@@ -156,7 +156,6 @@
     [self.wenluWebView loadWebWithPath:@"index.html"];
     [self.wenluWebView setHidden:true];
     self.wenluWebView.top = self.briefView.bottom+10;
-    RC.gameManager.wenluView = self.wenluWebView;
 }
 
 - (void)receiveWenLu:(NSArray *)list {

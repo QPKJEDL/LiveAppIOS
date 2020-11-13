@@ -66,6 +66,7 @@
         [_moneyButton setImage:[UIImage imageNamed:@"jinbi2"] forState:UIControlStateNormal];
         _moneyButton.titleLabel.font = [UIFont PingFangMedium:13];
         [_moneyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_moneyButton setUserInteractionEnabled:false];
         [self addSubview:_moneyButton];
     }
     return _moneyButton;
@@ -154,8 +155,7 @@
     self.guanImageView.left = self.avatarImageView.left-self.guanImageView.width/2+floor(self.guanImageView.width/3);
     self.guanImageView.top = self.avatarImageView.top-self.guanImageView.width/2;
     
-    CGFloat money = [data[@"money"] floatValue]/100;
-    [self.moneyButton setTitle:[NSString stringWithFormat:@"%.2f", money] forState:UIControlStateNormal];
+    [self.moneyButton setTitle:data[@"cmoney"] forState:UIControlStateNormal];
     self.moneyButton.top = self.nickNameLabel.bottom;
 
     

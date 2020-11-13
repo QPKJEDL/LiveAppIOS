@@ -122,7 +122,7 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
         return false;
     }
-    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT, URI_ACCOUNT_INFO];
+    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT, URI_ACCOUNT_INFO, URI_ACCOUNT_SX_BANLANCE];
     
     if ([noLoadings containsObject:request.uri] == false) {
          [ABUITips showLoading];

@@ -42,6 +42,7 @@
     [self.meiliButton setImage:[UIImage imageNamed:@"xingxing"] forState:UIControlStateNormal];
     [self.meiliButton setSpacingBetweenImageAndTitle:2];
     [self addSubview:self.meiliButton];
+    [self.meiliButton setUserInteractionEnabled:false];
     
     self.lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 0, self.width-30, 1)];
     self.lineView.backgroundColor = [UIColor hexColor:@"#F3F3F3"];
@@ -72,6 +73,6 @@
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:item[@"avatar"]] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
     
-    [self.meiliButton setTitle:item[@"money"] forState:UIControlStateNormal];
+    [self.meiliButton setTitle:item[@"cmoney"] forState:UIControlStateNormal];
 }
 @end

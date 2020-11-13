@@ -49,7 +49,7 @@
     
     NSArray *list = [ABIteration iterationList:[Stack shared].gslogs block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
         NSString *text = [dic toJSONString];
-        text = [text stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
+//        text = [text stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
         CGFloat h = [text sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(SCREEN_WIDTH, MAXFLOAT)].height;
         dic[@"item.size.height"] = @(h+20);
         dic[@"text"] = text;

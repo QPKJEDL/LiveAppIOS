@@ -85,7 +85,7 @@
     [self.avatarImageView sd_setImageWithURL:item[@"Avater"] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
 //    [self.avatarImageView loadImage:item[@"Avatar"]];
     
-    self.giftNumLabel.text = [NSString stringWithFormat:@"%.2f", [item[@"GiftMoney"] floatValue]/100];
+    self.giftNumLabel.text = item[@"cmoney"];
     [self.giftNumLabel sizeToFit];
     
     self.nameLabel.width = self.width/3;

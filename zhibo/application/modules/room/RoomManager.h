@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger roomid;
 @property (nonatomic, assign) NSInteger anchorid;
 @property (nonatomic, assign) BOOL isAnchor;
+@property (nonatomic, assign) BOOL isOnline;
 - (void)enterRoomId:(NSInteger)roomId;
 - (void)sendText:(NSString *)text;
 @end
