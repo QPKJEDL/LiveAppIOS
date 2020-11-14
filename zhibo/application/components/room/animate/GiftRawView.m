@@ -58,16 +58,6 @@
         self.numberLabel.textColor = [UIColor hexColor:@"#FFFFFF"];
         self.numberLabel.font = [UIFont PingFangSCBlod:25];
         [self addSubview:self.numberLabel];
-        
-//        self.nameLabel.text = @"荷塘月色";
-//        [self.nameLabel sizeToFit];
-//
-//        self.detailLabel.text = @"送出粉丝灯牌";
-//        [self.detailLabel sizeToFit];
-//
-//        self.numberLabel.text = @"x18";
-//        [self.numberLabel sizeToFit];
-        
     }
     return self;
 }

@@ -8,7 +8,7 @@
 
 #import "RoomSocket.h"
 
-@interface RoomSocket ()<PeerMessageObserver, RoomMessageObserver>
+@interface RoomSocket ()<PeerMessageObserver, RoomMessageObserver, TCPConnectionObserver>
 
 @end
 @implementation RoomSocket
@@ -34,11 +34,18 @@
         self.imService.heartbeatHZ = 30;
         self.imService.deviceID = [Service shared].account.uidStr;
         self.imService.token = [Service shared].account.token;
-        
         [self startListenAppStatus];
         
     }
     return self;
+}
+
+- (void)onConnectState:(int)state {
+    if (state == STATE_CONNECTED) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(roomSocketDidConnected)]) {
+            [self.delegate roomSocketDidConnected];
+        }
+    }
 }
 
 - (void)startListenAppStatus {
@@ -64,6 +71,7 @@
     [self.imService start];
     [self.imService addPeerMessageObserver:self];
     [self.imService addRoomMessageObserver:self];
+    [self.imService addConnectionObserver:self];
 }
 
 - (void)stopRoom {
@@ -74,6 +82,7 @@
 
     [self.imService removePeerMessageObserver:self];
     [self.imService removeRoomMessageObserver:self];
+    [self.imService removeConnectionObserver:self];
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {

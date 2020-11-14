@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <IMService.h>
 NS_ASSUME_NONNULL_BEGIN
+@protocol RoomSocketDelegate <NSObject>
 
+- (void)roomSocketDidConnected;
+
+@end
 @interface RoomSocket : NSObject
+@property (nonatomic, weak) id<RoomSocketDelegate> delegate;
 @property (nonatomic, assign) int64_t roomID;
 @property (nonatomic, strong) IMService *imService;
 

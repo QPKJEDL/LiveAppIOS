@@ -291,11 +291,14 @@
     
     NSInteger lmd = [message[@"Lmd"] intValue];
     if (lmd == 1) { //来了
-        NSLog(@"laiel");
-        NSString *username = message[@"UserNickname"];
-        [self.audienceView setCount:[message[@"RoomCount"] intValue]];
-//        [self.chatView receiveNewNotice:@{@"name":username, @"notice":@"来了", @"uid":message[@"UserId"]}];
-        [self.comeAnimateBanner pushData:@{@"name":username, @"notice":@"来了", @"uid":message[@"UserId"], @"native_id":@"RoomComeRaw"}];
+        NSInteger uid = [message[@"UserId"] integerValue];
+        if (uid != [Service shared].account.uid) {
+            NSString *username = message[@"UserNickname"];
+            [self.audienceView setCount:[message[@"RoomCount"] intValue]];
+    //        [self.chatView receiveNewNotice:@{@"name":username, @"notice":@"来了", @"uid":message[@"UserId"]}];
+            [self.comeAnimateBanner pushData:@{@"name":username, @"notice":@"来了", @"uid":message[@"UserId"], @"native_id":@"RoomComeRaw"}];
+        }
+
     }
     else if (lmd == 5) { //用户赠送礼物
         NSString *giftid = [NSString stringWithFormat:@"%@", message[@"GiftType"]];
@@ -375,7 +378,7 @@
     }
     
     NSString *text = [NSString stringWithFormat:@"%@:%@", name, content];
-    CGSize s = [text sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake((SCREEN_WIDTH/3)*2, MAXFLOAT)];
+    CGSize s = [text sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:CGSizeMake((SCREEN_WIDTH/3)*2, MAXFLOAT)];
     return @{
         @"uid":@(uu),
         @"name":name,
@@ -410,6 +413,7 @@
     if ([req.uri isEqualToString:URI_ROOM_SYSTEM]) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[self chatItem:@"" content:obj[@"text"] uid:@"0" nativeid:@"livecomment"]];
         dic[@"color"] = obj[@"color"];
+        dic[@"type"] = @"sys";
         RC.roomManager.nickcolor = obj[@"nick_color"];
         RC.roomManager.talkcolor = obj[@"talk_color"];
         [self.chatView receiveNewMessage:dic];

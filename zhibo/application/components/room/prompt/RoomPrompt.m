@@ -216,10 +216,6 @@
         self.betView.game_id = RC.gameManager.game_id;
         [self.betView setCoins:rules[@"coins"] options:rules[@"options"] sounds:rules[@"sounds"] limit:rules[@"tip"]];
     }
-    if (self.betView.isopen == true) {
-        return;
-    }
-    self.betView.isopen = true;
     
     RC.gameManager.betView = self.betView;
 

@@ -8,8 +8,9 @@
 
 #import "RoomManager.h"
 #import "RoomSocket.h"
-@interface RoomManager ()<INetData>
+@interface RoomManager ()<INetData, RoomSocketDelegate>
 @property (nonatomic, strong) RoomSocket *roomSocket;
+@property (nonatomic, assign) int type;
 @end
 @implementation RoomManager
 - (instancetype)init
@@ -17,24 +18,33 @@
     self = [super init];
     if (self) {
         self.roomSocket = [[RoomSocket alloc] init];
+        self.roomSocket.delegate = self;
         self.isAnchor = false;
         [UIApplication sharedApplication].idleTimerDisabled = true;
         [[UIApplication sharedApplication] addObserver:self forKeyPath:@"idleTimerDisabled"options:NSKeyValueObservingOptionNew context:nil];
+        
+       
     }
     return self;
 }
 
-- (void)enterRoomId:(NSInteger)roomId {
-    self.roomid = roomId;
-    [self.roomSocket startRoomWithID:roomId];
-    [self fetchPostUri:URI_ROOM_INFO params:@{@"room_id":@(roomId)}];
+
+- (void)roomSocketDidConnected {
+    [self fetchPostUri:URI_ROOM_INFO params:@{@"room_id":@(self.roomid), @"type":@(self.type)}];
     if (self.isAnchor) {
         [RoomContext shared].isForbidden = false;
         [RoomContext shared].isManager = true;
     }else{
-        [self fetchPostUri:URI_ROOM_MANAGER params:@{@"room_id":@(roomId)}];
-        [self fetchPostUri:URI_ROOM_BANSTATUS params:@{@"room_id":@(roomId)}];
+        [self fetchPostUri:URI_ROOM_MANAGER params:@{@"room_id":@(self.roomid)}];
+        [self fetchPostUri:URI_ROOM_BANSTATUS params:@{@"room_id":@(self.roomid)}];
     }
+    self.type = 1;
+}
+
+- (void)enterRoomId:(NSInteger)roomId {
+    self.roomid = roomId;
+    self.type = 0;
+    [self.roomSocket startRoomWithID:roomId];
     
 }
 

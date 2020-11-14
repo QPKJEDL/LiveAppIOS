@@ -46,12 +46,18 @@
 //    NSAttributedString *imgStr = [NSAttributedString attributedStringWithAttachment:attach];
 //    [textAttrStr appendAttributedString:imgStr];
     self.titleLabel.textColor = [UIColor hexColor:RC.roomManager.talkcolor];
+    self.titleLabel.font = [UIFont systemFontOfSize:14];
     if (item[@"color"] != nil) {
         self.titleLabel.textColor = [UIColor hexColor:item[@"color"]];
+        
+    }
+    NSString *typ = item[@"type"];
+    if ([typ isEqualToString:@"sys"]) {
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     }
     
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:title];;
-    [attrString addAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:RC.roomManager.nickcolor]} range:NSMakeRange(0, name.length)];
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:title];
+    [attrString addAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:RC.roomManager.nickcolor], NSFontAttributeName:[UIFont boldSystemFontOfSize:14]} range:NSMakeRange(0, name.length+1)];
     self.titleLabel.attributedText = attrString;
     
     NSDictionary *css = item[@"css"];

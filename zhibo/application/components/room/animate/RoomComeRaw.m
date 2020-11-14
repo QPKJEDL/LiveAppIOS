@@ -35,7 +35,7 @@
     
     self.nameLabel = [[QMUILabel alloc] initWithFrame:CGRectZero];
     self.nameLabel.textColor = [UIColor hexColor:@"#FF2A40"];
-    self.nameLabel.font = [UIFont PingFangMedium:14];
+    self.nameLabel.font = [UIFont PingFangSCBlod:15];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     [self.containView addSubview:self.nameLabel];
     [self.nameLabel setUserInteractionEnabled:false];
@@ -52,6 +52,7 @@
 
 //设置数据
 - (void)reload:(NSDictionary *)item {
+    self.nameLabel.textColor = [UIColor hexColor:RC.roomManager.nickcolor];
     self.uid = [item[@"uid"] intValue];
     self.nameLabel.text = item[@"name"];
     [self.nameLabel sizeToFit];
