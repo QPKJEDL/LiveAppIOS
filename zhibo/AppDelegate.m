@@ -56,6 +56,16 @@
     
     [[UIButton appearance] setExclusiveTouch:true];
     
+    [[ABNet shared] startNetListen:^(BOOL isReachable) {
+        if (isReachable) {
+            NSLog(@"网络正常");
+            [[ABMQ shared] publish:@"" channel:CHANNEL_NET_REACHABLE];
+        }else{
+            [ABUITips showError:@"当前无网络连接，请检查网络"];
+            NSLog(@"网络断开");
+        }
+    }];
+    
     return YES;
 }
 

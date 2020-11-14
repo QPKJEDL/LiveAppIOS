@@ -20,6 +20,8 @@
 @property (nonatomic, assign) NSInteger MaxLimit;
 @property (nonatomic, assign) NSInteger MinLimit;
 
+@property (nonatomic, strong) NSDictionary *tmpDic;//deskinfo
+
 @end
 @implementation GameManager
 - (instancetype)init
@@ -81,6 +83,8 @@
         if (obj == nil) {
             self.desk_id = 0;
             self.game_id = 0;
+            [RC.gameManager.control rliveclose];
+            return;
         }
         self.desk_id = [obj[@"desk_id"] intValue];
         self.game_id = [obj[@"game_id"] intValue];
@@ -94,11 +98,13 @@
         self.DeskName = obj[@"DeskName"];
         self.tipStr = obj[@"tip"];
         [self _refreshDeskBetInfo];
-        [self refreshDesk:obj];
+        self.tmpDic = obj;
+       
         self.shixunPlayAddress = obj[@"LeftPlay"];
     }
     if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
         self.rules = obj[@"rules"];
+        [self refreshDesk:self.tmpDic];
         [[ABMQ shared] publish:self.rules channel:CHANNEL_GAME_RULES];
         
     }
@@ -159,6 +165,7 @@
 }
 
 - (void)refreshDesk:(NSDictionary *)desk {
+    NSLog(@"refreshDesk");
     if (desk == nil) {
         return;
     }

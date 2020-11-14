@@ -37,7 +37,7 @@
 }
 
 - (void)showSeat {
-    if (![ABNet isNetReachable]) {
+    if (![[ABNet shared] isNetReachable]) {
         [self showEmptyViewWithImage:[UIImage imageNamed:@"shuju"] text:@"暂无数据" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(refreshData)];
     }else{
        [self showEmptyViewWithImage:[UIImage imageNamed:@"wuwang"] text:@"网络异常" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(refreshData)];

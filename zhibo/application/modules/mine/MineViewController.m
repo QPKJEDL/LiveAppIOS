@@ -33,6 +33,13 @@
     [self.listView adapterSafeArea];
     [self.view addSubview:self.listView];
     
+    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 30)];
+    [versionLabel setText:[NSString stringWithFormat:@"V%@", [ABDevice applicationVersion]]];
+    versionLabel.textAlignment = NSTextAlignmentCenter;
+    [versionLabel setTextColor:[UIColor hexColor:@"999999"]];
+    versionLabel.font = [UIFont PingFangSC:14];
+    self.listView.footerView = versionLabel;
+    
     NSArray *dataList = [Config getMe];
     [self.listView setTempleteDataList:dataList];
     

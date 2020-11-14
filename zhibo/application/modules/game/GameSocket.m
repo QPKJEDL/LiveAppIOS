@@ -8,7 +8,7 @@
 
 #import "GameSocket.h"
 
-@interface GameSocket ()<PeerMessageObserver, RoomMessageObserver>
+@interface GameSocket ()<PeerMessageObserver, RoomMessageObserver, IABMQSubscribe>
 
 @end
 @implementation GameSocket
@@ -35,8 +35,16 @@
         
         self.roomID = -1;
         
+        
+        [[ABMQ shared] subscribe:self channel:CHANNEL_NET_REACHABLE autoAck:true];
     }
     return self;
+}
+
+- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+    if ([channel isEqualToString:CHANNEL_NET_REACHABLE]) {
+        [self applicationDidBecomeActive];
+    }
 }
 
 - (void)startListenAppStatus {
@@ -50,9 +58,10 @@
 }
 
 - (void)applicationDidBecomeActive {
-    [self startRoomWithID:self.roomID];
-    
-    [RC.gameManager refresh];
+    if ([[ABNet shared] isNetReachable]) {
+        [self startRoomWithID:self.roomID];
+        [RC.gameManager refresh];
+    }
 }
 
 - (void)startRoomWithID:(int64_t)roomID {

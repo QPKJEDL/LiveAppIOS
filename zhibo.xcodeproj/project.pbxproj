@@ -280,6 +280,7 @@
 		F1B7950624596EA7000BD333 /* wallet.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950524596EA6000BD333 /* wallet.json */; };
 		F1B7950924597214000BD333 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B7950824597214000BD333 /* BillViewController.m */; };
 		F1B7950B24597A7C000BD333 /* footprint.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950A24597A7C000BD333 /* footprint.json */; };
+		F1C45A9A255F674F00DFA122 /* RoomCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C45A99255F674F00DFA122 /* RoomCenter.m */; };
 		F1D2727524E3BC6A003FFABE /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725624E3BC69003FFABE /* test.js */; };
 		F1D2727624E3BC6A003FFABE /* zhuang.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725824E3BC69003FFABE /* zhuang.png */; };
 		F1D2727724E3BC6A003FFABE /* hong_xie.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725924E3BC69003FFABE /* hong_xie.png */; };
@@ -825,6 +826,8 @@
 		F1B7950724597214000BD333 /* BillViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillViewController.h; sourceTree = "<group>"; };
 		F1B7950824597214000BD333 /* BillViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillViewController.m; sourceTree = "<group>"; };
 		F1B7950A24597A7C000BD333 /* footprint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = footprint.json; sourceTree = "<group>"; };
+		F1C45A98255F674E00DFA122 /* RoomCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCenter.h; sourceTree = "<group>"; };
+		F1C45A99255F674F00DFA122 /* RoomCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCenter.m; sourceTree = "<group>"; };
 		F1D2725624E3BC69003FFABE /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		F1D2725824E3BC69003FFABE /* zhuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhuang.png; sourceTree = "<group>"; };
 		F1D2725924E3BC69003FFABE /* hong_xie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hong_xie.png; sourceTree = "<group>"; };
@@ -1942,6 +1945,8 @@
 				F1D2729C24E542B3003FFABE /* LiveRoom.m */,
 				F1D272A924E62BB1003FFABE /* RoomManager.h */,
 				F1D272AA24E62BB1003FFABE /* RoomManager.m */,
+				F1C45A98255F674E00DFA122 /* RoomCenter.h */,
+				F1C45A99255F674F00DFA122 /* RoomCenter.m */,
 			);
 			path = room;
 			sourceTree = "<group>";
@@ -2420,6 +2425,7 @@
 				F166EE2E24B5CF5D00178F0F /* Stack.m in Sources */,
 				F11AA51D24D53C3000FCFE18 /* GFCalendarCell.m in Sources */,
 				F10FB5BD24BC034000857E1E /* GiftEffectsPlayView.m in Sources */,
+				F1C45A9A255F674F00DFA122 /* RoomCenter.m in Sources */,
 				F17513B324ED012B008729D7 /* UncaughtExceptionHandler.m in Sources */,
 				F10FB5B124BB1D9D00857E1E /* AnchorPromptView.m in Sources */,
 				557C07A724501955008868E6 /* BaseNavigationController.m in Sources */,
@@ -2647,7 +2653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qp.zhibo;
 				PRODUCT_NAME = hqzhibo;
 				PROVISIONING_PROFILE_SPECIFIER = "qp university";
@@ -2672,7 +2678,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qp.zhibo;
 				PRODUCT_NAME = hqzhibo;
 				PROVISIONING_PROFILE_SPECIFIER = "qp university";

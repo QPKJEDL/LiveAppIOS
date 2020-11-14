@@ -102,5 +102,16 @@
 
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
+
+- (void)finish {
+    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+        [[RoomContext shared].pushView stop];
+        [self fetchPostUri:URI_ROOM_CLOSE params:@{@"room_id":@(RC.roomManager.roomid)}];
+        [NSRouter dismiss];
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"直播已失联，请重新开播" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:action2];
+    [alertController showWithAnimated:YES];
+}
 @end
 

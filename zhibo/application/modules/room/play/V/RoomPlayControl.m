@@ -235,6 +235,10 @@
     [NSRouter back];
 }
 
+- (void)rliveclose {
+    [self liveclose];
+}
+
 - (void)liveclose {
     [self.delegate roomPlayControl:self closeWithData:self.roomInfo];
 }

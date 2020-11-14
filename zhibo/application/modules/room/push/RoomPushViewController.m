@@ -36,7 +36,6 @@
 @property (nonatomic, strong) GameManager *gameManager;
 @property (nonatomic, strong) RoomManager *roomManager;
 
-
 @end
 
 @implementation RoomPushViewController

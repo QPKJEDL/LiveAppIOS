@@ -20,7 +20,7 @@
 #import "GameManager.h"
 #import "BetTransform.h"
 #import "MoneyInPrompt.h"
-@interface RoomControl ()<RoomBottomBarDelegate, RoomChatViewDelegate, INetData, RoomAnchorBriefViewDelegate, GameStatusPlateViewDelegate, BetViewDelegate, IABMQSubscribe>
+@interface RoomControl ()<RoomBottomBarDelegate, RoomChatViewDelegate, INetData, RoomAnchorBriefViewDelegate, GameStatusPlateViewDelegate, BetViewDelegate, IABMQSubscribe, RoomPlayViewDelegate>
 @property (nonatomic, strong) UIView *bbbView;
 @property (nonatomic, strong) RoomAnchorBriefView *briefView;
 @property (nonatomic, strong) RoomBottomBar *bottomBar;
@@ -79,6 +79,8 @@
         
         self.shixunPlayView = [[RoomPlayView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*(9.0/16.0))];
         [self addSubview:self.shixunPlayView];
+        self.shixunPlayView.delegate = self;
+        self.shixunPlayView.erNotice = @"暂无现场画面";
         [self.shixunPlayView setHidden:true];
         [self addSubview:self.briefView];
          [self addSubview:_audienceView];
@@ -141,12 +143,16 @@
     return self;
 }
 
+- (void)roomPlayViewLoadFail {
+    
+}
+
 - (void)loadGame {
     
 }
 
 - (void)loadWenLu {
-    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 290, 130)];
+    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 140)];
     [self.wenluWebView.webView setOpaque:false];
     self.wenluWebView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
@@ -201,6 +207,7 @@
 }
 
 - (void)onPlate2 {
+    NSLog(@"onPlate2");
     if (RC.gameManager.rules == nil) {
         return;
     }
@@ -217,6 +224,15 @@
     }];
 }
 
+
+- (void)refreshScene {
+    if (self.sceneButton.isSelected) {
+        if ([RC.gameManager.shixunPlayAddress isEqualToString:self.shixunPlayView.currentURL]) {
+            return;
+        }
+        [self.shixunPlayView playURL:RC.gameManager.shixunPlayAddress];
+    }
+}
 - (void)onScene {
     [self.sceneButton setSelected:!self.sceneButton.isSelected];
     if (self.sceneButton.isSelected) {
@@ -323,6 +339,10 @@
     
 }
 
+- (void)rliveclose {
+    
+}
+
 - (void)receiveRoomInfo:(NSDictionary *)roomInfo {
     self.roomInfo = roomInfo;
     
@@ -390,6 +410,8 @@
     if ([req.uri isEqualToString:URI_ROOM_SYSTEM]) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[self chatItem:@"" content:obj[@"text"] uid:@"0" nativeid:@"livecomment"]];
         dic[@"color"] = obj[@"color"];
+        RC.roomManager.nickcolor = obj[@"nick_color"];
+        RC.roomManager.talkcolor = obj[@"talk_color"];
         [self.chatView receiveNewMessage:dic];
     }
     if ([req.uri isEqualToString:URI_FOLLOW_FOLLOW]) {
@@ -453,7 +475,8 @@
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
     if ([channel isEqualToString:CHANNEL_GAME_RULES]) {
-        [self onPlate2];
+//        [self onPlate2];
+        [self refreshScene];
         [self.plateView setHidden:false];
         if ([RoomContext shared].gameManager.game_id == 1 || [RoomContext shared].gameManager.game_id == 2) {
             [self.wenluWebView setHidden:false];
@@ -483,7 +506,7 @@
                 break;
             case 1://开始下注
                 [self.plateView please:desk]; //开启下注倒计时
-
+                NSLog(@"开始下注");
                 [RoomPrompt shared].betView.enabled = true; //开启下注
                 [self onPlate2]; //弹出下注UI
                 [[RoomPrompt shared].betView reset]; //重置下注盘

@@ -45,13 +45,13 @@
 //    attach.bounds = CGRectMake(0, 0 , 30, self.titleLabel.font.pointSize);
 //    NSAttributedString *imgStr = [NSAttributedString attributedStringWithAttachment:attach];
 //    [textAttrStr appendAttributedString:imgStr];
-    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.textColor = [UIColor hexColor:RC.roomManager.talkcolor];
     if (item[@"color"] != nil) {
         self.titleLabel.textColor = [UIColor hexColor:item[@"color"]];
     }
     
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:title];;
-    [attrString addAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:@"FF2A40"]} range:NSMakeRange(0, name.length)];
+    [attrString addAttributes:@{NSForegroundColorAttributeName:[UIColor hexColor:RC.roomManager.nickcolor]} range:NSMakeRange(0, name.length)];
     self.titleLabel.attributedText = attrString;
     
     NSDictionary *css = item[@"css"];

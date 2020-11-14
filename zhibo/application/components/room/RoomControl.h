@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)kickoff;
 
 - (void)liveclose;
+- (void)rliveclose;
 
 - (void)anchorLeave;
 - (void)anchorReturn;

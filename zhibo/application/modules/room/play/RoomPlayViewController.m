@@ -41,6 +41,7 @@
 
     self.playView = [[RoomPlayView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.playView];
+    self.playView.erNotice = @"主播没有在线";
 
     self.controlView = [[RoomPlayControl alloc] initWithFrame:self.view.bounds];
     self.controlView.delegate = self;

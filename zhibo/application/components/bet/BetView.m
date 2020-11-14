@@ -450,4 +450,10 @@
     }
 }
 
+- (void)removeFromSuperview {
+    [super removeFromSuperview];
+    self.isopen = false;
+}
+
+
 @end

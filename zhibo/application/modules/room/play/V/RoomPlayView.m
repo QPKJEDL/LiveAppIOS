@@ -67,6 +67,7 @@
 }
 
 - (void)playURL:(NSString *)url {
+    self.currentURL = url;
     self.player.delegate = self;
     if ([url hasPrefix:@"rtmp"]) {
         [_player startPlay:url type:PLAY_TYPE_LIVE_RTMP];
@@ -98,7 +99,10 @@
     else if (EvtID == PLAY_ERR_NET_DISCONNECT) {
         NSLog(@"播放失败");
         [self.indicatorView stopAnimating];
-        [ABUITips showError:@"视频载入失败"];
+        [ABUITips showError:self.erNotice];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(roomPlayViewLoadFail)]) {
+            [self.delegate roomPlayViewLoadFail];
+        }
     }
 //    if (EvtID == PLAY_EVT_PLAY_BEGIN) {
 //        stopLoadingAnimation();
