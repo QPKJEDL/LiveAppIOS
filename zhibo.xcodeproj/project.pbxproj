@@ -281,6 +281,7 @@
 		F1B7950924597214000BD333 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B7950824597214000BD333 /* BillViewController.m */; };
 		F1B7950B24597A7C000BD333 /* footprint.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B7950A24597A7C000BD333 /* footprint.json */; };
 		F1C45A9A255F674F00DFA122 /* RoomCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C45A99255F674F00DFA122 /* RoomCenter.m */; };
+		F1C45AC525621EAA00DFA122 /* RecoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C45AC425621EAA00DFA122 /* RecoverViewController.m */; };
 		F1D2727524E3BC6A003FFABE /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725624E3BC69003FFABE /* test.js */; };
 		F1D2727624E3BC6A003FFABE /* zhuang.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725824E3BC69003FFABE /* zhuang.png */; };
 		F1D2727724E3BC6A003FFABE /* hong_xie.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D2725924E3BC69003FFABE /* hong_xie.png */; };
@@ -828,6 +829,8 @@
 		F1B7950A24597A7C000BD333 /* footprint.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = footprint.json; sourceTree = "<group>"; };
 		F1C45A98255F674E00DFA122 /* RoomCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCenter.h; sourceTree = "<group>"; };
 		F1C45A99255F674F00DFA122 /* RoomCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCenter.m; sourceTree = "<group>"; };
+		F1C45AC325621EAA00DFA122 /* RecoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecoverViewController.h; sourceTree = "<group>"; };
+		F1C45AC425621EAA00DFA122 /* RecoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecoverViewController.m; sourceTree = "<group>"; };
 		F1D2725624E3BC69003FFABE /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		F1D2725824E3BC69003FFABE /* zhuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhuang.png; sourceTree = "<group>"; };
 		F1D2725924E3BC69003FFABE /* hong_xie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hong_xie.png; sourceTree = "<group>"; };
@@ -1653,6 +1656,8 @@
 				F144CA1C24DED09C0051EDD4 /* QrCodeSharePrompt.m */,
 				F15D271824E11DA80026F847 /* TencentCOS.h */,
 				F15D271924E11DA80026F847 /* TencentCOS.m */,
+				F1C45AC325621EAA00DFA122 /* RecoverViewController.h */,
+				F1C45AC425621EAA00DFA122 /* RecoverViewController.m */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -2325,6 +2330,7 @@
 				559F3E922452EB4E001280F2 /* AnchorPresent.m in Sources */,
 				F18AA64A24B85714002846AB /* GiftItemView.m in Sources */,
 				F18AA64324B84CFC002846AB /* MeiYanPromptView.m in Sources */,
+				F1C45AC525621EAA00DFA122 /* RecoverViewController.m in Sources */,
 				557C078524500BFA008868E6 /* ShowViewController.m in Sources */,
 				557C07FC245170F2008868E6 /* PublishDTViewController.m in Sources */,
 				F166EE4324B6C3A300178F0F /* RoomPushReadyTitleView.m in Sources */,

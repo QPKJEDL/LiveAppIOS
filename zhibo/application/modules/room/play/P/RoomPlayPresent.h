@@ -4,7 +4,7 @@
 //
 //  Created by qp on 2020/7/10.
 //  Copyright © 2020 qp. All rights reserved.
-//
+//  弃用
 
 #import <Foundation/Foundation.h>
 #import "RoomPresent.h"

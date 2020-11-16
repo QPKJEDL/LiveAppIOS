@@ -50,7 +50,7 @@
 - (void)startListenAppStatus {
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)applicationDidEnterBackground {
@@ -124,6 +124,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopRoom];
+    NSLog(@"game socket dealloc");
 }
 
 @end

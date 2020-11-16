@@ -62,19 +62,24 @@
                 }];
             }
         }
-        
+        int type = [request.params[@"type"] intValue];
         list = [ABIteration iterationList:list block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"avatar"] = dic[@"avater"];
             dic[@"num"] = @(idx+1);
             NSString *money = [NSString stringWithFormat:@"%@", [dic valueInKeys:@[@"month_get",@"all_get", @"day_send",@"all_send",@"win_rate",@"all_rate"]]];
             money = [money componentsSeparatedByString:@"."][0];
-            if ([[dic allKeys] containsObject:@"win_rate"] || [[dic allKeys] containsObject:@"all_rate"]) {
-                money = [NSString stringWithFormat:@"%@%%", money];
-            }
-            dic[@"money"] = money;
-            CGFloat cmoney = [money floatValue]/100;
-            dic[@"cmoney"] = [NSString stringWithFormat:@"%.2f", cmoney];
             dic[@"native_id"] = @"rankitem";
+            dic[@"money"] = money;
+            
+            //赌神榜单不用除100
+            if (type == 5 || type == 6) {
+                dic[@"cmoney"] = [NSString stringWithFormat:@"%@%%", money];
+            }else{
+                CGFloat cmoney = [money floatValue]/100;
+                dic[@"cmoney"] = [NSString stringWithFormat:@"%.2f", cmoney];
+                
+            }
+
             return dic;
         }];
         return @{@"list":list};

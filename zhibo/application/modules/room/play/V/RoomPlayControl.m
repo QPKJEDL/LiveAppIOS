@@ -64,6 +64,7 @@
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
     QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
         [self.plateView stop];
+        [self free];
          [NSRouter back];
     }];
     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定退出直播？" message:nil preferredStyle:QMUIAlertControllerStyleAlert];

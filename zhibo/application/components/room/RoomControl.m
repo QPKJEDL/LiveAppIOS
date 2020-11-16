@@ -139,6 +139,7 @@
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
         
         [self fetchPostUri:URI_ROOM_SYSTEM params:nil];
+        
     }
     return self;
 }
@@ -542,6 +543,7 @@
                 
                 break;
             case 7://结算完成(下注后有结果)
+                NSLog(@"结算完成");
                 [RP promptGameBetResult:desk];
                break;
             case 8://换靴

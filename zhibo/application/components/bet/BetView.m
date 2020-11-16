@@ -230,7 +230,13 @@
 
 - (void)setBalance:(CGFloat)balnace {
     self.bb = balnace;
+    
+    CGSize s = [[NSString stringWithFormat:@"%.2f", balnace] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:9]}];
+    
     self.balanceLabel.text = [NSString stringWithFormat:@"余额\n%.2f", balnace];
+    self.balanceLabel.width = MAX(60, s.width+10);
+    
+    self.wenluButton.left = self.balanceLabel.right+10;
 }
 
 //重置未下注选择

@@ -184,7 +184,11 @@
         return @{@"list":list};
     }
     if ([request.uri isEqualToString:URI_GAME_RESULT_LIST]) {
+//        NSLog(@"%lu", (unsigned long)[response[@"list"][0][@"list"] count]);
         NSArray *list = response[@"list"][0][@"list"];
+        if (list.count == 0) {
+            NSLog(@"no game result");
+        }
         return @{@"list":list};
     }
     if ([request.uri isEqualToString:URI_GAME_DESKLIST]) {

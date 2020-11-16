@@ -37,6 +37,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger game_id;
 @property (nonatomic, assign) NSInteger room_id;
 @property (nonatomic, assign) NSInteger boot_num;
+@property (nonatomic, assign) NSInteger pave_num;
 @property (nonatomic, strong) NSString *DeskName;
 @property (nonatomic, weak) RoomControl *control;
 @property (nonatomic, weak) BetView *betView;

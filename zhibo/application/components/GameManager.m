@@ -92,6 +92,7 @@
     }
     if ([req.uri isEqualToString:URI_GAME_DESK]) {
         self.boot_num = [obj[@"BootNum"] intValue];
+        self.pave_num = [obj[@"PaveNum"] intValue];
         self.MaxLimit = [obj[@"MaxLimit"] intValue];
         self.MinLimit = [obj[@"MinLimit"] intValue];
         self.game_id = [obj[@"GameId"] intValue];
@@ -104,6 +105,7 @@
     }
     if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
         self.rules = obj[@"rules"];
+        self.deskInfo = self.tmpDic;
         [self refreshDesk:self.tmpDic];
         [[ABMQ shared] publish:self.rules channel:CHANNEL_GAME_RULES];
         
@@ -164,6 +166,10 @@
     [self fetchPostUri:URI_GAME_UNBET params:dic];
 }
 
+- (void)extractDeskDynamicInfo {
+    
+}
+
 - (void)refreshDesk:(NSDictionary *)desk {
     NSLog(@"refreshDesk");
     if (desk == nil) {
@@ -180,7 +186,10 @@
         @"BootNum":@"boot_num",
         @"PaveNum":@"pave_num"
     };
-    self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
+    
+    NSDictionary *cc = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
+    self.deskInfo = [ABIteration setAndReaplceKeyTo:self.deskInfo with:cc];
+//    self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
     self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.DeskName, self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
     //获取台桌状态，执行相应UI更新
     //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
@@ -233,6 +242,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"gamemanager dealloc");
     RP.betView = nil;
 }
 

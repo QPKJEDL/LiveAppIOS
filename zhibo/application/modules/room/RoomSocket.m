@@ -51,7 +51,7 @@
 - (void)startListenAppStatus {
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)applicationDidEnterBackground {
@@ -83,6 +83,8 @@
     [self.imService removePeerMessageObserver:self];
     [self.imService removeRoomMessageObserver:self];
     [self.imService removeConnectionObserver:self];
+    
+    self.imService = nil;
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {
@@ -116,6 +118,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopRoom];
+    NSLog(@"room socket dealloc");
 }
 
 @end
