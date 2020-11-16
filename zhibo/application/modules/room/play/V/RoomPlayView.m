@@ -40,7 +40,6 @@
         self.indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
         self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         [self addSubview:self.indicatorView];
-        [self.indicatorView startAnimating];
         
         [self startListenAppStatus];
         
@@ -67,6 +66,7 @@
 }
 
 - (void)playURL:(NSString *)url {
+    [self.indicatorView startAnimating];
     self.currentURL = url;
     self.player.delegate = self;
     if ([url hasPrefix:@"rtmp"]) {
