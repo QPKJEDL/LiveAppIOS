@@ -30,7 +30,7 @@
 #import "BetTransform.h"
 #import <Bugly/Bugly.h>
 #import <AVFoundation/AVFoundation.h>
-#import <CocoaLumberjack/CocoaLumberjack.h>
+//#import <CocoaLumberjack/CocoaLumberjack.h>
 @interface AppDelegate ()<INetData>
 @property (nonatomic, assign) NSInteger force;
 @end
@@ -39,13 +39,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [DDLog addLogger:[DDASLLogger sharedInstance]];//发送给苹果服务器
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];//发送给 Xcode 的控制台
-    
-    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-    [DDLog addLogger:fileLogger];
+//    [DDLog addLogger:[DDASLLogger sharedInstance]];//发送给苹果服务器
+//    [DDLog addLogger:[DDTTYLogger sharedInstance]];//发送给 Xcode 的控制台
+//
+//    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+//    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+//    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+//    [DDLog addLogger:fileLogger];
 
     [Bugly startWithAppId:@"7dd91fe103"];
     self.force = 0;

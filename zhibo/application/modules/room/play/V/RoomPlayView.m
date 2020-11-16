@@ -92,7 +92,7 @@
 #pragma mark -------------  player delegate -----------
 - (void)onPlayEvent:(int)EvtID withParam:(NSDictionary *)param {
 //    NSLog(@"%i", EvtID);
-    if (EvtID == PLAY_EVT_PLAY_BEGIN) {
+    if (EvtID == PLAY_EVT_PLAY_BEGIN || EvtID == PLAY_EVT_RTMP_STREAM_BEGIN) {
         [self.containView.subviews[0] setBackgroundColor:[UIColor clearColor]];
         [self.indicatorView stopAnimating];
     }

@@ -129,7 +129,9 @@
         [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
     }
     if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
-        [RC.gameManager.control receiveWenLu:obj[@"list"]];
+        if (self.game_id == 1 || self.game_id == 2) {
+            [RC.gameManager.control receiveWenLu:obj[@"list"]];
+        }
     }
 }
 
@@ -190,7 +192,10 @@
     NSDictionary *cc = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
     self.deskInfo = [ABIteration setAndReaplceKeyTo:self.deskInfo with:cc];
 //    self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
-    self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.DeskName, self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
+    if ([self.deskInfo[@"boot_num"] intValue] > 0 && [self.deskInfo[@"pave_num"] intValue] > 0) {
+        self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.DeskName, self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
+    }
+    
     //获取台桌状态，执行相应UI更新
     //Phase:0洗牌中1倒计时(开始下注)2开牌中(停止下注)3结算完成
     //cmd: 10 下注成功
@@ -247,3 +252,4 @@
 }
 
 @end
+
