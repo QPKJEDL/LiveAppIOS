@@ -158,6 +158,7 @@
     self.wenluWebView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.bounces = false;
+    self.wenluWebView.isShowProgress = false;
     [self addSubview:self.wenluWebView];
 //    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index2.html"];
     [self.wenluWebView loadWebWithPath:@"index.html"];
@@ -166,12 +167,15 @@
 }
 
 - (void)receiveWenLu:(NSArray *)list {
-//    NSDictionary *data = @{@"data":[ResourceUtil readDataWithFileName:@"zhuangxian"][@"data"]};
-    NSDictionary *data = @{@"data":list};
-    NSString *jsonString = [data toJSONString];
-    [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-        NSLog(@"%@", error);
-    }];
+    NSLog(@"receiveWenLu");
+    dispatch_main_async_safe(^{
+        NSDictionary *data = @{@"data":list};
+        NSString *jsonString = [data toJSONString];
+        NSLog(@"%@", self.wenluWebView);
+        [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            NSLog(@"%@", error);
+        }];
+    });
 }
 
 - (void)receiveWenLuItem:(NSDictionary *)item {
@@ -582,7 +586,9 @@
     [self.plateView stop];
     [self.shixunPlayView free];
     [[ABMQ shared] unsubscribe:self];
+    self.wenluWebView.delegate = nil;
     [self.wenluWebView free];
+    [self.wenluWebView removeFromSuperview];
     
 }
 
