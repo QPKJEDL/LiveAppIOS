@@ -195,7 +195,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+
     if (self.force == 1) {
         [self checkVersion];
     }
@@ -210,6 +210,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 //    [[IMService instance] enterForeground];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive:true error:nil];
 }
 @end
 
