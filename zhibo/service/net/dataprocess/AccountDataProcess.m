@@ -88,17 +88,20 @@
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_CASHOUT]) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:request.params];
-        dic[@"draw_money"] =  @([request.params[@"draw_money"] floatValue]*100);
+        CGFloat mm = [request.params[@"draw_money"] floatValue]*100;
+        dic[@"draw_money"] =  [NSString stringWithFormat:@"%.0f", mm];
         request.realParams = dic;
         request.realUri = @"/code/Mycenter/draw";
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_EXCAHNGE]) {
         request.realUri = @"/Exchange";
-        request.realParams = @{@"money":@([request.params[@"money"] floatValue]*100)};
+        CGFloat mm = [request.params[@"money"] floatValue]*100;
+        request.realParams = @{@"money":[NSString stringWithFormat:@"%.0f",mm]};
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_WITHDRAW]) {
         request.realUri = @"/Withdraw";
-        request.realParams = @{@"money":@([request.params[@"money"] floatValue]*100)};
+        CGFloat mm = [request.params[@"money"] floatValue]*100;
+        request.realParams = @{@"money":[NSString stringWithFormat:@"%.0f",mm]};
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_SX_BANLANCE]) {
         request.realUri = @"/WebUserBalance";

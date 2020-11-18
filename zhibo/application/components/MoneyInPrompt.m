@@ -93,7 +93,7 @@
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     [ABUITips hideLoading];
-    [ABUITips showError:@"转入成功"];
+    [ABUITips showError:req.msg];
     [self onCancel];
     [[ABMQ shared] publish:@"" channel:@"refreshbalance"];
 }

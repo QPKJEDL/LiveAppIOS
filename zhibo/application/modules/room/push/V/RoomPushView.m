@@ -89,6 +89,7 @@
         }
         if (evtID == PUSH_EVT_PUSH_BEGIN) {
             NSLog(@"开始推流");
+            [self imback];
         }
         if (evtID == PUSH_WARNING_RECONNECT) {
             NSLog(@"开始推流");

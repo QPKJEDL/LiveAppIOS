@@ -84,7 +84,6 @@
     [self.imService removeRoomMessageObserver:self];
     [self.imService removeConnectionObserver:self];
     
-    self.imService = nil;
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {

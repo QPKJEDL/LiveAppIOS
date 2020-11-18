@@ -165,15 +165,9 @@
 		F121925624D052EE00630CA2 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121925524D052EE00630CA2 /* WebViewViewController.m */; };
 		F121925924D0554700630CA2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F121925824D0554700630CA2 /* ProfileViewController.m */; };
 		F121925C24D055A000630CA2 /* ProfileTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121925B24D055A000630CA2 /* ProfileTopView.m */; };
-		F121925E24D154FB00630CA2 /* A89.html in Resources */ = {isa = PBXBuildFile; fileRef = F121925D24D154F900630CA2 /* A89.html */; };
 		F121926124D15A2D00630CA2 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926024D15A2C00630CA2 /* CommentView.m */; };
 		F121926424D1600800630CA2 /* CommentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926324D1600800630CA2 /* CommentItemView.m */; };
 		F121926B24D16F1E00630CA2 /* ZBInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926A24D16F1E00630CA2 /* ZBInputView.m */; };
-		F121927024D17B8100630CA2 /* niuniu.html in Resources */ = {isa = PBXBuildFile; fileRef = F121926C24D17B7F00630CA2 /* niuniu.html */; };
-		F121927124D17B8100630CA2 /* longhu.html in Resources */ = {isa = PBXBuildFile; fileRef = F121926D24D17B8000630CA2 /* longhu.html */; };
-		F121927224D17B8100630CA2 /* sangong.html in Resources */ = {isa = PBXBuildFile; fileRef = F121926E24D17B8000630CA2 /* sangong.html */; };
-		F121927524D17B9600630CA2 /* baijiale.html in Resources */ = {isa = PBXBuildFile; fileRef = F121927424D17B9600630CA2 /* baijiale.html */; };
-		F121927724D1825400630CA2 /* bjl.png in Resources */ = {isa = PBXBuildFile; fileRef = F121927624D1825300630CA2 /* bjl.png */; };
 		F121927C24D276EF00630CA2 /* CommentReplyItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121927B24D276EE00630CA2 /* CommentReplyItemView.m */; };
 		F14250722499E7C2003E83D8 /* NetProvidor.m in Sources */ = {isa = PBXBuildFile; fileRef = F14250712499E7C2003E83D8 /* NetProvidor.m */; };
 		F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1425079249A102C003E83D8 /* AnchorItemView.m */; };
@@ -631,18 +625,12 @@
 		F121925824D0554700630CA2 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		F121925A24D055A000630CA2 /* ProfileTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTopView.h; sourceTree = "<group>"; };
 		F121925B24D055A000630CA2 /* ProfileTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTopView.m; sourceTree = "<group>"; };
-		F121925D24D154F900630CA2 /* A89.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = A89.html; sourceTree = "<group>"; };
 		F121925F24D15A2C00630CA2 /* CommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
 		F121926024D15A2C00630CA2 /* CommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		F121926224D1600800630CA2 /* CommentItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentItemView.h; sourceTree = "<group>"; };
 		F121926324D1600800630CA2 /* CommentItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentItemView.m; sourceTree = "<group>"; };
 		F121926924D16F1E00630CA2 /* ZBInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBInputView.h; sourceTree = "<group>"; };
 		F121926A24D16F1E00630CA2 /* ZBInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBInputView.m; sourceTree = "<group>"; };
-		F121926C24D17B7F00630CA2 /* niuniu.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = niuniu.html; sourceTree = "<group>"; };
-		F121926D24D17B8000630CA2 /* longhu.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = longhu.html; sourceTree = "<group>"; };
-		F121926E24D17B8000630CA2 /* sangong.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sangong.html; sourceTree = "<group>"; };
-		F121927424D17B9600630CA2 /* baijiale.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = baijiale.html; sourceTree = "<group>"; };
-		F121927624D1825300630CA2 /* bjl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bjl.png; sourceTree = "<group>"; };
 		F121927A24D276EE00630CA2 /* CommentReplyItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentReplyItemView.h; sourceTree = "<group>"; };
 		F121927B24D276EE00630CA2 /* CommentReplyItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplyItemView.m; sourceTree = "<group>"; };
 		F142506F2499E766003E83D8 /* HTTPURI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPURI.h; sourceTree = "<group>"; };
@@ -1795,12 +1783,6 @@
 				F1D2725424E3BC69003FFABE /* wenlu */,
 				F15D271C24E2697C0026F847 /* zhuangxian.json */,
 				F15D271624E0DE250026F847 /* abc.png */,
-				F121927624D1825300630CA2 /* bjl.png */,
-				F121927424D17B9600630CA2 /* baijiale.html */,
-				F121926D24D17B8000630CA2 /* longhu.html */,
-				F121926C24D17B7F00630CA2 /* niuniu.html */,
-				F121926E24D17B8000630CA2 /* sangong.html */,
-				F121925D24D154F900630CA2 /* A89.html */,
 				F10FB5B924BC001600857E1E /* 1_720.mp4 */,
 				F16CBB1F24AE102700CA6C18 /* audio */,
 			);
@@ -2168,7 +2150,6 @@
 				F10FB5BA24BC023600857E1E /* 1_720.mp4 in Resources */,
 				559F3E852452E096001280F2 /* commentlist.json in Resources */,
 				F16CBB3824AE102800CA6C18 /* huWin.mp3 in Resources */,
-				F121927124D17B8100630CA2 /* longhu.html in Resources */,
 				F1D2728424E3BC6A003FFABE /* he_a1.png in Resources */,
 				F1D2728E24E3BC6A003FFABE /* xian.png in Resources */,
 				F1D2728024E3BC6A003FFABE /* zhuang_a1b2.png in Resources */,
@@ -2180,7 +2161,6 @@
 				F16CBB3624AE102800CA6C18 /* lastTenM.mp3 in Resources */,
 				557C077324500A0C008868E6 /* Images.xcassets in Resources */,
 				F1D2728524E3BC6A003FFABE /* dyz_hong_a1.png in Resources */,
-				F121927524D17B9600630CA2 /* baijiale.html in Resources */,
 				F1D2727B24E3BC6A003FFABE /* hongs.png in Resources */,
 				F15D271724E0DE250026F847 /* abc.png in Resources */,
 				F16CBB2F24AE102800CA6C18 /* heJu.mp3 in Resources */,
@@ -2190,19 +2170,15 @@
 				F1D2727824E3BC6A003FFABE /* lans.png in Resources */,
 				F17513B924EE2480008729D7 /* raise.mp3 in Resources */,
 				F1D2727624E3BC6A003FFABE /* zhuang.png in Resources */,
-				F121925E24D154FB00630CA2 /* A89.html in Resources */,
 				F1D2727724E3BC6A003FFABE /* hong_xie.png in Resources */,
 				F1D272B624EB8460003FFABE /* bet_succeed.mp3 in Resources */,
-				F121927224D17B8100630CA2 /* sangong.html in Resources */,
 				559F3E942452EDBE001280F2 /* anchorlist.json in Resources */,
 				55F3B24D245EED0F00334B8F /* livecomment.json in Resources */,
-				F121927724D1825400630CA2 /* bjl.png in Resources */,
 				F16CBB3524AE102800CA6C18 /* xianWin.mp3 in Resources */,
 				F1D2728A24E3BC6A003FFABE /* xian_a1.png in Resources */,
 				F1D2728F24E3BC6A003FFABE /* zhuang_b2.png in Resources */,
 				F17513C824EE681D008729D7 /* xian4.mp3 in Resources */,
 				F17513CD24EE68B9008729D7 /* fanMen.mp3 in Resources */,
-				F121927024D17B8100630CA2 /* niuniu.html in Resources */,
 				F17513C924EE681D008729D7 /* xian6.mp3 in Resources */,
 				F1D2727924E3BC6A003FFABE /* zhuang_a1.png in Resources */,
 				F16CBB3124AE102800CA6C18 /* xian3.mp3 in Resources */,
@@ -2659,7 +2635,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qp.zhibo;
 				PRODUCT_NAME = hqzhibo;
 				PROVISIONING_PROFILE_SPECIFIER = "qp university";
@@ -2684,7 +2660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qp.zhibo;
 				PRODUCT_NAME = hqzhibo;
 				PROVISIONING_PROFILE_SPECIFIER = "qp university";

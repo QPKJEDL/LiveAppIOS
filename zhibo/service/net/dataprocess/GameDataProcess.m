@@ -156,27 +156,27 @@
         NSArray *list = @[
             @{
                 @"title":@"百家乐游戏",
-                @"src":@"baijiale.html",
+                @"src":@"https://live.zbzx6088.com:8933/game/baijiale.html",
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"龙虎游戏",
-                @"src":@"longhu.html",
+                @"src":@"https://live.zbzx6088.com:8933/game/longhu.html",
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"牛牛游戏",
-                @"src":@"niuniu.html",
+                @"src":@"https://live.zbzx6088.com:8933/game/niuniu.html",
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"三公游戏",
-                @"src":@"sangong.html",
+                @"src":@"https://live.zbzx6088.com:8933/game/sangong.html",
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"A89游戏",
-                @"src":@"A89.html",
+                @"src":@"https://live.zbzx6088.com:8933/game/A89.html",
                 @"native_id":@"gameruleitem",
             }
         ];
