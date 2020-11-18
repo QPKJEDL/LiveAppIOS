@@ -391,7 +391,7 @@
         @"native_id":nativeid,
         @"css":@{
             @"font":@(14),
-            @"w":@(s.width),
+            @"w":@(s.width+2),
             @"h":@(s.height),
         }
     };

@@ -9,9 +9,9 @@
 #import "MomentsViewController.h"
 
 @interface MomentsViewController ()<INetData, ABUIListViewDelegate, ABUIListViewDataSource, IABMQSubscribe>
-@property (nonatomic, strong) ABUIListView *listView;
+@property (nonatomic, strong) ABUIRefreshListView *listView;
 
-@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, assign) NSInteger last_id;
 @end
 
 @implementation MomentsViewController
@@ -20,9 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
-    [self.listView setupPullRefresh];
-    [self.listView setupLoadMore];
+    self.listView = [[ABUIRefreshListView alloc] initWithFrame:self.view.bounds];
     self.listView.delegate = self;
     self.listView.dataSource = self;
     [self.view addSubview:self.listView];
@@ -54,23 +52,10 @@
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     NSArray *newList = obj[@"list"];
-    if (self.listView.isLoadMoreing) {
-        [self.dataList addObjectsFromArray:newList];
-    }else{
-       self.dataList = [[NSMutableArray alloc] initWithArray:newList];
+    if (newList.count > 0) {
+        self.last_id = [newList.lastObject[@"zone_id"] intValue];
     }
-    if (newList.count == 0) {
-        [self.listView noMoreData];
-    }
-    
-    [self hideEmptyView];
-    if (self.dataList.count == 0) {
-        [self showNoDataEmpty];
-    }
-    
-    [self.listView endPullRefreshing];
-    [self.listView endLoadMore];
-    [self.listView setDataList:self.dataList css:@{@"item.rowSpacing":@"5"}];
+    [self.listView setDataList:newList css:@{@"item.rowSpacing":@"5"}];
 }
 
 
@@ -86,10 +71,10 @@
 }
 
 - (void)listViewOnLoadMore:(ABUIListView *)listView {
-    [self fetchPostUri:URI_MOMENTS_LIST params:@{@"lastid":self.dataList.lastObject[@"zone_id"]}];
+    [self fetchPostUri:URI_MOMENTS_LIST params:@{@"lastid":@(self.last_id)}];
 }
 
-- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {\
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     [self.listView endPullRefreshing];
     [self showSeat];
 }

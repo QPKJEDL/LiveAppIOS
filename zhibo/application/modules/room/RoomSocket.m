@@ -39,19 +39,22 @@
     }
     return self;
 }
-
 - (void)onConnectState:(int)state {
     if (state == STATE_CONNECTED) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(roomSocketDidConnected)]) {
             [self.delegate roomSocketDidConnected];
         }
     }
+    if (state == STATE_UNCONNECTED) {
+        NSLog(@"STATE_UNCONNECTED");
+    }
 }
 
 - (void)startListenAppStatus {
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationWillEnterForegroundNotification object:nil];
+
 }
 
 - (void)applicationDidEnterBackground {
@@ -95,7 +98,15 @@
     [[ABMQ shared] publish:[msg.content toDictionary] channel:CHANNEL_ROOM_PEER];
 }
 
+- (void)sendSysText:(NSString *)text {
+    
+}
+
 - (void)sendText:(NSString *)text {
+    if (self.imService.connectState != STATE_CONNECTED) {
+        [ABUITips showError:@"聊天已断开"];
+        return;
+    }
     if ([RoomContext shared].isForbidden) {
         [ABUITips showError:@"您已被禁言"];
         return;
