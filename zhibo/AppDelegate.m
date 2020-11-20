@@ -192,10 +192,11 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     [[Service shared] enterBackground];
+    [[Service shared] applicationWillResignActive];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-
+    [[Service shared] applicationDidBecomeActive];
     if (self.force == 1) {
         [self checkVersion];
     }

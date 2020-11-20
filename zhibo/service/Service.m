@@ -36,6 +36,7 @@
             self.historyList = [[NSMutableArray alloc] init];
         }
         
+        self.appEventMQ = [[ABMQ alloc] init];
     }
     return self;
 }
@@ -179,5 +180,13 @@
 
 - (void)likeMomentWithUid:(NSInteger)uid zone_id:(NSInteger)zone_id {
     [self fetchPostUri:URI_MOMENTS_LIKE params:@{@"live_uid":@(uid), @"zone_id":@(zone_id)}];
+}
+
+- (void)applicationWillResignActive {
+    [self.appEventMQ publish:@"resign" channel:CHANNEL_APP_STATUS];
+}
+
+- (void)applicationDidBecomeActive {
+    [self.appEventMQ publish:@"active" channel:CHANNEL_APP_STATUS];
 }
 @end

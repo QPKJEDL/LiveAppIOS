@@ -31,12 +31,11 @@
             self.imService.ssl = false;
         }
         
-        [self startListenAppStatus];
-        
         self.roomID = -1;
         
         
         [[ABMQ shared] subscribe:self channel:CHANNEL_NET_REACHABLE autoAck:true];
+        [[Service shared].appEventMQ subscribe:self channel:CHANNEL_APP_STATUS autoAck:true];
     }
     return self;
 }
@@ -45,12 +44,13 @@
     if ([channel isEqualToString:CHANNEL_NET_REACHABLE]) {
         [self applicationDidBecomeActive];
     }
-}
-
-- (void)startListenAppStatus {
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationWillEnterForegroundNotification object:nil];
+    if ([channel isEqualToString:CHANNEL_APP_STATUS]) {
+        if ([message isEqualToString:@"resign"]) {
+            [self applicationDidEnterBackground];
+        }else if ([message isEqualToString:@"active"]){
+            [self applicationDidBecomeActive];
+        }
+    }
 }
 
 - (void)applicationDidEnterBackground {
@@ -58,6 +58,7 @@
 }
 
 - (void)applicationDidBecomeActive {
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     if ([[ABNet shared] isNetReachable]) {
         [self startRoomWithID:self.roomID];
         [RC.gameManager refresh];
@@ -92,7 +93,6 @@
 }
 
 - (void)onRoomMessage:(RoomMessage *)rm {
-    NSLog(@"%@", rm.content);
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[rm.content dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
 //    {"Cmd":6,"DeskId":15,"Status":2,"Winner":"作废","Boot_num":1,"Pave_num":13}
     [[ABMQ shared] publish:dic channel:CHANNEL_ROOM_GAME];
@@ -122,6 +122,8 @@
 
 - (void)dealloc
 {
+    [[ABMQ shared] unsubscribe:self];
+    [[Service shared].appEventMQ unsubscribe:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopRoom];
     NSLog(@"game socket dealloc");

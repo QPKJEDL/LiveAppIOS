@@ -8,7 +8,7 @@
 
 #import "RoomSocket.h"
 
-@interface RoomSocket ()<PeerMessageObserver, RoomMessageObserver, TCPConnectionObserver>
+@interface RoomSocket ()<PeerMessageObserver, RoomMessageObserver, TCPConnectionObserver, IABMQSubscribe>
 
 @end
 @implementation RoomSocket
@@ -34,11 +34,26 @@
         self.imService.heartbeatHZ = 30;
         self.imService.deviceID = [Service shared].account.uidStr;
         self.imService.token = [Service shared].account.token;
-        [self startListenAppStatus];
+        
+        [[ABMQ shared] subscribe:self channel:CHANNEL_NET_REACHABLE autoAck:true];
+        [[Service shared].appEventMQ subscribe:self channel:CHANNEL_APP_STATUS autoAck:true];
         
     }
     return self;
 }
+- (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
+    if ([channel isEqualToString:CHANNEL_NET_REACHABLE]) {
+        [self applicationDidBecomeActive];
+    }
+    if ([channel isEqualToString:CHANNEL_APP_STATUS]) {
+        if ([message isEqualToString:@"resign"]) {
+            [self applicationDidEnterBackground];
+        }else if ([message isEqualToString:@"active"]){
+            [self applicationDidBecomeActive];
+        }
+    }
+}
+
 - (void)onConnectState:(int)state {
     if (state == STATE_CONNECTED) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(roomSocketDidConnected)]) {
@@ -48,13 +63,6 @@
     if (state == STATE_UNCONNECTED) {
         NSLog(@"STATE_UNCONNECTED");
     }
-}
-
-- (void)startListenAppStatus {
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationWillEnterForegroundNotification object:nil];
-
 }
 
 - (void)applicationDidEnterBackground {
@@ -126,6 +134,8 @@
 
 - (void)dealloc
 {
+    [[ABMQ shared] unsubscribe:self];
+    [[Service shared].appEventMQ unsubscribe:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopRoom];
     NSLog(@"room socket dealloc");

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *gamewsurl;
 @property (nonatomic, strong) NSString *gameurl;
 @property (nonatomic, strong) NSMutableArray *historyList;
+@property (nonatomic, strong) ABMQ *appEventMQ;
 - (void)addHistory:(NSDictionary *)item;
 - (NSArray *)getHistoryList;
 
@@ -33,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)unfollowUserWithUid:(NSInteger)uid;
 
 - (void)likeMomentWithUid:(NSInteger)uid zone_id:(NSInteger)zone_id;
+
+- (void)applicationWillResignActive;
+- (void)applicationDidBecomeActive;
 @end
 
 NS_ASSUME_NONNULL_END
