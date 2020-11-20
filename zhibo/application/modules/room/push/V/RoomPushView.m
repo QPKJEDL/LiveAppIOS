@@ -22,6 +22,7 @@
         _config.pauseImg = [UIImage imageWithColor:[UIColor hexColor:@"161823"]];
         self.pusher = [[TXLivePush alloc] initWithConfig: _config]; // config 参数不能为空
         self.pusher.delegate = self;
+        [self.pusher setMirror:true];
         self.beautyLevel = 0.2;
         self.whitenessLevel = 0.2;
         self.beautyLevel = 0.2;
@@ -43,6 +44,7 @@
 
 - (void)flip {
     [self.pusher switchCamera];
+    [self.pusher setMirror:self.pusher.frontCamera];
 }
 
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {

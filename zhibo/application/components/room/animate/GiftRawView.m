@@ -87,7 +87,7 @@
     self.detailLabel.text = [NSString stringWithFormat:@"送出%@", data[@"gift"][@"giftname"]];
     [self.numberLabel shake];
     [self.nameLabel sizeToFit];
-    self.nameLabel.width = 140;
+    self.nameLabel.width = 90;
     [self.detailLabel sizeToFit];
     [self.numberLabel sizeToFit];
     
