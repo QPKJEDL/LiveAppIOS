@@ -38,7 +38,7 @@
 
 @property (nonatomic, strong) RoomPlayView *shixunPlayView;
 
-
+@property (nonatomic, assign) BOOL isFirstTan;
 
 @end
 
@@ -49,7 +49,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        
+        self.isFirstTan = true;
         self.bbbView = [[UIView alloc] initWithFrame:self.bounds];
         [self addSubview:self.bbbView];
         
@@ -368,6 +368,12 @@
     
     [self.audienceView setList:roomInfo[@"room"][@"rank"]];
     [self.audienceView setCount:[roomInfo[@"room"][@"roomcount"] intValue]];
+    
+    if (self.isFirstTan) {
+        self.isFirstTan = false;
+        [self onScene];
+    }
+    
 }
 
 - (void)receiveDeskInfo:(NSDictionary *)deskInfo {
