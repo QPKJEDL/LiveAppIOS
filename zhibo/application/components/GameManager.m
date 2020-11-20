@@ -104,6 +104,7 @@
         self.shixunPlayAddress = obj[@"LeftPlay"];
     }
     if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
+
         self.rules = obj[@"rules"];
         self.deskInfo = self.tmpDic;
         [self refreshDesk:self.tmpDic];
@@ -115,6 +116,7 @@
         [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
     }
     if ([req.uri isEqualToString:URI_GAME_BET]) {
+        [ABUITips hideLoading];
         [RP.betView betSuccess];
         [ABUITips showError:@"下注成功"];
         [self refreshBalance];
@@ -138,6 +140,7 @@
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     [ABUITips showError:err.message];
     if ([req.uri isEqualToString:URI_GAME_BET]) {
+        [ABUITips hideLoading];
         [[ABAudio shared] playBundleFileWithName:@"bet_failed.mp3"];
         [RP.betView timeEnd];
     }
@@ -155,6 +158,7 @@
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:info];
         [dic setValue:self.rules[@"uris"][@"bet"] forKey:@"uri"];
+        [ABUITips showLoading];
         [self fetchPostUri:URI_GAME_BET params:dic];
         
 //    }else{
@@ -218,7 +222,6 @@
         phase = 8;
     }
 
-    [[Stack shared] addgslogs:desk];
     [[ABMQ shared] publish:@{@"status":@(phase), @"data":desk} channel:CHANNEL_GAME_STATUS];
 }
 
@@ -235,6 +238,11 @@
     if ([channel isEqualToString:CHANNEL_ROOM_GAME]) {
         NSDictionary *dic = (NSDictionary *)message;
         if ([dic isKindOfClass:[NSDictionary class]] && dic[@"Cmd"] != nil) {
+            int cmd = [dic[@"Cmd"] intValue];
+            if (cmd == 7) {
+                [self refreshDesk:dic];
+                return;
+            }
             if ([self isSelf:dic] == false) {
                 NSLog(@"不是本台");
                 return;

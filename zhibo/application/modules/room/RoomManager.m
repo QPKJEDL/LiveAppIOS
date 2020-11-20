@@ -98,7 +98,7 @@
 
 
 - (void)sendText:(NSString *)text {
-    if ([text isEqualToString:@":gamesocket"]) {
+    if ([text isEqualToString:@":recovery"]) {
         [NSRouter gotoXXXX];
         return;
     }

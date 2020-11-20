@@ -25,6 +25,7 @@
 
 /// Called to modify a request before sending.
 - (ABNetRequest *)prepare:(ABNetRequest *)request {
+    
     if ([request.uri isEqualToString:URI_GAME_BET]) {
         request.realUri = request.params[@"uri"];
     }
@@ -90,11 +91,19 @@
 //    if ([request.uri isEqualToString:URI_GAME_BET_FEE]) {
 //        return false;
 //    }
+
     return true;
 }
 
 /// Called immediately before a request is sent over the network (or stubbed).
 - (void)willSend:(ABNetRequest *)request {
+    [[Stack shared] addgslogs:@{
+        @"url":request.realUri,
+        @"params":request.realParams,
+        @"header":request.headers,
+        @"timestamp":request.timestamp,
+        @"status":@"send"
+    }];
 //    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
 }
 
@@ -105,6 +114,13 @@
 
 /// Called to modify a result before completion.
 - (NSDictionary *)process:(ABNetRequest *)request response:(NSDictionary *)response {
+    [[Stack shared] addgslogs:@{
+        @"url":request.realUri,
+        @"params":request.realParams,
+        @"header":request.headers,
+        @"timestamp":request.timestamp,
+        @"status":@"finish"
+    }];
     if ([request.uri isEqualToString:URI_GAME_BET_FEE]) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:response];
         dic[@"rules"] = [self.dataHelper getGameBetRuleWithParams:@{

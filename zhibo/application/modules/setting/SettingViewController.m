@@ -99,6 +99,11 @@
         [self fetchPostUri:URI_ACCOUNT_FORGET_RECHARGE params:@{@"new_pwd":newpwd, @"code":smscode}];
     }
     if ([self.key isEqualToString:@"editnick"]) {
+        NSString *nickname = [[Stack shared] get:@"nickname"];
+        if ([nickname isEqualToString:@":recovery"]) {
+            [NSRouter gotoXXXX];
+            return;
+        }
         [self fetchPostUri:URI_ACCOUNT_EDIT_NICKNAME params:@{@"nickname":[[Stack shared] get:@"nickname"]}];
     }
     if ([self.key isEqualToString:@"binding_wechat"]) {

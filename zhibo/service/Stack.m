@@ -61,15 +61,16 @@
 }
 
 - (void)addgslogs:(NSDictionary *)logs {
-    if (self.gslogs.count > 50) {
-        [self.gslogs removeLastObject];
-    }
-    
-    [self.gslogs insertObject:logs atIndex:0];
+//    if (self.gslogs.count > 5000) {
+//        self.gslogs = [[NSMutableArray alloc] init];
+//    }
+//    [self.gslogs addObject:logs];
 }
 
-- (void)addgshttplogs:(NSDictionary *)logs {
-    
+- (void)addgshttplog:(NSString *)log {
+    @synchronized (self.gslogs) {
+        [self.gslogs addObject:log];
+    }
 }
 
 @end

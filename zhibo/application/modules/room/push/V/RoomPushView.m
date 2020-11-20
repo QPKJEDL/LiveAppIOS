@@ -33,12 +33,6 @@
         
         
         [[ABMQ shared] subscribe:self channel:CHANNEL_NET_REACHABLE autoAck:true];
-//
-//        [ABNet startNetListen:^(BOOL isReachable) {
-//            if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-//                [self imback];
-//            }
-//        }];
     }
     return self;
 }
@@ -80,12 +74,11 @@
 
 - (void)onPushEvent:(int)evtID withParam:(NSDictionary *)param {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"%i", evtID);
         if (evtID == WARNING_RTMP_READ_WRITE_FAIL) {
 
         }
         if (evtID == PUSH_EVT_ROOM_USER_ENTER) {
-            
+            NSLog(@"用户进入");
         }
         if (evtID == PUSH_EVT_PUSH_BEGIN) {
             NSLog(@"开始推流");

@@ -31,5 +31,6 @@
 #import "UIFont+Extension.h"
 #import "RoomContext.h"
 #import "RoomCenter.h"
+#import <Foundation/Foundation.h>
 #endif
 #endif /* zhibo_pch */
