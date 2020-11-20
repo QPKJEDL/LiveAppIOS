@@ -193,6 +193,8 @@
     self.deskInfo = [ABIteration setAndReaplceKeyTo:self.deskInfo with:cc];
 //    self.deskInfo = [ABIteration pickKeysAndReplaceWithMapping:mm fromDictionary:desk];
     if ([self.deskInfo[@"boot_num"] intValue] > 0 && [self.deskInfo[@"pave_num"] intValue] > 0) {
+        self.boot_num = [self.deskInfo[@"boot_num"] intValue];
+        self.pave_num = [self.deskInfo[@"pave_num"] intValue];
         self.atipStr = [NSString stringWithFormat:@"桌号:%@\n靴次:%@\n铺次:%@\n", self.DeskName, self.deskInfo[@"boot_num"], self.deskInfo[@"pave_num"]];
     }
     
