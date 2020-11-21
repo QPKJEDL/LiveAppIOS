@@ -31,13 +31,7 @@
 
 - (void)roomSocketDidConnected {
     [self fetchPostUri:URI_ROOM_INFO params:@{@"room_id":@(self.roomid), @"type":@(self.type)}];
-    if (self.isAnchor) {
-        [RoomContext shared].isForbidden = false;
-        [RoomContext shared].isManager = true;
-    }else{
-        [self fetchPostUri:URI_ROOM_MANAGER params:@{@"room_id":@(self.roomid)}];
-        [self fetchPostUri:URI_ROOM_BANSTATUS params:@{@"room_id":@(self.roomid)}];
-    }
+
     self.type = 1;
 }
 
@@ -56,6 +50,7 @@
 }
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
+    [ABUITips hideLoading];
     if ([req.uri isEqualToString:URI_ROOM_INFO]) { //房间信息
         int status = [obj[@"room"][@"status"] intValue];
         self.isOnline = (status == 1);
@@ -64,6 +59,15 @@
         }
         [[ABMQ shared] publish:obj channel:CHANNEL_ROOM_INFO];
         self.anchorid = [obj[@"anchor"][@"UserId"] intValue];
+        
+        
+        if (self.isAnchor) {
+            [RoomContext shared].isForbidden = false;
+            [RoomContext shared].isManager = true;
+        }else{
+            [self fetchPostUri:URI_ROOM_MANAGER params:@{@"room_id":@(self.roomid)}];
+            [self fetchPostUri:URI_ROOM_BANSTATUS params:@{@"room_id":@(self.roomid)}];
+        }
 //        self.roomInfo = obj;
 //        if ([obj[@"room"][@"status"] intValue] == 0) {
 //            [self.delegate roomPlayPresent:self closeWithData:obj];

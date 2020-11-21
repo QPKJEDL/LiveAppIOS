@@ -121,6 +121,7 @@
         @"timestamp":request.timestamp,
         @"status":@"finish"
     }];
+    [ABUITips hideLoading];
     if ([request.uri isEqualToString:URI_GAME_BET_FEE]) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:response];
         dic[@"rules"] = [self.dataHelper getGameBetRuleWithParams:@{

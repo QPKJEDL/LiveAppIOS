@@ -100,6 +100,9 @@
 }
 
 - (void)finish {
+    if (self.timer.isValid) {
+        return;
+    }
     self.textLabel.text = @"已完结";
     self.timeLabel.text = @"";
     self.textLabel.textColor = [UIColor hexColor:@"#FFC71C"];
