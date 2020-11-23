@@ -55,6 +55,7 @@
         int status = [obj[@"room"][@"status"] intValue];
         self.isOnline = (status == 1);
         if (status == 0) {
+            [RC.gameManager.control rliveclose];
             return;
         }
         [[ABMQ shared] publish:obj channel:CHANNEL_ROOM_INFO];
