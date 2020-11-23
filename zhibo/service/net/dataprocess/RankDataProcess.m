@@ -20,12 +20,6 @@
 
 /// Called immediately before a request will sent
 - (BOOL)canSend:(ABNetRequest *)request {
-//    NSArray *noLoadings = @[URI_RANK_LIST];
-//    if ([noLoadings containsObject:request.uri] == false) {
-//        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
-//    }
-    
-
     return true;
 }
 

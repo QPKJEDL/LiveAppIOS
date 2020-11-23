@@ -22,7 +22,7 @@
 }
 - (void)getAnchorList:(NSDictionary *)props {
     if (self.anchorList.count == 0) {
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+        [ABUITips showLoading];
     }
     if (self.anchorList.count == 0 || self.isPullRefresh == true) {
         [self fetchPostUri:URI_ROOM_LIST params:@{@"channe_id":props[@"id"], @"last_id":@"0"}];

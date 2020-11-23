@@ -104,12 +104,12 @@
         @"timestamp":request.timestamp,
         @"status":@"send"
     }];
-//    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+
 }
 
 /// Called to modify a result before completion.
 - (void)didReceive:(ABNetRequest *)request response:(NSDictionary *)response {
-//     [[UIApplication sharedApplication].keyWindow hideToastActivity];
+
 }
 
 /// Called to modify a result before completion.

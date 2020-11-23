@@ -13,18 +13,18 @@
 @implementation LoginRegPresent
 
 - (void)login:(NSString *)username passsword:(NSString *)password {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     [self fetchPostUri:URI_ACCOUNT_LOGIN params:@{@"account":username, @"password":password}];
     [[Service shared] rememberAccount:username password:password];
 }
 
 - (void)login:(NSString *)phone code:(NSString *)code {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     [self fetchPostUri:URI_ACCOUNT_LOGIN params:@{@"mobile":phone, @"code":code, @"type":@"phone"}];
 }
 
 - (void)reg:(NSString *)username nickname:(NSString *)nickname passsword:(NSString *)password {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     [self fetchPostUri:URI_ACCOUNT_REGISTER params:@{@"nickname":nickname ,@"account":username, @"password":password}];
 }
 

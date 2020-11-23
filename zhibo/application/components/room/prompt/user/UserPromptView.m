@@ -214,7 +214,7 @@
     if (selected) {
         QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
         QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
-            [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+            [ABUITips showLoading];
             [self fetchPostUri:URI_FOLLOW_UNFOLLOW params:@{@"live_uid":@(self.uid)}];
         }];
         QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定不在关注此人？" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
@@ -222,13 +222,13 @@
         [alertController addAction:action2];
         [alertController showWithAnimated:YES];
     }else{
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+        [ABUITips showLoading];
         [self fetchPostUri:URI_FOLLOW_FOLLOW params:@{@"live_uid":@(self.uid)}];
     }
 }
 
 - (void)manager:(BOOL)selected {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     if (selected) {
         [self fetchPostUri:URI_ROOM_RMMANAGER params:@{@"room_id":@([RoomContext shared].roomid), @"manager_id":@(self.uid)}];
     }else{
@@ -240,7 +240,7 @@
 - (void)onKickButton {
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:NULL];
     QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+        [ABUITips showLoading];
         [self fetchPostUri:URI_ROOM_KICK params:@{@"room_id":@([RoomContext shared].roomid), @"fans_id":@(self.uid)}];
     }];
     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定踢出直播间吗？" message:nil preferredStyle:QMUIAlertControllerStyleAlert];
@@ -251,7 +251,7 @@
 }
 
 - (void)forbidden:(BOOL)selected {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     if (selected) {
         [self fetchPostUri:URI_ROOM_UNBAN params:@{@"room_id":@([RoomContext shared].roomid), @"fans_id":@(self.uid)}];
     }else{

@@ -90,7 +90,7 @@
     NSArray *noLoadings = @[URI_ROOM_SEND_GIFT];
     
     if ([noLoadings containsObject:request.uri] == false) {
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+        [ABUITips showLoading];
     }
         
     

@@ -79,7 +79,7 @@
 }
 
 - (void)refreshData {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     [self fetchPostUri:URI_ROOM_GIFTRECORD params:@{@"type":@(self.type), @"lastid":@"0", @"date":self.dateItemView.dateButton.titleLabel.text}];
 }
 /*

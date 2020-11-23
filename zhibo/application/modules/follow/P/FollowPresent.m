@@ -14,7 +14,7 @@
 
 - (void)requestFollowList {
     if (self.dataList.count == 0) {
-        [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+        [ABUITips showLoading];
     }
     [self fetchPostUri:URI_FOLLOW_LIST params:nil];
 }

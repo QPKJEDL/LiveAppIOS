@@ -12,7 +12,7 @@
 @implementation MessagePresent
 
 - (void)getMessageList:(NSInteger)tag {
-    [[UIApplication sharedApplication].keyWindow makeToastActivity:CSToastPositionCenter];
+    [ABUITips showLoading];
     [self fetchPostUri:URI_MESSAGE_LIST params:@{@"type":@(tag)}];
     
 //    if (tag == 0) {

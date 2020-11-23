@@ -40,6 +40,8 @@
 
 @property (nonatomic, assign) BOOL isFirstTan;
 
+@property (nonatomic, strong) NSMutableArray *wenluList;
+@property (nonatomic, strong) UIView *wenluActionView;
 @end
 
 @implementation RoomControl
@@ -153,7 +155,7 @@
 }
 
 - (void)loadWenLu {
-    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 140)];
+    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 132)];
     [self.wenluWebView.webView setOpaque:false];
     self.wenluWebView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
@@ -166,18 +168,24 @@
     self.wenluWebView.top = self.briefView.bottom+10;
 }
 
+- (void)loadWenLuActionView {
+    self.wenluActionView = [[UIView alloc] initWithFrame:CGRectMake(0, self.wenluWebView.bottom, self.wenluWebView.width, 40)];
+    self.wenluActionView.backgroundColor = [UIColor redColor];
+    [self addSubview:self.wenluActionView];
+}
+
 - (void)receiveWenLu:(NSArray *)list {
     NSLog(@"receiveWenLu");
+    self.wenluList = [[NSMutableArray alloc] initWithArray:list];
     dispatch_main_async_safe(^{
         NSDictionary *data = @{@"data":list};
         NSString *jsonString = [data toJSONString];
-        NSLog(@"%@", self.wenluWebView);
         [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             NSLog(@"%@", error);
         }];
     });
 }
-
+//弃用
 - (void)receiveWenLuItem:(NSDictionary *)item {
     id winner = item[@"Winner"];
     if ([winner isKindOfClass:[NSString class]] && [(NSString *)winner containsString:@"game"]) {
@@ -245,6 +253,7 @@
         [self.shixunPlayView playURL:RC.gameManager.shixunPlayAddress];
         self.wenluWebView.top = self.shixunPlayView.bottom;
         
+        
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_up"]];
     }else{
         [self.shixunPlayView setHidden:true];
@@ -252,6 +261,8 @@
         [self.sceneImageView setImage:[UIImage imageNamed:@"gd_scene_down"]];
         self.wenluWebView.top = self.briefView.bottom+10;
     }
+    
+    self.wenluActionView.top = self.wenluWebView.bottom;
     
 }
 
