@@ -155,7 +155,7 @@
 }
 
 - (void)loadWenLu {
-    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 132)];
+    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 160)];
     [self.wenluWebView.webView setOpaque:false];
     self.wenluWebView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
@@ -177,13 +177,13 @@
 - (void)receiveWenLu:(NSArray *)list {
     NSLog(@"receiveWenLu");
     self.wenluList = [[NSMutableArray alloc] initWithArray:list];
-    dispatch_main_async_safe(^{
-        NSDictionary *data = @{@"data":list};
+    dispatch_main_async_safe((^{
+        NSDictionary *data = @{@"data":list, @"gameid":@(RC.gameManager.game_id)};
         NSString *jsonString = [data toJSONString];
         [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             NSLog(@"%@", error);
         }];
-    });
+    }));
 }
 //弃用
 - (void)receiveWenLuItem:(NSDictionary *)item {
@@ -363,6 +363,7 @@
 }
 
 - (void)receiveRoomInfo:(NSDictionary *)roomInfo {
+    NSLog(@"receiveRoomInfo");
     self.roomInfo = roomInfo;
     
     [self.briefView setHidden:false];

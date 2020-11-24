@@ -66,9 +66,10 @@
 }
 
 - (void)startRoomWithID:(int64_t)roomID {
-//    if (self.roomID > 0) {
-//        [self.imService leaveRoom:self.roomID];
-//    }
+    if (roomID <= 0) {
+        NSLog(@"roomidd invalid ");
+        return;
+    }
     self.roomID = roomID;
     [self.imService enterRoom:roomID];
     [self.imService start];

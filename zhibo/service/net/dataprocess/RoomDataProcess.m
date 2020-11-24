@@ -21,6 +21,7 @@
 //        request.realUri = @"/RoomList";
     }
     if ([request.uri isEqualToString:URI_ROOM_INFO]) {
+        NSLog(@"room info");
         request.realUri = @"/RoomInfo";
 //        request.realParams = @{@"room_id":request.params[@"RoomId"]};
     }

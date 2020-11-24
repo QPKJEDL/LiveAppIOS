@@ -77,6 +77,15 @@
     }
 }
 
+- (void)pause {
+    [self.player pause];
+}
+
+- (void)resume {
+    [self.player pause];
+    [self.player resume];
+}
+
 - (void)viewWillAppear {
    
     if (self.containView.subviews.count == 0) {

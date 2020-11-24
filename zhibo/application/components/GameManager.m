@@ -14,9 +14,6 @@
 @property (nonatomic, strong) NSDictionary *deskInfo;
 @property (nonatomic, strong) NSDictionary *desksubmit;
 
-
-
-
 @property (nonatomic, assign) NSInteger MaxLimit;
 @property (nonatomic, assign) NSInteger MinLimit;
 
@@ -42,6 +39,9 @@
 }
 
 - (void)refresh {
+    if (self.room_id == 0) {
+        return;
+    }
     [self fetchPostUri:URI_ROOM_GAME params:@{@"room_id":@(self.room_id)}];
 }
 

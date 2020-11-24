@@ -246,9 +246,11 @@
 
 - (void)anchorLeave {
     [self.leaveLabel setHidden:false];
+    [RC.roomManager.playView pause];
 }
 
 - (void)anchorReturn {
     [self.leaveLabel setHidden:true];
+    [RC.roomManager.playView resume];
 }
 @end

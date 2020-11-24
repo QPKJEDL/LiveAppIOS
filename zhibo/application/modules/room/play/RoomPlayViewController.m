@@ -53,7 +53,7 @@
     self.roomManager = [[RoomManager alloc] init];
     [RoomContext shared].roomManager = self.roomManager;
     [RoomContext shared].gameManager.control = self.controlView;
-    
+    RC.roomManager.playView = self.playView;
 //    [RoomContext shared].gameManager.shixunPlayerView = self.shixunPlayView;
     
     [self.gameManager enterRoomId:self.roomid];

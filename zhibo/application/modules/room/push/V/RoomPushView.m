@@ -139,6 +139,9 @@
 
 - (void)imback {
     NSLog(@"imback");
+    if (RC.roomManager.roomid == 0) {
+        return;
+    }
     [self fetchPostUri:URI_ROOM_RETURN params:@{@"room_id":@(RC.roomManager.roomid)}];
 }
 

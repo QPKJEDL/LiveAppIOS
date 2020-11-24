@@ -1,327 +1,410 @@
 <html>
-	<head>
-		<meta http-equiv='cache-control' content='no-cache'>
-		<meta charset="UTF-8"></meta>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
-		<link rel="stylesheet" href="index.css" type="text/css"></link>
-	</head>
-	<body>
-		<div id="app" @touchstart="subtouchStart($event,index)">
-			<div class="gridWrapper">
-				<canvas id="canvas" height="128" width="290"></canvas>
-			</div>
-			<div class="contentWrapper clearfix" id="contentWrapper">
-				<div class="zzRoad road">
-					<div class="item" v-for="zz in zzList">
-						<img class="xx" :src="zz.img"></img>
-					</div>
-				</div>
-				<div class="dlRoad road">
-					<div class="item" v-for="dl in dlList">
-						<img v-if="dl!=null" class="xx" :src="dl.img"></img>
-						<span v-if="dl!= null && dl.num!=null" class="num">{{dl.num}}</span>
-					</div>
-				</div>
-				<div class="dyzRoad road">
-					<div class="item" v-for="dyz in dyzList">
-						<img v-if="dyz!=null" class="xx" :src="dyz.img"></img>
-					</div>
-				</div>
-				<div class="xlRoad road">
-					<div class="item" v-for="xl in xlList">
-						<img v-if="xl!=null" class="xx" :src="xl.img"></img>
-					</div>
-				</div>
-				<div class="yyRoad road">
-					<div class="item" v-for="yy in yyList">
-						<img v-if="yy!=null" class="xx" :src="yy.img"></img>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script>
-			function drawGrid(row, column, size, x, y) {
-				var canvas = document.getElementById("canvas");
-				var context = canvas.getContext("2d");
-				context.strokeStyle = "#3c3c3c";
-				context.lineWidth = 0.5;
-				context.beginPath();
+    <head>
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+        <link rel="stylesheet" href="index.css" type="text/css"></link>
+    </head>
+    <body>
+        <div id="app" @touchstart="subtouchStart($event,index)">
+            <div class="gridWrapper">
+                <canvas id="mycanvas" height="128" width="290"></canvas>
+            </div>
+            <div class="contentWrapper clearfix" id="contentWrapper">
+                <div class="zzRoad road">
+                    <div class="item" v-for="zz in zzList">
+                        <img :class="[zz.t==null ? '' : 'ani', 'xx']" :src="zz.img"></img>
+                    </div>
+                </div>
+                <div class="dlRoad road">
+                    <div class="item" v-for="dl in dlList">
+                        <img v-if="dl!=null" class="xx" :src="dl.img"></img>
+                        <span v-if="dl!= null && dl.num!=null" class="num">{{dl.num}}</span>
+                    </div>
+                </div>
+                <div class="dyzRoad road">
+                    <div class="item" v-for="dyz in dyzList">
+                        <img v-if="dyz!=null" class="xx" :src="dyz.img"></img>
+                    </div>
+                </div>
+                <div class="xlRoad road">
+                    <div class="item" v-for="xl in xlList">
+                        <img v-if="xl!=null" class="xx" :src="xl.img"></img>
+                    </div>
+                </div>
+                <div class="yyRoad road">
+                    <div class="item" v-for="yy in yyList">
+                        <img v-if="yy!=null" class="xx" :src="yy.img"></img>
+                    </div>
+                </div>
+            </div>
+            <div class="bar">
+                <div class="barItem" v-for="item in wenList" @click="onBarItem(item.a)">
+                    <div class="sub a">{{item.a}}</div>
+                    <img v-if="item.b!= null" class="sub b" :src="item.b"></img>
+                    <img v-if="item.c!= null" class="sub c" :src="item.c"></img>
+                    <img v-if="item.d!= null" class="sub d" :src="item.d"></img>
+                </div>
+            </div>
+        </div>
+        <script src="vue.min.js"></script>
+        <script src="test.js"></script>
+        <script>
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    zzList:[],
+                    dlList:[],
+                    dyzList:[],
+                    xlList:[],
+                    yyList:[],
+                    
+                    inputList:[],
+                    tmpinputList:[],
 
-				for(var i = 0;i<row+1;i++) {
-					context.moveTo(i*size+0.5+x,y);
-					context.lineTo(i*size+0.5+x,size*column+y);
-				}
-				for(var i = 0;i<column+1;i++){
-					context.moveTo(x,i*size+0.5+y);
-					context.lineTo(row*size+1+x,i*size+0.5+y);
-				}
-				context.stroke();
-			}
+                    dlSets:[[]],
+                    dyzSets:[[]],
+                    xlSets:[[]],
+                    yySets:[[]],
+                    wenList:[],
+                    gameid:2,
+                    iph:"",
+                    timer:void 0
+                },
+                mounted(){
+                    window.setGameResults = this.setGameResults;
+                    window.setNewResult = this.setNewResult;
+                    window.setGameID = this.setGameID;
+                    window.abc = this.abc;
+                    document.documentElement.style.webkitUserSelect='none';
+                    document.documentElement.style.webkitTouchCallout='none'
 
-			drawGrid(4, 6, 20, 0, 0);
-			drawGrid(20, 6, 10, 83, 0);
-			drawGrid(20, 3, 10, 83, 60);
-			drawGrid(10, 3, 10, 83, 90);
-			drawGrid(10, 3, 10, 183, 90);
-		</script>
-		<script src="vue.min.js"></script>
-		<script src="test.js"></script>
-		<script>
-			var app = new Vue({
-				el:"#contentWrapper",
-				data:{
-					zzList:[],
-					dlList:[],
-					dyzList:[],
-					xlList:[],
-					yyList:[],
-					
-					inputList:[],
+                },
+                updated() {
+                    setTimeout(() => {
+                        var zzroad = this.$el.querySelector('.zzRoad')
+                        zzroad.scrollTo(zzroad.scrollWidth, 0)
 
-					dlSets:[[]],
-					dyzSets:[[]],
-					xlSets:[[]],
-					yySets:[[]],
-				},
-				mounted(){
-					window.setGameResults = this.setGameResults;
-					window.setNewResult = this.setNewResult;
-				},
-				updated() {
-					setTimeout(() => {
-						var zzroad = this.$el.querySelector('.zzRoad')
-						zzroad.scrollTo(zzroad.scrollWidth, 0)
+                        var dlroad = this.$el.querySelector('.dlRoad')
+                        dlroad.scrollTo(dlroad.scrollWidth, 0)
 
-						var dlroad = this.$el.querySelector('.dlRoad')
-						dlroad.scrollTo(dlroad.scrollWidth, 0)
+                        var dyzroad = this.$el.querySelector('.dyzRoad')
+                        dyzroad.scrollTo(dyzroad.scrollWidth, 0)
 
-						var dyzroad = this.$el.querySelector('.dyzRoad')
-						dyzroad.scrollTo(dyzroad.scrollWidth, 0)
+                        var xlroad = this.$el.querySelector('.xlRoad')
+                        xlroad.scrollTo(xlroad.scrollWidth, 0)
 
-						var xlroad = this.$el.querySelector('.xlRoad')
-						xlroad.scrollTo(xlroad.scrollWidth, 0)
+                        var yyroad = this.$el.querySelector('.yyRoad')
+                        yyroad.scrollTo(yyroad.scrollWidth, 0)
+                    }, 13)
+                },
+                methods: {
+                    abc: function (ttt) {
+                        JSON.parse(ttt)
+                    },
+                    put: function (message) {
+                        window.webkit.messageHandlers['bridge'].postMessage(message)
+                    },
+                    ready: function (data) {
+                        var jsonData = JSON.parse(data);
+                        this.inputList = jsonData["data"];
+                        this.gameid = jsonData["gameid"];
+                        var gameid = 2;
+                        if (data.indexOf("bankerPair") > 0) {
+                            gameid = 1;
+                        }
+                        this.display(gameid)
+                    },
+                    display: function (gameid) {
+                        var map = {}
+                        if (gameid == 1) {
+                            var inputlist2 = this.cc(this.inputList);
+                            for (var i=0;i<inputlist2.length;i++) {
+                                var bankerPair = inputlist2[i]["bankerPair"];
+                                var playerPair = inputlist2[i]["playerPair"];
+                                var game = inputlist2[i]["game"];
+                                keyString = game+bankerPair+playerPair;
+                                inputlist2[i]["winner"] = keyString;
+                            }
+                            this.readyZZ(inputlist2)
+                            map = getRoadList(this.inputList, 1)
+                        }else {
+                            this.readyZZ(this.cc(this.inputList))
+                            map = getRoadList(this.inputList, 2)
+                        }
+                        this.readyDL(this.cc(map["temp"]))
+                        this.readyDYZ(this.cc(map["DYtemp"]))
+                        this.readyXL(this.cc(map["XLtemp"]))
+                        this.readyYY(this.cc(map["YYtemp"]))
+                        this.refreshWenLu(this.cc(map["L"]), this.cc(map["H"]))
+                    },
+                    onBarItem: function (name) {
+                        this.reBackTmp()
+                        var map = {
+                            "庄问路":{"t":"tmp","bankerPair": "","game": "庄","id": 2254,"playerPair": ""},
+                            "闲问路":{"t":"tmp","bankerPair": "","game": "闲","id": 2254,"playerPair": ""},
+                            "龙问路":{"t":"tmp","id": 2254,"winner": "龙"},
+                            "虎问路":{"t":"tmp","id": 2254,"winner": "虎"}}
+                        this.inputList.push(map[name])
+                        this.display(this.gameid)
+                        if (this.timer != void 0) {
+                            clearTimeout(this.timer)
+                        }
+                        this.timer = setTimeout(() => {
+                            this.reBackTmp()
+                        }, 3000);
 
-						var yyroad = this.$el.querySelector('.yyRoad')
-						yyroad.scrollTo(yyroad.scrollWidth, 0)
-					}, 13)
-				},
-				methods: {
-					put: function (message) {
-						window.webkit.messageHandlers['bridge'].postMessage(message)
-					},
-					ready: function (data) {
-						var jsonData = JSON.parse(data);
-						this.inputList = jsonData["data"];
-						var gameid = 2;
-						if (data.indexOf("bankerPair") > 0) {
-							gameid = 1;
-						}
-						this.display(gameid)
-					},
-					display: function (gameid) {
-						var map = {}
-						if (gameid == 1) {
-							var inputlist2 = this.cc(this.inputList);
-							for (var i=0;i<inputlist2.length;i++) {
-								var bankerPair = inputlist2[i]["bankerPair"];
-								var playerPair = inputlist2[i]["playerPair"];
-								var game = inputlist2[i]["game"];
-								keyString = game+bankerPair+playerPair;
-								inputlist2[i]["winner"] = keyString;
-							}
-							this.readyZZ(inputlist2)
-							map = getRoadList(this.inputList, 1)
-						}else {
-							this.readyZZ(this.cc(this.inputList))
-							map = getRoadList(this.inputList, 2)
-						}
+                    },
+                    reBackTmp: function () {
+                        if (this.timer != void 0) {
+                            clearTimeout(this.timer)
+                        }
+                        if (this.inputList.length > 0) {
+                            var obj = this.inputList[this.inputList.length-1]
+                            if (obj["t"] != void 0) {
+                                this.inputList.pop()
+                                this.display(this.gameid)
+                            }else{
+                                console.log("pass")
+                            }
+                        }
 
-						this.readyDL(this.cc(map["temp"]))
-						this.readyDYZ(this.cc(map["DYtemp"]))
-						this.readyXL(this.cc(map["XLtemp"]))
-						this.readyYY(this.cc(map["YYtemp"]))
-					},
-					subtouchStart: function (event,index) {
-						event.preventDefault()
-					},
-					receiveItem: function (item) {
-						this.zzList.push(item)
-					},
-					setGameResults: function (text) {
-						this.ready(text)
-					},
-					setNewResult: function (text) {
-						var json = JSON.parse(text)
-						var winner = json["Winner"];
-						console.log(typeof(winner))
-						if (typeof(winner) === 'number') {
-							console.log("receve lh new item")
-							if (winner == 1) { //和
-								console.log(2222)
-								this.inputList.push({
-									"id":26,
-									"winner":"和"
-								})
-							}
-							else if (winner == 4) { //龙
-								this.inputList.push({
-									"id":26,
-									"winner":"虎"
-								})
-							}
-							else if (winner == 7) { //和
-								this.inputList.push({
-									"id":26,
-									"winner":"龙"
-								})
-							}
-							this.display(2)
-						}
-						else if (typeof(winner) == 'object') {
-							console.log("receve bjl new item")
-							var winjson = winner
-							var game = winner["game"];
-							var nItem = {"playerPair":"", "game":"庄", "bankerPair":""}
-							if (game == 1) {
-								nItem["game"] = "和"
-							}
-							else if (game == 4) {
-								nItem["game"] = "闲"
-							}
-							else if (game == 7) {
-								nItem["game"] = "庄"
-							}
+                    },
+                    refreshWenLu: function (aList, bList) {
+                        var wenList = []
+                        var sets = [aList, bList]
+                        var keys = ["b", "c", "d"]
+                        var aa = {1:["庄问路", "闲问路"], 2:["龙问路", "虎问路"]}
+                        var vv = {"龙":["hong.png", "hongs.png", "hong_xie.png"], "虎":["lan.png", "lans.png", "lan_xie.png"]}
+                        for(var i=0;i<sets.length;i++) {
+                            var m = {}
+                            m["a"] = aa[this.gameid][i];
+                            for(var j=0;j<sets[i].length;j++) {
+                                if (sets[i][j] != void 0) {
+                                    var winner = sets[i][j]["winner"]
+                                    m[keys[j]] = this.iph+vv[winner][j]
+                                }else{
+                                    m[keys[j]] = null
+                                }
+                                
+                                
+                            }
+                            wenList.push(m)
+                        }
+                        this.wenList = wenList
+                    },
+                    subtouchStart: function (event,index) {
+                        event.preventDefault()
+                    },
+                    receiveItem: function (item) {
+                        this.zzList.push(item)
+                    },
+                    setGameID: function(gameid) {
+                        this.gameid = gameid
+                        this.refreshWenLu([null,null,null],[null,null,null])
+                    },
+                    setGameResults: function (text) {
+                        this.reBackTmp()
+                        this.ready(text)
+                    },
+                    setNewResult: function (text) {
+                        this.reBackTmp()
+                        var json = JSON.parse(text)
+                        var winner = json["Winner"];
+                        if (typeof(winner) === 'number') {
+                            console.log("receve lh new item")
+                            if (winner == 1) { //和
+                                this.inputList.push({
+                                    "id":26,
+                                    "winner":"和"
+                                })
+                            }
+                            else if (winner == 4) { //龙
+                                this.inputList.push({
+                                    "id":26,
+                                    "winner":"虎"
+                                })
+                            }
+                            else if (winner == 7) { //和
+                                this.inputList.push({
+                                    "id":26,
+                                    "winner":"龙"
+                                })
+                            }
+                            this.display(2)
+                        }
+                        else if (typeof(winner) == 'object') {
+                            console.log("receve bjl new item")
+                            var winjson = winner
+                            var game = winner["game"];
+                            var nItem = {"playerPair":"", "game":"庄", "bankerPair":""}
+                            if (game == 1) {
+                                nItem["game"] = "和"
+                            }
+                            else if (game == 4) {
+                                nItem["game"] = "闲"
+                            }
+                            else if (game == 7) {
+                                nItem["game"] = "庄"
+                            }
 
-							if (winjson["playerPair"] == 5) {
-								nItem["playerPair"] = "闲对";
-							}
-							if (winjson["bankerPair"] == 2) {
-								nItem["bankerPair"] = "庄对";
-							}
+                            if (winjson["playerPair"] == 5) {
+                                nItem["playerPair"] = "闲对";
+                            }
+                            if (winjson["bankerPair"] == 2) {
+                                nItem["bankerPair"] = "庄对";
+                            }
 
-							this.inputList.push(nItem)
-							this.display(1)
-						}
-					},
-					scrollToEnd: function () {
-						this.$nextTick(function () {
-							const container = this.$el.querySelector('.zzRoad')
-							container.scrollTo(container.scrollWidth, 0)
+                            this.inputList.push(nItem)
+                            this.display(1)
+                        }
+                    },
+                    scrollToEnd: function () {
+                        this.$nextTick(function () {
+                            const container = this.$el.querySelector('.zzRoad')
+                            container.scrollTo(container.scrollWidth, 0)
 
-							const container2 = this.$el.querySelector('.dlRoad')
-							console.log(container2.scrollWidth)
-							container.scrollTo(container2.scrollWidth, 0)
+                            const container2 = this.$el.querySelector('.dlRoad')
+                            console.log(container2.scrollWidth)
+                            container.scrollTo(container2.scrollWidth, 0)
 
-							const container3 = this.$el.querySelector('.dyzRoad')
-							container.scrollTo(container3.scrollWidth, 0)
+                            const container3 = this.$el.querySelector('.dyzRoad')
+                            container.scrollTo(container3.scrollWidth, 0)
 
-							const container4 = this.$el.querySelector('.xlRoad')
-							container.scrollTo(container4.scrollWidth, 0)
+                            const container4 = this.$el.querySelector('.xlRoad')
+                            container.scrollTo(container4.scrollWidth, 0)
 
-							const container5 = this.$el.querySelector('.yyRoad')
-							container.scrollTo(container5.scrollWidth, 0)
-						})
-					},
-					readyZZ: function (inputList) {
-						var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png", "庄":"zhuang.png","闲":"xian.png","庄庄对":"zhuang_a1.png", "庄闲对":"zhuang_b2.png", "庄庄对闲对":"zhuang_a1b2.png","闲庄对":"xian_a1.png","闲闲对":"xian_b2.png", "闲庄对闲对":"xian_a1b2.png", "和庄对":"he_a1.png", "和闲对":"he_b2.png", "和庄对闲对":"he_a1b2.png"}
-						var nlist = []
-						for (var i=0;i<inputList.length;i++) {	
-							var item = inputList[i];
-							if (item == void 0) {
-								item["img"] = "";
-								nlist.push(item)
-							}else if (mm[item.winner] != void 0) {
-								var img = mm[item.winner];
-								item["img"] = img
-								nlist.push(item)
-							}	
-						}
-						this.zzList = nlist
-					},
-					cc: function (obj) {
-						let tmp = JSON.stringify(obj);
-						let result = JSON.parse(tmp)
-						return result;
-					},
-					readyDL: function (tempList) {
-						var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
-						var nlist = [];
-						for (var i=0;i<tempList.length;i++) {
-							nlist.push(...tempList[i])
-						}
-						for (var i=0;i<nlist.length;i++) {
-							var item = nlist[i];
-							if (item != void 0) {
-								if (item.winner === "龙") {
-									item["img"] = "hong.png"
-								}
-								if (item.winner === "虎") {
-									item["img"] = "lan.png"
-								}
-							}
-						}
-						this.dlList = nlist;
-					},
-					readyDYZ: function (tempList) {
-						var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
-						var nlist = [];
-						for (var i=0;i<tempList.length;i++) {
-							nlist.push(...tempList[i])
-						}
-						for (var i=0;i<nlist.length;i++) {
-							var item = nlist[i];
-							if (item != void 0) {
-								if (item.winner === "龙") {
-									item["img"] = "hong.png"
-								}
-								if (item.winner === "虎") {
-									item["img"] = "lan.png"
-								}
-							}
-						}
-						this.dyzList = nlist
-					},
-					readyXL: function (tempList) {
-						var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
-						var nlist = [];
-						for (var i=0;i<tempList.length;i++) {
-							nlist.push(...tempList[i])
-						}
-						for (var i=0;i<nlist.length;i++) {
-							var item = nlist[i];
-							if (item != void 0) {
-								if (item.winner === "龙") {
-									item["img"] = "hongs.png"
-								}
-								if (item.winner === "虎") {
-									item["img"] = "lans.png"
-								}
-							}
-						}
-						this.xlList = nlist
-					},
-					readyYY: function (tempList) {
-						var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
-						var nlist = [];
-						for (var i=0;i<tempList.length;i++) {
-							nlist.push(...tempList[i])
-						}
-						for (var i=0;i<nlist.length;i++) {
-							var item = nlist[i];
-							if (item != void 0) {
-								if (item.winner === "龙") {
-									item["img"] = "hong_xie.png"
-								}
-								if (item.winner === "虎") {
-									item["img"] = "lan_xie.png"
-								}
-							}
-						}
-						this.yyList = nlist
-					}
-				},
-			})
-		</script>
+                            const container5 = this.$el.querySelector('.yyRoad')
+                            container.scrollTo(container5.scrollWidth, 0)
+                        })
+                    },
+                    readyZZ: function (inputList) {
+                        var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png", "庄":"zhuang.png","闲":"xian.png","庄庄对":"zhuang_a1.png", "庄闲对":"zhuang_b2.png", "庄庄对闲对":"zhuang_a1b2.png","闲庄对":"xian_a1.png","闲闲对":"xian_b2.png", "闲庄对闲对":"xian_a1b2.png", "和庄对":"he_a1.png", "和闲对":"he_b2.png", "和庄对闲对":"he_a1b2.png"}
+                        var nlist = []
+                        for (var i=0;i<inputList.length;i++) {
+                            var item = inputList[i];
+                            if (item == void 0) {
+                                item["img"] = "";
+                                nlist.push(item)
+                            }else {
+                                var img = mm[item.winner];
+                                if (img != void 0) {
+                                    item["img"] = this.iph+img
+                                    nlist.push(item)
+                                }
+                                
+                            }
+                        }
+                        this.zzList = nlist
+                    },
+                    cc: function (obj) {
+                        let tmp = JSON.stringify(obj);
+                        let result = JSON.parse(tmp)
+                        return result;
+                    },
+                    readyDL: function (tempList) {
+                        var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
+                        var nlist = [];
+                        for (var i=0;i<tempList.length;i++) {
+                            nlist.push(...tempList[i])
+                        }
+                        for (var i=0;i<nlist.length;i++) {
+                            var item = nlist[i];
+                            if (item != void 0) {
+                                if (item.winner === "龙") {
+                                    item["img"] = this.iph+"hong.png"
+                                }
+                                if (item.winner === "虎") {
+                                    item["img"] = this.iph+"lan.png"
+                                }
+                            }
+                        }
+                        this.dlList = nlist;
+                    },
+                    readyDYZ: function (tempList) {
+                        var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
+                        var nlist = [];
+                        for (var i=0;i<tempList.length;i++) {
+                            nlist.push(...tempList[i])
+                        }
+                        for (var i=0;i<nlist.length;i++) {
+                            var item = nlist[i];
+                            if (item != void 0) {
+                                if (item.winner === "龙") {
+                                    item["img"] = this.iph+"hong.png"
+                                }
+                                if (item.winner === "虎") {
+                                    item["img"] = this.iph+"lan.png"
+                                }
+                            }
+                        }
+                        this.dyzList = nlist
+                    },
+                    readyXL: function (tempList) {
+                        var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
+                        var nlist = [];
+                        for (var i=0;i<tempList.length;i++) {
+                            nlist.push(...tempList[i])
+                        }
+                        for (var i=0;i<nlist.length;i++) {
+                            var item = nlist[i];
+                            if (item != void 0) {
+                                if (item.winner === "龙") {
+                                    item["img"] = this.iph+"hongs.png"
+                                }
+                                if (item.winner === "虎") {
+                                    item["img"] = this.iph+"lans.png"
+                                }
+                            }
+                        }
+                        this.xlList = nlist
+                    },
+                    readyYY: function (tempList) {
+                        var mm = {"龙":"long.png", "虎":"hu.png", "和":"he.png"}
+                        var nlist = [];
+                        for (var i=0;i<tempList.length;i++) {
+                            nlist.push(...tempList[i])
+                        }
+                        for (var i=0;i<nlist.length;i++) {
+                            var item = nlist[i];
+                            if (item != void 0) {
+                                if (item.winner === "龙") {
+                                    item["img"] = this.iph+"hong_xie.png"
+                                }
+                                if (item.winner === "虎") {
+                                    item["img"] = this.iph+"lan_xie.png"
+                                }
+                            }
+                        }
+                        this.yyList = nlist
+                    }
+                },
+            })
+        </script>
+        <script>
+            function drawGrid(row, column, size, x, y) {
+                var canvas = document.getElementById("mycanvas");
+                var context = canvas.getContext("2d");
+                context.strokeStyle = "#3c3c3c";
+                context.lineWidth = 0.5;
+                context.beginPath();
 
-	</body>
+                for(var i = 0;i<row+1;i++) {
+                    context.moveTo(i*size+0.5+x,y);
+                    context.lineTo(i*size+0.5+x,size*column+y);
+                }
+                for(var i = 0;i<column+1;i++){
+                    context.moveTo(x,i*size+0.5+y);
+                    context.lineTo(row*size+1+x,i*size+0.5+y);
+                }
+                context.stroke();
+            }
+
+            drawGrid(4, 6, 20, 0, 0);
+            drawGrid(20, 6, 10, 83, 0);
+            drawGrid(20, 3, 10, 83, 60);
+            drawGrid(10, 3, 10, 83, 90);
+            drawGrid(10, 3, 10, 183, 90);
+        </script>
+    </body>
 </html>
