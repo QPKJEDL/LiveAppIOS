@@ -9,11 +9,13 @@
 #import "GameHistoryViewController.h"
 #import "DateItemView.h"
 @interface GameHistoryViewController ()<INetData, ABUIListViewDelegate>
-@property (nonatomic, strong) ABUIListView *listView;
+@property (nonatomic, strong) ABUIRefreshListView *listView;
 @property (nonatomic, strong) DateItemView *dateItemView;
 
 @property (nonatomic, strong) NSMutableArray *dataList;
 @property (nonatomic, assign) BOOL isPullRefresh;
+@property (nonatomic, strong) UILabel *shuyingLabel;
+@property (nonatomic, assign) NSInteger lastid;
 @end
 
 @implementation GameHistoryViewController
@@ -30,12 +32,17 @@
     [self.dateItemView.selectButton addTarget:self action:@selector(onDateItemClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.dateItemView];
     
-    self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
+    self.shuyingLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 44, SCREEN_WIDTH-30, 30)];
+    self.shuyingLabel.text = @"总输赢: 0";
+    self.shuyingLabel.textColor = [UIColor hexColor:@"666666"];
+    self.shuyingLabel.font = [UIFont PingFangSCBlod:15];
+    [self.view addSubview:self.shuyingLabel];
+    
+    
+    self.listView = [[ABUIRefreshListView alloc] initWithFrame:self.view.bounds];
     self.listView.delegate = self;
     [self.view addSubview:self.listView];
     [self.listView adapterSafeArea];
-    [self.listView setupLoadMore];
-    [self.listView setupPullRefresh];
     [self refreshData];
 }
 
@@ -43,42 +50,44 @@
     self.isPullRefresh = true;
     [self.listView resetNoMoreData];
     self.dataList = [[NSMutableArray alloc] init];
+    self.lastid = 0;
     [self refreshData];
 }
 
 - (void)refreshData {
-    if (self.dataList.count == 0) {
-        [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid":@(0),@"date":self.dateItemView.dateTitle}];
-    }else{
-        [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid": self.dataList.lastObject[@"id"],@"date":self.dateItemView.dateTitle}];
-    }
+    [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid":@(self.lastid),@"date":self.dateItemView.dateTitle}];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.listView.frame = CGRectMake(0, 44, SCREEN_WIDTH, self.view.height-44);
+    self.listView.frame = CGRectMake(0, self.shuyingLabel.bottom, SCREEN_WIDTH, self.view.height-self.shuyingLabel.bottom);
 }
 
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     NSArray *newList = obj[@"list"];
-    if (self.listView.isLoadMoreing) {
-        [self.dataList addObjectsFromArray:newList];
-    }else{
-        self.dataList = [[NSMutableArray alloc] initWithArray:newList];
+    if (newList.count > 0) {
+        self.lastid = [newList.lastObject[@"id"] intValue];
     }
-    if (self.dataList.count > 0 && newList.count == 0) {
-        [self.listView noMoreData];
-    }
-    self.isPullRefresh = false;
-    [self.listView endLoadMore];
-    [self.listView endPullRefreshing];
-    [self.listView setDataList:self.dataList css:@{
+    [self.listView setDataList:newList css:@{
         @"item.size.width":@"100%",
         @"item.size.height":@"175",
         @"item.rowSpacing":@"10",
         @"section.inset.top":@"10"
     }];
+    self.shuyingLabel.text = [NSString stringWithFormat:@"总输赢:%@", obj[@"sum"]];
+//    if (self.listView.isLoadMoreing) {
+//        [self.dataList addObjectsFromArray:newList];
+//    }else{
+//        self.dataList = [[NSMutableArray alloc] initWithArray:newList];
+//    }
+//    if (self.dataList.count > 0 && newList.count == 0) {
+//        [self.listView noMoreData];
+//    }
+//    self.isPullRefresh = false;
+//    [self.listView endLoadMore];
+//    [self.listView endPullRefreshing];
+
 }
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
@@ -90,6 +99,7 @@
 }
 
 - (void)listViewOnHeaderPullRefresh:(ABUIListView *)listView {
-    [self fetchPostUri:URI_ACCOUNT_BET_HISTORY params:@{@"lastid":@(0),@"date":self.dateItemView.dateTitle}];
+    self.lastid = 0;
+    [self refreshData];
 }
 @end

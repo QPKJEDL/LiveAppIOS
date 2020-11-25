@@ -421,7 +421,8 @@
             dic[@"native_id"] = @"gamehistoryitem";
             return dic;
         }];
-        return @{@"list":list};
+        NSString *sum = [NSString stringWithFormat:@"%.2f", [response[@"sum"] floatValue]/100];
+        return @{@"list":list, @"sum":sum};
     }
     if ([request.uri isEqualToString:URI_ACCOUNT_DRAWPER]) {
         

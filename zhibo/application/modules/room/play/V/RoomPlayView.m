@@ -85,7 +85,6 @@
 }
 
 - (void)resume {
-    [self.player pause];
     [self.player resume];
 }
 
