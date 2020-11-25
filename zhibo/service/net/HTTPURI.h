@@ -54,6 +54,9 @@
 
 #define URI_ACCOUNT_INFO_UPDATE_AVATAR      @"/account/info/update/avatar"
 #define URI_SMS_SEND                        @"/account/DtSend"
+
+#define URI_ACCOUNT_NOTICE                      @"/account/system/notice"
+
 #pragma mark ------ zfnotice -------
 #define URI_ZFNOTICE_KEFU                   @"/zfnotice/kefu"
 
@@ -123,6 +126,7 @@
 
 #pragma mark ------ shixun -------
 #define URI_GAME_LOGIN                   @"/game/login"
+
 
 
 #pragma mark ------ channel for mq ------

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)applicationDidEnterBackground;
 
 - (void)applicationDidBecomeActive;
+
 @end
 
 NS_ASSUME_NONNULL_END

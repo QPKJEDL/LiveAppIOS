@@ -80,9 +80,12 @@
 //    [self.present requestRoomInfo];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self.playView viewWillAppear];
+    [self.gameManager resume];
+    [self.playView resume];
+    [self.roomManager resume];
 }
 
 
@@ -96,6 +99,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.playView viewDisAppear];
+    
+    [self.gameManager pause];
+    [self.playView pause];
+    [self.roomManager pause];
 }
 
 - (void)roomPlayControl:(RoomPlayControl *)roomPlayControl closeWithData:(NSDictionary *)data {

@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.isVisableNavigationBar = false;
     self.pushView = [[RoomPushView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.pushView];
 
@@ -107,6 +107,23 @@
     [self.gameManager enterRoomId:[RoomContext shared].roomid];
     [self.roomManager enterRoomId:[RoomContext shared].roomid];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.gameManager resume];
+    [self.roomManager resume];
+    [self.pushView resume];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.gameManager pause];
+    [self.roomManager pause];
+    [self.pushView pause];
 }
 
 - (void)dealloc

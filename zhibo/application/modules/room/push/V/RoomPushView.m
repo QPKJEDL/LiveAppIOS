@@ -68,9 +68,11 @@
 }
 
 - (void)didBecomeActive:(NSNotification *)notification {
-    if ([[ABNet shared] isNetReachable]) {
-        [self imback];
-        [self.pusher resumePush];
+    if ([[RoomCenter shared] isFront]) {
+        if ([[ABNet shared] isNetReachable]) {
+            [self imback];
+            [self.pusher resumePush];
+        }
     }
 }
 
@@ -149,4 +151,12 @@
     NSLog(@"%@ dealloc", [[self class] description]);
 }
 
+
+- (void)pause {
+    [self willResignActive:nil];
+}
+
+- (void)resume {
+    [self didBecomeActive:nil];
+}
 @end

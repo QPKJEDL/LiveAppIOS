@@ -18,4 +18,20 @@
     return instance;
 }
 
+- (void)pause {
+    
+}
+
+- (void)resume {
+    
+}
+
+- (BOOL)isFront {
+    NSString *topDes = [[[[UIApplication sharedApplication] topViewController] class] description];
+    if ([topDes isEqualToString:@"RoomPushViewController"] || [topDes isEqualToString:@"RoomPlayViewController"]) {
+        return true;
+    }
+    return false;
+}
+
 @end

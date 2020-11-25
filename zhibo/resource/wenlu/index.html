@@ -108,7 +108,7 @@
                     ready: function (data) {
                         var jsonData = JSON.parse(data);
                         this.inputList = jsonData["data"];
-                        this.gameid = jsonData["gameid"];
+                        this.setGameID(jsonData["gameid"]);
                         var gameid = 2;
                         if (data.indexOf("bankerPair") > 0) {
                             gameid = 1;

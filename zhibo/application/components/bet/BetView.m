@@ -16,7 +16,7 @@
 @property (nonatomic, strong) BetOptionsView *optionsView;
 @property (nonatomic, strong) UIButton *okButton;
 @property (nonatomic, strong) UIButton *cancelButton;
-@property (nonatomic, strong) UILabel *tipLabel;
+@property (nonatomic, strong) UIImageView *balanceImageView;
 @property (nonatomic, strong) UILabel *balanceLabel;
 @property (nonatomic, strong) NSArray *coins;
 @property (nonatomic, strong) NSArray *options;
@@ -29,6 +29,8 @@
 @property (nonatomic, strong)NSString *tipStr;
 
 @property (nonatomic, assign) BOOL isBetting;
+@property (nonatomic, strong) UIImageView *coinNoticeImageView;
+@property (nonatomic, strong) UIView *actionsView;
 @end
 
 @implementation BetView
@@ -46,6 +48,11 @@
         self.coinsView = [[BetCoinsView alloc] initWithFrame:CGRectMake(10, 2, SCREEN_WIDTH-20, 55)];
         self.coinsView.delegate = self;
         [self.mainView addSubview:self.coinsView];
+        
+        self.coinNoticeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.coinsView.width-35, (55-35)/2, 35, 35)];
+        self.coinNoticeImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.coinNoticeImageView setImage:[UIImage imageNamed:@"xiangzhoutu"]];
+        [self.coinsView addSubview:self.coinNoticeImageView];
         
         self.optionsView = [[BetOptionsView alloc] initWithFrame:CGRectMake(10, self.coinsView.bottom, SCREEN_WIDTH-70, 100)];
         self.optionsView.delegate = self;
@@ -82,49 +89,79 @@
         self.cancelButton.layer.shadowOpacity = 1;
         self.cancelButton.layer.shadowRadius = 0;
         
-        
-        self.tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 24)];
-        self.tipLabel.backgroundColor = [[UIColor hexColor:@"#3C3C3C"] colorWithAlphaComponent:0.6];
-        self.tipLabel.textAlignment = NSTextAlignmentCenter;
-        [self.tipLabel setTextColor:[UIColor whiteColor]];
-        self.tipLabel.font = [UIFont systemFontOfSize:9];
-        self.tipLabel.layer.cornerRadius = 24/2;
-        self.tipLabel.numberOfLines = 2;
-        self.tipLabel.clipsToBounds = true;
-        [self addSubview:self.tipLabel];
-        self.tipLabel.centerY = 22;
-        [self.tipLabel addTarget:self action:@selector(onTipAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tipLabel.right+2, 0, 60, 24)];
-        self.balanceLabel.backgroundColor = [[UIColor hexColor:@"#3C3C3C"] colorWithAlphaComponent:0.6];
-        self.balanceLabel.textAlignment = NSTextAlignmentCenter;
-        [self.balanceLabel setTextColor:[UIColor whiteColor]];
-        self.balanceLabel.font = [UIFont systemFontOfSize:9];
-        self.balanceLabel.layer.cornerRadius = 24/2;
-        self.balanceLabel.numberOfLines = 2;
-        self.balanceLabel.clipsToBounds = true;
-        [self addSubview:self.balanceLabel];
-        self.balanceLabel.centerY = 22;
-        
-        
-        self.wenluButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-        self.wenluButton.backgroundColor = self.tipLabel.backgroundColor;
-        self.wenluButton.layer.cornerRadius = 32/2;
-        self.wenluButton.clipsToBounds = true;
-        [self.wenluButton setImage:[UIImage imageNamed:@"wenlu"] forState:UIControlStateNormal];
-        [self addSubview:self.wenluButton];
-        [self.wenluButton addTarget:self action:@selector(onWenLuButton) forControlEvents:UIControlEventTouchUpInside];
-        self.wenluButton.centerY = 22;
-        self.wenluButton.left = self.balanceLabel.right+10;
-    
+        self.actionsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        [self addSubview:self.actionsView];
+        [self loadActionsView];
         
         self.enabled = false;
-//        [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_BALANCE] autoAck:true];
         
     }
     return self;
 }
 
+- (void)loadActionsView {
+    CGFloat x = 15;
+    NSArray *titleArray = @[@"限红", @"充值", @"提现", @"下注记录", @"余额\n123", @"问路"];
+    NSArray *imgArray = @[@"xianhongtu", @"chongzgzhitu", @"tixiantu", @"xiazhujilutu", @"yuetu", @"wenlutu"];
+    for (int i=0; i<titleArray.count;i++) {
+        UIImage *im = [UIImage imageNamed:imgArray[i]];
+        CGFloat imHeight = im.size.height+6;
+        if (i == 4) {
+            self.balanceImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, 0, 50, imHeight)];
+            [self.balanceImageView setImage:im];
+            [self.actionsView addSubview:self.balanceImageView];
+            self.balanceImageView.centerY = self.actionsView.height/2;
+            
+            self.balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, 50, imHeight)];
+            self.balanceLabel.textAlignment = NSTextAlignmentCenter;
+            [self.balanceLabel setTextColor:[UIColor whiteColor]];
+            self.balanceLabel.font = [UIFont systemFontOfSize:7];
+            self.balanceLabel.numberOfLines = 2;
+            [self.actionsView addSubview:self.balanceLabel];
+
+            self.balanceLabel.centerY = self.actionsView.height/2;
+            x = self.balanceLabel.right+5;
+        }else{
+            CGSize s = [titleArray[i] sizeWithAttributes:@{NSFontAttributeName:[UIFont PingFangSC:10]}];
+            
+            QMUIButton *btn = [[QMUIButton alloc] initWithFrame:CGRectMake(x, 0, s.width+20, imHeight)];
+            [btn setBackgroundImage:im forState:UIControlStateNormal];
+            [btn setTitle:titleArray[i] forState:UIControlStateNormal];
+            [self.actionsView addSubview:btn];
+            btn.tag = i;
+            btn.titleLabel.font = [UIFont PingFangSC:10];
+            [btn addTarget:self action:@selector(onBtn:) forControlEvents:UIControlEventTouchUpInside];
+            btn.centerY = self.actionsView.height/2;
+            
+            x = btn.right+5;
+            if (i == 5) {
+                self.wenluButton = btn;
+            }
+        }
+
+    }
+}
+
+- (void)onBtn:(QMUIButton *)btn {
+    if (btn.tag == 0) {
+        [self onTipAction];
+    }
+    if (btn.tag == 1) {
+        [NSRouter gotoReCharge];
+        [[ABUIPopUp shared] remove];
+    }
+    if (btn.tag == 2) {
+        [NSRouter gotoCashOut];
+        [[ABUIPopUp shared] remove];
+    }
+    if (btn.tag == 3) {
+        [NSRouter gotoGameHistroy];
+        [[ABUIPopUp shared] remove];
+    }
+    if (btn.tag == 5) {
+        [self onWenLuButton];
+    }
+}
 
 - (void)onTipAction {
     QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleCancel handler:NULL];
@@ -216,7 +253,6 @@
     self.coins = coins;
     self.options = options;
     self.sounds = sounds;
-    [self.tipLabel setText:@"限红 >"];
     
     [self _reload];
     
@@ -231,12 +267,13 @@
 - (void)setBalance:(CGFloat)balnace {
     self.bb = balnace;
     
-    CGSize s = [[NSString stringWithFormat:@"%.2f", balnace] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:9]}];
+    CGSize s = [[NSString stringWithFormat:@"%.2f", balnace] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:7]}];
     
     self.balanceLabel.text = [NSString stringWithFormat:@"余额\n%.2f", balnace];
-    self.balanceLabel.width = MAX(60, s.width+10);
+    self.balanceLabel.width = MAX(50, s.width+20);
+    self.balanceImageView.width = self.balanceLabel.width;
     
-    self.wenluButton.left = self.balanceLabel.right+10;
+    self.wenluButton.left = self.balanceLabel.right+5;
 }
 
 //重置未下注选择

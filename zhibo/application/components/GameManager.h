@@ -57,6 +57,9 @@ typedef enum : NSUInteger {
 
 - (void)doBet:(NSDictionary *)data;
 - (void)doBetCancel;
+
+- (void)pause;
+- (void)resume;
 @end
 
 NS_ASSUME_NONNULL_END

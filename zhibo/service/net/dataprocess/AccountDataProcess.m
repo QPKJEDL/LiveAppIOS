@@ -117,6 +117,9 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_HELP]) {
         request.realUri = @"/kefu_url";
     }
+    if ([request.uri isEqualToString:URI_ACCOUNT_NOTICE]) {
+        request.realUri = @"/notice_list";
+    }
     return request;
 }
 
@@ -125,7 +128,7 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_BALANCE_CASHOUT]) {
         return false;
     }
-    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT, URI_ACCOUNT_INFO, URI_ACCOUNT_SX_BANLANCE];
+    NSArray *noLoadings = @[URI_ROOM_SEND_GIFT, URI_ACCOUNT_INFO, URI_ACCOUNT_SX_BANLANCE, URI_ACCOUNT_NOTICE];
     
     if ([noLoadings containsObject:request.uri] == false) {
          [ABUITips showLoading];
@@ -435,6 +438,13 @@
     if ([request.uri isEqualToString:URI_ACCOUNT_HELP]) {
         NSString *kefu_url = [response stringValueForKey:@"kefu_url"];
         return @{@"address":kefu_url};
+    }
+    if ([request.uri isEqualToString:URI_ACCOUNT_NOTICE]) {
+        NSArray *list = response[@"list"];
+        if (list.count > 0) {
+            return @{@"content":list[0][@"content"]};
+        }
+        return @{@"content":@"欢迎来到环球直播"};
     }
     return response;
 }

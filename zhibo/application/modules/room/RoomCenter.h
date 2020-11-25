@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RoomCenter : NSObject
 + (RoomCenter *)shared;
+- (void)pause;
+- (void)resume;
+
+- (BOOL)isFront;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -255,6 +255,14 @@
     }
 }
 
+- (void)pause {
+    [self.socket stopRoom];
+}
+
+- (void)resume {
+    [self.socket startRoomWithID:RC.roomManager.roomid];
+}
+
 - (void)dealloc
 {
     NSLog(@"gamemanager dealloc");

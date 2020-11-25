@@ -214,7 +214,7 @@
         
     } showBlock:^{
         [UIView animateWithDuration:0.1 animations:^{
-            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10-164;
+            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10-164-30;
         }];
     }];
 }
@@ -232,7 +232,7 @@
         
     } showBlock:^{
         [UIView animateWithDuration:0.1 animations:^{
-            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10-164;
+            weakSelf.plateView.top = weakSelf.height-TI_HEIGHT-44-66-10-164-30;
         }];
     }];
 }

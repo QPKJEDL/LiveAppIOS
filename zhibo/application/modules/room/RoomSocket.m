@@ -72,6 +72,9 @@
 
 - (void)applicationDidBecomeActive {
     NSLog(@"applicationDidBecomeActive");
+    if ([[RoomCenter shared] isFront] == false) {
+        return;
+    }
     [self startRoomWithID:self.roomID];
      [UIApplication sharedApplication].idleTimerDisabled = true;
 }
@@ -135,6 +138,7 @@
     m.content = message;
     [self.imService sendRoomMessage:m];
 }
+
 
 - (void)dealloc
 {

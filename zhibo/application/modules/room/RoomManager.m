@@ -127,5 +127,13 @@
     [alertController addAction:action2];
     [alertController showWithAnimated:YES];
 }
+
+- (void)pause {
+    [self.roomSocket stopRoom];
+}
+
+- (void)resume {
+    [self.roomSocket startRoomWithID:RC.roomManager.roomid];
+}
 @end
 

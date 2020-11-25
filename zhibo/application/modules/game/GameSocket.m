@@ -58,6 +58,9 @@
 }
 
 - (void)applicationDidBecomeActive {
+    if ([[RoomCenter shared] isFront] == false) {
+        return;
+    }
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     if ([[ABNet shared] isNetReachable]) {
         [self startRoomWithID:self.roomID];

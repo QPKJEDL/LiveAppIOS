@@ -62,6 +62,9 @@
 
 - (void)applicationDidBecomeActive {
     NSLog(@"applicationDidBecomeActive");
+    if ([[RoomCenter shared] isFront] == false) {
+        return;
+    }
     [self.player resume];
 }
 

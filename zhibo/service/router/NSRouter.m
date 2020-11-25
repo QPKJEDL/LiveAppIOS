@@ -59,6 +59,10 @@
     }
     else if (from.parent.navigationController != nil) {
         [from.parent.navigationController pushViewController:to animated:true];
+    }else{
+//        BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+//        [nav setNavigationBarHidden:true];
+//        [[[UIApplication sharedApplication] topViewController] presentViewController:nav animated:true completion:nil];
     }
 }
 
@@ -176,7 +180,10 @@
             [alertController showWithAnimated:YES];
         }else{
             RoomPushViewController *vc = [[RoomPushViewController alloc] init];
-            [[[UIApplication sharedApplication] topViewController] presentViewController:vc animated:true completion:nil];
+            BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+            [nav setNavigationBarHidden:true];
+            [nav.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor hexColor:@"FF2828"]] forBarMetrics:UIBarMetricsDefault];
+            [[[UIApplication sharedApplication] topViewController] presentViewController:nav animated:true completion:nil];
         }
     }];
 }

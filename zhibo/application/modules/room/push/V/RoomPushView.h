@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)flip;
 - (void)push:(NSString *)address;
 - (void)stop;
+
+- (void)pause;
+- (void)resume;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,6 +10,7 @@
 #import "ADBannerView.h"
 #import "AnchorListViewController.h"
 #import "HTAsyncSocket.h"
+#import <JhtMarquee/JhtHorizontalMarquee.h>
 @interface AJXCategoryIndicatorBackgroundView: JXCategoryIndicatorBackgroundView<INetData>
 @property (nonatomic, strong) UIImageView *indicatorImageView;
 
@@ -50,6 +51,7 @@
 @property (nonatomic, strong) NSArray *titles;
 
 @property (nonatomic, strong) NSArray *bannerImgs;
+@property (nonatomic, strong) JhtHorizontalMarquee *marquee;
 @end
 
 @implementation HomeHotViewController
@@ -62,14 +64,18 @@
     self.colorView.backgroundColor = [UIColor hexColor:@"#FF2828"];
     [self.view addSubview:self.colorView];
     
-    self.whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, self.colorView.bottom, SCREEN_WIDTH, 125)];
+    self.whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, self.colorView.bottom, SCREEN_WIDTH, 125+25)];
     self.whiteView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.whiteView];
     
-    self.bannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 125)];
+    self.bannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 105)];
     self.bannerView.delegate = self;
     [self.view addSubview:self.bannerView];
 
+    self.marquee = [[JhtHorizontalMarquee alloc] initWithFrame:CGRectMake(15, self.bannerView.bottom, SCREEN_WIDTH-30, 30) singleScrollDuration:0.0];
+    self.marquee.font = [UIFont PingFangSC:14];
+    self.marquee.text = @"欢迎来到环球直播~";
+    [self.view addSubview:self.marquee];
     
     self.categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, self.whiteView.bottom-44, SCREEN_WIDTH, 44)];
     self.categoryView.backgroundColor = UIColor.whiteColor;
@@ -106,6 +112,11 @@
 //[socket sendDataWithType:<#(int)#> withDic:<#(nonnull NSMutableDictionary *)#>]
 //    [socket reciveData:^(NSString  *data, NSString *type) {
 //    }];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self fetchPostUri:URI_ACCOUNT_NOTICE params:nil];
+    [self.marquee marqueeOfSettingWithState:MarqueeStart_H];
 }
 
 - (void)adBannerView:(ADBannerView *)adBannerView didSelectIndex:(NSInteger)index {
@@ -167,7 +178,10 @@
 
 
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
-    if ([req.uri isEqualToString:URI_BANNER_LIST]) {
+    if ([req.uri isEqualToString:URI_ACCOUNT_NOTICE]) {
+        self.marquee.text = obj[@"content"];
+    }
+    else if ([req.uri isEqualToString:URI_BANNER_LIST]) {
         self.bannerImgs = obj[@"list"];
         NSMutableArray *urls = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in self.bannerImgs) {
@@ -197,7 +211,10 @@
 
 - (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
     [ABUITips hideLoading];
-    [self showEmptyViewWithImage:[UIImage imageNamed:@"wuwang"] text:@"网络无法连接" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(reloadData)];
+    if ([req.uri isEqualToString:URI_CHANNEL_LIST]) {
+        [self showEmptyViewWithImage:[UIImage imageNamed:@"wuwang"] text:@"网络无法连接" detailText:nil buttonTitle:@"点击刷新" buttonAction:@selector(reloadData)];
+    }
+
 }
 
 @end

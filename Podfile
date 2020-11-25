@@ -29,4 +29,5 @@ pod 'JSONModel'
 pod 'QCloudCOSXML'
 pod 'CocoaLumberjack'
 pod 'Bugly'
+pod 'JhtMarquee'
 end
