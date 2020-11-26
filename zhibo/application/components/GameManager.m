@@ -260,7 +260,7 @@
 }
 
 - (void)resume {
-    [self.socket startRoomWithID:RC.roomManager.roomid];
+    [self enterRoomId:RC.roomManager.roomid];
 }
 
 - (void)dealloc

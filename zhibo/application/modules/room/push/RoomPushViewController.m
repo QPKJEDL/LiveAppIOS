@@ -111,11 +111,11 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self.gameManager resume];
-    [self.roomManager resume];
-    [self.pushView resume];
-    
+    if (self.roomControl != nil) {
+        [self.gameManager resume];
+        [self.roomManager resume];
+        [self.pushView resume];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
