@@ -28,12 +28,12 @@
         self.beautyLevel = 0.2;
         
         // 注册应用监听事件
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-        [center addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-        
+//        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//        [center addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+//        [center addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
         
         [[ABMQ shared] subscribe:self channel:CHANNEL_NET_REACHABLE autoAck:true];
+        [[Service shared].appEventMQ subscribe:self channel:CHANNEL_APP_STATUS autoAck:true];
     }
     return self;
 }
@@ -50,6 +50,13 @@
 - (void)abmq:(ABMQ *)abmq onReceiveMessage:(id)message channel:(NSString *)channel {
     if ([channel isEqualToString:CHANNEL_NET_REACHABLE]) {
         [self didBecomeActive:nil];
+    }
+    if ([channel isEqualToString:CHANNEL_APP_STATUS]) {
+        if ([message isEqualToString:@"resign"]) {
+            [self willResignActive:nil];
+        }else if ([message isEqualToString:@"active"]){
+            [self didBecomeActive:nil];
+        }
     }
 }
 

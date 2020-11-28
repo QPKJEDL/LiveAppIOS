@@ -42,6 +42,8 @@
 
 @property (nonatomic, strong) NSMutableArray *wenluList;
 @property (nonatomic, strong) UIView *wenluActionView;
+
+@property (nonatomic, strong) NSString *webPath;
 @end
 
 @implementation RoomControl
@@ -133,15 +135,14 @@
         self.plateView.delegate = self;
         [self.plateView watch];
         [self.plateView setHidden:true];
-        
         [self loadWenLu];
-        
         RC.briefView = self.briefView;
         
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
         
         [self fetchPostUri:URI_ROOM_SYSTEM params:nil];
         
+
     }
     return self;
 }
@@ -155,17 +156,25 @@
 }
 
 - (void)loadWenLu {
-    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 180)];
-    [self.wenluWebView.webView setOpaque:false];
-    self.wenluWebView.backgroundColor = [UIColor clearColor];
-    self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
-    self.wenluWebView.bounces = false;
-    self.wenluWebView.isShowProgress = false;
-    [self addSubview:self.wenluWebView];
-//    [self.wenluWebView loadWebWithPath:@"http://192.168.0.101/wenlu/index2.html"];
-    [self.wenluWebView loadWebWithPath:@"index.html"];
-    [self.wenluWebView setHidden:true];
-    self.wenluWebView.top = self.briefView.bottom+10;
+    if (self.wenluWebView == nil) {
+        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 180)];
+        [self.wenluWebView.webView setOpaque:false];
+//        self.wenluWebView.adapterSize = true;
+        self.wenluWebView.backgroundColor = [UIColor clearColor];
+        self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
+        self.wenluWebView.bounces = false;
+        self.wenluWebView.isShowProgress = false;
+        [self addSubview:self.wenluWebView];
+        self.wenluWebView.top = self.briefView.bottom+10;
+    }
+    if ([self.webPath isEqualToString:self.wenluWebView.webPath] == false) {
+        [self.wenluWebView loadWebWithPath:self.webPath];
+        [self.wenluWebView setHidden:false];
+    }
+    
+//    [self.wenluWebView loadWebWithPath:@"index.html"];
+//    [self.wenluWebView setHidden:true];
+
 }
 
 - (void)loadWenLuActionView {
@@ -176,7 +185,6 @@
 
 - (void)receiveWenLu:(NSArray *)list {
     NSLog(@"receiveWenLu");
-    self.wenluList = [[NSMutableArray alloc] initWithArray:list];
     dispatch_main_async_safe((^{
         NSDictionary *data = @{@"data":list, @"gameid":@(RC.gameManager.game_id), @"boot_num":@(RC.gameManager.boot_num), @"pave_num":@(RC.gameManager.pave_num)};
         NSString *jsonString = [data toJSONString];
@@ -339,7 +347,6 @@
         [RoomContext shared].gameManager.desk_id = [message[@"DeskId"] intValue];
         [[RoomContext shared].gameManager _refreshDeskInfo];
         [self.plateView stop];
-        [RC.gameManager.control.wenluWebView setHidden:true];
     }
     else if (lmd == 10) {
         [self liveclose];
@@ -505,9 +512,13 @@
 //        [self onPlate2];
         [self refreshScene];
         [self.plateView setHidden:false];
-        if ([RoomContext shared].gameManager.game_id == 1 || [RoomContext shared].gameManager.game_id == 2) {
-            [self.wenluWebView setHidden:false];
+        
+        if (RC.gameManager.game_id == 1 || RC.gameManager.game_id == 2) {
+            self.webPath = @"index.html";
+        }else{
+            self.webPath = @"index2.html";
         }
+        [self loadWenLu];
         
     }
     if ([channel isEqualToString:CHANNEL_ROOM_INFO]) {

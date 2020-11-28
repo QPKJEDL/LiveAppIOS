@@ -69,9 +69,9 @@
         @"tip":self.tipStr,
     }];
     
-    if (self.game_id == 1 || self.game_id == 2) {
+//    if (self.game_id == 1 || self.game_id == 2) {
         [self fetchPostUri:URI_GAME_RESULT_LIST params:@{@"game_id":@(self.game_id), @"boot_num":@(self.boot_num), @"desk_id":@(self.desk_id)}];
-    }
+//    }
 }
 
 - (void)refreshwenlu {
@@ -131,9 +131,7 @@
         [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
     }
     if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
-        if (self.game_id == 1 || self.game_id == 2) {
-            [RC.gameManager.control receiveWenLu:obj[@"list"]];
-        }
+        [RC.gameManager.control receiveWenLu:obj[@"list"]];
     }
 }
 

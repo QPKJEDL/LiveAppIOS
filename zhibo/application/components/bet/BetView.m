@@ -256,11 +256,6 @@
     
     [self _reload];
     
-    [self.wenluButton setHidden:true];
-    if (RC.gameManager.game_id == 1 || RC.gameManager.game_id == 2) {
-        [self.wenluButton setHidden:false];
-    }
-    
     [[RoomContext shared].gameManager refreshBalance];
 }
 
