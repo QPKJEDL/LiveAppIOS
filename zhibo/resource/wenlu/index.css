@@ -133,6 +133,7 @@
     color: white;
     height: 25px;
     line-height: 25px;
+    border-radius: 2px;
 }
 .barItem .sub {
     margin-right: 2px;
@@ -186,9 +187,10 @@
     background-color: rgba(0,0, 0, 0.5);
     display: inline-block;
     color: white;
-    padding: 0px 5px;
+    padding: 0px 3px;
     margin-right: 1px;
     box-sizing: border-box;
     height: 20px;
     line-height: 20px;
+    border-radius: 2px;
 }

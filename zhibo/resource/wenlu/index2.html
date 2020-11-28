@@ -1,162 +1,180 @@
 <html>
-	<head>
-		<meta http-equiv='cache-control' content='no-cache'>
-		<meta charset="UTF-8"></meta>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
-		<link rel="stylesheet" href="index2.css" type="text/css"></link>
-	</head>
-	<body>
-		<div id="app" @touchstart="subtouchStart($event,index)">
-			<div class="contentWrapper clearfix" id="contentWrapper">
-				<div class="road" :style="{height:roadHeight,width:roadWidth}">
-					<div class="item" v-for="item in itemList" :style="{height:itemHeight,lineHeight:itemHeight}">
-						<div class="itemWrapper">
-							<div class="a" v-if="item.win.length==0" :style="{color:item.color, fontSize:item.fontsize, backgroundColor:item.bgcolor}">
-								{{ item.title }}
-							</div>
-							<div class="b" v-if="item.win.length>0" :style="{color:item.color, fontSize:item.fontsize, backgroundColor:item.bgcolor}">
-								<div class="title" :style="{height:halfItemHeight, lineHeight:halfItemHeight}">{{item.title}}</div>
-								<div class="win" :style="{backgroundColor:item.color, height:halfItemHeight, lineHeight:halfItemHeight}">win</div>
-							</div>
-						</div>
+    <head>
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+        <link rel="stylesheet" href="index2.css" type="text/css"></link>
+    </head>
+    <body>
+        <div id="app" @touchstart="subtouchStart($event,index)">
+            <div class="contentWrapper clearfix" id="contentWrapper">
+                <div class="road" :style="{height:roadHeight,width:roadWidth}">
+                    <div class="item" v-for="item in itemList" :style="{height:itemHeight,lineHeight:itemHeight}">
+                        <div class="itemWrapper">
+                            <div class="a" v-if="item.win.length==0" :style="{color:item.color, fontSize:item.fontsize, backgroundColor:item.bgcolor}">
+                                {{ item.title }}
+                            </div>
+                            <div class="b" v-if="item.win.length>0" :style="{color:item.color, fontSize:item.fontsize, backgroundColor:item.bgcolor}">
+                                <div class="title" :style="{height:halfItemHeight, lineHeight:halfItemHeight}">{{item.title}}</div>
+                                <div class="win" :style="{backgroundColor:item.color, height:halfItemHeight, lineHeight:halfItemHeight}">win</div>
+                            </div>
+                        </div>
 
-					</div>
-				</div>
-			</div>
-			<div class="pv">
-				<span>靴次 {{boot_num}}</span>
-				<span>铺次 {{pave_num}}</span>
-			</div>
-		</div>
-		<script src="vue.min.js"></script>
-		<script>
-			var app = new Vue({
-				el:"#app",
-				data:{
-					itemList:[],
-					roadWidth:"244px",
-					roadHeight:"124px",
-					itemHeight:"30px",
-					halfItemHeight:"15px",
-					boot_num:0,
-					pave_num:0
-				},
-				mounted(){
-                    window.setGameResults = this.setGameResults;
-				},
-				methods: {
-					setGameResults (data) {
-						var json = JSON.parse(data)
-						this.boot_num = json["boot_num"];
-						this.pave_num = json["pave_num"];
-						var gid = json["gameid"]
-						var list = json["data"].slice(0, 5).reverse()
-						var titles = []
-						var options = []
-						if (gid == 3) {
+                    </div>
+                </div>
+            </div>
+            <div class="pv">
+                <span>靴次: {{boot_num}}</span>
+                <span>铺次: {{pave_num}}</span>
+                <span v-if="x1wincount != void 0">闲1: {{x1wincount}}</span>
+                <span v-if="x2wincount != void 0">闲2: {{x2wincount}}</span>
+                <span v-if="x3wincount != void 0">闲3: {{x3wincount}}</span>
+                <span v-if="ShunWinCount != void 0">顺门: {{ShunWinCount}}</span>
+                <span v-if="TianWinCount != void 0">天门: {{TianWinCount}}</span>
+                <span v-if="FanWinCount != void 0">反门: {{FanWinCount}}</span>
+            </div>
+        </div>
+        <script src="vue.min.js"></script>
+        <script>
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    itemList:[],
+                    roadWidth:"244px",
+                    roadHeight:"124px",
+                    itemHeight:"30px",
+                    halfItemHeight:"15px",
+                    boot_num:0,
+                    pave_num:0,
+                    x1wincount:void 0,
+                    x2wincount:void 0,
+                    x3wincount:void 0,
+                    FanWinCount:void 0,
+                    ShunWinCount:void 0,
+                    TianWinCount:void 0,
+                },
+                mounted(){
+                    window.setGameResults = this.setGameResults
+                },
+                methods: {
+                    setGameResults (data) {
+                        var json = JSON.parse(data)
+                        this.boot_num = json["boot_num"];
+                        this.pave_num = json["pave_num"];
+                        this.x1wincount = json["x1wincount"]
+                        this.x2wincount = json["x2wincount"]
+                        this.x3wincount = json["x3wincount"]
+                        this.FanWinCount = json["FanWinCount"]
+                        this.ShunWinCount = json["ShunWinCount"]
+                        this.TianWinCount = json["TianWinCount"]
+                        var gid = json["gameid"]
+                        var list = json["list"].slice(0, 5).reverse()
+                        var titles = []
+                        var options = []
+                        if (gid == 3) {
 
-							
-							var keys1 = []
-							var kesy2 = []
-							for(var i=1;i<4;i++) {
-								var key1 = "x"+i+"num";
-								var key2 = "x"+i+"result";
-								keys1.push(key1)
-								kesy2.push(key2)
-							}
-							titles = this.getTitles(["庄", "闲1", "闲2", "闲3"])
-							options = this.getOptions(list, keys1, kesy2)
-						}
-						if (gid == 4) {
-							this.halfItemHeight = "15px"
-							var keys1 = []
-							var kesy2 = []
-							for(var i=1;i<4;i++) {
-								var key1 = "x"+i+"num";
-								var key2 = "x"+i+"result";
-								keys1.push(key1)
-								kesy2.push(key2)
-							}
-							titles = this.getTitles(["庄", "闲1", "闲2", "闲3"])
-							options = this.getOptions(list, keys1, kesy2)
-						}
-						if (gid == 5) {
-							this.halfItemHeight = "15px"
-							var keys1 = ["ShunNum", "TianNum", "FanNum"]
-							var kesy2 = ["Shunresult", "Tianresult", "Fanresult"]
-							titles = this.getTitles(["庄", "顺门", "天门", "反门"])
-							options = this.getOptions(list, keys1, kesy2)
-						}
-						this.itemList = titles.concat(options)
-					},
-					getOptions(list,key1s,key2s) {
-						var resules = [];
-						for (var i=0;i<list.length;i++) {
-							var item = list[i]
-							var bankerresult = "win";
-							var r = []
-							for (var j=0;j<key1s.length;j++) {
-								var key1 = key1s[j];
-								var key2 = key2s[j];
-								var bgcolor = "dedede"
-								if (j % 2 != 0) {bgcolor = "ffffff"}
-								r.push({
-									"title":item[key1]?item[key1]:"废",
-									"win":item[key2]?item[key2]:"",
-									"color":"blue",
-									"fontsize":"12px",
-									"bgcolor":bgcolor
-								})
+                            
+                            var keys1 = []
+                            var kesy2 = []
+                            for(var i=1;i<4;i++) {
+                                var key1 = "x"+i+"num";
+                                var key2 = "x"+i+"result";
+                                keys1.push(key1)
+                                kesy2.push(key2)
+                            }
+                            titles = this.getTitles(["庄", "闲1", "闲2", "闲3"])
+                            options = this.getOptions(list, keys1, kesy2)
+                        }
+                        if (gid == 4) {
+                            this.halfItemHeight = "15px"
+                            var keys1 = []
+                            var kesy2 = []
+                            for(var i=1;i<4;i++) {
+                                var key1 = "x"+i+"num";
+                                var key2 = "x"+i+"result";
+                                keys1.push(key1)
+                                kesy2.push(key2)
+                            }
+                            titles = this.getTitles(["庄", "闲1", "闲2", "闲3"])
+                            options = this.getOptions(list, keys1, kesy2)
+                        }
+                        if (gid == 5) {
+                            this.halfItemHeight = "15px"
+                            var keys1 = ["ShunNum", "TianNum", "FanNum"]
+                            var kesy2 = ["Shunresult", "Tianresult", "Fanresult"]
+                            titles = this.getTitles(["庄", "顺门", "天门", "反门"])
+                            options = this.getOptions(list, keys1, kesy2)
+                        }
+                        this.itemList = titles.concat(options)
+                    },
+                    getOptions(list,key1s,key2s) {
+                        var resules = [];
+                        for (var i=0;i<list.length;i++) {
+                            var item = list[i]
+                            var bankerresult = "win";
+                            var r = []
+                            for (var j=0;j<key1s.length;j++) {
+                                var key1 = key1s[j];
+                                var key2 = key2s[j];
+                                var bgcolor = "dedede"
+                                if (j % 2 != 0) {bgcolor = "ffffff"}
+                                r.push({
+                                    "title":item[key1]?item[key1]:"废",
+                                    "win":item[key2]?item[key2]:"",
+                                    "color":"blue",
+                                    "fontsize":"12px",
+                                    "bgcolor":bgcolor
+                                })
 
-								if (item[key2] == "win") {
-									bankerresult = "";
-								}
-							}
-							var bankernum = void 0
-							if (item["bankernum"] != void 0) {
-								bankernum = item["bankernum"]
-							}
-							if (item["BankerNum"] != void 0) {
-								bankernum = item["BankerNum"]
-							}
-							r.unshift({
-								"title":bankernum?bankernum:"废",
-								"win":bankernum?bankerresult:"",
-								"color":"red",
-								"fontsize":"12px",
-								"bgcolor":"dedede"
-							})
+                                if (item[key2] == "win") {
+                                    bankerresult = "";
+                                }
+                            }
+                            var bankernum = void 0
+                            if (item["bankernum"] != void 0) {
+                                bankernum = item["bankernum"]
+                            }
+                            if (item["BankerNum"] != void 0) {
+                                bankernum = item["BankerNum"]
+                            }
+                            r.unshift({
+                                "title":bankernum?bankernum:"废",
+                                "win":bankernum?bankerresult:"",
+                                "color":"red",
+                                "fontsize":"12px",
+                                "bgcolor":"dedede"
+                            })
 
-							resules.push(...r)
-						}
-						return resules;
-					},
-					getTitles(titles) {
-						var resules = [];
-						for (var i=0;i<titles.length;i++) {
-							if (i == 0) {
-								resules.push({
-									"title":titles[i],
-									"win":"",
-									"color":"white",
-									"fontsize":"14px",
-									"bgcolor":"red"
-								})
-							}else {
-								resules.push({
-									"title":titles[i],
-									"win":"",
-									"color":"white",
-									"fontsize":"14px",
-									"bgcolor":"blue"
-								})
-							}	
-						}
-						return resules;
-					},
-				},
-			})
-		</script>
+                            resules.push(...r)
+                        }
+                        return resules;
+                    },
+                    getTitles(titles) {
+                        var resules = [];
+                        for (var i=0;i<titles.length;i++) {
+                            if (i == 0) {
+                                resules.push({
+                                    "title":titles[i],
+                                    "win":"",
+                                    "color":"white",
+                                    "fontsize":"14px",
+                                    "bgcolor":"red"
+                                })
+                            }else {
+                                resules.push({
+                                    "title":titles[i],
+                                    "win":"",
+                                    "color":"white",
+                                    "fontsize":"14px",
+                                    "bgcolor":"blue"
+                                })
+                            }
+                        }
+                        return resules;
+                    },
+                },
+            })
+        </script>
 
-	</body>
+    </body>
 </html>

@@ -202,11 +202,8 @@
     }
     if ([request.uri isEqualToString:URI_GAME_RESULT_LIST]) {
 //        NSLog(@"%lu", (unsigned long)[response[@"list"][0][@"list"] count]);
-        NSArray *list = response[@"list"][0][@"list"];
-        if (list.count == 0) {
-            NSLog(@"no game result");
-        }
-        return @{@"list":list};
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:response[@"list"][0]];
+        return dic;
     }
     if ([request.uri isEqualToString:URI_GAME_DESKLIST]) {
         NSArray *list = response[@"list"];

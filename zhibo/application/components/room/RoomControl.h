@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)receiveRoomInfo:(NSDictionary *)roomInfo;
 - (void)receiveWenLu:(NSArray *)list;
+- (void)receiveWenLuData:(NSDictionary *)data;
 - (void)receiveWenLuItem:(NSDictionary *)item;
 - (void)refreshRank;
 

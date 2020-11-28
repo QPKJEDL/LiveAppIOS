@@ -131,7 +131,7 @@
         [RC.gameManager.betView setBalance:[obj[@"balance"] floatValue]];
     }
     if ([req.uri isEqualToString:URI_GAME_RESULT_LIST]) {
-        [RC.gameManager.control receiveWenLu:obj[@"list"]];
+        [RC.gameManager.control receiveWenLuData:obj];
     }
 }
 

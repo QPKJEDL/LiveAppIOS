@@ -39,8 +39,16 @@
                 </div>
             </div>
             <div class="pv">
-                <span>靴次 {{boot_num}}</span>
-                <span>铺次 {{pave_num}}</span>
+                <span>靴次: {{boot_num}}</span>
+                <span>铺次: {{pave_num}}</span>
+                <span v-if="sumBanker != void 0">庄: {{sumBanker}}}</span>
+                <span v-if="sumPlayer != void 0">闲: {{sumPlayer}}</span>
+                <span v-if="sumTie != void 0 && gameid == 1">和: {{sumTie}}</span>
+                <span v-if="sumBankerPair != void 0">庄对: {{sumBankerPair}}}</span>
+                <span v-if="sumPlayerPair != void 0">闲对: {{sumPlayerPair}}</span>
+                <span v-if="sumDragon != void 0">龙: {{sumDragon}}</span>
+                <span v-if="sumTie != void 0  && gameid == 2">和: {{sumTie}}</span>
+                <span v-if="sumDragon != void 0">虎: {{sumTiger}}</span>
             </div>
             <div class="bar">
                 <div class="barItem" v-for="item in wenList" @click="onBarItem(item.a)">
@@ -75,7 +83,15 @@
                     iph:"",
                     timer:void 0,
                     boot_num:0,
-                    pave_num:0
+                    pave_num:0,
+                    sumDragon:void 0,
+                    sumTiger:void 0,
+                    sumTie:void 0,
+                    sumBanker:void 0,
+                    sumBankerPair:void 0,
+                    sumPlayer:void 0,
+                    sumPlayerPair:void 0,
+
                 },
                 mounted(){
                     window.setGameResults = this.setGameResults;
@@ -84,6 +100,7 @@
                     window.abc = this.abc;
                     document.documentElement.style.webkitUserSelect='none';
                     document.documentElement.style.webkitTouchCallout='none'
+
 
                 },
                 updated() {
@@ -113,10 +130,18 @@
                     },
                     ready: function (data) {
                         var jsonData = JSON.parse(data);
-                        this.inputList = jsonData["data"];
+                        this.inputList = jsonData["list"];
                         this.gameid = jsonData["gameid"];
                         this.boot_num = jsonData["boot_num"];
                         this.pave_num = jsonData["pave_num"];
+                        this.sumDragon = jsonData["sumDragon"];
+                        this.sumTiger = jsonData["sumTiger"];
+                        this.sumTie = jsonData["sumTie"];
+                        this.sumBanker = jsonData["sumBanker"];
+                        this.sumBankerPair = jsonData["sumBankerPair"];
+                        this.sumPlayer = jsonData["sumPlayer"];
+                        this.sumPlayerPair = jsonData["sumPlayerPair"];
+
                         var gameid = 2;
                         if (data.indexOf("bankerPair") > 0) {
                             gameid = 1;

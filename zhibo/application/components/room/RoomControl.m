@@ -186,13 +186,28 @@
 - (void)receiveWenLu:(NSArray *)list {
     NSLog(@"receiveWenLu");
     dispatch_main_async_safe((^{
-        NSDictionary *data = @{@"data":list, @"gameid":@(RC.gameManager.game_id), @"boot_num":@(RC.gameManager.boot_num), @"pave_num":@(RC.gameManager.pave_num)};
+        NSDictionary *data = @{@"list":list, @"gameid":@(RC.gameManager.game_id), @"boot_num":@(RC.gameManager.boot_num), @"pave_num":@(RC.gameManager.pave_num)};
         NSString *jsonString = [data toJSONString];
         [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             NSLog(@"%@", error);
         }];
     }));
 }
+
+- (void)receiveWenLuData:(NSDictionary *)data {
+    NSLog(@"receiveWenLu");
+    dispatch_main_async_safe((^{
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:data];
+        dic[@"gameid"] = @(RC.gameManager.game_id);
+        dic[@"boot_num"] = @(RC.gameManager.boot_num);
+        dic[@"pave_num"] = @(RC.gameManager.pave_num);
+        NSString *jsonString = [dic toJSONString];
+        [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            NSLog(@"%@", error);
+        }];
+    }));
+}
+
 //弃用
 - (void)receiveWenLuItem:(NSDictionary *)item {
     id winner = item[@"Winner"];
