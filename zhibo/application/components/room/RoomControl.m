@@ -155,7 +155,7 @@
 }
 
 - (void)loadWenLu {
-    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 160)];
+    self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 180)];
     [self.wenluWebView.webView setOpaque:false];
     self.wenluWebView.backgroundColor = [UIColor clearColor];
     self.wenluWebView.webView.scrollView.backgroundColor = [UIColor clearColor];
@@ -178,7 +178,7 @@
     NSLog(@"receiveWenLu");
     self.wenluList = [[NSMutableArray alloc] initWithArray:list];
     dispatch_main_async_safe((^{
-        NSDictionary *data = @{@"data":list, @"gameid":@(RC.gameManager.game_id)};
+        NSDictionary *data = @{@"data":list, @"gameid":@(RC.gameManager.game_id), @"boot_num":@(RC.gameManager.boot_num), @"pave_num":@(RC.gameManager.pave_num)};
         NSString *jsonString = [data toJSONString];
         [self.wenluWebView callFuncName:@"setGameResults" data:jsonString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             NSLog(@"%@", error);

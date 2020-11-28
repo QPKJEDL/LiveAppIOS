@@ -38,6 +38,10 @@
                     </div>
                 </div>
             </div>
+            <div class="pv">
+                <span>靴次 {{boot_num}}</span>
+                <span>铺次 {{pave_num}}</span>
+            </div>
             <div class="bar">
                 <div class="barItem" v-for="item in wenList" @click="onBarItem(item.a)">
                     <div class="sub a">{{item.a}}</div>
@@ -69,7 +73,9 @@
                     wenList:[],
                     gameid:2,
                     iph:"",
-                    timer:void 0
+                    timer:void 0,
+                    boot_num:0,
+                    pave_num:0
                 },
                 mounted(){
                     window.setGameResults = this.setGameResults;
@@ -108,7 +114,9 @@
                     ready: function (data) {
                         var jsonData = JSON.parse(data);
                         this.inputList = jsonData["data"];
-                        this.setGameID(jsonData["gameid"]);
+                        this.gameid = jsonData["gameid"];
+                        this.boot_num = jsonData["boot_num"];
+                        this.pave_num = jsonData["pave_num"];
                         var gameid = 2;
                         if (data.indexOf("bankerPair") > 0) {
                             gameid = 1;

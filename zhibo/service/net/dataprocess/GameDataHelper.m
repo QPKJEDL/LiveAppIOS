@@ -125,7 +125,7 @@
 
 - (NSArray *)_getXians:(NSInteger)num deep:(NSInteger)deep fee:(NSDictionary *)fee {
     
-    NSArray *aa = @[@"", @"翻倍", @"超倍"];
+    NSArray *aa = @[@"平倍", @"翻倍", @"超倍"];
     NSArray *bb = @[@"equal", @"double", @"SuperDouble"];
     
     NSArray *cc = @[@"Equal", @"Double", @"SuperDouble"];
