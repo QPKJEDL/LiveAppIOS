@@ -102,6 +102,8 @@
         self.tmpDic = obj;
        
         self.shixunPlayAddress = obj[@"LeftPlay"];
+        self.shixunLeftPlayAddress = obj[@"LeftPlay"];
+        self.shixunRightPlayAddress = obj[@"RightPlay"];
     }
     if ([req.uri isEqualToString:URI_GAME_BET_FEE]) {
 

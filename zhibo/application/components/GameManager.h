@@ -43,6 +43,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) BetView *betView;
 @property (nonatomic, weak) RoomPlayView *shixunPlayerView;
 @property (nonatomic, strong) NSString *shixunPlayAddress;
+@property (nonatomic, strong) NSString *shixunLeftPlayAddress;
+@property (nonatomic, strong) NSString *shixunRightPlayAddress;
 
 @property (nonatomic, strong) NSString *tipStr;
 @property (nonatomic, strong) NSString *atipStr;

@@ -89,6 +89,26 @@
         [self addSubview:self.briefView];
          [self addSubview:_audienceView];
         
+        QMUIButton *leftButton = [[QMUIButton alloc] initWithFrame:CGRectMake(self.width/2-60-10, self.shixunPlayView.height-40, 60, 30)];
+        leftButton.backgroundColor = [[UIColor hexColor:@"222222"] colorWithAlphaComponent:0.6];
+        [leftButton setTitle:@"远景" forState:UIControlStateNormal];
+        leftButton.titleLabel.font = [UIFont PingFangSCBlod:15];
+        [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        leftButton.layer.cornerRadius = 5;
+        leftButton.clipsToBounds = true;
+        [leftButton addTarget:self action:@selector(onLeftButton) forControlEvents:UIControlEventTouchUpInside];
+        [self.shixunPlayView addSubview:leftButton];
+        
+        QMUIButton *rightButton = [[QMUIButton alloc] initWithFrame:CGRectMake(self.width/2+10, self.shixunPlayView.height-40, 60, 30)];
+        rightButton.backgroundColor = [[UIColor hexColor:@"222222"] colorWithAlphaComponent:0.6];
+        [rightButton setTitle:@"近景" forState:UIControlStateNormal];
+        rightButton.titleLabel.font = [UIFont PingFangSCBlod:15];
+        [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        rightButton.layer.cornerRadius = 5;
+        rightButton.clipsToBounds = true;
+        [rightButton addTarget:self action:@selector(onRightButton) forControlEvents:UIControlEventTouchUpInside];
+        [self.shixunPlayView addSubview:rightButton];
+        
         self.comeAnimateBanner = [[ABUIAnimateBanner alloc] initWithFrame:CGRectMake(0, _chatView.top-30-5, SCREEN_WIDTH, 30)];
 //        self.comeAnimateBanner.backgroundColor = [UIColor redColor];
         [self.bbbView addSubview:self.comeAnimateBanner];
@@ -144,6 +164,23 @@
 
     }
     return self;
+}
+
+
+- (void)onLeftButton {
+    if ([RC.gameManager.shixunPlayAddress isEqualToString:RC.gameManager.shixunLeftPlayAddress]) {
+        [ABUITips showError:@"当前已是远景"];
+    }
+    RC.gameManager.shixunPlayAddress = RC.gameManager.shixunLeftPlayAddress;
+    [self refreshScene];
+}
+
+- (void)onRightButton {
+    if ([RC.gameManager.shixunPlayAddress isEqualToString:RC.gameManager.shixunRightPlayAddress]) {
+        [ABUITips showError:@"当前已是近景"];
+    }
+    RC.gameManager.shixunPlayAddress = RC.gameManager.shixunRightPlayAddress;
+    [self refreshScene];
 }
 
 - (void)roomPlayViewLoadFail {
