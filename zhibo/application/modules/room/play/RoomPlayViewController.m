@@ -103,6 +103,8 @@
     [self.gameManager pause];
     [self.playView pause];
     [self.roomManager pause];
+    
+    [ABUITips hideLoading];
 }
 
 - (void)roomPlayControl:(RoomPlayControl *)roomPlayControl closeWithData:(NSDictionary *)data {

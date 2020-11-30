@@ -41,10 +41,10 @@
             <div class="pv">
                 <span>靴次: {{boot_num}}</span>
                 <span>铺次: {{pave_num}}</span>
-                <span v-if="sumBanker != void 0">庄: {{sumBanker}}}</span>
+                <span v-if="sumBanker != void 0">庄: {{sumBanker}}</span>
                 <span v-if="sumPlayer != void 0">闲: {{sumPlayer}}</span>
                 <span v-if="sumTie != void 0 && gameid == 1">和: {{sumTie}}</span>
-                <span v-if="sumBankerPair != void 0">庄对: {{sumBankerPair}}}</span>
+                <span v-if="sumBankerPair != void 0">庄对: {{sumBankerPair}}</span>
                 <span v-if="sumPlayerPair != void 0">闲对: {{sumPlayerPair}}</span>
                 <span v-if="sumDragon != void 0">龙: {{sumDragon}}</span>
                 <span v-if="sumTie != void 0  && gameid == 2">和: {{sumTie}}</span>
@@ -99,8 +99,7 @@
                     window.setGameID = this.setGameID;
                     window.abc = this.abc;
                     document.documentElement.style.webkitUserSelect='none';
-                    document.documentElement.style.webkitTouchCallout='none'
-
+                    document.documentElement.style.webkitTouchCallout='none';
 
                 },
                 updated() {

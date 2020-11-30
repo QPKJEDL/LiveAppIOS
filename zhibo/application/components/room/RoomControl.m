@@ -157,7 +157,7 @@
 
 - (void)loadWenLu {
     if (self.wenluWebView == nil) {
-        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 180)];
+        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 320, 200)];
         [self.wenluWebView.webView setOpaque:false];
 //        self.wenluWebView.adapterSize = true;
         self.wenluWebView.backgroundColor = [UIColor clearColor];
@@ -196,6 +196,7 @@
 
 - (void)receiveWenLuData:(NSDictionary *)data {
     NSLog(@"receiveWenLu");
+    
     dispatch_main_async_safe((^{
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:data];
         dic[@"gameid"] = @(RC.gameManager.game_id);
