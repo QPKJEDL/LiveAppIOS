@@ -141,7 +141,6 @@
         [[ABMQ shared] subscribe:self channels:@[CHANNEL_GAME_RULES, CHANNEL_ROOM_INFO, CHANNEL_ROOM_MESSAGE, CHANNEL_ROOM_PEER, CHANNEL_GAME_STATUS] autoAck:true];
         
         [self fetchPostUri:URI_ROOM_SYSTEM params:nil];
-        
 
     }
     return self;
@@ -157,7 +156,7 @@
 
 - (void)loadWenLu {
     if (self.wenluWebView == nil) {
-        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 320, 200)];
+        self.wenluWebView = [[ABUIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH*(9.0/16.0), 300, 205)];
         [self.wenluWebView.webView setOpaque:false];
 //        self.wenluWebView.adapterSize = true;
         self.wenluWebView.backgroundColor = [UIColor clearColor];

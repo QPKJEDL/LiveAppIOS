@@ -44,18 +44,18 @@
 }
 
 .pv {
-	height: 25px;
 	font-size: 12px;
 	font-weight: bold;
+    margin-bottom: 2px;
 }
 .pv span {
     background-color: rgba(0,0, 0, 0.5);
-	display: inline-block;
-	color: white;
+    display: inline-block;
+    color: white;
     padding: 0px 3px;
-	margin-right: 0px;
-	box-sizing: border-box;
-	height: 25px;
-	line-height: 25px;
+    margin-right: 1px;
+    box-sizing: border-box;
+    height: 20px;
+    line-height: 20px;
     border-radius: 2px;
 }

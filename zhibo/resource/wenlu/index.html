@@ -41,6 +41,8 @@
             <div class="pv">
                 <span>靴次: {{boot_num}}</span>
                 <span>铺次: {{pave_num}}</span>
+            </div>
+            <div class="pv">
                 <span v-if="sumBanker != void 0">庄: {{sumBanker}}</span>
                 <span v-if="sumPlayer != void 0">闲: {{sumPlayer}}</span>
                 <span v-if="sumTie != void 0 && gameid == 1">和: {{sumTie}}</span>
@@ -130,7 +132,7 @@
                     ready: function (data) {
                         var jsonData = JSON.parse(data);
                         this.inputList = jsonData["list"];
-                        this.gameid = jsonData["gameid"];
+                        this.setGameID(jsonData["gameid"]);
                         this.boot_num = jsonData["boot_num"];
                         this.pave_num = jsonData["pave_num"];
                         this.sumDragon = jsonData["sumDragon"];
