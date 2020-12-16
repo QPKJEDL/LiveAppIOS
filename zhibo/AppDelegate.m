@@ -46,7 +46,6 @@
 //    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
 //    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 //    [DDLog addLogger:fileLogger];
-
     [Bugly startWithAppId:@"7dd91fe103"];
     self.force = 0;
     [WOCrashProtectorManager makeAllEffective];
@@ -68,14 +67,18 @@
     [[ABNet shared] startNetListen:^(BOOL isReachable) {
         if (isReachable) {
             NSLog(@"网络正常");
+            [self requestDomain];
             [[ABMQ shared] publish:@"" channel:CHANNEL_NET_REACHABLE];
         }else{
             [ABUITips showError:@"当前无网络连接，请检查网络"];
             NSLog(@"网络断开");
         }
     }];
-    
     return YES;
+}
+//请求domain
+- (void)requestDomain {
+//    [self fetchUri:URI_DOMAIN params:nil];
 }
 
 - (void)checkVersion {
@@ -90,26 +93,30 @@
 //}
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     [ABUITips hideLoading];
-    NSString *url = obj[@"url"];
-    NSInteger force = [obj[@"force"] intValue];
-    NSString *detail = obj[@"detail"];
-    self.force = force;
-    if (force == 2) {
-        return;
-    }
-    QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+    if ([req.uri isEqualToString:URI_VERSION]) {
+        NSString *url = obj[@"url"];
+        NSInteger force = [obj[@"force"] intValue];
+        NSString *detail = obj[@"detail"];
+        self.force = force;
+        if (force == 2) {
+            return;
+        }
+        QMUIAlertAction *action1 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleCancel handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
 
-    }];
-    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"立即更新" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-    }];
-    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"版本更新" message:detail preferredStyle:QMUIAlertControllerStyleAlert];
-    if (force == 0) {
-        [alertController addAction:action1];
+        }];
+        QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"立即更新" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"版本更新" message:detail preferredStyle:QMUIAlertControllerStyleAlert];
+        if (force == 0) {
+            [alertController addAction:action1];
+        }
+        
+        [alertController addAction:action2];
+        [alertController showWithAnimated:YES];
+    }else{
+        NSLog(@"%@", obj);
     }
-    
-    [alertController addAction:action2];
-    [alertController showWithAnimated:YES];
 }
 
 //init window and display
@@ -130,6 +137,7 @@
 
 - (void)ready {
     NetProvidor *p = [[NetProvidor alloc] init];
+    p.host = @"https://live.zbzx6088.com";
     
     [ABNetConfiguration shared].provider = p;
     [ABUIListViewMapping shared].mapping = [[NSMutableDictionary alloc] initWithDictionary:@{

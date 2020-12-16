@@ -36,6 +36,10 @@
     [self.titleLabel sizeToFit];
     
     self.key = item[@"key"];
+    self.textField.secureTextEntry = false;
+    if ([self.key containsString:@"pwd"]) {
+        self.textField.secureTextEntry = true;
+    }
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:item[@"placeholder"] attributes:
     @{NSForegroundColorAttributeName:[UIColor hexColor:@"cccccc"],
                  NSFontAttributeName:[UIFont systemFontOfSize:12]

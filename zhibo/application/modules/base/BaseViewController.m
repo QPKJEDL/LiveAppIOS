@@ -25,6 +25,12 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     self.view.backgroundColor = [UIColor hexColor:@"F7F9FD"];
+    
+    if (@available(iOS 13.0, *)) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (void)showEmptyView {

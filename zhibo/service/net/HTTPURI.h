@@ -14,6 +14,7 @@
 #define HTTPHost          @"http://192.168.1.6/code"
 
 #define URI_VERSION                         @"/code/Mycenter/version"
+#define URI_DOMAIN                          @""
 #define URI_ACCOUNT_HELP                            @"/account/help"
 
 #define mark ----- index -----
