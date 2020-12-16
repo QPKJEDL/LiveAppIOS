@@ -19,6 +19,7 @@
     self.listView = [[ABUIListView alloc] initWithFrame:self.view.bounds];
     self.listView.delegate = self;
     [self.view addSubview:self.listView];
+    [self.listView adapterSafeArea];
     
     NSArray *historyList = [[Service shared] getHistoryList];
     historyList = [ABIteration iterationList:historyList block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
@@ -43,6 +44,11 @@
 //
 //    [self.listView reloadData];
 
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.listView.frame = self.view.bounds;
 }
 
 - (void)listView:(ABUIListView *)listView didSelectItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item {

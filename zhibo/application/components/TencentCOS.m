@@ -34,7 +34,7 @@
         QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
         // 本地文件路径
         // 存储桶名称，格式为 BucketName-APPID
-        put.bucket = @"downloadapk-1302167200";
+        put.bucket = @"images-1304463593";
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         put.object = fileName;
         //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
@@ -81,7 +81,7 @@
     QCloudServiceConfiguration* configuration = [QCloudServiceConfiguration new];
     QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] init];
     // 服务地域简称，例如广州地区是 ap-guangzhou
-    endpoint.regionName = @"ap-shanghai";
+    endpoint.regionName = @"ap-nanjing";
     // 使用 HTTPS
     endpoint.useHTTPS = true;
     configuration.endpoint = endpoint;

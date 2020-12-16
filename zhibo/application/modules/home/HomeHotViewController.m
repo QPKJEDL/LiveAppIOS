@@ -180,6 +180,7 @@
 - (void)onNetRequestSuccess:(ABNetRequest *)req obj:(NSDictionary *)obj isCache:(BOOL)isCache {
     if ([req.uri isEqualToString:URI_ACCOUNT_NOTICE]) {
         self.marquee.text = obj[@"content"];
+        [self.marquee marqueeOfSettingWithState:MarqueeStart_H];
     }
     else if ([req.uri isEqualToString:URI_BANNER_LIST]) {
         self.bannerImgs = obj[@"list"];

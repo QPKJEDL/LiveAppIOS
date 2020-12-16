@@ -9,12 +9,12 @@
 #ifndef HTTPURI_h
 #define HTTPURI_h
 
-#define ISENABLESSL   1
+#define ISENABLESSL   0
 
 #define HTTPHost          @"http://192.168.1.6/code"
 
 #define URI_VERSION                         @"/code/Mycenter/version"
-#define URI_DOMAIN                          @""
+#define URI_ACCOUNT_DOMAIN                          @"/account/domain"
 #define URI_ACCOUNT_HELP                            @"/account/help"
 
 #define mark ----- index -----

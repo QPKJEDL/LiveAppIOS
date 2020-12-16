@@ -173,27 +173,27 @@
         NSArray *list = @[
             @{
                 @"title":@"百家乐游戏",
-                @"src":@"https://live.zbzx6088.com:8933/game/baijiale.html",
+                @"src":[NSString stringWithFormat:@"%@:8933/game/baijiale.html", [ABNetConfiguration shared].provider.host],
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"龙虎游戏",
-                @"src":@"https://live.zbzx6088.com:8933/game/longhu.html",
+                @"src":[NSString stringWithFormat:@"%@:8933/game/longhu.html", [ABNetConfiguration shared].provider.host],
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"牛牛游戏",
-                @"src":@"https://live.zbzx6088.com:8933/game/niuniu.html",
+                @"src":[NSString stringWithFormat:@"%@:8933/game/niuniu.html", [ABNetConfiguration shared].provider.host],
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"三公游戏",
-                @"src":@"https://live.zbzx6088.com:8933/game/sangong.html",
+                @"src":[NSString stringWithFormat:@"%@:8933/game/sangong.html", [ABNetConfiguration shared].provider.host],
                 @"native_id":@"gameruleitem",
             },
             @{
                 @"title":@"A89游戏",
-                @"src":@"https://live.zbzx6088.com:8933/game/A89.html",
+                @"src":[NSString stringWithFormat:@"%@:8933/game/A89.html", [ABNetConfiguration shared].provider.host],
                 @"native_id":@"gameruleitem",
             }
         ];

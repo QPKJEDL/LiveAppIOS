@@ -7,7 +7,7 @@
 //
 
 #import "RoomSocket.h"
-
+#import "NetProvidor.h"
 @interface RoomSocket ()<PeerMessageObserver, RoomMessageObserver, TCPConnectionObserver, IABMQSubscribe>
 
 @end
@@ -21,15 +21,15 @@
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 
         self.imService = [[IMService alloc] init];
-        if (ISENABLESSL) {
-            self.imService.ssl = true;
-            self.imService.host = @"live.zbzx6088.com";
-            self.imService.port = 24430;
-        }else{
-            self.imService.ssl = false;
-            self.imService.host = @"124.156.149.44";
-            self.imService.port = 23002;
-        }
+//        if (ISENABLESSL) {
+//            self.imService.ssl = true;
+//            self.imService.host = [(NetProvidor *)[ABNetConfiguration shared].provider imHost];
+//            self.imService.port = 24430;
+//        }else{
+        self.imService.ssl = false;
+        self.imService.host = [(NetProvidor *)[ABNetConfiguration shared].provider imHost];
+        self.imService.port = 23002;
+//        }
         
         self.imService.heartbeatHZ = 30;
         self.imService.deviceID = [Service shared].account.uidStr;

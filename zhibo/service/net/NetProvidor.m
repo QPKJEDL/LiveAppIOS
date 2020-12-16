@@ -10,24 +10,16 @@
 #import "Service.h"
 @implementation NetProvidor
 - (NSString *)host:(NSString *)uri {
-    
     if ([uri hasPrefix:@"/game"]) {
         return [Stack shared].game_url;
     }
     NSArray *baijiusansan = @[URI_ACCOUNT_DRAWPER, URI_MOMENTS_PUBLISH, URI_ACCOUNT_INFO_UPDATE_AVATAR, URI_ACCOUNT_CASHOUT, URI_TENCENT_COSSECRET, URI_ACCOUNT_BALANCE_RECHARGE, URI_ACCOUNT_RECHARGE_CHANNELS, URI_VERSION, URI_ROOM_SYSTEM];
     
-    if (ISENABLESSL == 1) {
-        NSString *port = @"8215";
-        if ([baijiusansan containsObject:uri]) {
-            port = @"8933";
-        }
-        return [NSString stringWithFormat:@"%@:%@",self.host, port];
-    }else{
-        if ([baijiusansan containsObject:uri]) {
-            return @"http://124.156.149.44:8933";
-        }
-        return @"http://124.156.149.44:8212";
+    NSString *port = @"8212";
+    if ([baijiusansan containsObject:uri]) {
+        port = @"8933";
     }
+    return [NSString stringWithFormat:@"%@:%@",self.host, port];
 }
 
 - (NSDictionary *)headers:(NSString *)uri {
@@ -51,6 +43,12 @@
     return @"application/x-www-form-urlencoded";
 }
 
+- (NSString *)responseContentType:(NSString *)uri {
+    if ([uri isEqualToString:URI_ACCOUNT_DOMAIN]) {
+        return @"text/plain";
+    }
+    return @"application/json";
+}
 - (NSString *)msgKey:(ABNetRequest *)request {
     return @"info";
 }

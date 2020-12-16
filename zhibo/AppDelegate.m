@@ -30,9 +30,13 @@
 #import "BetTransform.h"
 #import <Bugly/Bugly.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AFNetworking/AFNetworking.h>
 //#import <CocoaLumberjack/CocoaLumberjack.h>
 @interface AppDelegate ()<INetData>
 @property (nonatomic, assign) NSInteger force;
+@property (nonatomic, strong)  AFHTTPSessionManager *man;
+@property (nonatomic, strong) NetProvidor *p;
+@property (nonatomic, assign) BOOL isHasRefreshDomain;
 @end
 
 @implementation AppDelegate
@@ -46,6 +50,7 @@
 //    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
 //    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 //    [DDLog addLogger:fileLogger];
+    
     [Bugly startWithAppId:@"7dd91fe103"];
     self.force = 0;
     [WOCrashProtectorManager makeAllEffective];
@@ -54,13 +59,12 @@
     [self ready];
     
     [self setUpWindow];
-    
-    [TXLiveBase setLicenceURL:@"http://license.vod2.myqcloud.com/license/v1/91fdbc3ccf9f493cf80ec9410610d562/TXLiveSDK.licence" key:@"cfec6f3245fbc129bdadac94e65c8413"];
+    self.isHasRefreshDomain = false;
+    [TXLiveBase setLicenceURL:@"http://license.vod2.myqcloud.com/license/v1/728d0036f215bda45630a12468b63d2e/TXLiveSDK.licence" key:@"cfec6f3245fbc129bdadac94e65c8413"];
     
     [[TencentCOS shared] setup];
-    
+    [self requestDomain];
     [UncaughtExceptionHandler installUncaughtExceptionHandler:YES showAlert:YES];
-    [self checkVersion];
     
     [[UIButton appearance] setExclusiveTouch:true];
     
@@ -78,7 +82,25 @@
 }
 //请求domain
 - (void)requestDomain {
-//    [self fetchUri:URI_DOMAIN params:nil];
+    if (self.isHasRefreshDomain) {
+        return;
+    }
+    self.man = [[AFHTTPSessionManager alloc] init];
+    _man.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [_man GET:@"https://gitee.com/hqguojicom/world/raw/master/lapi.json" parameters:nil headers:@{} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        self.p.host = dic[@"data"][@"url"];
+        self.p.imHost = dic[@"data"][@"im"];
+        [self domainUpdateSuccess];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+//域名更新完毕
+- (void)domainUpdateSuccess {
+    self.isHasRefreshDomain = true;
+    [self checkVersion];
 }
 
 - (void)checkVersion {
@@ -119,6 +141,10 @@
     }
 }
 
+- (void)onNetRequestFailure:(ABNetRequest *)req err:(ABNetError *)err {
+    
+}
+
 //init window and display
 - (void)setUpWindow {
     if ([Service shared].account.isLogin) {
@@ -136,10 +162,11 @@
 }
 
 - (void)ready {
-    NetProvidor *p = [[NetProvidor alloc] init];
-    p.host = @"https://live.zbzx6088.com";
+    self.p = [[NetProvidor alloc] init];
+    self.p.host = @"http://129.226.9.107";
+    self.p.imHost = @"129.226.9.107";
     
-    [ABNetConfiguration shared].provider = p;
+    [ABNetConfiguration shared].provider = self.p;
     [ABUIListViewMapping shared].mapping = [[NSMutableDictionary alloc] initWithDictionary:@{
         @"anchoritem":@"AnchorItemView",
         @"betoption":@"BetOptionView",
