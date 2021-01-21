@@ -267,7 +267,7 @@
                 dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"score"] integerValue]/100.0];
                 dic[@"status"] = dic[@"remark"];
             }else{
-                dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"money"] integerValue]/100.0];
+                dic[@"money"] = [NSString stringWithFormat:@"%.2f", [dic[@"money"] floatValue]/100.0];
             }
             return dic;
         }];
@@ -384,12 +384,12 @@
         }
         NSArray *list = [ABIteration iterationList:rResponse[@"list"] block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
             dic[@"date"] = [ABTime timestampToTime:dic[@"creatime"]  format:@"YYYY-MM-dd"];
-            dic[@"detail"] = [NSString stringWithFormat:@"%@ %@ %@", [dic stringValueForKey:@"desk_name"], [dic stringValueForKey:@"boot_num"], [dic stringValueForKey:@"pave_num"]];
+            dic[@"detail"] = [NSString stringWithFormat:@"%@ %@靴次 %@铺次", [dic stringValueForKey:@"desk_name"], [dic stringValueForKey:@"boot_num"], [dic stringValueForKey:@"pave_num"]];
             dic[@"money"] = [dic stringValueForKey:@""];
             dic[@"time"] = [ABTime timestampToTime:dic[@"creatime"]  format:@"HH:mm:ss"];
             
-            NSInteger gm = [dic[@"get_money"] intValue]/100;
-            dic[@"gmoney"] = [NSString stringWithFormat:@"%ld", (long)gm];
+            CGFloat gm = [dic[@"get_money"] floatValue]/100;
+            dic[@"gmoney"] = [NSString stringWithFormat:@"%.2f", gm];
             dic[@"statusStr"] = statusMap[dic[@"status"]];
             
             NSMutableString *betStr = [[NSMutableString alloc] init];

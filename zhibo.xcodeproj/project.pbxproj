@@ -2643,7 +2643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qp.zhibo;
 				PRODUCT_NAME = hqzhibo;
 				PROVISIONING_PROFILE_SPECIFIER = "qp university";
@@ -2668,7 +2668,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qp.zhibo;
 				PRODUCT_NAME = hqzhibo;
 				PROVISIONING_PROFILE_SPECIFIER = "qp university";

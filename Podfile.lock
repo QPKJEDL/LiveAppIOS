@@ -27,6 +27,7 @@ PODS:
     - ABUIKit/ABUIAnimateBanner (= 0.0.1)
     - ABUIKit/ABUIButtons (= 0.0.1)
     - ABUIKit/ABUIChatView (= 0.0.1)
+    - ABUIKit/ABUIDocumentView (= 0.0.1)
     - ABUIKit/ABUILabels (= 0.0.1)
     - ABUIKit/ABUIListView (= 0.0.1)
     - ABUIKit/ABUIListViewItems (= 0.0.1)
@@ -44,6 +45,8 @@ PODS:
   - ABUIKit/ABUIButtons (0.0.1):
     - Toast
   - ABUIKit/ABUIChatView (0.0.1):
+    - Toast
+  - ABUIKit/ABUIDocumentView (0.0.1):
     - Toast
   - ABUIKit/ABUILabels (0.0.1):
     - Toast
@@ -454,7 +457,7 @@ DEPENDENCIES:
   - QMUIKit
   - SDCycleScrollView (>= 1.80)
   - SDWebImage
-  - Toast
+  - Toast (from `https://github.com/whdevlab/Toast`)
   - TSHAlphaVideos (from `https://github.com/whdevlab/TSHAlphaVideos`)
   - TXLiteAVSDK_Smart
   - UINavigation-SXFixSpace
@@ -481,7 +484,6 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
     - SocketRocket
-    - Toast
     - TXLiteAVSDK_Smart
     - UINavigation-SXFixSpace
     - YBImageBrowser
@@ -494,6 +496,8 @@ EXTERNAL SOURCES:
     :path: "/Users/qp/own/ABUIKit"
   gobelieve:
     :git: https://github.com/whdevlab/gobelieve
+  Toast:
+    :git: https://github.com/whdevlab/Toast
   TSHAlphaVideos:
     :git: https://github.com/whdevlab/TSHAlphaVideos
 
@@ -501,13 +505,16 @@ CHECKOUT OPTIONS:
   gobelieve:
     :commit: 269727086099ba2828e38cbc9901c93a2c52f5b1
     :git: https://github.com/whdevlab/gobelieve
+  Toast:
+    :commit: 6a71e1e25d85b89c1871efc2b297988ec717745f
+    :git: https://github.com/whdevlab/Toast
   TSHAlphaVideos:
     :commit: d93ba241b74186d7e90d106c1780414c19b0ff32
     :git: https://github.com/whdevlab/TSHAlphaVideos
 
 SPEC CHECKSUMS:
   ABFoundation: 24d5c9a443b5ba6cc02e3edf1b9397719c808c7b
-  ABUIKit: 74a8c4e5d46f0b8448a1b7eee74dd1e6756fd6fa
+  ABUIKit: ba13f87d987e5082766c97db9565f693d9eedb99
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
@@ -535,6 +542,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 8f6bd1d63da31c153905ccc081ee08831c036b60
+PODFILE CHECKSUM: a7ee04481788f47733b11d39698d389bc2c58126
 
 COCOAPODS: 1.9.3

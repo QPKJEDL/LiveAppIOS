@@ -15,7 +15,7 @@ pod 'ABUIKit', :path => "/Users/qp/own/ABUIKit"
 #pod 'ABFoundation', :git => "https://github.com/whdevlab/ABFoundation"
 pod 'ABFoundation', :path => "/Users/qp/own/ABFoundation"
 pod 'gobelieve', :git => "https://github.com/whdevlab/gobelieve"
-pod 'Toast'
+pod 'Toast', :git => "https://github.com/whdevlab/Toast"
 pod 'SDWebImage'
 pod 'FMDB'
 pod 'QMUIKit'
