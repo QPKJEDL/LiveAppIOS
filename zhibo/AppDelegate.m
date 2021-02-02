@@ -60,7 +60,7 @@
     
     [self setUpWindow];
     self.isHasRefreshDomain = false;
-    [TXLiveBase setLicenceURL:@"http://license.vod2.myqcloud.com/license/v1/728d0036f215bda45630a12468b63d2e/TXLiveSDK.licence" key:@"cfec6f3245fbc129bdadac94e65c8413"];
+    [TXLiveBase setLicenceURL:@"http://license.vod2.myqcloud.com/license/v1/728d0036f215bda45630a12468b63d2e/TXLiveSDK.licence" key:@"645d79241aa017cf4b7ed17486cc215f"];
     
     [[TencentCOS shared] setup];
     [self requestDomain];

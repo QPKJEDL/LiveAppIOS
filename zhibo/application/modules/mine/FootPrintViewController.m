@@ -25,7 +25,7 @@
     historyList = [ABIteration iterationList:historyList block:^NSMutableDictionary * _Nonnull(NSMutableDictionary * _Nonnull dic, NSInteger idx) {
         dic[@"title"] = dic[@"LiveName"];
         dic[@"icon"] = dic[@"CoverImg"];
-        dic[@"content"] = @"123";
+        dic[@"content"] = @"";
         dic[@"time"] = [ABTime timestampToTime:dic[@"addtime"] format:nil];
         dic[@"native_id"] = @"message";
         return dic;

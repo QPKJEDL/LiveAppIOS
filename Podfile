@@ -10,8 +10,7 @@ pod 'JXPagingView/Pager'
 pod "UINavigation-SXFixSpace"
 pod 'FSTextView'
 pod 'YBImageBrowser'
-#pod 'ABUIKit', :git => "https://github.com/whdevlab/ABUIKit"
-pod 'ABUIKit', :path => "/Users/qp/own/ABUIKit"
+pod 'ABUIKit', :git => "https://github.com/whdevlab/ABUIKit", :tag=>'0.0.2'
 #pod 'ABFoundation', :git => "https://github.com/whdevlab/ABFoundation"
 pod 'ABFoundation', :path => "/Users/qp/own/ABFoundation"
 pod 'gobelieve', :git => "https://github.com/whdevlab/gobelieve"
