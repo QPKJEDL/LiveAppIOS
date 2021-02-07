@@ -105,6 +105,12 @@
     [self fetchPostUri:URI_ACCOUNT_WebUserBetsFee params:@{@"touid":item[@"user_id"]}];
 }
 
+- (void)listView:(ABUIListView *)listView didActionItemAtIndexPath:(NSIndexPath *)indexPath item:(NSDictionary *)item itemKey:(NSString *)itemKey actionKey:(NSString *)actionKey actionData:(id)actionData {
+    if ([actionKey isEqualToString:@"refresh"]) {
+        [self fetchPostUri:URI_ACCOUNT_WebUserBetsFee params:@{@"touid":actionData}];
+    }
+}
+
 
 - (NSDictionary *)listView:(ABUIListView *)listView extraDataAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *item = self.dataList[indexPath.row];

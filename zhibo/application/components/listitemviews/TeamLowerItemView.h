@@ -14,7 +14,7 @@
 @end
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TeamLowerItemView : UIView<ABUIListItemViewProtocol>
+@interface TeamLowerItemView : ABUIListViewBaseItemView<ABUIListItemViewProtocol>
 
 @end
 

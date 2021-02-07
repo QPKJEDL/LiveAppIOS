@@ -53,8 +53,17 @@
         self.rightLabel.textColor = [UIColor hexColor:@"#474747"];
         [self addSubview:self.rightLabel];
         
+        self.minValue = 0;
+        
     }
     return self;
+}
+
+
+- (void)setMinValue:(int)minValue {
+    _minValue = minValue;
+    self.leftLabel.text = [NSString stringWithFormat:@"%i", minValue];
+    self.progress = 0.5;
 }
 
 - (void)setMaxValue:(NSInteger)maxValue {
@@ -70,7 +79,7 @@
     
     self.cursorLabel.left = self.cursorView.width-self.cursorLabel.width-5;
     
-    NSString *text = [NSString stringWithFormat:@"%.0f", progress*self.maxValue];
+    NSString *text = [NSString stringWithFormat:@"%.0f", progress*(self.maxValue-self.minValue)+self.minValue];
     self.cursorLabel.text = text;
 }
 

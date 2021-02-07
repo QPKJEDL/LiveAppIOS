@@ -48,6 +48,7 @@
 #define URI_ACCOUNT_EXCAHNGE                @"/account/exchange"
 #define URI_ACCOUNT_WITHDRAW                @"/account/withdraw"
 #define URI_ACCOUNT_WebUserBetsFee          @"/WebUserBetsFee"
+#define URI_ACCOUNT_SavaFee                 @"/SavaFee"
 #define URI_ACCOUNT_POPULARIZE_CODELIST     @"/account/popularize/codelist"
 #define URI_ACCOUNT_POPULARIZE_ADD     @"/account/popularize/add"
 #define URI_ACCOUNT_POPULARIZE_DELETE     @"/account/popularize/delete"

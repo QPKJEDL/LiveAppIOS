@@ -169,6 +169,7 @@
 		F121926424D1600800630CA2 /* CommentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926324D1600800630CA2 /* CommentItemView.m */; };
 		F121926B24D16F1E00630CA2 /* ZBInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121926A24D16F1E00630CA2 /* ZBInputView.m */; };
 		F121927C24D276EF00630CA2 /* CommentReplyItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121927B24D276EE00630CA2 /* CommentReplyItemView.m */; };
+		F121B15A25CF980A00854574 /* EditLowerTeamFeeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F121B15925CF980A00854574 /* EditLowerTeamFeeView.m */; };
 		F14250722499E7C2003E83D8 /* NetProvidor.m in Sources */ = {isa = PBXBuildFile; fileRef = F14250712499E7C2003E83D8 /* NetProvidor.m */; };
 		F142507A249A102D003E83D8 /* AnchorItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1425079249A102C003E83D8 /* AnchorItemView.m */; };
 		F144CA0924DA5CC80051EDD4 /* DateItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F144CA0824DA5CC80051EDD4 /* DateItemView.m */; };
@@ -635,6 +636,8 @@
 		F121926A24D16F1E00630CA2 /* ZBInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBInputView.m; sourceTree = "<group>"; };
 		F121927A24D276EE00630CA2 /* CommentReplyItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentReplyItemView.h; sourceTree = "<group>"; };
 		F121927B24D276EE00630CA2 /* CommentReplyItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplyItemView.m; sourceTree = "<group>"; };
+		F121B15825CF980A00854574 /* EditLowerTeamFeeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditLowerTeamFeeView.h; sourceTree = "<group>"; };
+		F121B15925CF980A00854574 /* EditLowerTeamFeeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditLowerTeamFeeView.m; sourceTree = "<group>"; };
 		F142506F2499E766003E83D8 /* HTTPURI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPURI.h; sourceTree = "<group>"; };
 		F14250702499E7C2003E83D8 /* NetProvidor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetProvidor.h; sourceTree = "<group>"; };
 		F14250712499E7C2003E83D8 /* NetProvidor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetProvidor.m; sourceTree = "<group>"; };
@@ -1065,6 +1068,8 @@
 				F11AA53824D8F11400FCFE18 /* PopularizeListViewController.m */,
 				F1D272B024E7E0B5003FFABE /* HelpViewController.h */,
 				F1D272B124E7E0B5003FFABE /* HelpViewController.m */,
+				F121B15825CF980A00854574 /* EditLowerTeamFeeView.h */,
+				F121B15925CF980A00854574 /* EditLowerTeamFeeView.m */,
 			);
 			path = mine;
 			sourceTree = "<group>";
@@ -2433,6 +2438,7 @@
 				559F3E762452C0CB001280F2 /* PhotoListView.m in Sources */,
 				557C07622450058D008868E6 /* MainViewController.m in Sources */,
 				F166EE5424B716C800178F0F /* TopicItemView.m in Sources */,
+				F121B15A25CF980A00854574 /* EditLowerTeamFeeView.m in Sources */,
 				F16F6D3B24A982A3003A51A6 /* GameDataProcess.m in Sources */,
 				557C077C24500BB8008868E6 /* HomeViewController.m in Sources */,
 				F121922A24CED10D00630CA2 /* MomentDataProcess.m in Sources */,
